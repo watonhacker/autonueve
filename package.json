@@ -1,0 +1,20 @@
+{
+  "name": "autonueve",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/watonhacker/autonueve.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/watonhacker/autonueve/issues"
+  },
+  "homepage": "https://github.com/watonhacker/autonueve#readme"
+}
