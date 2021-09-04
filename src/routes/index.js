@@ -6,13 +6,13 @@ const connection = require('../database/database')
 
 router.get('/', (req, res) => {
     
-    res.send("ejemplo1")
+    res.render('index', "hola")
 
-    connection.query("SELECT * FROM productos", (err, results, rows) => {
+    /* connection.query("SELECT * FROM productos", (err, results, rows) => {
         for (result of results) {
             console.log(result)
         }
-    })
+    }) */
 })
 
 router.post('/', (req, res) => {
