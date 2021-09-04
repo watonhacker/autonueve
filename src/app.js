@@ -1,11 +1,11 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const index = 
+const cfg = require('./cfg')
+const indexRoutes = require('./routes/index')
 
-app.get('/', (req, res) => {
-    res.send("Hola3")
-})
+
+app.use('/test', indexRoutes)
 
 
 
