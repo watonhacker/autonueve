@@ -1,5 +1,5 @@
 const mysql = require('mysql')
-const cfg = require('../cfg')
+const cfg = require('../../cfg.js')
 const connection = mysql.createConnection({
     host:cfg.host,
     user:cfg.user,
