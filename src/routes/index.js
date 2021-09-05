@@ -6,7 +6,7 @@ const connection = require('../database/database')
 
 router.get('/', (req, res) => {
     
-    res.render('index', "hola")
+    res.render('index')
 
     /* connection.query("SELECT * FROM productos", (err, results, rows) => {
         for (result of results) {
