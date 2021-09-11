@@ -1,15 +1,7 @@
 const d = document;
 
 export function searchBtn () {
-    const $searchBtn = d.querySelector('#btnSearch')
-
-    $searchBtn.disabled = true;
-
-    $searchBtn.addEventListener("click", e => {
-        alert("click")
-    })
-
-
+    
     var submodelsBox = document.getElementById("formYears");
 
 
