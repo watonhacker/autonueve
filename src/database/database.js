@@ -1,15 +1,19 @@
-const mysql = require('mysql')
-const cfg = require('../../cfg.js')
-const connection = mysql.createConnection({
-    host:cfg.host,
-    user:cfg.user,
-    password:cfg.password,
-    database:cfg.database,
-    port:cfg.port
+const config = require('../../config/cfg.js');
+const mysql = require('mysql');
+const mysqlConnection = mysql.createConnection({
+    host:config.host,
+    user:config.user,
+    password:config.password,
+    database:config.database
+
+
 })
 
-connection.connect(() => {
-    console.log('Conectados a la database')
-})
+mysqlConnection.connect(function(err) {
+        if (err) console.log(err)
+        console.log("Conectado a: ", config.database)
+  });
 
-module.exports = connection;
+
+
+module.exports = mysqlConnection;

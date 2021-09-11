@@ -1,23 +1,21 @@
-const express = require('express')
-const router = express.Router()
-const connection = require('../database/database')
-
-
+const router = require('express').Router();
+const mysqlConnection = require('../database/database')
 
 router.get('/', (req, res) => {
+
+    let resultados;
+
+    mysqlConnection.query("SELECT * FROM marca", (err, results, row) => {
+        /* results=JSON.parse(JSON.stringify(results)) */
+        resultados = results
+        console.log(resultados)
+        res.render('index', {
+            resultados
+        })
+    })
     
-    res.render('index')
-
-    /* connection.query("SELECT * FROM productos", (err, results, rows) => {
-        for (result of results) {
-            console.log(result)
-        }
-    }) */
-})
-
-router.post('/', (req, res) => {
     
-    res.send("Hola por post1")
-})
 
+   /*  resultados = 1 */
+})
 module.exports = router;

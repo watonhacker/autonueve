@@ -1,0 +1,10 @@
+@import 'index';
+@import 'normalize';
+@import 'search';
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    max-width: 1920px;
+    font-family: "open sans";
+}
