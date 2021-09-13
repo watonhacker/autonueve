@@ -1,14 +1,23 @@
 <section class="search">
+    {{test contadorPagina}}
+        <p>Hola</p>
     <div class="products">
-    {{#each results}}
-    <div class="product">
-        <p>Nombre: {{nombre}}</p>
-        <p>SKU: {{SKU}}</p>
-        <p>precio: {{precio}}</p>
-        <p>descripcion: {{descripcion}}</p>
-        <p>marca: {{marca}}</p>
-    </div>
-    {{/each}}
+    {{#if results}}
+        {{#each results}}
+        <div class="product">
+            <p>Nombre: {{loud nombre}}</p>
+            <p>SKU: {{SKU}}</p>
+            <p>precio: {{precio}}</p>
+            <p>descripcion: {{loud descripcion}}</p>
+            <p>marca: {{marca}}</p>
+        </div>
+        {{/each}}
+    {{else}}
+
+    <div>NO HAY RESULTADOS</div>
+    {{/if}}
+
+
 
     </div>
 

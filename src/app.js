@@ -25,7 +25,19 @@ const hbs = exphbs.create({
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
     partialsDir: path.join(__dirname, 'views', 'partials'),
     defaultLayout: 'main',
-    extname: '.hbs'
+    extname: '.hbs',
+
+    helpers: {
+        loud: function (aString) {
+            return aString.toUpperCase()
+        },
+        test:function(contador) {
+            if (contador == 2){
+                let txt = `Son 2`
+                return txt
+            }
+        }
+    }
 })
 
 app.set('port', process.env.PORT || 3000)

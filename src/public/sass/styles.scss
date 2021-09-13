@@ -1,6 +1,8 @@
+@import './config/normalize';
+@import './config/variables';
 @import 'index';
-@import 'normalize';
 @import 'search';
+@import 'layout';
 
 * {
     box-sizing: border-box;
