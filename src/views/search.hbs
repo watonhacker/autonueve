@@ -2,8 +2,8 @@
     {{test contadorPagina}}
         <p>Hola</p>
     <div class="products">
-    {{#if results}}
-        {{#each results}}
+    {{#if resultados}}
+        {{#each resultados}}
         <div class="product">
             <p>Nombre: {{loud nombre}}</p>
             <p>SKU: {{SKU}}</p>
@@ -15,6 +15,10 @@
     {{else}}
 
     <div>NO HAY RESULTADOS</div>
+    {{/if}}
+
+    {{#if nextPage}}
+    <a href="/search?submodel={{$submodeloId}}&year={{$anyoId}}&page={{nextPage}}"`>{{nextPage}}</a>
     {{/if}}
 
 

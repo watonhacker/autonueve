@@ -18,7 +18,7 @@ export function searchBtn () {
             $submodelId = $submodelId.getAttribute("data-id")
             $yearId = $yearId.getAttribute("data-id")
 
-            location.href = `/search?submodel=${$submodelId}&year=${$yearId}`
+            location.href = `/search?submodel=${$submodelId}&year=${$yearId}&page=1`
 
           
 

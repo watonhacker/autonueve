@@ -12,16 +12,25 @@ let contadorItem = 0
 
 let listaResto = []
 
+let page = 0
+
+let posicionArrayProductos = 0
+
+
+
 router.get('/', (req, res) => {
     console.log(req.query)
+    let $listaSubmodeloId
+    let $submodeloId = req.query.submodel
+    let $anyoId = req.query.year
+    page = req.query.page
+    posicionArrayProductos = parseInt(page) - 1
+    console.log("Estamos en la página ", page)
 
-    const $submodeloId = req.query.submodel
-    const $anyoId = req.query.year
+   
+        mysqlConnection.query(`SELECT listasubmodelo.id FROM listasubmodelo INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id INNER JOIN fabricacion ON fabricacion.id = listasubmodelo.fabricacion_id WHERE submodelo.id = ${$submodeloId} AND fabricacion.id = ${$anyoId};`, (err, results, rows) => {
 
-
-    mysqlConnection.query(`SELECT listasubmodelo.id FROM listasubmodelo INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id INNER JOIN fabricacion ON fabricacion.id = listasubmodelo.fabricacion_id WHERE submodelo.id = ${$submodeloId} AND fabricacion.id = ${$anyoId};`, (err, results, rows) => {
-
-        let $listaSubmodeloId = results[0]['id']
+        $listaSubmodeloId = results[0]['id']
 
         mysqlConnection.query(`SELECT producto.nombre, producto.SKU, producto.precio, producto.descripcion,
         producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
@@ -29,145 +38,196 @@ router.get('/', (req, res) => {
             results=JSON.parse(JSON.stringify(results))
             results = [
                 {
-                    nombre:"Hola",
-                    SKU:1231,
-                    precio:1231,
-                    descripcion:"123",
-                    marca:"123"
+                    nombre:"1",
+                    SKU:1,
+                    precio:1,
+                    descripcion:"1",
+                    marca:"1"
                 },
                 {
-                nombre:"Hola",
-                SKU:1231,
-                precio:1231,
-                descripcion:"123",
-                marca:"123"
+                nombre:"2",
+                SKU:2,
+                precio:2,
+                descripcion:"2",
+                marca:"2"
                 },
                 {
-                    nombre:"Hola",
-                    SKU:1231,
-                    precio:1231,
-                    descripcion:"123",
-                    marca:"123"
+                    nombre:"3",
+                    SKU:3,
+                    precio:3,
+                    descripcion:"3",
+                    marca:"3"
                 },       
                 {
-                nombre:"Hola",
-                SKU:1231,
-                precio:1231,
-                descripcion:"123",
-                marca:"123"
+                nombre:"4",
+                SKU:4,
+                precio:4,
+                descripcion:"4",
+                marca:"4"
                 },   
                 {
-                    nombre:"Hola",
-                    SKU:1231,
-                    precio:1231,
-                    descripcion:"123",
-                    marca:"123"
+                    nombre:"5",
+                    SKU:5,
+                    precio:5,
+                    descripcion:"5",
+                    marca:"5"
                 },
                 {
-                    nombre:"Hola",
-                    SKU:1231,
-                    precio:1231,
-                    descripcion:"123",
-                    marca:"123"
+                    nombre:"6",
+                    SKU:6,
+                    precio:6,
+                    descripcion:"6",
+                    marca:"6"
                 },
                 {
-                    nombre:"Hola",
-                    SKU:1231,
-                    precio:1231,
-                    descripcion:"123",
-                    marca:"123"
+                    nombre:"7",
+                    SKU:7,
+                    precio:7,
+                    descripcion:"7",
+                    marca:"7"
                 },       
                 {
-                    nombre:"Hola",
-                    SKU:1231,
-                    precio:1231,
-                    descripcion:"123",
-                    marca:"123"
+                    nombre:"8",
+                    SKU:8,
+                    precio:8,
+                    descripcion:"8",
+                    marca:"8"
                 },   
                 {
-                    nombre:"Hola",
-                    SKU:1231,
-                    precio:1231,
-                    descripcion:"123",
-                    marca:"123"
+                    nombre:"9",
+                    SKU:9,
+                    precio:9,
+                    descripcion:"9",
+                    marca:"9"
                 },     
                 {
-                    nombre:"Hola",
-                    SKU:1231,
-                    precio:1231,
-                    descripcion:"123",
-                    marca:"123"
+                    nombre:"10",
+                    SKU:10,
+                    precio:10,
+                    descripcion:"10",
+                    marca:"10"
                 },       
                 {
-                    nombre:"Hola",
-                    SKU:1231,
-                    precio:1231,
-                    descripcion:"123",
-                    marca:"123"
+                    nombre:"11",
+                    SKU:11,
+                    precio:11,
+                    descripcion:"11",
+                    marca:"11"
                 },                                          
             ]
-            lenResults = (results.length)
-            let resto = lenResults % 10
-            contadorPagina = 1;
-            contadorResultado = 0;
 
-            results.forEach(n => {
-                contadorResultado++
-                if (contadorPagina == 1){
-                    if (contadorResultado == 11) {
-                        contadorPagina += 1
-                        contadorResultado = 0
-         
-                    }
-                } else {
-                    if (contadorResultado == 10) {
-                        contadorPagina += 1
-                        contadorResultado = 0
-                    }
-                }
-            })
+            if (parseInt(page) == 1) {
 
-            results.forEach(n => {
+                /* Acá sacamos la diferencia entre los resultados y 10 */
+                lenResults = (results.length)
+                let resto = lenResults % 10
+                contadorPagina = 1;
+                contadorResultado = 0;
+                listaNueva = []
+          
     
-                listaLocal.push(n)
-                contadorItem += 1
-                contadorVuelta += 1
-            
-            
-                console.log(`Resto = ${resto}, listaObj ${lenResults} - contadorItem ${contadorItem} == ${lenResults - contadorItem}`)
-            
-                if (contadorVuelta == 10) {
-                    listaNueva.push(listaLocal)
-                    contadorVuelta = 0
-                    listaLocal = []
-                }
-            
-                if (lenResults - contadorItem < resto) {
-                    console.log("entramos en los últimos")
-                    listaResto.push(n)
-                }
+                results.forEach(n => {
+                    contadorResultado++
+                    if (contadorPagina == 1){
+                        if (contadorResultado == 11) {
+                            contadorPagina += 1
+                            contadorResultado = 0
+             
+                        }
+                    } else {
+                        if (contadorResultado == 10) {
+                            contadorPagina += 1
+                            contadorResultado = 0
+                        }
+                    }
+                })
+                /* Cada item es guardado en la lista local, esta almacenará hasta 10 datos por vuelta
+                y una vez alcance los 10 resultados, los agregará a la lista final y reseteará los contadores
+                y la lista local, para la proxima vuelta empezar de 0 añadiendo items en una nueva lista local,
+                en caso de que existan mas de 10 items restantes. En caso contrario entrará en los últimos */
+                results.forEach(n => {
+        
+                    listaLocal.push(n)
+                    contadorItem += 1
+                    contadorVuelta += 1
                 
-            })
-            
-            if (listaResto[0]) {
-            listaNueva.push(listaResto)
+                
+                    //console.log(`Resto = ${resto}, listaObj ${lenResults} - contadorItem ${contadorItem} == ${lenResults - contadorItem}`)
+                
+                    if (contadorVuelta == 10) {
+                        listaNueva.push(listaLocal)
+                        contadorVuelta = 0
+                        listaLocal = []
+                    }
+                /* Si la diferencia entre el contador y el total, es menor al resto, entramos en los ultimos */
+                    if (lenResults - contadorItem < resto) {
+                        console.log("entramos en los últimos")
+                        listaResto.push(n)
+                    }
+                    
+                })
+                
+                if (listaResto[0]) {
+                listaNueva.push(listaResto)
+                }
             }
-            
-            
+
+
+            console.log(posicionArrayProductos, "En esta posicion buscará")
+            let resultados = []
+            resultados = listaNueva[posicionArrayProductos]
+        /*             
             console.log(contadorItem, "contadorVuelta")
             console.log(lenResults, "cantidadTotal")
 
             console.log("Se necesitan paginas : ", contadorPagina)
-            console.log(lenResults, "Resultados totales")
-
-            res.render('search', {
-                results,
-                contadorPagina
-            })
+            console.log(lenResults, "Resultados totales") */
 
             console.log(listaNueva)
+            console.log("Lista entera")
+            console.log(listaNueva[1])
+            console.log("Esta es la lista pos 1")
+
+            if (contadorPagina > page) {
+                let nextPage = parseInt(page) + 1
+                console.log(nextPage, "Siguiente pagina")
+
+                console.log(resultados)
+                console.log("estos son los resultados enviados en el IF")
+
+                res.render('search', {
+                    resultados,
+                    contadorPagina,
+                    nextPage,
+                    $submodeloId,
+                    $anyoId
+                })
+
+                resultados = []
+
+                console.log(resultados)
+                console.log("Estos son los resultados una vez enviados en el IF")
+
+            } else {
+
+                console.log(resultados)
+                console.log("estos son los resultados enviados en el ELSE")
+
+                res.render('search', {
+                    resultados,
+                    contadorPagina
+                })
+
+            }
+
+
         })
     })
+
+    
+
+
+ 
 
    
     
