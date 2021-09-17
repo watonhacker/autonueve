@@ -1,24 +1,31 @@
 const router = require('express').Router()
 const mysqlConnection = require('../database/database')
 
+/* Variables para rescatar los resultados en un array de arrays */
 let lenResults = 0;
 let contadorPagina = 1;
 let contadorResultado = 0;
-
+/* Lista que sera impresa en la vista */
 let listaNueva = []
+/* Lista que se itera SI se entra a los IF (es pag 1, listaNueva esta vacia, que los listasubmodeloid sean dif) */
 let listaLocal = []
+/* Cuenta cada vuelta, y se resetea cada 10 o cada lo que le pida, esto sirve para ir creando distintos arrays */
 let contadorVuelta = 0
+/* Este contador sirve para saber cuando estaremos con los items "restantes", los que no calzen justo. Si la diferencia entre la suma total de resultados - el contador, es menos de los 10 que pido, comienzo a obtener la listaResto */
 let contadorItem = 0
-
 let listaResto = []
 
+/* Sirve para saber en que página estamos */
 let page = 0
-
+/* Esto sirve para ir buscando como puntero los arrays correctos. obtiene su numero en base a la pagina - 1*/
 let posicionArrayProductos = 0
 
+let idListaSubmodeloPasada = 0
 
 
 router.get('/', (req, res) => {
+
+    
     console.log(req.query)
     let $listaSubmodeloId
     let $submodeloId = req.query.submodel
@@ -29,14 +36,31 @@ router.get('/', (req, res) => {
 
    
         mysqlConnection.query(`SELECT listasubmodelo.id FROM listasubmodelo INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id INNER JOIN fabricacion ON fabricacion.id = listasubmodelo.fabricacion_id WHERE submodelo.id = ${$submodeloId} AND fabricacion.id = ${$anyoId};`, (err, results, rows) => {
+    
+        console.log(results)
+        if (results == undefined) {
+            console.log("UNDEFINEDDDDDDDDDDDD")
+        }
+        
+       /*  if (results[0] != undefined && results[0]['id'] != undefined) {
+                console.log(results[0])
+                console.log(results[0]['id'])
+                
+           
 
-        $listaSubmodeloId = results[0]['id']
+        } */
+
+        $listaSubmodeloId = 1
 
         mysqlConnection.query(`SELECT producto.nombre, producto.SKU, producto.precio, producto.descripcion,
         producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
         INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id WHERE listasubmodelo.id = ${$listaSubmodeloId};`, (err, results, rows) => {
+
+
             results=JSON.parse(JSON.stringify(results))
-            results = [
+            /* console.log(results) */
+            console.log("Estos son los resultados de la busqueda")
+/*             results = [
                 {
                     nombre:"1",
                     SKU:1,
@@ -113,17 +137,91 @@ router.get('/', (req, res) => {
                     precio:11,
                     descripcion:"11",
                     marca:"11"
-                },                                          
-            ]
+                },   
+                {
+                    nombre:"12",
+                    SKU:12,
+                    precio:12,
+                    descripcion:"12",
+                    marca:"12"
+                },  
+                {
+                    nombre:"13",
+                    SKU:13,
+                    precio:13,
+                    descripcion:"13",
+                    marca:"13"
+                },  
+                {
+                    nombre:"14",
+                    SKU:14,
+                    precio:14,
+                    descripcion:"14",
+                    marca:"14"
+                },  
+                {
+                    nombre:"15",
+                    SKU:15,
+                    precio:15,
+                    descripcion:"15",
+                    marca:"15"
+                },  
+                {
+                    nombre:"16",
+                    SKU:16,
+                    precio:16,
+                    descripcion:"16",
+                    marca:"16"
+                },  
+                {
+                    nombre:"17",
+                    SKU:17,
+                    precio:17,
+                    descripcion:"17",
+                    marca:"17"
+                },  
+                {
+                    nombre:"18",
+                    SKU:18,
+                    precio:18,
+                    descripcion:"18",
+                    marca:"18"
+                },  
+                {
+                    nombre:"19",
+                    SKU:19,
+                    precio:19,
+                    descripcion:"19",
+                    marca:"19"
+                },  
+                {
+                    nombre:"20",
+                    SKU:20,
+                    precio:20,
+                    descripcion:"20",
+                    marca:"20"
+                },  
+                {
+                    nombre:"21",
+                    SKU:21,
+                    precio:21,
+                    descripcion:"21",
+                    marca:"21"
+                },                                         
+            ] */
 
-            if (parseInt(page) == 1) {
+            console.log(`ListaSubmodeloReciente = ${$listaSubmodeloId}, ListaPasada = ${idListaSubmodeloPasada} diferentes?
+                       ${listaNueva[0]} undefined?,       ${parseInt(page)} es 1???`)
 
+            if (parseInt(page) == 1 /* && listaNueva[0] == undefined */ && $listaSubmodeloId != idListaSubmodeloPasada) {
+                console.log("************!*!*!*!*!*!*!*!*!********************************************!*!*!*!*!*!*!*!*****************************!*!*!*!*!*!")
                 /* Acá sacamos la diferencia entre los resultados y 10 */
                 lenResults = (results.length)
                 let resto = lenResults % 10
                 contadorPagina = 1;
                 contadorResultado = 0;
                 listaNueva = []
+                idListaSubmodeloPasada = $listaSubmodeloId
           
     
                 results.forEach(n => {
@@ -173,7 +271,7 @@ router.get('/', (req, res) => {
             }
 
 
-            console.log(posicionArrayProductos, "En esta posicion buscará")
+            /* console.log(posicionArrayProductos, "En esta posicion buscará") */
             let resultados = []
             resultados = listaNueva[posicionArrayProductos]
         /*             
@@ -183,17 +281,17 @@ router.get('/', (req, res) => {
             console.log("Se necesitan paginas : ", contadorPagina)
             console.log(lenResults, "Resultados totales") */
 
-            console.log(listaNueva)
+/*             console.log(listaNueva)
             console.log("Lista entera")
             console.log(listaNueva[1])
-            console.log("Esta es la lista pos 1")
+            console.log("Esta es la lista pos 1") */
 
             if (contadorPagina > page) {
                 let nextPage = parseInt(page) + 1
-                console.log(nextPage, "Siguiente pagina")
+/*                 console.log(nextPage, "Siguiente pagina")
 
                 console.log(resultados)
-                console.log("estos son los resultados enviados en el IF")
+                console.log("estos son los resultados enviados en el IF") */
 
                 res.render('search', {
                     resultados,
@@ -205,13 +303,13 @@ router.get('/', (req, res) => {
 
                 resultados = []
 
-                console.log(resultados)
-                console.log("Estos son los resultados una vez enviados en el IF")
+/*                 console.log(resultados)
+                console.log("Estos son los resultados una vez enviados en el IF") */
 
             } else {
-
+/* 
                 console.log(resultados)
-                console.log("estos son los resultados enviados en el ELSE")
+                console.log("estos son los resultados enviados en el ELSE") */
 
                 res.render('search', {
                     resultados,
