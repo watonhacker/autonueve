@@ -16,6 +16,7 @@ const modelRoutes = require('./routes/models')
 const searchRoutes = require('./routes/search')
 const signinRoutes = require('./routes/signin')
 const signupRoutes = require('./routes/signup')
+const adminRoutes = require('./routes/admin')
 
 /* Initializations */
 const app = express()
@@ -64,7 +65,7 @@ app.use('/models', modelRoutes)
 app.use('/search', searchRoutes)
 app.use('/signin', signinRoutes)
 app.use('/signup', signupRoutes)
-
+app.use('/admin', adminRoutes)
 
 app.listen(app.get('port'), () => {
     console.log("Inicio el servidor en el puerto", app.get("port"))

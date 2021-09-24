@@ -78,12 +78,12 @@ exports.login = async (req, res) => {
 
                         console.log("token", token)
 
-                        const cookieOptions = {
+                        const cookiesOptions = {
                             expires: new Date(Date.now()+config.jwtCookieExpires * 24 * 60 * 60 * 1000),
                             httpOnly:true
                         }
 
-                        res.cookie('jwt', token, cookieOptions)
+                        res.cookie('jwt', token, cookiesOptions)
                         res.render("signin", {
                             alert:true,
                             alertTitle:"Exitoso",
@@ -91,7 +91,7 @@ exports.login = async (req, res) => {
                             alertIcon:'success',
                             showConfirmButton:true,
                             timer:800,
-                            ruta:""
+                            ruta:"/admin"
                         })
                         }
 
@@ -104,6 +104,34 @@ exports.login = async (req, res) => {
     } catch (err) {
         console.log("err")
     }
+}
+
+
+exports.isAuthenticated = async (req, res, next) => {
+
+    //Preguntamos por nuestra cookie
+    
+    if (req.cookies.jwt) {
+        try {
+
+            const decoded = await promisify(jwt.verify)(req.cookies.jwt, config.jwtSecreto)
+            
+
+            mysqlConnection.query('SELECT * FROM usuario WHERE id = ?', [decoded.id], (error, results) => {
+                if (!results) return next();
+                req.user = results[0]
+                return next()
+            })
+
+        } catch (err) {
+            console.error(err)
+            return next()
+        }
+    } else {
+        res.redirect('signin')
+        next()
+    }
+    
 }
 
 
