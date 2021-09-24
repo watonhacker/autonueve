@@ -37,20 +37,20 @@ router.get('/', (req, res) => {
    
         mysqlConnection.query(`SELECT listasubmodelo.id FROM listasubmodelo INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id INNER JOIN fabricacion ON fabricacion.id = listasubmodelo.fabricacion_id WHERE submodelo.id = ${$submodeloId} AND fabricacion.id = ${$anyoId};`, (err, results, rows) => {
     
-        console.log(results)
+/*         console.log(results)
         if (results == undefined) {
-            console.log("UNDEFINEDDDDDDDDDDDD")
+            console.log("UNDEFINEDDDDDDDDDDDD ")
         }
         
-       /*  if (results[0] != undefined && results[0]['id'] != undefined) {
+        if (results.length != 0) {
                 console.log(results[0])
                 console.log(results[0]['id'])
-                
-           
+        }
+ */
+        $listaSubmodeloId = results[0]['id']
+        console.log("Lista submodelo IDDDDDDDDDDDD", $listaSubmodeloId)
 
-        } */
-
-        $listaSubmodeloId = 1
+        /* $listaSubmodeloId = 1 */
 
         mysqlConnection.query(`SELECT producto.nombre, producto.SKU, producto.precio, producto.descripcion,
         producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
@@ -58,162 +58,9 @@ router.get('/', (req, res) => {
 
 
             results=JSON.parse(JSON.stringify(results))
-            /* console.log(results) */
-            console.log("Estos son los resultados de la busqueda")
-/*             results = [
-                {
-                    nombre:"1",
-                    SKU:1,
-                    precio:1,
-                    descripcion:"1",
-                    marca:"1"
-                },
-                {
-                nombre:"2",
-                SKU:2,
-                precio:2,
-                descripcion:"2",
-                marca:"2"
-                },
-                {
-                    nombre:"3",
-                    SKU:3,
-                    precio:3,
-                    descripcion:"3",
-                    marca:"3"
-                },       
-                {
-                nombre:"4",
-                SKU:4,
-                precio:4,
-                descripcion:"4",
-                marca:"4"
-                },   
-                {
-                    nombre:"5",
-                    SKU:5,
-                    precio:5,
-                    descripcion:"5",
-                    marca:"5"
-                },
-                {
-                    nombre:"6",
-                    SKU:6,
-                    precio:6,
-                    descripcion:"6",
-                    marca:"6"
-                },
-                {
-                    nombre:"7",
-                    SKU:7,
-                    precio:7,
-                    descripcion:"7",
-                    marca:"7"
-                },       
-                {
-                    nombre:"8",
-                    SKU:8,
-                    precio:8,
-                    descripcion:"8",
-                    marca:"8"
-                },   
-                {
-                    nombre:"9",
-                    SKU:9,
-                    precio:9,
-                    descripcion:"9",
-                    marca:"9"
-                },     
-                {
-                    nombre:"10",
-                    SKU:10,
-                    precio:10,
-                    descripcion:"10",
-                    marca:"10"
-                },       
-                {
-                    nombre:"11",
-                    SKU:11,
-                    precio:11,
-                    descripcion:"11",
-                    marca:"11"
-                },   
-                {
-                    nombre:"12",
-                    SKU:12,
-                    precio:12,
-                    descripcion:"12",
-                    marca:"12"
-                },  
-                {
-                    nombre:"13",
-                    SKU:13,
-                    precio:13,
-                    descripcion:"13",
-                    marca:"13"
-                },  
-                {
-                    nombre:"14",
-                    SKU:14,
-                    precio:14,
-                    descripcion:"14",
-                    marca:"14"
-                },  
-                {
-                    nombre:"15",
-                    SKU:15,
-                    precio:15,
-                    descripcion:"15",
-                    marca:"15"
-                },  
-                {
-                    nombre:"16",
-                    SKU:16,
-                    precio:16,
-                    descripcion:"16",
-                    marca:"16"
-                },  
-                {
-                    nombre:"17",
-                    SKU:17,
-                    precio:17,
-                    descripcion:"17",
-                    marca:"17"
-                },  
-                {
-                    nombre:"18",
-                    SKU:18,
-                    precio:18,
-                    descripcion:"18",
-                    marca:"18"
-                },  
-                {
-                    nombre:"19",
-                    SKU:19,
-                    precio:19,
-                    descripcion:"19",
-                    marca:"19"
-                },  
-                {
-                    nombre:"20",
-                    SKU:20,
-                    precio:20,
-                    descripcion:"20",
-                    marca:"20"
-                },  
-                {
-                    nombre:"21",
-                    SKU:21,
-                    precio:21,
-                    descripcion:"21",
-                    marca:"21"
-                },                                         
-            ] */
 
-            console.log(`ListaSubmodeloReciente = ${$listaSubmodeloId}, ListaPasada = ${idListaSubmodeloPasada} diferentes?
-                       ${listaNueva[0]} undefined?,       ${parseInt(page)} es 1???`)
 
-            if (parseInt(page) == 1 /* && listaNueva[0] == undefined */ && $listaSubmodeloId != idListaSubmodeloPasada) {
+            if (/* parseInt(page) == 1 */ /* && listaNueva[0] == undefined */  $listaSubmodeloId != idListaSubmodeloPasada) {
                 console.log("************!*!*!*!*!*!*!*!*!********************************************!*!*!*!*!*!*!*!*****************************!*!*!*!*!*!")
                 /* Acá sacamos la diferencia entre los resultados y 10 */
                 lenResults = (results.length)
@@ -221,6 +68,10 @@ router.get('/', (req, res) => {
                 contadorPagina = 1;
                 contadorResultado = 0;
                 listaNueva = []
+                listaLocal = []
+                listaResto = []
+                contadorItem = 0
+                contadorVuelta = 0
                 idListaSubmodeloPasada = $listaSubmodeloId
           
     
@@ -270,6 +121,9 @@ router.get('/', (req, res) => {
                 }
             }
 
+            console.log("----------------------------------------------------------------- COMIENZO LISTA NUEVA (TODO) ----------------------------------------------------------------------------")
+            console.log(listaNueva)
+            console.log("----------------------------------------------------------------- FIN LISTA NUEVA (TODO) ----------------------------------------------------------------------------")
 
             /* console.log(posicionArrayProductos, "En esta posicion buscará") */
             let resultados = []
@@ -285,6 +139,11 @@ router.get('/', (req, res) => {
             console.log("Lista entera")
             console.log(listaNueva[1])
             console.log("Esta es la lista pos 1") */
+            
+
+            console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! COMIENZO ESTOS ENVIA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            console.log(resultados)
+            console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FIN ESTOS ENVIA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
             if (contadorPagina > page) {
                 let nextPage = parseInt(page) + 1
@@ -316,6 +175,8 @@ router.get('/', (req, res) => {
                     contadorPagina
                 })
 
+                resultados = []
+
             }
 
 
@@ -326,7 +187,7 @@ router.get('/', (req, res) => {
 
 
  
-
+    
    
     
 

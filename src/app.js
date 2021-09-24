@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 const path = require('path')
 const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
 
 
 /* Variables de ruteo */
@@ -13,6 +14,8 @@ const submodelRoutes = require('./routes/submodels')
 const yearRoutes = require('./routes/years')
 const modelRoutes = require('./routes/models')
 const searchRoutes = require('./routes/search')
+const signinRoutes = require('./routes/signin')
+const signupRoutes = require('./routes/signup')
 
 /* Initializations */
 const app = express()
@@ -51,7 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-
+app.use(cookieParser())
 // Rutas
 
 app.use('/', indexRoutes)
@@ -59,7 +62,8 @@ app.use('/submodels', submodelRoutes)
 app.use('/years', yearRoutes)
 app.use('/models', modelRoutes)
 app.use('/search', searchRoutes)
-
+app.use('/signin', signinRoutes)
+app.use('/signup', signupRoutes)
 
 
 app.listen(app.get('port'), () => {
