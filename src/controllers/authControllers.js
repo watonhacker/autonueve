@@ -113,12 +113,9 @@ exports.isAuthenticated = async (req, res, next) => {
     
     if (req.cookies.jwt) {
         try {
-
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, config.jwtSecreto)
-            
-
             mysqlConnection.query('SELECT * FROM usuario WHERE id = ?', [decoded.id], (error, results) => {
-                if (!results) return next();
+                if(!results){return next()}
                 req.user = results[0]
                 return next()
             })
@@ -129,9 +126,13 @@ exports.isAuthenticated = async (req, res, next) => {
         }
     } else {
         res.redirect('signin')
-        next()
     }
     
+}
+
+exports.logout = (req, res) => {
+    res.clearCookie('jwt')
+    return res.redirect('/')
 }
 
 

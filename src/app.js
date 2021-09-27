@@ -17,6 +17,7 @@ const searchRoutes = require('./routes/search')
 const signinRoutes = require('./routes/signin')
 const signupRoutes = require('./routes/signup')
 const adminRoutes = require('./routes/admin')
+const logoutRoutes = require('./routes/logout')
 
 /* Initializations */
 const app = express()
@@ -56,6 +57,14 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
+
+
+//Para eliminar la cache 
+app.use(function(req, res, next) {
+    if (!req.user)
+        res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    next();
+});
 // Rutas
 
 app.use('/', indexRoutes)
@@ -66,6 +75,8 @@ app.use('/search', searchRoutes)
 app.use('/signin', signinRoutes)
 app.use('/signup', signupRoutes)
 app.use('/admin', adminRoutes)
+app.use('/logout', logoutRoutes)
+
 
 app.listen(app.get('port'), () => {
     console.log("Inicio el servidor en el puerto", app.get("port"))

@@ -37,17 +37,17 @@ router.get('/', (req, res) => {
    
         mysqlConnection.query(`SELECT listasubmodelo.id FROM listasubmodelo INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id INNER JOIN fabricacion ON fabricacion.id = listasubmodelo.fabricacion_id WHERE submodelo.id = ${$submodeloId} AND fabricacion.id = ${$anyoId};`, (err, results, rows) => {
     
-/*         console.log(results)
+        console.log(results)
         if (results == undefined) {
             console.log("UNDEFINEDDDDDDDDDDDD ")
         }
-        
+/*         
         if (results.length != 0) {
                 console.log(results[0])
                 console.log(results[0]['id'])
-        }
- */
-        $listaSubmodeloId = results[0]['id']
+            } */
+            
+            $listaSubmodeloId = results[0]['id']
         console.log("Lista submodelo IDDDDDDDDDDDD", $listaSubmodeloId)
 
         /* $listaSubmodeloId = 1 */
