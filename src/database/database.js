@@ -1,17 +1,17 @@
 const config = require('../config/cfg');
 const mysql = require('mysql');
 const mysqlConnection = mysql.createConnection({
-    host:config.host,
-    user:config.user,
-    password:config.password,
-    database:config.database
-
+    host:'uh1.hnc.cl',
+    user:'mobalzen_keyzen',
+    password:'keyzencl123',
+    database:'mobalzen_autonueve',
+    port:'3306',
 
 })
 
 mysqlConnection.connect(function(err) {
         if (err) console.log(err)
-        console.log("Conectado a: ", config.database)
+        console.log("Conectado a: ", 'mobalzen_autonueve')
   });
 
 

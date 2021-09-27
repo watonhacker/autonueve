@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const mysqlConnection = require('../database/database')
 const {promisify} = require('util')
-const config = require('../config/cfg')
+//const config = require('../config/cfg')
 
 
 // procedimientos para registrarnos
@@ -72,14 +72,14 @@ exports.login = async (req, res) => {
                         // INICIO OK
 
                         const id = results[0].clave
-                        const token = jwt.sign({id:id}, config.jwtSecreto, {
-                            expiresIn:config.jwtTiempoExpira
+                        const token = jwt.sign({id:id}, 'secretito', {
+                            expiresIn:'7d'
                         } )
 
                         console.log("token", token)
 
                         const cookiesOptions = {
-                            expires: new Date(Date.now()+config.jwtCookieExpires * 24 * 60 * 60 * 1000),
+                            expires: new Date(Date.now()+90 * 24 * 60 * 60 * 1000),
                             httpOnly:true
                         }
 
@@ -113,7 +113,7 @@ exports.isAuthenticated = async (req, res, next) => {
     
     if (req.cookies.jwt) {
         try {
-            const decoded = await promisify(jwt.verify)(req.cookies.jwt, config.jwtSecreto)
+            const decoded = await promisify(jwt.verify)(req.cookies.jwt, 'secretito')
             mysqlConnection.query('SELECT * FROM usuario WHERE id = ?', [decoded.id], (error, results) => {
                 if(!results){return next()}
                 req.user = results[0]
