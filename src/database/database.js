@@ -1,4 +1,4 @@
-const config = require('../../config/cfg.js');
+const config = require('../config/cfg');
 const mysql = require('mysql');
 const mysqlConnection = mysql.createConnection({
     host:config.host,
