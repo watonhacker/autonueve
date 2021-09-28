@@ -5,6 +5,17 @@ const {promisify} = require('util')
 //const config = require('../config/cfg')
 
 
+
+/* mysqlConnection.getConnection(function(err, connection) {
+    if (err) throw err;
+    
+    //codigo aca
+
+    connection.release()
+
+    if (err) throw err;
+})
+ */
 // procedimientos para registrarnos
 
 exports.register = async (req, res) => {
@@ -15,11 +26,20 @@ exports.register = async (req, res) => {
         let passHash = await bcrypt.hash(pass, 8)   
     
 
-    
-        mysqlConnection.query("INSERT INTO usuario SET ?", {nombre:user, clave:passHash}, (err, results, rows) => {
+        mysqlConnection.getConnection(function(err, connection) {
             if (err) throw err;
-            if (results) console.log(results)
+            
+            mysqlConnection.query("INSERT INTO usuario SET ?", {nombre:user, clave:passHash}, (err, results, rows) => {
+                if (err) throw err;
+                if (results) console.log(results)
+            })
+
+            connection.release()
+
+            if (err) throw err;
         })
+
+
 
         res.redirect('/')
 
@@ -50,6 +70,12 @@ exports.login = async (req, res) => {
             })
         } else {
 
+
+            
+        mysqlConnection.getConnection(function(err, connection) {
+            if (err) throw err;
+            
+            // aca va el codigo
             mysqlConnection.query("SELECT * FROM usuario WHERE ?", {nombre:user}, async (err, results) => {
 
                 console.log(await results)
@@ -96,8 +122,14 @@ exports.login = async (req, res) => {
                         }
 
                 })
+            connection.release()
 
-            }
+            if (err) throw err;
+        })
+
+            
+
+        }
 
     
 
@@ -113,11 +145,24 @@ exports.isAuthenticated = async (req, res, next) => {
     
     if (req.cookies.jwt) {
         try {
+
+            
+            
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, 'secretito')
-            mysqlConnection.query('SELECT * FROM usuario WHERE id = ?', [decoded.id], (error, results) => {
-                if(!results){return next()}
-                req.user = results[0]
-                return next()
+
+            mysqlConnection.getConnection(function(err, connection) {
+                if (err) throw err;
+                
+                //codigo aca
+                mysqlConnection.query('SELECT * FROM usuario WHERE id = ?', [decoded.id], (error, results) => {
+                    if(!results){return next()}
+                    req.user = results[0]
+                    return next()
+                })
+            
+                connection.release()
+            
+                if (err) throw err;
             })
 
         } catch (err) {

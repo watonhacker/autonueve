@@ -13,10 +13,7 @@ const mysqlConnection = mysql.createPool({
 
 })
 
-mysqlConnection.connect(function(err) {
-        if (err) console.log(err)
-        console.log("Conectado a: ", 'mobalzen_autonueve')
-  });
+
 
 
 
