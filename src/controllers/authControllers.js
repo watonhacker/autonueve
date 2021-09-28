@@ -2,20 +2,9 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const mysqlConnection = require('../database/database')
 const {promisify} = require('util')
-//const config = require('../config/cfg')
+const config = require('../../config/cfg')
 
 
-
-/* mysqlConnection.getConnection(function(err, connection) {
-    if (err) throw err;
-    
-    //codigo aca
-
-    connection.release()
-
-    if (err) throw err;
-})
- */
 // procedimientos para registrarnos
 
 exports.register = async (req, res) => {
@@ -26,20 +15,11 @@ exports.register = async (req, res) => {
         let passHash = await bcrypt.hash(pass, 8)   
     
 
-        mysqlConnection.getConnection(function(err, connection) {
+    
+        mysqlConnection.query("INSERT INTO usuario SET ?", {nombre:user, clave:passHash}, (err, results, rows) => {
             if (err) throw err;
-            
-            mysqlConnection.query("INSERT INTO usuario SET ?", {nombre:user, clave:passHash}, (err, results, rows) => {
-                if (err) throw err;
-                if (results) console.log(results)
-            })
-
-            connection.release()
-
-            if (err) throw err;
+            if (results) console.log(results)
         })
-
-
 
         res.redirect('/')
 
@@ -70,12 +50,6 @@ exports.login = async (req, res) => {
             })
         } else {
 
-
-            
-        mysqlConnection.getConnection(function(err, connection) {
-            if (err) throw err;
-            
-            // aca va el codigo
             mysqlConnection.query("SELECT * FROM usuario WHERE ?", {nombre:user}, async (err, results) => {
 
                 console.log(await results)
@@ -98,14 +72,14 @@ exports.login = async (req, res) => {
                         // INICIO OK
 
                         const id = results[0].clave
-                        const token = jwt.sign({id:id}, 'secretito', {
-                            expiresIn:'7d'
+                        const token = jwt.sign({id:id}, config.jwtSecreto, {
+                            expiresIn:config.jwtTiempoExpira
                         } )
 
                         console.log("token", token)
 
                         const cookiesOptions = {
-                            expires: new Date(Date.now()+90 * 24 * 60 * 60 * 1000),
+                            expires: new Date(Date.now()+config.jwtCookieExpires * 24 * 60 * 60 * 1000),
                             httpOnly:true
                         }
 
@@ -122,14 +96,8 @@ exports.login = async (req, res) => {
                         }
 
                 })
-            connection.release()
 
-            if (err) throw err;
-        })
-
-            
-
-        }
+            }
 
     
 
@@ -145,24 +113,11 @@ exports.isAuthenticated = async (req, res, next) => {
     
     if (req.cookies.jwt) {
         try {
-
-            
-            
-            const decoded = await promisify(jwt.verify)(req.cookies.jwt, 'secretito')
-
-            mysqlConnection.getConnection(function(err, connection) {
-                if (err) throw err;
-                
-                //codigo aca
-                mysqlConnection.query('SELECT * FROM usuario WHERE id = ?', [decoded.id], (error, results) => {
-                    if(!results){return next()}
-                    req.user = results[0]
-                    return next()
-                })
-            
-                connection.release()
-            
-                if (err) throw err;
+            const decoded = await promisify(jwt.verify)(req.cookies.jwt, config.jwtSecreto)
+            mysqlConnection.query('SELECT * FROM usuario WHERE id = ?', [decoded.id], (error, results) => {
+                if(!results){return next()}
+                req.user = results[0]
+                return next()
             })
 
         } catch (err) {

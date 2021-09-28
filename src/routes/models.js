@@ -10,12 +10,6 @@ router.get('/', (req, res) => {
         console.log("tenemos brand")
         console.log(selectedBrand)
 
-        mysqlConnection.getConnection(function(err, connection) {
-            if (err) throw err;
-            
-            //codigo aca
-
-            
         mysqlConnection.query(`SELECT marca.id FROM marca WHERE marca.nombre = '${selectedBrand}'`, (err, results, rows) => {
             
             if (results[0]) {
@@ -38,12 +32,6 @@ router.get('/', (req, res) => {
             }
             
         })
-        
-            connection.release()
-        
-            if (err) throw err;
-        })
-
 
     } 
 
