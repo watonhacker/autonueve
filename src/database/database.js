@@ -1,6 +1,6 @@
 //const config = require('../config/cfg');
 const mysql = require('mysql');
-const mysqlConnection = mysql.createConnection({
+const mysqlConnection = mysql.createPool({
     host:'uh1.hnc.cl',
     user:'mobalzen_keyzen',
     password:'keyzencl123',
