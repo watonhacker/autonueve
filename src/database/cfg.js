@@ -1,10 +1,8 @@
 module.exports = {
-    host:'uh1.hnc.cl',
-    user:'mobalzen_keyzen',
-    password:'keyzencl123',
-    database:'mobalzen_autonueve',
-    port:'3306',
-
+    host: 'localhost',
+    user:"keyzen",
+    password:"$Elmasmejor0910",
+    database:"keyzencl_nodetests",
     //DEfinimos los datos para jwt
     jwtSecreto : 'secretito',
     //Tiempo que expira el token
