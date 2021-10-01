@@ -1,4 +1,4 @@
-const config = require('./cfg');
+const config = require('../../config/cfg');
 const mysql = require('mysql');
 
 
