@@ -9,7 +9,7 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 
-console.log(process.env.HOST)
+
 /* Variables de ruteo */
 const indexRoutes = require('./routes/index')
 const submodelRoutes = require('./routes/submodels')
