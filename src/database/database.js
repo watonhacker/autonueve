@@ -20,7 +20,7 @@ const mysql = require('mysql');
 
     mysqlConnection.connect((err) => {
         if (err) throw err;
-        console.log("Conectado a la base de datos ", proces.env.DATABASE)
+        console.log("Conectado a la base de datos ", process.env.DATABASE)
     })
 
 
