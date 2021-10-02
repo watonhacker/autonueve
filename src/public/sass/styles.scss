@@ -1,12 +1,11 @@
 @import './config/normalize';
 @import './config/variables';
+@import 'mediaqueries';
 @import 'index';
 @import 'search';
+@import 'slider';   
 @import 'layout';
+@import 'header';
+@import 'main';
+@import 'footer';
 
-* {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    max-width: 1920px;
-    font-family: "open sans";
-}

@@ -1,9 +1,27 @@
 body {
+    font-family: $primary-font;
+    max-width:2560px;
+    margin:0 auto;
+    
     display:grid;
-    grid-template-columns: auto;
-    grid-template-rows: repeat(3, auto);
-    grid-template-columns: "header"
-                           "main"
-                           "footer";
+    grid-template-columns: repeat(3, auto);
+    grid-template-columns: 1fr;
+    grid-template:"header"
+                  "main"
+                  "footer";
+}
+
+.header {
+    grid-area: header;
+}
+
+.main {
+    grid-area:main;
+    
+}
+
+.footer {
+    grid-area:footer;
+   
 }
 
