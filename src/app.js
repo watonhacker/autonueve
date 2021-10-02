@@ -1,13 +1,15 @@
 /* Modules and variables */
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
 const express = require('express')
 const Handlebars = require('handlebars')
 const exphbs = require('express-handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
-const path = require('path')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 
-
+console.log(process.env.HOST)
 /* Variables de ruteo */
 const indexRoutes = require('./routes/index')
 const submodelRoutes = require('./routes/submodels')
