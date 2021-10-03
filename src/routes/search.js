@@ -22,6 +22,9 @@ let posicionArrayProductos = 0
 
 let idListaSubmodeloPasada = 0
 
+let nextPage;
+let previousPage;
+
 
 router.get('/', (req, res) => {
 
@@ -148,19 +151,21 @@ router.get('/', (req, res) => {
                     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! FIN ESTOS ENVIA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         
                     if (contadorPagina > page) {
-                        let nextPage = parseInt(page) + 1
+
+                        nextPage = parseInt(page) + 1
         /*                 console.log(nextPage, "Siguiente pagina")
         
                         console.log(resultados)
                         console.log("estos son los resultados enviados en el IF") */
         
         
-                        
+                        previousPage = parseInt(page) -1
                         
                         res.render('search', {
                             brandResults,
                             resultados,
                             contadorPagina,
+                            previousPage,
                             nextPage,
                             $submodeloId,
                             $anyoId
@@ -175,11 +180,14 @@ router.get('/', (req, res) => {
         /* 
                         console.log(resultados)
                         console.log("estos son los resultados enviados en el ELSE") */
-        
+                        previousPage = nextPage -1
                         res.render('search', {
+                            previousPage,
                             brandResults,
                             resultados,
-                            contadorPagina
+                            contadorPagina,
+                            $submodeloId,
+                            $anyoId
                         })
         
                         resultados = []

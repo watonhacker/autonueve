@@ -25,9 +25,9 @@
    </div>
    </section>
 
-        <h2</h2>
-    <div class="products">
     {{#if resultados}}
+    <h4 class="subtitle-products">Productos encontrados</h4>
+    <div class="products">
         {{#each resultados}}
         <div class="product">
             <img src="https://placeimg.com/640/480/tech" alt="">
@@ -47,12 +47,21 @@
     <div>NO HAY RESULTADOS</div>
     {{/if}}
 
-    {{#if nextPage}}
-    <a href="/search?submodel={{$submodeloId}}&year={{$anyoId}}&page={{nextPage}}"`>{{nextPage}}</a>
+   
+
+
+
+
+    </div>
+
+    <div class="pages">
+
+    {{#if previousPage}}
+         <a class="previous-page" href="/search?submodel={{$submodeloId}}&year={{$anyoId}}&page={{previousPage}}"`>{{previousPage}}</a>
     {{/if}}
-
-
-
+    {{#if nextPage}}
+        <a class="next-page" href="/search?submodel={{$submodeloId}}&year={{$anyoId}}&page={{nextPage}}"`>{{nextPage}}</a>
+    {{/if}}
     </div>
 
 

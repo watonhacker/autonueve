@@ -8,8 +8,8 @@ console.log(process.env.DATABASE)
 console.log("***")
 
 const mysql = require('mysql');
-/* 
-mysqlConnection = mysql.createConnection({
+
+/* mysqlConnection = mysql.createConnection({
     host:'uh1.hnc.cl',
     user:"mobalzen_keyzen",
     password:"keyzencl123",
