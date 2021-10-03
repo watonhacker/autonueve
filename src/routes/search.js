@@ -177,6 +177,7 @@ router.get('/', (req, res) => {
                         console.log("estos son los resultados enviados en el ELSE") */
         
                         res.render('search', {
+                            brandResults,
                             resultados,
                             contadorPagina
                         })
