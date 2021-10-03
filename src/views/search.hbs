@@ -42,10 +42,7 @@
         {{!--     <p>descripcion: {{loud descripcion}}</p> --}}
         </div>
         {{/each}}
-    {{else}}
-
-    <div>NO HAY RESULTADOS</div>
-    {{/if}}
+ 
 
    
 
@@ -57,13 +54,16 @@
     <div class="pages">
 
     {{#if previousPage}}
-         <a class="previous-page" href="/search?submodel={{$submodeloId}}&year={{$anyoId}}&page={{previousPage}}"`>{{previousPage}}</a>
+         <a class="previous-page" href="/search?submodel={{$submodeloId}}&year={{$anyoName}}&page={{previousPage}}"`>{{previousPage}}</a>
     {{/if}}
     {{#if nextPage}}
-        <a class="next-page" href="/search?submodel={{$submodeloId}}&year={{$anyoId}}&page={{nextPage}}"`>{{nextPage}}</a>
+        <a class="next-page" href="/search?submodel={{$submodeloId}}&year={{$anyoName}}&page={{nextPage}}"`>{{nextPage}}</a>
     {{/if}}
     </div>
+   {{else}}
 
+    <div>NO HAY RESULTADOS</div>
+    {{/if}}
 
 </section>
 

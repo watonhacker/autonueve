@@ -24,18 +24,28 @@ let idListaSubmodeloPasada = 0
 
 let nextPage;
 let previousPage;
-
+let $anyoName;
+let $anyoId;
+let $submodeloId;
+let $listaSubmodeloId
 
 router.get('/', (req, res) => {
 
     
     console.log(req.query)
-    let $listaSubmodeloId
-    let $submodeloId = req.query.submodel
-    let $anyoId = req.query.year
+    $submodeloId = req.query.submodel
+    $anyoName = req.query.year
+    console.log($anyoId, "AÑOOOOOOOOOOOOOOOOOOOOOOOOO ID********************************!*!*!*!*!*!*!*")
     page = req.query.page
     posicionArrayProductos = parseInt(page) - 1
     console.log("Estamos en la página ", page)
+
+    mysqlConnection.query(`SELECT id FROM fabricacion WHERE fecha = ${$anyoName}`, (err, results) => {
+        
+        $anyoId = results[0]['id']
+        console.log($anyoId)
+        console.log("ACA ESTA EL RESULTADO DE ANYO NAMEAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
 
         mysqlConnection.query("SELECT * FROM marca", (err, results) => {
             let brandResults = results;
@@ -152,6 +162,8 @@ router.get('/', (req, res) => {
         
                     if (contadorPagina > page) {
 
+                        console.log(contadorPagina, "CONTADOR PAGINA")
+
                         nextPage = parseInt(page) + 1
         /*                 console.log(nextPage, "Siguiente pagina")
         
@@ -168,7 +180,7 @@ router.get('/', (req, res) => {
                             previousPage,
                             nextPage,
                             $submodeloId,
-                            $anyoId
+                            $anyoName
                         })
         
                         resultados = []
@@ -178,17 +190,29 @@ router.get('/', (req, res) => {
         
                     } else {
         /* 
+        
                         console.log(resultados)
                         console.log("estos son los resultados enviados en el ELSE") */
-                        previousPage = nextPage -1
-                        res.render('search', {
-                            previousPage,
-                            brandResults,
-                            resultados,
-                            contadorPagina,
-                            $submodeloId,
-                            $anyoId
-                        })
+                        
+
+                        if (contadorPagina == 1) {
+                            console.log(contadorPagina, " PAGINA UNICA")
+                            res.render('search', {
+                                brandResults,
+                                resultados
+                            })
+                        } else {
+                            previousPage = nextPage -1
+                            res.render('search', {
+                                previousPage,
+                                brandResults,
+                                resultados,
+                                contadorPagina,
+                                $submodeloId,
+                                $anyoName
+                            })
+
+                        }
         
                         resultados = []
         
@@ -200,6 +224,7 @@ router.get('/', (req, res) => {
         
 
         })
+    })
 
    
         

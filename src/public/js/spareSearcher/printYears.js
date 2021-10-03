@@ -12,6 +12,7 @@ export function printYears () {
         let $inputYear = d.querySelector("#inputYear")
         var isInputEvent = (Object.prototype.toString.call(e).indexOf("InputEvent") > -1);
         let selectedSubmodel = e.target.value
+        
         let $inputSubmodel = d.querySelector("#inputSubmodel")
         let url = `/years?submodel=${selectedSubmodel}`
         if(!isInputEvent)
