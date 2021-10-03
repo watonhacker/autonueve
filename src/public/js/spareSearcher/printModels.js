@@ -12,6 +12,7 @@ export function printModels () {
         let url = `/models?brand=${selectedBrand}`
         if(!isInputEvent)
 
+
             fetch(url)
             .then(res => res.json())
             .then(data => {

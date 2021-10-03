@@ -1,15 +1,45 @@
 <section class="search">
-    {{test contadorPagina}}
-        <p>Hola</p>
+{{!--     {{contadorPagina}} --}}
+   <h2>Buscador de repuestos</h2>
+   <div class="index-forms">
+      <form action="/brands" method="POST" id ="formBrand" autocomplete="off">
+         <input placeholder="Marca" list="brand" name="brand" id="inputBrand">
+         <datalist id="brand">
+         {{#each brandResults}}
+         <option value="{{nombre}}" data-id ="{{{id}}}">{{{nombre}}}</option>
+         {{/each}}
+         </datalist>  
+      </form>
+
+      <form action="/models" method="POST" id ="formModels" autocomplete="off">
+         <input placeholder="modelo" list="model" name="model" id="inputModel" disabled>
+      </form>
+
+      <form action="/submodels" method="POST" id ="formSubmodels" autocomplete="off">
+         <input placeholder="submodelo"list="submodel" name="submodel" id="inputSubmodel" disabled>
+      </form>
+
+      <form action="/years" method="POST" id ="formYears" autocomplete="off">
+         <input placeholder="año"list="year" name="year" id="inputYear"disabled>
+      </form>
+   </div>
+   </section>
+
+        <h2</h2>
     <div class="products">
     {{#if resultados}}
         {{#each resultados}}
         <div class="product">
-            <p>Nombre: {{loud nombre}}</p>
-            <p>SKU: {{SKU}}</p>
-            <p>precio: {{precio}}</p>
-            <p>descripcion: {{loud descripcion}}</p>
-            <p>marca: {{marca}}</p>
+            <img src="https://placeimg.com/640/480/tech" alt="">
+            <h3 class="product-name">{{nombre}}</h3>
+            <p class="product-sku">SKU: {{SKU}}</p>
+            <p class="product-brand">{{marca}}</p>
+            <div class="product-button">
+                <p>${{precio}}</p>
+                <a href="#">Comprar</a>
+            </div>  
+
+        {{!--     <p>descripcion: {{loud descripcion}}</p> --}}
         </div>
         {{/each}}
     {{else}}
