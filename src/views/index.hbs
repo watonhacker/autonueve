@@ -4,61 +4,33 @@
 
    <section class="search">
 
-   <h2>Buscador de repuestos</h2>
    <div class="index-forms">
       <form action="/brands" method="POST" id ="formBrand" autocomplete="off">
-         <input placeholder="Marca" list="brand" name="brand" id="inputBrand">
          <datalist id="brand">
          {{#each resultados}}
          <option value="{{nombre}}" data-id ="{{{id}}}">{{{nombre}}}</option>
          {{/each}}
          </datalist>  
+         <input placeholder="Marca" list="brand" name="brand" id="inputBrand">
       </form>
 
+
       <form action="/models" method="POST" id ="formModels" autocomplete="off">
-         <input placeholder="modelo" list="model" name="model" id="inputModel" disabled>
+         <input placeholder="Modelo" list="model" name="model" id="inputModel" disabled>
       </form>
 
       <form action="/submodels" method="POST" id ="formSubmodels" autocomplete="off">
-         <input placeholder="submodelo"list="submodel" name="submodel" id="inputSubmodel" disabled>
+         <input placeholder="Submodelo"list="submodel" name="submodel" id="inputSubmodel" disabled>
       </form>
 
       <form action="/years" method="POST" id ="formYears" autocomplete="off">
-         <input placeholder="año"list="year" name="year" id="inputYear"disabled>
+         <input placeholder="Año"list="year" name="year" id="inputYear"disabled>
       </form>
    </div>
    </section>
 
-   <!-- Sección de servicios -->
 
-        <section class="services">
-            <div class="services-text">
-                <h2 class="services-title">
-                    Conoce nuestros principales servicios
-                </h2>
-                <div class="border-line"></div>
-                <p>Cuando confías en repuestos montenegro tienes acceso a productos de alta calidad, acorde a los estándares del mercado.</p>
-                <h3>¡Revisa nuestras principales categorías!</h3>
-
-            </div>
-
-
-            <div class="services-images">
-                
-                <!-- Las imagenes se insertarán como background -->
-
-                <div class="services-image image-1">
-                    <h4>BATERIAS</h4>
-                </div>
-
-                <div class="services-image image-2">
-                    <h4>REPUESTOS</h4>                    
-                </div>
-            
-            </div>
-
-        </section>
-
+   
         <!-- Slider de imágenes -->
 
         <section class="container-slider">
@@ -80,6 +52,37 @@
             </div>
         </section>
 
+   <!-- Sección de servicios -->
+
+        <section class="services">
+            <div class="services-text">
+                <h2 class="services-title">
+                    Conoce nuestros principales servicios
+                </h2>
+                <div class="border-line"></div>
+                <p>Cuando confías en repuestos autonueve tienes acceso a productos de alta calidad, acorde a los estándares del mercado.</p>
+                <h3>¡Revisa nuestras principales categorías!</h3>
+
+            </div>
+
+
+            <div class="services-images">
+                
+                <!-- Las imagenes se insertarán como background -->
+
+                <div class="services-image image-1">
+                    <h4>BATERIAS</h4>
+                </div>
+
+                <div class="services-image image-2">
+                    <h4>REPUESTOS</h4>                    
+                </div>
+            
+            </div>
+
+        </section>
+
+
         <!-- Proveedores -->
 
         <section class="suppliers">
@@ -87,7 +90,7 @@
                     
                     <h2>Nuestros proveedores</h2>
                     <div class="border-line"></div>
-                    <p>Contamos con proveedores con amplia experiencia en la venta de  repuestos, es por esto que en <span>Repuestos Montenegro</span> garantizamos la calidad de nuestros productos y por lo tanto tu satisfacción!</p>
+                    <p>Contamos con proveedores con amplia experiencia en la venta de  repuestos, es por esto que en <span>Repuestos Autonueve</span> garantizamos la calidad de nuestros productos y por lo tanto tu satisfacción!</p>
                 
                 </div>
               
@@ -126,4 +129,4 @@
         </section>
 
 
-<script src="/js/main.js" type="module"></script>
+<script src="/js/main.js" type=module></script>

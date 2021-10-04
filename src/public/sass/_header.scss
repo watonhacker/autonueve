@@ -5,7 +5,18 @@ img {
 
 #signin-btn {
 
-    color:#aaa;                
+    color:#ddd;    
+
+    border:1px solid #ddd;
+    padding:.5rem;     
+    height:100%;
+    
+    
+}
+
+#signin-btn:hover {
+    background-color: #fff;
+    color:#4C6EA7;
 }
 
 
@@ -14,7 +25,7 @@ img {
     .nav {
 
         display:flex;
-        justify-content: center;
+        justify-content: space-around;
         align-content: center;
         align-items: center;
         background-color: $primary-color;
@@ -51,7 +62,7 @@ img {
         }
         .nav-menu {
 
- 
+            line-height: 0;
 
 
             text-decoration: none;
@@ -63,12 +74,12 @@ img {
     }
 
     .main-image {
-        background-image: url('https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-cottonbro-7019367-min_jjrx0w.jpg');
+        background-image: url('https://res.cloudinary.com/keyzen/image/upload/v1633315176/Group_167_vt12w7.png');
         background-position: center;
         background-clip: border-box;
         background-repeat: no-repeat;
         background-size: cover;
-
+   
         display: flex;
         align-content: center;
         align-items: center;
@@ -146,6 +157,7 @@ img {
                     padding:0;
                     font-size: 1.5rem;
                     color:#fff;
+                    font-weight: 800;
                 }
         
         
@@ -168,3 +180,18 @@ img {
     padding:4rem 0;
 }
 
+
+.wrap-search {
+    height:100px;
+    background-color: #6EA0F3;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    h2 {
+        color:#f7f7fe;
+        font-size: 1.5rem;
+
+    }
+}
