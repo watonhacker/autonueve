@@ -52,6 +52,37 @@
             </div>
         </section>
 
+        {{!-- Sección de productos destacados --}}
+
+
+    {{#if lastProducts}}
+    <h2 class="title">Productos recientes</h2>
+    <div class="products-index products">
+        {{#each lastProducts}}
+        <div class="product">
+            <img src="https://placeimg.com/640/480/tech" alt="">
+            <h3 class="product-name">{{nombre}}</h3>
+            <p class="product-sku">SKU: {{SKU}}</p>
+            <p class="product-brand">{{marca}}</p>
+            <div class="product-button">
+                <p>${{precio}}</p>
+                <a href="#">Comprar</a>
+            </div>  
+
+        {{!--     <p>descripcion: {{loud descripcion}}</p> --}}
+        </div>
+        {{/each}}
+    
+    {{/if}}
+ 
+
+   
+
+
+
+
+    </div>
+
    <!-- Sección de servicios -->
 
         <section class="services">

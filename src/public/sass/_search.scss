@@ -7,6 +7,7 @@
     padding:2rem;
     color:#444;
 }
+
 .products {
     display:flex;
     justify-content: center;
@@ -15,8 +16,9 @@
     gap:1rem;
     .product {
         border:1px solid #f1f1f1;
+
         padding:10px;
-        width:200px;
+        width:47%;
 
 
         img {
@@ -33,6 +35,7 @@
         .product-name {
             height:50px;
             color:#555;
+            font-size: 1rem;
         }
 
         .product-sku {
@@ -85,6 +88,18 @@
 
     }
 
+}
+
+.title {
+    margin:6rem auto 2rem auto;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    color:#4C6EA7;
+}
+
+.products-index {
+
+    margin-bottom:5rem;
 }
 
 .pages {

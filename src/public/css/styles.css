@@ -313,6 +313,8 @@ template {
     font-size: 1.5rem; }
 
   /* Main */
+  body .main .products .product {
+    width: 230px; }
   body .main .services .services-images {
     justify-content: center;
     gap: 4rem; }
@@ -335,8 +337,10 @@ template {
     width: 150px; }
 
   /* Footer */
-  body .footer .footer-container img {
-    width: 150px; } }
+  body .footer {
+    margin-top: 5rem; }
+    body .footer .footer-container img {
+      width: 150px; } }
 @media (min-width: 768px) {
   /* Header */
   body h2 {
@@ -352,7 +356,7 @@ template {
       transform: translateX(0);
       display: flex;
       flex-direction: row;
-      gap: 1.5rem;
+      gap: 1rem;
       width: fit-content;
       position: relative;
       opacity: 1;
@@ -363,18 +367,23 @@ template {
       -ms-transform: translateX(0);
       -o-transform: translateX(0); }
       body .header .nav .nav-menu .nav-menu__item {
-        margin: 2rem 0;
+        margin: 1rem 0;
         padding: 0;
-        font-size: 1.2rem;
+        font-size: .9rem;
         color: #fff; }
   body .header .main-image .image-content h1 {
     font-size: 1.7rem; }
 
   /* Main */
   body .main .services .services-text .services-title {
-    font-size: 1.5rem; }
+    font-size: 2rem;
+    align-self: flex-start; }
   body .main .services .services-text h3 {
     font-size: 1.3rem; }
+  body .main .services .services-text .border-line {
+    display: none; }
+  body .main .services .services-text p {
+    align-self: flex-start; }
   body .main .services .services-images {
     padding: 2rem 0; }
     body .main .services .services-images .services-image {
@@ -385,15 +394,23 @@ template {
   body .main .container-slider .slider-text .slider-title {
     font-size: 1.5rem; }
   body .main .suppliers .suppliers-text h2 {
-    font-size: 1.5rem;
-    line-height: 1rem; }
+    font-size: 2rem;
+    line-height: 1rem;
+    align-self: flex-start; }
   body .main .suppliers .suppliers-text p {
-    font-size: 1.1rem; }
+    font-size: 1.1rem;
+    text-align: start; }
+  body .main .suppliers .suppliers-text .border-line {
+    display: none; }
   body .main .us .us-text h2 {
-    font-size: 1.5rem;
-    line-height: 1rem; }
+    font-size: 2rem;
+    line-height: 1rem;
+    align-self: flex-start; }
   body .main .us .us-text p {
-    font-size: 1.1rem; }
+    font-size: 1.2rem;
+    text-align: start; }
+  body .main .us .us-text .border-line {
+    display: none; }
 
   /* Footer */ }
 @media (min-width: 992px) {
@@ -404,6 +421,15 @@ template {
   /* Main */
   /* Footer */ }
 @media (min-width: 1200px) {
+  .header .nav #signin-btn {
+    padding: .5rem; }
+
+  #nav-menu .nav-menu__item {
+    margin: 1rem 0;
+    padding: 0;
+    font-size: 1.2rem !important;
+    color: #fff; }
+
   /* Header */
   body {
     max-width: 2560px;
@@ -464,12 +490,17 @@ body h3 {
     flex-direction: column;
     align-content: center;
     align-items: center; }
+    .main .services .services-text .services-title {
+      color: #4C6EA7;
+      font-size: 1.5rem; }
     .main .services .services-text .border-line {
       width: 100px;
       height: 3px;
       background-color: #4C6EA7; }
     .main .services .services-text p {
       line-height: 1.5rem; }
+    .main .services .services-text h3 {
+      color: #6EA0F3; }
   .main .services .services-images {
     display: flex;
     align-items: center;
@@ -499,9 +530,32 @@ body h3 {
       color: #fff;
       font-weight: bolder; }
     .main .services .services-images .image-1 {
-      background-image: url("https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-erik-mclean-4732635-min_dn8cdn.jpg"); }
+      background-image: url("https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-erik-mclean-4732635-min_dn8cdn.jpg");
+      transition: transform .3s ease-in-out;
+      -webkit-transition: transform .3s ease-in-out;
+      -moz-transition: transform .3s ease-in-out;
+      -ms-transition: transform .3s ease-in-out;
+      -o-transition: transform .3s ease-in-out;
+      box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25); }
     .main .services .services-images .image-2 {
-      background-image: url("https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-anete-lusina-4792505-min_vgbbpm.jpg"); }
+      background-image: url("https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-anete-lusina-4792505-min_vgbbpm.jpg");
+      transition: transform .3s ease-in-out;
+      -webkit-transition: transform .3s ease-in-out;
+      -moz-transition: transform .3s ease-in-out;
+      -ms-transition: transform .3s ease-in-out;
+      -o-transition: transform .3s ease-in-out;
+      box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25); }
+    .main .services .services-images .image-2:hover,
+    .main .services .services-images .image-1:hover {
+      transition: transform .5s ease-out;
+      transform: translateY(-1rem);
+      box-shadow: -2px 6px 5px rgba(0, 0, 0, 0.35);
+      -webkit-transition: transform .5s ease-out;
+      -moz-transition: transform .5s ease-out;
+      -ms-transition: transform .5s ease-out;
+      -o-transition: transform .5s ease-out; }
+  .main .suppliers {
+    margin-top: 3rem; }
   .main .suppliers-text,
   .main .slider-text,
   .main .us-text {
@@ -514,6 +568,10 @@ body h3 {
     flex-direction: column;
     align-content: center;
     align-items: center; }
+    .main .suppliers-text h2,
+    .main .slider-text h2,
+    .main .us-text h2 {
+      color: #4C6EA7; }
     .main .suppliers-text .border-line,
     .main .slider-text .border-line,
     .main .us-text .border-line {
@@ -524,14 +582,18 @@ body h3 {
     .main .slider-text p,
     .main .us-text p {
       line-height: 1.5rem; }
+  .main .suppliers-text h2 {
+    color: #4C6EA7; }
   .main .suppliers-text p span {
     font-weight: bolder; }
   .main .logos {
     display: flex;
+    margin: 2rem 0 3rem 0;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     align-content: center;
+    flex-direction: column;
     gap: 1.5rem;
     padding: 2rem 0;
     background-color: #F0F0F0; }
@@ -570,7 +632,7 @@ body h3 {
   .products .product {
     border: 1px solid #f1f1f1;
     padding: 10px;
-    width: 200px; }
+    width: 47%; }
     .products .product img {
       max-width: 100%;
       height: auto; }
@@ -580,7 +642,8 @@ body h3 {
       text-align: start; }
     .products .product .product-name {
       height: 50px;
-      color: #555; }
+      color: #555;
+      font-size: 1rem; }
     .products .product .product-sku {
       font-size: .7rem; }
     .products .product .product-brand {
@@ -618,6 +681,15 @@ body h3 {
         -ms-border-radius: 0.5rem;
         -o-border-radius: 0.5rem; }
 
+.title {
+  margin: 6rem auto 2rem auto;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  color: #4C6EA7; }
+
+.products-index {
+  margin-bottom: 5rem; }
+
 .pages {
   padding: 2rem 0;
   display: flex;
@@ -643,6 +715,9 @@ body h3 {
 .container-slider {
   padding-top: 1rem;
   text-align: center; }
+  .container-slider .slider-title {
+    font-size: 1.5rem;
+    color: #4C6EA7; }
   .container-slider .wood-icon {
     width: 60px; }
 

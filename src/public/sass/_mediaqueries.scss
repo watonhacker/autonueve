@@ -40,6 +40,11 @@
     body {
         .main {
 
+            .products {
+                .product {
+                    width:230px;
+                }
+            }
 
             .services {
                 .services-images {
@@ -90,6 +95,7 @@
 
     body {
         .footer {
+            margin-top:5rem;
             .footer-container {
                 img {
                     width:150px;
@@ -131,7 +137,7 @@
                     display:flex;
                     flex-direction: row;
 
-                    gap:1.5rem;
+                    gap:1rem;
                     width:fit-content;
                     position:relative;
                     opacity: 1;
@@ -148,9 +154,9 @@
                     
                 
                     .nav-menu__item {
-                        margin:2rem 0;
+                        margin:1rem 0;
                         padding:0;
-                        font-size: 1.2rem;
+                        font-size: .9rem;
                         color:#fff;
                     }
             
@@ -183,10 +189,17 @@
 
                 .services-text {
                     .services-title {
-                        font-size: 1.5rem;
+                        font-size: 2rem;
+                        align-self: flex-start;
                     }
                     h3 {
                         font-size: 1.3rem;
+                    }
+                    .border-line {
+                        display: none;
+                    }
+                    p {
+                        align-self: flex-start;
                     }
                 }
              
@@ -213,11 +226,17 @@
             .suppliers {
                 .suppliers-text {
                     h2 {
-                        font-size: 1.5rem;
+                        font-size: 2rem;
                         line-height: 1rem;
+                        align-self: flex-start;
                     }
                     p {
                         font-size: 1.1rem;
+                        text-align: start;
+                    }
+                    .border-line {
+                        display: none;
+                        
                     }
                 }
             }
@@ -225,11 +244,16 @@
             .us {
                 .us-text {
                     h2 {
-                        font-size: 1.5rem;
+                        font-size: 2rem;
                         line-height: 1rem;
+                        align-self: flex-start;
                     }
                     p {
-                        font-size: 1.1rem;
+                        font-size: 1.2rem;
+                        text-align: start;
+                    }
+                    .border-line {
+                        display: none;
                     }
                 }
             }
@@ -262,6 +286,26 @@
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
+
+    .header {
+        .nav {
+            #signin-btn {
+                padding:.5rem;
+            }
+        }
+    }
+
+
+    #nav-menu {
+        .nav-menu__item {
+            margin:1rem 0;
+            padding:0;
+            font-size: 1.2rem !important;
+            color:#fff;
+        }
+
+    }
+
     /* Header */
     body {
         max-width:2560px;
