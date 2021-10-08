@@ -1,0 +1,48 @@
+
+
+{{#if resultsModels}}
+<div class="results-title">
+    <h2>MODELOS</h2>
+</div>
+
+<div class="models-panel">
+    <div class="models">
+        <a href="/admin/brands">Marcas</a>
+    </div>
+    <div class="models">
+        <a href="/admin/models">Modelos</a>
+    </div>
+    <div class="models">
+        <a href="/admin/submodels">Submodelos</a>
+    </div>
+
+</div>
+
+<div class="btnToAdmin">
+    <a href="/admin"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
+    <a class="backToPanel" href="/admin">Volver al panel</a>
+</div>
+
+<div class="adminResults">
+        <div class="options-box">
+        
+        <a href=""><i class="fas fa-plus-circle"></i></a>
+        <a href="">Agregar modelo</a>
+        
+    </div>
+    <table class="resultsTable">
+    <tr class="firstColumn"><td>Acciones</td><td>ID</td><td>Modelo</td></tr>
+   {{#each resultsModels}}
+    <tr><td><a href="#"><i class="far fa-edit"></i></a></td><td>{{id}}</td><td>{{nombre}}</td></tr>
+    {{/each}}
+    </table>
+</div>
+
+
+
+</div>
+{{/if}}
+
+<script src="/js/hamburgerBtnCopy.js"></script>
+<script src="/js/responsiveCopy.js"></script>
+<script src="/js/hiddenSearch.js"></script>
