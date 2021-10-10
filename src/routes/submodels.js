@@ -6,6 +6,8 @@ router.post('/', (req, res) => {
     res.send("Ok")
 })
 
+
+
 router.get('/', (req, res) => {
     let selectedModel = req.query.model
     let ModelId;
@@ -41,6 +43,8 @@ router.get('/', (req, res) => {
     } 
 
 })
+
+
 
 
 module.exports = router;

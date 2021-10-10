@@ -1,0 +1,21 @@
+
+
+<form action="/admin/submodels/add" method="POST" class="add-form"autocomplete="off">
+
+    <label for="name">Nombre</label>
+    <input type="text" name="name">
+    <label for="model">Modelo</label>
+    <datalist id="model">
+    {{#each resultados}}
+    <option value="{{id}}">{{{nombre}}}</option>
+    {{/each}}
+    </datalist>  
+    <input placeholder="Modelo" list="model" name="model" id="inputModel">
+    <input type="submit" value="Enviar">
+</form>
+
+
+
+<script src="/js/hamburgerBtnCopy.js"></script>
+<script src="/js/responsiveCopy.js"></script>
+<script src="/js/hiddenSearch.js"></script>

@@ -1225,6 +1225,30 @@ img {
     font-size: 2rem;
     color: #4C6EA7; }
 
+/* Agregar submodelo */
+.add-form {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  padding: 2rem; }
+
+#logout {
+  font-size: 1.2rem;
+  height: 60px;
+  width: 100px;
+  background-color: #6EA0F3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem; }
+
 .models-panel {
   display: flex; }
   .models-panel .models {

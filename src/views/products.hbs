@@ -1,19 +1,19 @@
 
 
-{{#if resultsSubmodels}}
+{{#if productResults}}
 <div class="results-title">
-    <h2>SUBMODELOS</h2>
+    <h2>PRODUCTOS</h2>
 </div>
 
 <div class="models-panel">
     <div class="models">
-        <a href="/admin/brands">Marcas</a>
+        <a href="/admin/products">Productos</a>
     </div>
     <div class="models">
-        <a href="/admin/models">Modelos</a>
+        <a href="/admin/categories">Categorías</a>
     </div>
     <div class="models">
-        <a href="/admin/submodels">Submodelos</a>
+        <a href="/admin/compatibility">Asignación</a>
     </div>
 
 </div>
@@ -29,14 +29,14 @@
     <div class="options-box">
         
         <a href="/admin/submodels/add"><i class="fas fa-plus-circle"></i></a>
-        <a href="">Agregar submodelo</a>
+        <a href="">Agregar producto</a>
         
     </div>
     <table class="resultsTable">
         
-    <tr class="firstColumn"><td>Acciones</td><td>ID</td><td>Submodelo</td></tr>
-   {{#each resultsSubmodels}}
-    <tr><td><a class="option" href="/admin/submodels/edit?id={{id}}"><i class="far fa-edit"></i></a><a class="option"href="#"><i class="far fa-trash-alt"></i></a></td><td>{{id}}</td><td>{{nombre}}</td></tr>
+    <tr class="firstColumn"><td>Acciones</td><td>SKU</td><td>Nombre</td><td>Precio</td></tr>
+   {{#each productResults}}
+    <tr><td><a class="option" href="/admin/submodels/edit?id={{id}}"><i class="far fa-edit"></i></a><a class="option"href="#"><i class="far fa-trash-alt"></i></a></td><td>{{SKU}}</td><td>{{nombre}}</td><td>{{precio}}</td></tr>
     {{/each}}
     </table>
 </div>
