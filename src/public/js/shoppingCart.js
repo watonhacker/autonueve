@@ -21,7 +21,6 @@
 
     let productoActual;
     let productArray;
-    let url;
 
     if (listaProducto != null) {
         let listaProductoLength = listaProducto.split(',').length
@@ -41,14 +40,15 @@
                 selectedProductAmount = selectedProduct.previousElementSibling.value
 
                 myStorage.setItem("productos", e.target.dataset.id)
-                myStorage.setItem("listaproducto", `{${e.target.dataset.id}:${selectedProductAmount}}`)
+                myStorage.setItem("listaproducto", `${e.target.dataset.id}:${selectedProductAmount}`)
 
-            
+                
                 productList = myStorage.getItem("listaproducto")
+
                 shoppingCartAmount = productList.split(',').length
                 shoppingCart.innerHTML = shoppingCartAmount
 
-                firstTime = true;
+              
 
 
                 
@@ -79,11 +79,16 @@
                     selectedProduct = document.querySelector(`#product-${e.target.dataset.id}> div > a`)
                     selectedProductAmount = selectedProduct.previousElementSibling.value
 
-                    if (firstTime == true) {
-                        productList = productList.slice(0, -1)
-                        productList += `,${productoActual}:${selectedProductAmount}}`
+                    if (firstTime == false) {
+                        productList += `,${productoActual}:${selectedProductAmount}`
                         idList += `,${productoActual}`
-                    } 
+                        firstTime = true;
+                        alert("first time, no recortamos el ultimo")
+                    } else {
+                        /* productList = productList.slice(0, -1) */
+                        productList += `,${productoActual}:${selectedProductAmount}`
+                        idList += `,${productoActual}`
+                    }
       
                     myStorage.removeItem("productos")
                     myStorage.setItem("productos",idList )
@@ -100,22 +105,6 @@
         }
     })
     
-
-    let myObject = {
-        1:3,
-        2:1
-    }
-
-    console.log(myObject)
-
-    let myObjectStringify = JSON.stringify(myObject)
-
-    console.log(myObjectStringify)
-    console.log(JSON.parse(myObjectStringify))
-
-    const sendLocalStorage = () => {
-        
-    }
 
     document.querySelectorAll("[href='/checkout']")[0].addEventListener("click", e => {
         e.preventDefault()
@@ -137,14 +126,26 @@
         alert("click")
         url = "/checkout"
 
-        let inputData = window.localStorage.getItem("listaproducto")
+        let inputData = {id: "abc123", text: "sometext"}
+        let product_list = myStorage.getItem("listaproducto")
+        product_list = product_list.split(",")
+        let object_list = {}
+
+     
+        console.log(product_list    )
+        product_list.forEach((e) => {
+            /* necesito pasarlo aunque sean 2 o 3 digitos tanto en cantidad como en id */
+            object_list[e[0]] = e[2]
+        })
+
+        console.log(object_list)
         fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(inputData) // The data
+            body: JSON.stringify(inputData)
         })
     })
     
