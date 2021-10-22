@@ -3,13 +3,14 @@ const mysqlConnection = require('../database/database')
 
 router.get('/', (req, res) => {
 
+
     let results;
     let lastProducts;
 
     mysqlConnection.query("SELECT * FROM marca", (err, results, row) => {
             results=JSON.parse(JSON.stringify(results))
             resultados = results
-            mysqlConnection.query(`SELECT producto.nombre, producto.SKU, producto.precio, producto.descripcion,
+            mysqlConnection.query(`SELECT producto.id, producto.nombre, producto.SKU, producto.precio, producto.descripcion,
             producto.marca FROM producto ORDER BY id DESC LIMIT 12;`, (err, results, rows) => {
 
                 lastProducts = results

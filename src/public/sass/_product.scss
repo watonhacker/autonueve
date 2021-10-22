@@ -1,0 +1,118 @@
+.subtitle-products {
+    text-align: start;
+    display:block;
+    padding:2rem;
+    color:#444;
+}
+
+.products {
+    display:flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap:1rem;
+    .product {
+        border:1px solid #f1f1f1;
+
+        padding:10px;
+        width:47%;
+
+
+        img {
+            max-width:100%;
+            height:auto;
+        }
+
+        .product-name,
+        .product-sku,
+        .product-brand {
+            text-align: start;
+        }
+
+        .product-name {
+            height:50px;
+            color:#555;
+            font-size: 1rem;
+        }
+
+        .product-sku {
+            font-size: .7rem;
+        }
+
+        .product-brand {
+            font-weight: bold;
+            color:#555;
+            font-size: .8rem;
+        }
+
+        p {
+           
+                grid-area: price;
+                display: flex;
+                justify-content: flex-start;
+                text-align: start;
+                align-items: center;
+                align-content: center;
+                color:#4C6EA7;
+                font-weight: bold;
+                line-height: 10px;
+    
+   
+       
+        }
+
+        .product-button {
+
+            display:grid;
+            grid-template-columns: auto auto;
+            grid-template-rows:auto;
+            grid-template: "price button";
+            line-height: 0;
+         
+            input {
+                width:80%;
+                text-align: center;
+                margin: 0 auto;
+                color:#555;    
+   
+            }
+            a {
+                color:#fff;
+                font-weight: bold;
+                grid-area: button;
+                display:flex;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                align-content: center;
+                text-decoration: none;
+                background-color:#6EA0F3;
+                border-radius:.5rem ;
+                -webkit-border-radius:.5rem ;
+                -moz-border-radius:.5rem ;
+                -ms-border-radius:.5rem ;
+                -o-border-radius:.5rem ;
+}
+        }
+
+        .product-amount {
+
+            .amount {
+                padding-top:1rem;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                .number {
+                    width:30px;
+                }
+            }
+
+        }
+
+    }
+
+
+
+}

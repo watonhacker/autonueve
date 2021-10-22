@@ -615,9 +615,6 @@ body h3 {
       min-width: 50px;
       width: 21vw; }
 
-* {
-  box-sizing: border-box; }
-
 .subtitle-products {
   text-align: start;
   display: block;
@@ -651,20 +648,27 @@ body h3 {
       font-weight: bold;
       color: #555;
       font-size: .8rem; }
+    .products .product p {
+      grid-area: price;
+      display: flex;
+      justify-content: flex-start;
+      text-align: start;
+      align-items: center;
+      align-content: center;
+      color: #4C6EA7;
+      font-weight: bold;
+      line-height: 10px; }
     .products .product .product-button {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: auto auto;
       grid-template-rows: auto;
-      grid-template: "price button"; }
-      .products .product .product-button p {
-        grid-area: price;
-        display: flex;
-        justify-content: center;
+      grid-template: "price button";
+      line-height: 0; }
+      .products .product .product-button input {
+        width: 80%;
         text-align: center;
-        align-items: center;
-        align-content: center;
-        color: #4C6EA7;
-        font-weight: bold; }
+        margin: 0 auto;
+        color: #555; }
       .products .product .product-button a {
         color: #fff;
         font-weight: bold;
@@ -681,6 +685,18 @@ body h3 {
         -moz-border-radius: 0.5rem;
         -ms-border-radius: 0.5rem;
         -o-border-radius: 0.5rem; }
+    .products .product .product-amount .amount {
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      align-content: center; }
+      .products .product .product-amount .amount .number {
+        width: 30px; }
+
+* {
+  box-sizing: border-box; }
 
 .title {
   margin: 6rem auto 2rem auto;

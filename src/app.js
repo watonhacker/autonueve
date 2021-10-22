@@ -20,6 +20,8 @@ const signinRoutes = require('./routes/signin')
 const signupRoutes = require('./routes/signup')
 const adminRoutes = require('./routes/admin')
 const logoutRoutes = require('./routes/logout')
+const pedidoRoutes = require('./routes/pedido')
+const checkoutRoutes = require('./routes/checkout')
 
 /* Initializations */
 const app = express()
@@ -61,6 +63,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 
+
 //Para eliminar la cache 
 app.use(function(req, res, next) {
     if (!req.user)
@@ -78,7 +81,8 @@ app.use('/signin', signinRoutes)
 app.use('/signup', signupRoutes)
 app.use('/admin', adminRoutes)
 app.use('/logout', logoutRoutes)
-
+app.use('/pedido', pedidoRoutes)
+app.use('/checkout', checkoutRoutes)
 
 app.listen(app.get('port'), () => {
     console.log("Inicio el servidor en el puerto", app.get("port"))
