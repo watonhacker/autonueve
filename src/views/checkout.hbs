@@ -1,4 +1,15 @@
-<h1>Checkout</h1>
+
+ <h1>Checkout</h1>
+{{#if listaProductos}}
+
+    {{#each listaProductos}}
+
+        <div>Producto</div>
+
+    {{/each}}
+{{else}}
+<div>No hay resultados</div>
+{{/if}}
 
 
 
