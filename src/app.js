@@ -46,6 +46,10 @@ const hbs = exphbs.create({
                 let txt = `Son 2`
                 return txt
             }
+        },
+        price: function (precio, num) {
+            precio = precio * num
+            return precio
         }
     }
 })

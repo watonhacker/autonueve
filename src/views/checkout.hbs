@@ -1,15 +1,44 @@
 
  <h1>Checkout</h1>
 {{#if listaProductos}}
+<div class="wrapperResults">
+    <table class="tableResults">
+        <thead>
+            {{!-- <tr class="firstColumn"><td></td><td>Producto</td><td>Precio</td></tr> --}}
+            <th>Eliminar</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+        </thead>
+        
+    <tbody>
+        {{#each listaProductos}}    
+                <tr data-number="{{id}}">
+                    <td data-label="Eliminar"><a href="{{id}}"><i class="far fa-trash-alt"></i></a></td>
+                    <td data-label="Producto"="">{{nombre}}</td>
+                    <td data-label="Precio">{{ precio }}</td>
+                    <td data-label="Cantidad">
+                        <input type="number" class="number" min="1" value="1" max="20">
+                    </td>
+                    <td data-label="Subtotal">{{{price precio cantidad}}}</td>
+                 
+                </tr>
+        {{/each}}
+    </tbody>
 
-    {{#each listaProductos}}
-
-        <div>Producto</div>
-
-    {{/each}}
+    </table>
+</div>
 {{else}}
 <div>No hay resultados</div>
 {{/if}}
+
+
+
+    
+   {{#each resultsBrands}}
+    
+    {{/each}}
 
 
 
