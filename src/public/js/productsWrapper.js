@@ -24,6 +24,13 @@
     } else {
         shoppingCart.innerHTML = 0
     }
+    setTimeout(() => {
+        if (window.localStorage.getItem("listaproducto").length == 0 || window.localStorage.getItem("productos") == 0) {
+            shoppingCart.innerHTML = 0
+        }
+    }, 100)
+
+
     productsWrapper.addEventListener("click", e => {
         if (e.target.href != undefined) {
             e.preventDefault()
