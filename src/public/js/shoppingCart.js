@@ -102,7 +102,9 @@
             alert("No tiene productos agregados a su carrito")
         } else {
             product_list = product_list.split(",")
+
             let objeto = {}
+   
     
             let primerNumero ="";
             let segundoNumero ="";
@@ -134,14 +136,13 @@
                         break
                     }
                 }
-            
-                objeto[primerNumero] = segundoNumero
+
+                objeto[primerNumero] = segundoNumero.split("").reverse().join("")
             
     
             })
-    
-            
-    
+
+
             fetch(url, {
                 method: 'POST',
                 headers: {
@@ -152,7 +153,7 @@
             })
             .then(res => res.json())
             .then(data => {
-    
+
                 if (data.length == product_list.length) {
                     window.location.href = "/checkout"
                 } 

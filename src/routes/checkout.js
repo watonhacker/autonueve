@@ -21,6 +21,10 @@ router.post('/', async (req, res) => {
         dataListaProductoLen++
     }
 
+    console.log("A*A*A*A*A*A*A*A*A*A")
+    console.log(dataListaProducto)
+
+
     
 
     for (element in dataListaProducto) {
@@ -30,8 +34,10 @@ router.post('/', async (req, res) => {
             results=JSON.parse(JSON.stringify(results))
             resultados = results  
 
+            /* Se le agrega la cantidad al objeto que estamos recorriendo */
             ultimoElemento = test.slice(-1)
             if (ultimoElemento[0]) {
+
                 ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
             }
 
@@ -40,12 +46,14 @@ router.post('/', async (req, res) => {
         
 
     } 
+    
 
 
     setTimeout(() => {
         if (test.length == dataListaProductoLen) {
             ultimoElemento = test.slice(-1)
             ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
+            console.log("TEST---___---__TEST---___---__TEST---___---__TEST---___---__")
             console.log(test)
             contadorInterno = 0
             dataListaProductoLen = 0
@@ -66,6 +74,11 @@ router.get('/', (req, res) =>  {
     res.render("checkout", {
         listaProductos
     })
+
+    console.log("LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----")
+    console.log(listaProductos)
+
+
 })
 
 router.post('/update/', async (req, res) => {
@@ -104,7 +117,6 @@ router.post('/update/', async (req, res) => {
         if (test.length == dataListaProductoLen) {
             ultimoElemento = test.slice(-1)
             ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
-            console.log(test)
             contadorInterno = 0
             dataListaProductoLen = 0
             res.send({

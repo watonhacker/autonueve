@@ -1,8 +1,4 @@
 ((function(){
-
-
-
-
     
     let listaProducto = window.localStorage.getItem("listaproducto")
     let productos = window.localStorage.getItem("productos")
@@ -48,6 +44,14 @@
         }
     }, 100)
 
+    /* Variables para actualización de cantidad "actualizar carrit" */
+
+    let datosPedido;
+    let updatedListaProducto;
+    let updatedProductos;
+    let contadorPedido;
+    let objetoPedido = {};
+
 
 
     listaProducto.forEach((par) => {
@@ -82,7 +86,7 @@
         objeto[primerNumero] = segundoNumero
 
         actualProduct = document.querySelector(`[data-number='${primerNumero}']`)
-        actualProduct.childNodes[7].firstElementChild.value = segundoNumero
+        actualProduct.childNodes[7].firstElementChild.value = segundoNumero.split("").reverse().join("")
 
 
     })
@@ -158,7 +162,7 @@
                                                 break
                                             }
                                         }
-                                        objetoFetch[indiceObjeto] = cantidadObjeto
+                                        objetoFetch[indiceObjeto] = cantidadObjeto.split("").reverse().join("")
                             
                                     }) 
 
@@ -332,7 +336,7 @@
                                                 break
                                             }
                                         }
-                                        objetoFetch[indiceObjeto] = cantidadObjeto
+                                        objetoFetch[indiceObjeto] = cantidadObjeto.split("").reverse().join("")
                             
                                     }) 
                                                                                
@@ -347,6 +351,8 @@
                                     })
                                     .then(res => res.json())
                                     .then(data => {
+
+                                        console.log(data.test)
 
 
                                         updatedTable = `
@@ -373,7 +379,7 @@
                                             <td data-label="Cantidad">
                                                 <input type="number" class="number" min="1" value="${e['cantidad']}" max="20">
                                             </td>
-                                            <td data-label="Subtotal">${e['precio']}</td>
+                                            <td data-label="Subtotal">${e['precio'] * e['cantidad']}</td>
                                             </tr>
                                             
                                             `
@@ -395,32 +401,6 @@
                           
                                         }, 100)
 
-                 /*                        <table class="tableResults">
-                                        <thead>
-                                            {{!-- <tr class="firstColumn"><td></td><td>Producto</td><td>Precio</td></tr> --}}
-                                            <th>Eliminar</th>
-                                            <th>Producto</th>
-                                            <th>Precio</th>
-                                            <th>Cantidad</th>
-                                            <th>Subtotal</th>
-                                        </thead>
-                                        
-                                        <tbody>
-                                            {{#each listaProductos}}    
-                                                    <tr data-number="{{id}}">
-                                                        <td data-label="Eliminar"><a href="{{id}}"><i class="far fa-trash-alt"></i></a></td>
-                                                        <td data-label="Producto"="">{{nombre}}</td>
-                                                        <td data-label="Precio">{{ precio }}</td>
-                                                        <td data-label="Cantidad">
-                                                            <input type="number" class="number" min="1" value="1" max="20">
-                                                        </td>
-                                                        <td data-label="Subtotal">{{{price precio cantidad}}}</td>
-                                                    
-                                                    </tr>
-                                            {{/each}}
-                                        </tbody>
-                                    
-                                        </table> */
                                     })
                                 }
                             }
@@ -441,6 +421,150 @@
     
 
         } 
+    })
+
+
+
+
+    document.querySelector("#buttonPedido").addEventListener("click", e => {
+        updatedProductos =""
+        updatedListaProducto =""
+        contadorPedido = 1;
+        datosPedido = document.querySelectorAll("body > section.main > div > table > tbody > tr > td")
+        datosPedido.forEach(n => {
+            if (n.dataset.label == "Cantidad") {
+     
+                if (document.querySelectorAll("body > section.main > div > table > tbody > tr").length == contadorPedido) {
+                    updatedListaProducto += `${n.parentElement.dataset.number}:${n.firstElementChild.valueAsNumber}`
+                    updatedProductos += n.parentElement.dataset.number
+                } else {
+                    updatedProductos += n.parentElement.dataset.number + ","
+                    updatedListaProducto += `${n.parentElement.dataset.number}:${n.firstElementChild.valueAsNumber},`
+                }
+                
+
+                
+                contadorPedido++
+            }
+        })
+
+        /* Comienza a cargar los cambios */
+
+        document.querySelector("body > section.main > div > table").outerHTML = "<div class='lds-dual-ring'></div>"
+
+        /* Se cambian los datos a nivel localStorage */
+        window.localStorage.removeItem("listaproducto")
+        window.localStorage.removeItem("productos")
+        window.localStorage.setItem("listaproducto", updatedListaProducto)
+        window.localStorage.setItem("productos", updatedProductos)
+
+        updatedListaProducto = updatedListaProducto.split(",")
+        console.log(updatedListaProducto)
+
+        primerNumero = ""
+        segundoNumero = ""
+        objetoPedido = {}
+
+        updatedListaProducto.forEach((par) => {
+            primerNumero = ""
+            segundoNumero = ""
+            for (element of par) {
+                
+                if (element != ":") {
+                    primerNumero += element
+                } else {
+                    break
+                }
+            }
+            
+            let newString = "";
+            for (let i = par.length - 1; i >= 0; i--) {
+                newString += par[i];
+            }
+        
+        
+            for (element of newString) {
+                if (element != ":") {
+                    segundoNumero += element
+                } else {
+
+                    break
+                }
+            }
+        
+            objetoPedido[primerNumero] = segundoNumero.split("").reverse().join("")
+        
+
+        })
+
+        /* Se traen los productos nuevamente, con sus cantidades actualizadas */
+
+        fetch("/checkout/update", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objetoPedido)
+        })
+        .then(res => res.json())
+        .then(data => {
+        
+
+            console.log(data.test)
+
+            data.test.forEach(n => {
+                
+                updatedTable = `
+                <table class="tableResults">
+                    <thead>
+                        <th>Eliminar</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                    </thead>
+                    <tbody>
+                `
+
+                data.test.forEach(e => {
+
+                    updatedTable +=
+
+                    `
+                    <tr data-number="${e['id']}">
+                    <td data-label="Eliminar"><a href="${e['id']}"><i class="far fa-trash-alt"></i></a></td>
+                    <td data-label="Producto"="">${e['nombre']}</td>
+                    <td data-label="Precio">${e['precio']}</td>
+                    <td data-label="Cantidad">
+                        <input type="number" class="number" min="1" value="${e['cantidad']}" max="20">
+                    </td>
+                    <td data-label="Subtotal">${e['precio'] * e['cantidad']}</td>
+                    </tr>
+                    
+                    `
+
+                })
+
+                updatedTable += `
+                </tbody>
+                </table>
+                `
+                document.querySelector("body > section.main > div").innerHTML = ""
+                document.querySelector("body > section.main > div").innerHTML = updatedTable
+                shoppingCart.innerHTML = window.localStorage.getItem("productos").split(",").length
+
+                setTimeout(() => {
+
+                        shoppingCart.innerHTML = window.localStorage.getItem("productos").split(",").length
+   
+  
+                }, 100)
+
+            
+            })
+
+        })
     })
 
 
