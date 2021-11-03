@@ -274,10 +274,6 @@
     })
 
     $tableResults.addEventListener("click", e => {
-        alert("ok")
-    })
-
-    $tableResults.addEventListener("click", e => {
         if (e.target.href != undefined) {
             e.preventDefault()
 
