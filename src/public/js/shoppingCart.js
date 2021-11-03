@@ -7,7 +7,7 @@
     
     let listaProducto = myStorage.getItem("listaproducto")
 
-
+    shoppingCart.innerHTML = 0
     setTimeout(() => {
         if (listaProducto != null) {
             let listaProductoLength = listaProducto.split(',').length
