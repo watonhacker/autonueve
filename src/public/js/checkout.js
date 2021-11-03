@@ -555,11 +555,10 @@
                 shoppingCart.innerHTML = window.localStorage.getItem("productos").split(",").length
 
                 setTimeout(() => {
-
-                        shoppingCart.innerHTML = window.localStorage.getItem("productos").split(",").length
-   
-  
-                }, 100)
+                        if (window.localStorage.getItem("productos").split(",").length) {
+                            shoppingCart.innerHTML = window.localStorage.getItem("productos").split(",").length
+                        }
+                }, 300)
 
             
             })
