@@ -12,6 +12,8 @@
         if (listaProducto != null) {
             let listaProductoLength = listaProducto.split(',').length
             shoppingCart.innerHTML = listaProductoLength
+            alert(listaProducto)
+            alert(listaProducto.length)
     
         } else {
             shoppingCart.innerHTML = 0
