@@ -8,13 +8,18 @@
     let listaProducto = myStorage.getItem("listaproducto")
 
 
-    if (listaProducto != null) {
-        let listaProductoLength = listaProducto.split(',').length
-        shoppingCart.innerHTML = listaProductoLength
+    setTimeout(() => {
+        if (listaProducto != null) {
+            let listaProductoLength = listaProducto.split(',').length
+            shoppingCart.innerHTML = listaProductoLength
+    
+        } else {
+            shoppingCart.innerHTML = 0
+        }
+    
 
-    } else {
-        shoppingCart.innerHTML = 0
-    }
+    }, 300)
+
 
 
 
