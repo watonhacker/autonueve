@@ -10,8 +10,8 @@ import responsiveQueries from "./responsive.js";
 
 d.addEventListener("DOMContentLoaded", () => {
 
-    hamburgerMenu(".nav-btn", ".nav-menu", ".nav-menu a", "active");
     responsiveQueries("btn-menu", "(min-width: 768px)", "hidden");
+    hamburgerMenu(".nav-btn", ".nav-menu", ".nav-menu a", "active");
     getSubmodels()
     printSubmodels()
     printYears()

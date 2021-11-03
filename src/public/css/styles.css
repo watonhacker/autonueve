@@ -843,10 +843,11 @@ img {
       width: 200px; }
   .header .nav .nav-btn {
     width: 50px;
-    cursor: pointer; }
-  .header .nav .hidden {
-    visibility: hidden;
+    cursor: pointer;
     display: none; }
+  .header .nav .hidden {
+    visibility: visible;
+    display: block; }
   .header .nav .nav-menu {
     line-height: 0;
     text-decoration: none; }

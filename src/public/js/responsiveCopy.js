@@ -6,12 +6,12 @@
     let breakpoint = w.matchMedia("(min-width: 768px)");
 
     const responsive = e => {
-
+        
         if (e.matches) {
-            d.getElementById("btn-menu").classList.add("hidden")
+            d.getElementById("btn-menu").classList.remove("hidden")
 
         } else {
-            d.getElementById("btn-menu").classList.remove("hidden")
+            d.getElementById("btn-menu").classList.add("hidden")
 
         }
         

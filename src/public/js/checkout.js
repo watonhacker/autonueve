@@ -92,6 +92,11 @@
     })
 
 
+/*     document.querySelector(".main > .wrapperResults").addEventListener("click", e => {
+        
+        if (e.target.parentElement.href != undefined) {alert("clickazo")}
+    }) */
+
 
     document.querySelector(".wrapperResults").addEventListener("click", e => {
         e.preventDefault()
@@ -254,13 +259,13 @@
 
             })
 
-    
+            shoppingCart.innerHTML = window.localStorage.getItem("productos").split(",").length
 
         } 
 
 
 
-            shoppingCart.innerHTML = window.localStorage.getItem("productos").split(",").length
+          
   
 
 
@@ -269,13 +274,19 @@
     })
 
     $tableResults.addEventListener("click", e => {
+        alert("ok")
+    })
+
+    $tableResults.addEventListener("click", e => {
         if (e.target.href != undefined) {
             e.preventDefault()
+
 
         }
         if (e.target.parentElement.href != undefined && window.localStorage.getItem("productos").length > 0) {
 
             
+          
             e.preventDefault()
             $deletedProduct = e.target.parentElement.parentElement.parentElement.dataset.number
             contadorPar = -1
@@ -339,8 +350,11 @@
                                         objetoFetch[indiceObjeto] = cantidadObjeto.split("").reverse().join("")
                             
                                     }) 
-                                                                               
 
+                                    if (objetoFetch) {
+
+                                        console.log(objetoFetch, "aca")
+                                        
                                     fetch("/checkout/update", {
                                         method: 'POST',
                                         headers: {
@@ -351,7 +365,7 @@
                                     })
                                     .then(res => res.json())
                                     .then(data => {
-
+                                    
                                         console.log(data.test)
 
 
@@ -401,7 +415,12 @@
                           
                                         }, 100)
 
+                             
+
                                     })
+                                    }
+                                                                               
+
                                 }
                             }
         
@@ -427,6 +446,7 @@
 
 
     document.querySelector("#buttonPedido").addEventListener("click", e => {
+
         updatedProductos =""
         updatedListaProducto =""
         contadorPedido = 1;

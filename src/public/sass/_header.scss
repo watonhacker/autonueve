@@ -54,11 +54,16 @@ img {
         .nav-btn {
             width:50px;
             cursor: pointer;
+            display:none;
+
+ 
+        
         }
 
         .hidden {
-            visibility: hidden;
-            display: none;
+            visibility: visible;
+            display: block;
+
         }
         .nav-menu {
 

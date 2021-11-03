@@ -8,10 +8,13 @@ export default function responsiveQueries (id1,  mq, classHidden) {
     const responsive = e => {
 
         if (e.matches) {
-            d.getElementById(id1).classList.add(classHidden)
+       
+                d.getElementById(id1).classList.remove(classHidden)
+
+ 
 
         } else {
-            d.getElementById(id1).classList.remove(classHidden)
+            d.getElementById(id1).classList.add(classHidden)
 
         }
 
