@@ -9,18 +9,18 @@ console.log("***")
 
 const mysql = require('mysql');
 
-mysqlConnection = mysql.createConnection({
+/* mysqlConnection = mysql.createConnection({
     host:'uh1.hnc.cl',
     user:"mobalzen_keyzen",
     password:"keyzencl123",
     database:"mobalzen_autonueve"
-})
-/*     mysqlConnection = mysql.createConnection({
+}) */
+    mysqlConnection = mysql.createConnection({
     host:process.env.HOST,
     user:process.env.USER,
     password:process.env.PASS,
     database:process.env.DATABASE
-    }) */
+    })
 
 
 
