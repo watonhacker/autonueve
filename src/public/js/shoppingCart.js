@@ -1,7 +1,7 @@
 ((function(){
 
 
-    let shoppingCart = document.querySelector("#shopping-cart") 
+    let shoppingCart = document.querySelector(".shopping-cart") 
 
     let myStorage = window.localStorage
     

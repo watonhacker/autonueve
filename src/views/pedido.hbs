@@ -1,20 +1,74 @@
-<form action="/pedido" method="POST" id="pedidoForm">
+
+ <h1>Checkout</h1>
+{{!--  <div class="lds-dual-ring"></div> --}}
+{{#if listaProductos}}
+<div class="wrapperResults">
+    <table class="tableResults">
+        <thead>
+            {{!-- <tr class="firstColumn"><td></td><td>Producto</td><td>Precio</td></tr> --}}
+
+            <th>Producto</th>
+
+            <th>Subtotal</th>
+        </thead>
+        
+    <tbody>
+        {{#each listaProductos}}    
+                <tr data-number="{{id}}">
+                    <td style="font-size:.9rem;"data-label="Producto"="">{{nombre}} x <strong>{{cantidad}}</strong></td>
+                    <td data-label="Subtotal">{{{price precio cantidad}}}</td>
+                </tr>
+        {{/each}}
+
+        <tr>
+            <td><strong>Total</strong></td>
+            <td id="totalPrice"></td>
+        </tr>
+    </tbody>
+
+    </table>
+</div>
+
+{{else}}
+<div>No hay resultados</div>
+{{/if}}
+
+
+
+
+
+
+<form action="/venta" method="POST" id="pedidoForm">
+    <h2>Datos cliente</h2>
     <label for="nombre">Nombre</label>
     <input type="text" name="nombre">
+    <label for="apellido">Apellido</label>
+    <input type="text" name="apellido">
+    <label for="email">Email</label>
+    <input type="email" name="email">
+    <label for="phone">Teléfono</label>
+    <input type="text" name="phone">
+    <label for="rut">Rut</label>
+    <input type="text" name="rut">
     <label for="empresa">¿Es cliente empresa?</label>
     <input type="radio" name="empresa" id="inputEmpresa">
     <input type="submit" value="Enviar" id="pedidoSubmit">
+    <h2>Datos facturación</h2>
+    <label for="direccion">Direccion</label>
+    <input type="text" name="direccion">
+    <label for="comuna">Comuna</label>
+    <input type="text" name="comuna">
 </form>                     
 
-<div class="product-wrapper">
-    <button type="submit" value="1">1</button>
-    <button type="submit" value="2">2</button>
-    <button type="submit" value="3">3</button>
-</div>
 
 
 
 
+
+
+
+
+<script src="/js/pedido.js"></script>
 <script src="/js/hamburgerBtnCopy.js"></script>
 <script src="/js/responsiveCopy.js"></script>
 <script src="/js/hiddenSearch.js"></script>

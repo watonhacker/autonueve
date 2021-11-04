@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { query } = require('express');
+
 const mysqlConnection = require('../database/database')
 
 let listaProductos =[]
@@ -20,11 +20,6 @@ router.post('/', async (req, res) => {
     for (element in dataListaProducto) {
         dataListaProductoLen++
     }
-
-    console.log("A*A*A*A*A*A*A*A*A*A")
-    console.log(dataListaProducto)
-
-
     
 
     for (element in dataListaProducto) {
@@ -53,8 +48,6 @@ router.post('/', async (req, res) => {
         if (test.length == dataListaProductoLen) {
             ultimoElemento = test.slice(-1)
             ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
-            console.log("TEST---___---__TEST---___---__TEST---___---__TEST---___---__")
-            console.log(test)
             contadorInterno = 0
             dataListaProductoLen = 0
             res.send({
@@ -75,8 +68,6 @@ router.get('/', (req, res) =>  {
         listaProductos
     })
 
-    console.log("LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----LISTAPRODUCTOS----")
-    console.log(listaProductos)
 
 
 })

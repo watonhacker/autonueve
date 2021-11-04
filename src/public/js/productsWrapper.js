@@ -1,7 +1,7 @@
 ((function(){
 	let myStorage = window.localStorage
     let listaProducto = myStorage.getItem("listaproducto")
-    let shoppingCart = document.querySelector("#shopping-cart")
+    let shoppingCart = document.querySelector(".shopping-cart")
     let productsWrapper = document.querySelector(".products")
     let idProductos = myStorage.getItem("productos")
 

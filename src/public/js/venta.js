@@ -1,6 +1,6 @@
 ((function(){
 
-    let shoppingCart = document.querySelector("#shopping-cart")
+    let shoppingCart = document.querySelector(".shopping-cart")
     const d = document;
     let formPedido = d.querySelector("#pedidoForm")
     let inputPedido = d.querySelector("#pedidoSubmit")
