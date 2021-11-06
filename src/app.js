@@ -50,6 +50,9 @@ const hbs = exphbs.create({
         price: function (precio, num) {
             precio = precio * num
             return precio
+        },
+        selectImg : function (bddImg, image) {
+            return bddImg || image
         }
     }
 })

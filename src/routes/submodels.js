@@ -6,6 +6,8 @@ router.post('/', (req, res) => {
     res.send("Ok")
 })
 
+let idSubmodel;
+
 
 
 router.get('/', (req, res) => {
@@ -25,8 +27,11 @@ router.get('/', (req, res) => {
 
                 let resultsId = results[0]['id']
                 console.log(resultsId, "model")
-    
+                idSubmodel = resultsId
                 mysqlConnection.query(`SELECT * FROM submodelo WHERE modelo_id = ${resultsId}`, (err, results, rows) => {
+
+                    idSubmodel = resultsId
+        
                     if (err) {
                         console.log(err)
                     } else {

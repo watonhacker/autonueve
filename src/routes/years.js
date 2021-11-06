@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
         console.log("tenemos submodel")
         console.log(selectedSubmodel)
 
-        mysqlConnection.query(`SELECT submodelo.id FROM submodelo WHERE submodelo.nombre = "${selectedSubmodel}"`, (err, results, rows) => {
+        mysqlConnection.query(`SELECT submodelo.id FROM submodelo WHERE submodelo.nombre = '${selectedSubmodel}'`, (err, results, rows) => {
             if (err) throw err;
             console.log("id")
             SubmodelId = results[0]['id']
@@ -26,7 +26,8 @@ router.get('/', (req, res) => {
                 console.log(results)
 
                 res.send({
-                    results
+                    results,
+                    SubmodelId
                 })
                 
 /*                 if (results[0]) {

@@ -28,6 +28,14 @@ export function printYears () {
             $inputYear.disabled = false;
             $yearForm.insertAdjacentElement("beforeend", $yearDatalist)
             console.log(data)
+            console.log("pic", data)
+    
+            if (window.localStorage.getItem("submodel") != undefined) {
+                window.localStorage.removeItem("submodel")
+                window.localStorage.setItem("submodel", data.SubmodelId)
+            }
+            
+           
         })
 
         $inputSubmodel.disabled = true;

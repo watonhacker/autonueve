@@ -138,7 +138,7 @@
                                     arrayProductos.splice(producto, 1)
                                     window.localStorage.removeItem("productos")
                                     window.localStorage.setItem("productos", arrayProductos)
-                                    document.querySelector("body > section.main > div > table").outerHTML = "<div class='lds-dual-ring'></div>"
+                                    document.querySelector("body > section.main > div > table").outerHTML = "<div class='lds-ring'><div></div><div></div><div></div><div></div></div>"
 
                                     objetoFetch = {}
     
@@ -306,7 +306,7 @@
                                     arrayProductos.splice(producto, 1)
                                     window.localStorage.removeItem("productos")
                                     window.localStorage.setItem("productos", arrayProductos)
-                                    document.querySelector("body > section.main > div > table").outerHTML = "<div class='lds-dual-ring'></div>"
+                                    document.querySelector("body > section.main > div > table").outerHTML = "<div class='lds-ring'><div></div><div></div><div></div><div></div></div>"
 
                                     objetoFetch = {}
     
@@ -449,7 +449,7 @@
     /* Comienza a cargar los cambios */
 
     if (!pedido) {
-        document.querySelector("body > section.main > div > table").outerHTML = "<div class='lds-dual-ring'></div>"
+        document.querySelector("body > section.main > div > table").outerHTML = "<div class='lds-ring'><div></div><div></div><div></div><div></div></div>"
     }
 
 
@@ -514,6 +514,8 @@
 
         console.log(data.test)
 
+        if(!pedido) {
+            
         data.test.forEach(n => {
             
             updatedTable = `
@@ -563,6 +565,8 @@
 
         
         })
+        }
+
 
     })
   
@@ -584,7 +588,7 @@ if (document.querySelector("#buttonComprar")) {
     document.querySelector("#buttonComprar").addEventListener("click", e => {
 
         actualizarCarrito(true)
-    
+        document.querySelector("body > section.main > div > table").outerHTML = "<div class='lds-ring'><div></div><div></div><div></div><div></div></div>"
         e.preventDefault()
         url = "/checkout"
     
@@ -633,6 +637,8 @@ if (document.querySelector("#buttonComprar")) {
             
     
             })
+
+
     
     
             fetch("/pedido", {

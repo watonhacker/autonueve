@@ -10,69 +10,90 @@ let contadorInterno;
 let ultimoElemento;
 
 router.post('/', async (req, res) => {
-    dataListaProductoLen = 0
-    contadorInterno = 0
-    queryDone = false;
-    test = []
-    let dataListaProducto = req.body
-    let resultados;
 
-    for (element in dataListaProducto) {
-        dataListaProductoLen++
-    }
-    
-
-    for (element in dataListaProducto) {
+    try {
   
-        await mysqlConnection.query(`SELECT * FROM producto WHERE producto.id = ${element}`, (err, results) => {
-
-            results=JSON.parse(JSON.stringify(results))
-            resultados = results  
-
-            /* Se le agrega la cantidad al objeto que estamos recorriendo */
-            ultimoElemento = test.slice(-1)
-            if (ultimoElemento[0]) {
-
-                ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
-            }
-
-            test.push(resultados[0])
-        })     
+        dataListaProductoLen = 0
+        contadorInterno = 0
+        queryDone = false;
+        test = []
+        let dataListaProducto = req.body
+        let resultados;
+    
+        for (element in dataListaProducto) {
+            dataListaProductoLen++
+        }
         
-
-    } 
+     
+        for (element in dataListaProducto) {
+   
+            await mysqlConnection.query(`SELECT * FROM producto WHERE producto.id = ${element}`, (err, results) => {
+    
+                results=JSON.parse(JSON.stringify(results))
+                resultados = results  
+ 
+                /* Se le agrega la cantidad al objeto que estamos recorriendo */
+                ultimoElemento = test.slice(-1)
+                if (ultimoElemento[0]) {
+    
+                    ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
+                }
+    
+                test.push(resultados[0])  
+                
     
 
+        
+                    if (test.length == dataListaProductoLen) {
+                        ultimoElemento = test.slice(-1)
+                        ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
+                        contadorInterno = 0
+                        dataListaProductoLen = 0
+                        res.send({
+                            length: test.length
+                        })
+               
+                    } 
 
-    setTimeout(() => {
-        if (test.length == dataListaProductoLen) {
-            ultimoElemento = test.slice(-1)
-            ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
-            contadorInterno = 0
-            dataListaProductoLen = 0
-            res.send({
-                length: test.length
-            })
+            })     
+            
+    
         } 
-    }, 100)
 
+  
+    
+    
+
+    
+    } catch (err) {
+        console.log(err)
+    }
+  
 
 
 
 })
 
 router.get('/', (req, res) =>  {
-    listaProductos = []
-    listaProductos = test
-    res.render("checkout", {
-        listaProductos
-    })
+
+
+    try {
+
+        listaProductos = []
+        listaProductos = test
+        res.render("checkout", {
+            listaProductos
+        })
+    } catch (err) {
+        console.log(err)
+    }
 
 
 
 })
 
 router.post('/update/', async (req, res) => {
+    console.log("Entraron a update -!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!")
     dataListaProductoLen = 0
     contadorInterno = 0
     queryDone = false;
@@ -98,23 +119,32 @@ router.post('/update/', async (req, res) => {
                 ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
             }
 
+
+
             test.push(resultados[0])
-        })     
+   
+
+    
+            if (test.length == dataListaProductoLen) {
+                ultimoElemento = test.slice(-1)
+                ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
+                contadorInterno = 0
+                dataListaProductoLen = 0
+                res.send({
+                    test
+                })
+            } 
+        })   
+
+
+
+        
+        
         
 
     } 
 
-    setTimeout(() => {
-        if (test.length == dataListaProductoLen) {
-            ultimoElemento = test.slice(-1)
-            ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
-            contadorInterno = 0
-            dataListaProductoLen = 0
-            res.send({
-                test
-            })
-        } 
-    }, 100)
+
 
 })
 

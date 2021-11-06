@@ -36,6 +36,16 @@ router.post('/', async (req, res) => {
             }
 
             test.push(resultados[0])
+
+            if (test.length == dataListaProductoLen) {
+                ultimoElemento = test.slice(-1)
+                ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
+                contadorInterno = 0
+                dataListaProductoLen = 0
+                res.send({
+                    length: test.length
+                })
+            } 
         })     
         
 
@@ -43,17 +53,9 @@ router.post('/', async (req, res) => {
     
 
 
-    setTimeout(() => {
-        if (test.length == dataListaProductoLen) {
-            ultimoElemento = test.slice(-1)
-            ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
-            contadorInterno = 0
-            dataListaProductoLen = 0
-            res.send({
-                length: test.length
-            })
-        } 
-    }, 100)
+ 
+
+
 
 
 

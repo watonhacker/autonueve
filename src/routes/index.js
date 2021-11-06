@@ -10,8 +10,7 @@ router.get('/', (req, res) => {
     mysqlConnection.query("SELECT * FROM marca", (err, results, row) => {
             results=JSON.parse(JSON.stringify(results))
             resultados = results
-            mysqlConnection.query(`SELECT producto.id, producto.nombre, producto.SKU, producto.precio, producto.descripcion,
-            producto.marca FROM producto ORDER BY id DESC LIMIT 12;`, (err, results, rows) => {
+            mysqlConnection.query(`SELECT * FROM producto ORDER BY id DESC LIMIT 12;`, (err, results, rows) => {
 
                 lastProducts = results
 

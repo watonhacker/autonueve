@@ -15,11 +15,19 @@ const mysql = require('mysql');
     password:"keyzencl123",
     database:"mobalzen_autonueve"
 }) */
-    mysqlConnection = mysql.createConnection({
+/*     mysqlConnection = mysql.createConnection({
     host:process.env.HOST,
     user:process.env.USER,
     password:process.env.PASS,
     database:process.env.DATABASE
+    }) */
+
+    mysqlConnection = mysql.createConnection({
+    host:'mobalzen-autonueve-do-user-9924163-0.b.db.ondigitalocean.com',
+    user:"doadmin",
+    password:"lNIFw7eUbjhpbisK",
+    database:"autonueve",
+    port:'25060'
     })
 
 
