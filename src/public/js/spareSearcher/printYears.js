@@ -33,6 +33,8 @@ export function printYears () {
             if (window.localStorage.getItem("submodel") != undefined) {
                 window.localStorage.removeItem("submodel")
                 window.localStorage.setItem("submodel", data.SubmodelId)
+            } else {
+                window.localStorage.setItem("submodel", data.SubmodelId)
             }
             
            
