@@ -29,8 +29,6 @@ export function searchBtn () {
             $modelId = $modelId.getAttribute("data-id")
             $submodelId = window.localStorage.getItem("submodel")
 
-
-            alert($submodelId)
             location.href = `/search?submodel=${$submodelId}&year=${$yearId}&page=1`
 
           
