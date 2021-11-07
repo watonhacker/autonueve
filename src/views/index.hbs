@@ -1,7 +1,9 @@
 {{!--    <a href="/signup">Signup</a> --}}
 {{!--    <a href="/signin">Signin</a> --}}
 
-        <button style="z-index:30;" class="btnCart"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+{{!-- Boton --}}
+
+<button style="z-index:30;" class="btnCart"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
     </svg>
         <div id="cart-circle"  class="circle">
@@ -11,11 +13,20 @@
     <a class="shopping-cart" style="color:#ccc; display:flex; justify-content:center; align-items:center; align-content:center;text-decoration:none; " href="/checkout"></a>
 </button>
 
+
+{{!-- fin de boton cart
+ --}}
    <section class="search">
 
        <h2>BUSCADOR DE REPUESTOS</h2>
+<div class="arrow bounce">
+  <a class="fa fa-arrow-down fa-2x"></a>
+</div>
+
+
 
    <div class="index-forms">
+
       <form action="/brands" method="POST" id ="formBrand" autocomplete="off">
          <datalist id="brand">
          {{#each resultados}}
@@ -212,7 +223,11 @@ var swiperLogos = new Swiper(".swiperLogos", {
 
     </script>
 
+<button class="scrollUp-btn"><i class="fas fa-arrow-alt-circle-up"></i></button>
 
+
+
+<script src="/js/scrollUp.js"></script>
 <script src="/js/productsWrapper.js"></script>
 <script src="/js/slider.js"></script>
 <script src="/js/sliderLogos.js"></script>
