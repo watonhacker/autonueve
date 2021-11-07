@@ -765,12 +765,12 @@ body > section.main > div > div.swiper-button-prev,
 body > section.main > div > div.swiper-button-next {
   color: #fff; }
 
-.swiper {
-  width: 300px;
-  height: 100%; }
+.mySwiper {
+  width: 95vw;
+  height: 300px;
+  max-width: 1200px; }
 
 .swiper-slide {
-  width: 300px;
   text-align: center;
   font-size: 18px;
   background: #fff;
@@ -792,44 +792,24 @@ body > section.main > div > div.swiper-button-next {
 .swiper-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover; }
+  object-fit: cover;
+  object-position: center; }
 
 @media (min-width: 576px) {
   .swiper, .swiper-slide {
-    width: 500px;
-    height: 100%; } }
+    height: 300px; } }
 @media (min-width: 576px) {
   .swiper {
-    width: 500px;
-    height: 100%; }
-
-  body .swiper .swiper-slide {
-    width: 500px;
-    height: 100%; } }
+    height: 400px; } }
 @media (min-width: 768px) {
   .swiper {
-    width: 700px;
-    height: 100%; }
-
-  body .swiper .swiper-slide {
-    width: 700px;
-    height: 100%; } }
+    height: 400px; } }
 @media (min-width: 992px) {
   .swiper {
-    width: 800px;
-    height: 100%; }
-
-  body .swiper .swiper-slide {
-    width: 800px;
-    height: 100%; } }
+    height: 400px; } }
 @media (min-width: 1200px) {
   .swiper {
-    width: 1200px;
-    height: 100%; }
-
-  body .swiper .swiper-slide {
-    width: 1200px;
-    height: 100%; } }
+    height: 500px; } }
 /* SliderLogos */
 .swiperLogos {
   overflow: hidden;
