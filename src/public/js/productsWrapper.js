@@ -42,12 +42,18 @@
 
 
     productsWrapper.addEventListener("click", e => {
+
+        try {
+
+        } catch (err) {
+            console.log(err)
+        }
         if (e.target.href != undefined) {
             e.preventDefault()
+            
             if (myStorage.getItem("listaproducto") == null) {
               
                 selectedProduct = document.querySelector(`#product-${e.target.dataset.id}> div > a`)
-    
                 selectedProductAmount = selectedProduct.previousElementSibling.value
     
                 myStorage.setItem("productos", e.target.dataset.id)
@@ -64,7 +70,7 @@
     
             } else {
                 esIgual = false;
-    
+
                 productList = myStorage.getItem("listaproducto")
                 idList = myStorage.getItem("productos")
     

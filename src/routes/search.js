@@ -68,7 +68,7 @@ router.get('/', (req, res) => {
             
     
             
-                    mysqlConnection.query(`SELECT * FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
+                    mysqlConnection.query(`SELECT producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
                     INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id WHERE listasubmodelo.id = ${$listaSubmodeloId};`, (err, results, rows) => {
             
             
