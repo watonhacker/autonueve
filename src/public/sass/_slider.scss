@@ -77,17 +77,7 @@ body > section.main > div > div.swiper-button-next {
             height: 100%;
         }
 
-        .swiperLogos {
-            .swiper-button-next {
-                right: 20px;
-                transform: rotate(90deg);
-              }
-          
-              .swiper-button-prev {
-                left: 20px;
-                transform: rotate(90deg);
-              }
-        }
+
 
 
 
@@ -131,9 +121,8 @@ body > section.main > div > div.swiper-button-next {
 
 
  .swiperLogos {
-     overflow: hidden;
+   overflow: hidden;
    width: 90%;
-
    margin:2rem auto;
    height: 100%;
 
@@ -142,7 +131,7 @@ body > section.main > div > div.swiper-button-next {
     text-align: center;
     font-size: 18px;
     background: #fff;
-    width:200px;
+    width:100px;
     height:70px;
     /* Center slide text vertically */
     display: -webkit-box;
@@ -169,18 +158,3 @@ body > section.main > div > div.swiper-button-next {
  }
 
 
- @media (max-width: 760px) {
-
-  .swiperLogos {
-    .swiper-button-next {
-      right: 20px;
-      transform: rotate(90deg);
-    }
-  
-    .swiper-button-prev {
-      left: 20px;
-      transform: rotate(90deg);
-    }
-  }
-  
-}

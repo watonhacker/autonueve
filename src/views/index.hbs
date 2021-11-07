@@ -174,25 +174,28 @@ var swiperLogos = new Swiper(".swiperLogos", {
           delay: 3500,
           disableOnInteraction: false
         },
-        slidesPerView: 3,
-        direction: getDirection(),
+        slidesPerView: 2,
+        spaceBetween:20,
         navigation: {
           nextEl: ".swiperLogos > .swiper-button-next",
           prevEl: ".swiperLogos > .swiper-button-prev"
         },
-        on: {
-          resize: function () {
-            swiperLogos.changeDirection(getDirection());
-          }
-        }
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
+        },
       });
 
-      function getDirection() {
-        var windowWidth = window.innerWidth;
-        var direction = window.innerWidth <= 760 ? "vertical" : "horizontal";
-
-        return direction;
-      }
     </script>
 
 

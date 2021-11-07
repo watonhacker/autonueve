@@ -813,14 +813,7 @@ body > section.main > div > div.swiper-button-next {
 
   body .swiper .swiper-slide {
     width: 700px;
-    height: 100%; }
-
-  .swiperLogos .swiper-button-next {
-    right: 20px;
-    transform: rotate(90deg); }
-  .swiperLogos .swiper-button-prev {
-    left: 20px;
-    transform: rotate(90deg); } }
+    height: 100%; } }
 @media (min-width: 992px) {
   .swiper {
     width: 800px;
@@ -847,7 +840,7 @@ body > section.main > div > div.swiper-button-next {
     text-align: center;
     font-size: 18px;
     background: #fff;
-    width: 200px;
+    width: 100px;
     height: 70px;
     /* Center slide text vertically */
     display: -webkit-box;
