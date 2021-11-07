@@ -34,22 +34,19 @@
         <!-- Slider de imágenes -->
 
         <section class="container-slider">
-            <div class="slider-text">
-                <h2 class="slider-title">
-                    Productos destacados
-                </h2>
-                <div class="border-line"></div>
-            </div>
+
      
           
-            <div class="slider">
-                <ul>
-                    <li><img src="https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-pixabay-162553-min_ys7mmx.jpg" alt="slide1"></li>
-                    <li><img src="https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-m%C3%ADdia-4116191-min_emikjy.jpg" alt="slide2"></li>
-                    <li><img src="https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-andrea-piacquadio-3807167-min_jujbja.jpg" alt="slide3"></li>
-                    <li><img src="https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-pixabay-162553-min_ys7mmx.jpg" alt="slide4"></li>
-                </ul>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://res.cloudinary.com/keyzen/image/upload/v1636253117/pexels-pixabay-162553-min_ys7mmx_mjfj2o.jpg" alt=""></div>
+                    <div class="swiper-slide"><img src="https://res.cloudinary.com/keyzen/image/upload/v1636253115/pexels-andrea-piacquadio-3807167-min_jujbja_ncevgd.jpg" alt=""></div>
+                    <div class="swiper-slide"><img src="https://res.cloudinary.com/keyzen/image/upload/v1636253115/pexels-m%C3%ADdia-4116191-min_emikjy_x6trdv.jpg" alt=""></div>
             </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+    </div>
         </section>
 
         {{!-- Sección de productos destacados --}}
@@ -127,22 +124,29 @@
               
   
             <!-- Logos de marcas -->
-            <div class="logos">
+    <div class="swiperLogos">
+        <div class="swiper-wrapper">
+        
+                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1636258933/Group_168_dzs60v.svg" alt="" class="logo-image" id="logo-philips">
+                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Group_brfpma.svg" alt=""class="logo-image" id="logo-hyundai" >
+                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Group-1_v6zas9.svg" alt=""class="logo-image" id="logo-liqui" >
+                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Vector_je4iif.svg" alt="" class="logo-image" id="logo-kia">
+                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Group_9_s6wyls.svg" alt="" class="logo-image" id="logo-castrol">
+                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Group_10_bsubno.svg" alt="" class="logo-image" id="logo-renault">
 
-                <div class="first-row">
-                    <img src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Group_brfpma.svg" alt="" class="logo-image" id="logo-hyundai">
-                    <img src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Group-1_v6zas9.svg" alt="" class="logo-image" id="logo-liqui">
-                    <img src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Vector_je4iif.svg" alt="" class="logo-image" id="logo-kia">
-                </div>
-       
-                <div class="second-row">
-                    <img src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Group_9_s6wyls.svg" alt="" class="logo-image" id="logo-castrol">
-                    <img src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Vector-1_pddqtb.svg" alt="" class="logo-image" id="logo-philips">
-                    <img src="https://res.cloudinary.com/keyzen/image/upload/v1619891303/mobalzen/repuestosMontenegro/Group_10_bsubno.svg" alt="" class="logo-image" id="logo-renault">
-                </div>
-      
 
-            </div>
+        </div>
+
+
+    </div>
+
+                <!-- Swiper -->
+
+
+    <!-- Swiper JS -->
+
+
+
         </section>
 
         <!-- Nosotros -->
@@ -160,5 +164,39 @@
         </section>
 
 
+
+
+
+            <!-- Initialize Swiper -->
+    <script>
+var swiperLogos = new Swiper(".swiperLogos", {
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false
+        },
+        slidesPerView: 3,
+        direction: getDirection(),
+        navigation: {
+          nextEl: ".swiperLogos > .swiper-button-next",
+          prevEl: ".swiperLogos > .swiper-button-prev"
+        },
+        on: {
+          resize: function () {
+            swiperLogos.changeDirection(getDirection());
+          }
+        }
+      });
+
+      function getDirection() {
+        var windowWidth = window.innerWidth;
+        var direction = window.innerWidth <= 760 ? "vertical" : "horizontal";
+
+        return direction;
+      }
+    </script>
+
+
 <script src="/js/productsWrapper.js"></script>
+<script src="/js/slider.js"></script>
+<script src="/js/sliderLogos.js"></script>
 <script src="/js/main.js" type=module></script>
