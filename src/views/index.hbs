@@ -4,6 +4,8 @@
 
    <section class="search">
 
+       <h2>BUSCADOR DE REPUESTOS</h2>
+
    <div class="index-forms">
       <form action="/brands" method="POST" id ="formBrand" autocomplete="off">
          <datalist id="brand">
@@ -27,6 +29,8 @@
          <input placeholder="Año"list="year" name="year" id="inputYear"disabled>
       </form>
    </div>
+
+    <p class="search-info">¡Navega por las principales marcas y modelos!</p>
    </section>
 
 
@@ -45,18 +49,20 @@
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
-    </div>
+            </div>
 
 
         {{!-- Sección de productos destacados --}}
 
 
     {{#if lastProducts}}
+
+    <div class="wrap-lastProducts">
     <h2 class="title">Productos recientes</h2>
     <div class="products-index products">
         {{#each lastProducts}}
         <div class="product" id="product-{{id}}">
-            <img style="max-width:100%; height:210px;"src="{{selectImg imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}}" alt="">
+            <img style="max-width:100%; height:200px;"src="{{selectImg imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}}" alt="">
             <h3 class="product-name">{{nombre}}</h3>
             <p class="product-sku">SKU: {{SKU}}</p>
             <p class="product-brand">{{marca}}</p>
@@ -68,7 +74,7 @@
             </div>  
         </div>
         {{/each}}
-    
+    </div>
     {{/if}}
  
 

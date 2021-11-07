@@ -1,14 +1,17 @@
-<section class="search">
-{{!--     {{contadorPagina}} --}}
+   <section class="search">
+
+       <h2>BUSCADOR DE REPUESTOS</h2>
+
    <div class="index-forms">
       <form action="/brands" method="POST" id ="formBrand" autocomplete="off">
-         <input placeholder="Marca" list="brand" name="brand" id="inputBrand">
          <datalist id="brand">
-         {{#each brandResults}}
+         {{#each resultados}}
          <option value="{{nombre}}" data-id ="{{{id}}}">{{{nombre}}}</option>
          {{/each}}
          </datalist>  
+         <input placeholder="Marca" list="brand" name="brand" id="inputBrand">
       </form>
+
 
       <form action="/models" method="POST" id ="formModels" autocomplete="off">
          <input placeholder="Modelo" list="model" name="model" id="inputModel" disabled>
@@ -22,14 +25,17 @@
          <input placeholder="Año"list="year" name="year" id="inputYear"disabled>
       </form>
    </div>
+
+    <p class="search-info">¡Navega por las principales marcas y modelos!</p>
    </section>
 
     {{#if resultados}}
+    <div class="wrap-lastProducts">
     <h4 class="subtitle-products">Productos encontrados</h4>
     <div class="products">
         {{#each resultados}}
         <div class="product" id="product-{{id}}">
-            <img style="max-width:100%; height:210px;"src="{{selectImg imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}}" alt="">
+            <img style="max-width:100%; height:200px;"src="{{selectImg imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}}" alt="">
             <h3 class="product-name">{{nombre}}</h3>
             <p class="product-sku">SKU: {{SKU}}</p>
             <p class="product-brand">{{marca}}</p>
@@ -45,6 +51,7 @@
         {{!--     <p>descripcion: {{loud descripcion}}</p> --}}
         </div>
         {{/each}}
+      </div>
  
 
    
@@ -60,6 +67,7 @@
          <a class="previous-page" href="/search?submodel={{$submodeloId}}&year={{$anyoName}}&page={{previousPage}}"`>{{previousPage}}</a>
     {{/if}}
     {{#if nextPage}}
+    
         <a class="next-page" href="/search?submodel={{$submodeloId}}&year={{$anyoName}}&page={{nextPage}}"`>{{nextPage}}</a>
     {{/if}}
     </div>

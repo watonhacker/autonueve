@@ -23,6 +23,10 @@ img {
 .header {
 
     .nav {
+        #nav-menu > a:nth-child(7) > i,
+        #nav-menu > a.shopping-cart {
+            margin-top:1rem;
+        }
 
         display:flex;
         justify-content: space-around;
@@ -182,6 +186,53 @@ img {
 
 .search {
     padding:4rem 0;
+    background-color: #6EA0F3;
+    width:100%;
+    height:330px;
+    line-height: 0;
+    margin-bottom: 3rem;
+
+    h2 {
+        color:#fff;
+        margin:0;
+        padding:0;
+        margin-bottom:2.5rem;
+    }
+    
+    .search-info {
+        color:#fff;
+        margin-top:1.6rem;
+        padding:0;
+        font-size: .9rem;
+    }
+}
+
+@media (min-width: 440px) {
+    .search {
+
+        height:250px;
+
+    
+        h2 {
+            color:#fff;
+            margin:0;
+            padding:0;
+            margin-bottom:2.5rem;
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .search {
+
+        height:230px;
+
+        .search-info {
+            margin-top:2.2rem;
+            font-size: 1rem;
+        }
+
+    }
 }
 
 

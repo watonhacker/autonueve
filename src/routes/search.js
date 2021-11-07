@@ -82,7 +82,7 @@ router.get('/', (req, res) => {
                             console.log("************!*!*!*!*!*!*!*!*!********************************************!*!*!*!*!*!*!*!*****************************!*!*!*!*!*!")
                             /* Acá sacamos la diferencia entre los resultados y 10 */
                             lenResults = (results.length)
-                            let resto = lenResults % 10
+                            let resto = lenResults % 12
                             contadorPagina = 1;
                             contadorResultado = 0;
                             listaNueva = []
@@ -96,13 +96,13 @@ router.get('/', (req, res) => {
                             results.forEach(n => {
                                 contadorResultado++
                                 if (contadorPagina == 1){
-                                    if (contadorResultado == 11) {
+                                    if (contadorResultado == 13) {
                                         contadorPagina += 1
                                         contadorResultado = 0
                          
                                     }
                                 } else {
-                                    if (contadorResultado == 10) {
+                                    if (contadorResultado == 12) {
                                         contadorPagina += 1
                                         contadorResultado = 0
                                     }
@@ -121,7 +121,7 @@ router.get('/', (req, res) => {
                             
                                 //console.log(`Resto = ${resto}, listaObj ${lenResults} - contadorItem ${contadorItem} == ${lenResults - contadorItem}`)
                             
-                                if (contadorVuelta == 10) {
+                                if (contadorVuelta == 12) {
                                     listaNueva.push(listaLocal)
                                     contadorVuelta = 0
                                     listaLocal = []
@@ -174,7 +174,7 @@ router.get('/', (req, res) => {
                             console.log("estos son los resultados enviados en el IF") */
             
             
-                            previousPage = parseInt(page) -1
+                            previousPage = parseInt(page) 
                             
                             res.render('search', {
                                 brandResults,

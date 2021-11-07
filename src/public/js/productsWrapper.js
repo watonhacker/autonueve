@@ -1,4 +1,7 @@
 ((function(){
+
+
+    let asideCart = document.querySelector(".btnCart > p")
 	let myStorage = window.localStorage
     let listaProducto = myStorage.getItem("listaproducto")
     let shoppingCart = document.querySelector(".shopping-cart")
@@ -20,13 +23,20 @@
     if (listaProducto != null) {
         let listaProductoLength = listaProducto.split(',').length
         shoppingCart.innerHTML = listaProductoLength
+        asideCart.innerHTML = listaProductoLength
+
+
 
     } else {
         shoppingCart.innerHTML = 0
+        asideCart.innerHTML = 0
+
     }
     setTimeout(() => {
         if (window.localStorage.getItem("listaproducto").length == 0 || window.localStorage.getItem("productos") == 0) {
             shoppingCart.innerHTML = 0
+            asideCart.innerHTML = 0
+
         }
     }, 100)
 
@@ -47,7 +57,9 @@
                 productList = myStorage.getItem("listaproducto")
     
                 shoppingCartAmount = productList.split(',').length
-                shoppingCart.innerHTML = shoppingCartAmount            
+                shoppingCart.innerHTML = shoppingCartAmount   
+                asideCart.innerHTML = shoppingCartAmount
+ 
                 
     
             } else {
@@ -94,6 +106,8 @@
                     myStorage.setItem("listaproducto", productList)
                     shoppingCartAmount = productList.split(',').length
                     shoppingCart.innerHTML = shoppingCartAmount
+                    asideCart.innerHTML = shoppingCartAmount
+
                 } 
     
             }

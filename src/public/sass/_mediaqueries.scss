@@ -129,6 +129,12 @@
 
         .header {
             .nav {
+                height:80px;
+                #nav-menu > a:nth-child(7) > i,
+                #nav-menu > a.shopping-cart {
+                    margin:0;
+                }
+    
                 
                 justify-content: space-around;
 
@@ -273,7 +279,7 @@
     body {
         .header {
             .main-image {
-                height:450px;
+                height:400px;
             }
         }
     }
@@ -313,7 +319,7 @@
         margin:0 auto;
         .header {
             .main-image {
-                height:300px;
+                height:400px;
             }
 
 

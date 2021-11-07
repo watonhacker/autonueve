@@ -44,6 +44,7 @@
 
             shoppingCartAmount = productList.split(',').length
             shoppingCart.innerHTML = shoppingCartAmount
+ 
 
         }
 

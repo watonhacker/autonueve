@@ -351,7 +351,11 @@ template {
   body p {
     font-size: 1.1rem; }
   body .header .nav {
+    height: 80px;
     justify-content: space-around; }
+    body .header .nav #nav-menu > a:nth-child(7) > i,
+    body .header .nav #nav-menu > a.shopping-cart {
+      margin: 0; }
     body .header .nav .nav-menu {
       transform: translateX(0);
       display: flex;
@@ -416,7 +420,7 @@ template {
 @media (min-width: 992px) {
   /* Header */
   body .header .main-image {
-    height: 450px; }
+    height: 400px; }
 
   /* Main */
   /* Footer */ }
@@ -435,7 +439,7 @@ template {
     max-width: 2560px;
     margin: 0 auto; }
     body .header .main-image {
-      height: 300px; }
+      height: 400px; }
 
   /* Main */
   body .main .services .services-images {
@@ -481,82 +485,90 @@ body h3 {
   text-align: center;
   /* Proveedores */
   /* Logos de marcas */ }
-  .main .services .services-text {
-    text-align: center;
-    width: 95%;
-    margin: 0 auto;
-    max-width: 1440px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-content: center;
-    align-items: center; }
-    .main .services .services-text .services-title {
-      color: #4C6EA7;
-      font-size: 1.5rem; }
-    .main .services .services-text .border-line {
-      width: 100px;
-      height: 3px;
-      background-color: #4C6EA7; }
-    .main .services .services-text p {
-      line-height: 1.5rem; }
-    .main .services .services-text h3 {
-      color: #6EA0F3; }
-  .main .services .services-images {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    gap: 1.5rem; }
-    .main .services .services-images .services-image {
-      width: 40%;
-      height: 150px;
-      background-position: center;
-      background-clip: border-box;
-      background-repeat: no-repeat;
-      background-size: cover;
+  .main .services {
+    width: 100%;
+    background-color: #D8DEE8;
+    padding: 3rem 0; }
+    .main .services .services-text {
+      padding: 0 2rem;
+      text-align: center;
+      width: 95%;
+      max-width: 1200px;
+      margin: 0 auto;
       display: flex;
-      align-content: center;
-      align-items: center;
       justify-content: center;
-      padding: 0;
-      margin: 0;
-      line-height: 0;
-      border-radius: .5rem;
-      -webkit-border-radius: .5rem;
-      -moz-border-radius: .5rem;
-      -ms-border-radius: .5rem;
-      -o-border-radius: .5rem;
-      -webkit-border-radius: .5rem;
-      color: #fff;
-      font-weight: bolder; }
-    .main .services .services-images .image-1 {
-      background-image: url("https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-erik-mclean-4732635-min_dn8cdn.jpg");
-      transition: transform .3s ease-in-out;
-      -webkit-transition: transform .3s ease-in-out;
-      -moz-transition: transform .3s ease-in-out;
-      -ms-transition: transform .3s ease-in-out;
-      -o-transition: transform .3s ease-in-out;
-      box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25); }
-    .main .services .services-images .image-2 {
-      background-image: url("https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-anete-lusina-4792505-min_vgbbpm.jpg");
-      transition: transform .3s ease-in-out;
-      -webkit-transition: transform .3s ease-in-out;
-      -moz-transition: transform .3s ease-in-out;
-      -ms-transition: transform .3s ease-in-out;
-      -o-transition: transform .3s ease-in-out;
-      box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25); }
-    .main .services .services-images .image-2:hover,
-    .main .services .services-images .image-1:hover {
-      transition: transform .5s ease-out;
-      transform: translateY(-1rem);
-      box-shadow: -2px 6px 5px rgba(0, 0, 0, 0.35);
-      -webkit-transition: transform .5s ease-out;
-      -moz-transition: transform .5s ease-out;
-      -ms-transition: transform .5s ease-out;
-      -o-transition: transform .5s ease-out; }
+      flex-direction: column;
+      align-content: center;
+      align-items: center; }
+      .main .services .services-text .services-title {
+        color: #4C6EA7;
+        font-size: 1.5rem; }
+      .main .services .services-text .border-line {
+        width: 100px;
+        height: 3px;
+        background-color: #4C6EA7; }
+      .main .services .services-text p {
+        line-height: 1.5rem; }
+      .main .services .services-text h3 {
+        color: #6EA0F3; }
+    .main .services .services-images {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      gap: 1.5rem; }
+      .main .services .services-images .services-image {
+        width: 40%;
+        height: 150px;
+        background-position: center;
+        background-clip: border-box;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        line-height: 0;
+        border-radius: .5rem;
+        -webkit-border-radius: .5rem;
+        -moz-border-radius: .5rem;
+        -ms-border-radius: .5rem;
+        -o-border-radius: .5rem;
+        -webkit-border-radius: .5rem;
+        color: #fff;
+        font-weight: bolder; }
+      .main .services .services-images .image-1 {
+        background-image: url("https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-erik-mclean-4732635-min_dn8cdn.jpg");
+        transition: transform .3s ease-in-out;
+        -webkit-transition: transform .3s ease-in-out;
+        -moz-transition: transform .3s ease-in-out;
+        -ms-transition: transform .3s ease-in-out;
+        -o-transition: transform .3s ease-in-out;
+        box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25); }
+      .main .services .services-images .image-2 {
+        background-image: url("https://res.cloudinary.com/keyzen/image/upload/v1619891291/mobalzen/repuestosMontenegro/pexels-anete-lusina-4792505-min_vgbbpm.jpg");
+        transition: transform .3s ease-in-out;
+        -webkit-transition: transform .3s ease-in-out;
+        -moz-transition: transform .3s ease-in-out;
+        -ms-transition: transform .3s ease-in-out;
+        -o-transition: transform .3s ease-in-out;
+        box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25); }
+      .main .services .services-images .image-2:hover,
+      .main .services .services-images .image-1:hover {
+        transition: transform .5s ease-out;
+        transform: translateY(-1rem);
+        box-shadow: -2px 6px 5px rgba(0, 0, 0, 0.35);
+        -webkit-transition: transform .5s ease-out;
+        -moz-transition: transform .5s ease-out;
+        -ms-transition: transform .5s ease-out;
+        -o-transition: transform .5s ease-out; }
   .main .suppliers {
-    margin-top: 3rem; }
+    margin-top: 3rem;
+    max-width: 1200px; }
+  .main .us {
+    max-width: 1200px; }
   .main .suppliers-text,
   .main .slider-text,
   .main .us-text {
@@ -622,8 +634,8 @@ body h3 {
   position: fixed;
   left: 2rem;
   bottom: 2rem;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border: none;
   background-color: #fff;
   border-radius: 5rem; }
@@ -723,6 +735,9 @@ body h3 {
       align-content: center; }
       .products .product .product-amount .amount .number {
         width: 30px; }
+
+.wrap-lastProducts {
+  max-width: 1200px; }
 
 * {
   box-sizing: border-box; }
@@ -855,7 +870,7 @@ body {
 
 .main {
   grid-area: main;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto; }
 
 .footer {
@@ -881,6 +896,9 @@ img {
   align-items: center;
   background-color: #4C6EA7;
   padding: .25rem; }
+  .header .nav #nav-menu > a:nth-child(7) > i,
+  .header .nav #nav-menu > a.shopping-cart {
+    margin-top: 1rem; }
   .header .nav .logo-container {
     padding: 0;
     margin-top: .5rem;
@@ -967,8 +985,37 @@ img {
   -o-transform: translateX(0%); }
 
 .search {
-  padding: 4rem 0; }
+  padding: 4rem 0;
+  background-color: #6EA0F3;
+  width: 100%;
+  height: 330px;
+  line-height: 0;
+  margin-bottom: 3rem; }
+  .search h2 {
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 2.5rem; }
+  .search .search-info {
+    color: #fff;
+    margin-top: 1.6rem;
+    padding: 0;
+    font-size: .9rem; }
 
+@media (min-width: 440px) {
+  .search {
+    height: 250px; }
+    .search h2 {
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 2.5rem; } }
+@media (min-width: 992px) {
+  .search {
+    height: 230px; }
+    .search .search-info {
+      margin-top: 2.2rem;
+      font-size: 1rem; } }
 .wrap-search {
   height: 100px;
   background-color: #6EA0F3;
@@ -1097,8 +1144,7 @@ img {
   align-items: center;
   align-content: center;
   text-align: center;
-  margin: 0 auto;
-  padding-top: 1rem; }
+  margin: 0 auto; }
 
 .compatibility {
   overflow: hidden;
