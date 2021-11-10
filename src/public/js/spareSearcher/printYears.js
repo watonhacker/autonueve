@@ -5,6 +5,7 @@ export function printYears () {
     const $searchBtn = d.querySelector('#btnSearch')
 
     document.getElementById('inputSubmodel').addEventListener('input', function () {
+
         var selectedSubmodel = document.getElementById("inputSubmodel").value;
         let $yearDatalist = d.createElement("datalist")
         let $yearForm = d.querySelector("#formYears")

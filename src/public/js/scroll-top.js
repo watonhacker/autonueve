@@ -23,8 +23,6 @@ let $btnCart = d.querySelector(".btnCart")
        if(scrollTop > 1000) {
             $btnCart.style.visibility = "visible"
             $btnCart.style.display = "block"
-
-            console.log($btnCart.classList)
        } else {
         
         $btnCart.style.visibility = "hidden"

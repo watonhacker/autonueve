@@ -1,6 +1,84 @@
 
- <h1>Checkout</h1>
-{{!--  <div class="lds-dual-ring"></div> --}}
+ <h1>Datos de envío</h1>
+
+ <form action="/venta" method="POST" id="pedidoForm" autocomplete="ÑÖcompletes">
+
+    <div class="client-data">
+        <h3>Detalles de Facturación</h3>
+        <h4>Datos cliente</h2>
+        <div class="wrap-empresa">
+            <label for="empresa">¿Que tipo de cliente es?</label>
+            <div class="input-empresa">
+                <input type="radio" name="cliente" value="2" required>Empresa <br>
+                <input type="radio" name="cliente" value="1" required>Particular <br>
+            </div>
+
+        </div>
+
+        <div class="client-info"></div>
+
+        <div class="wrap-name">
+            <div class="name">
+                <label for="nombre">Nombre<span style="color:red; margin-left:5px;">*</span></label>
+                <input type="text" name="nombre" id="inputNombre" required>
+            </div>
+            <div class="surname">
+                <label for="apellido">Apellido<span style="color:red; margin-left:5px;">*</span></label>
+                <input type="text" name="apellido" id="inputApellido" required>
+            </div>
+
+        </div>
+        
+
+        <label for="email">Email<span style="color:red; margin-left:5px;">*</span></label>
+        <input type="email" name="email" required>
+        <label for="phone">Teléfono<span style="color:red; margin-left:5px;">*</span></label>
+        <input type="text" name="phone" required>
+        <label for="rut">Rut<span style="color:red; margin-left:5px;">*</span></label>
+        <input type="text" name="rut" required>
+    </div>
+
+    <div class="shipping-information">
+
+        <h4>Datos de Envío</h4>
+        <label for="direccion">Direccion<span style="color:red; margin-left:5px;">*</span></label>
+        <input type="text" name="direccion" id="inputDireccion" required>
+
+
+        <label for="documento">Documento<span style="color:red; margin-left:5px;">*</span></label>
+        <select id="documento" name="documento">
+            {{#each documentos}}
+                <option value="{{id}}" data-id ="{{{id}}}">{{{documento}}}</option>
+            {{/each}}
+        </select>  
+     {{!--    <input placeholder="Tipo de documento" list="documento" name="documento" id="inputDocumento" autocomplete="ÑÖcompletes"> --}}
+
+        <label for="region">Region<span style="color:red; margin-left:5px;">*</span></label>
+        <select id="region" name="region">
+            {{#each regiones}}
+                <option value="{{id}}" data-id ="{{{id}}}">{{{region}}}</option>
+            {{/each}}
+        </select>  
+        {{!-- <input placeholder="Region" list="region" name="region" id="inputRegion" autocomplete="ÑÖcompletes"> --}}
+
+
+        <label for="comuna">Comuna<span style="color:red; margin-left:5px;">*</span></label>
+        <select id="comuna" name="comuna">
+            {{#each comunas}}
+                <option value="{{id}}">{{{nombre}}}</option>
+            {{/each}}
+        </select>  
+       {{!--  <input placeholder="Comuna" list="comuna" name="comuna" id="inputComuna" autocomplete="ÑÖcompletes"> --}}
+
+        <label for="entregas">Entrega<span style="color:red; margin-left:5px;">*</span></label>
+        <select id="entregas" name="entrega">
+            {{#each entregas}}
+                <option value="{{id}}" >{{{entrega}}}</option>
+            {{/each}}
+        </select>  
+        {{!-- <input placeholder="Tipo de entrega" list="entregas" name="entregas" id="inputEntrega" autocomplete="ÑÖcompletes"> --}}
+    </div>
+
 {{#if listaProductos}}
 <div class="wrapperResults">
     <table class="tableResults">
@@ -23,6 +101,7 @@
         <tr>
             <td><strong>Total</strong></td>
             <td id="totalPrice"></td>
+            {{!-- <td id="totalPrice"><input type="text" name="total"></td> --}}
         </tr>
     </tbody>
 
@@ -35,30 +114,17 @@
 
 
 
-
-
-
-<form action="/venta" method="POST" id="pedidoForm">
-    <h2>Datos cliente</h2>
-    <label for="nombre">Nombre</label>
-    <input type="text" name="nombre">
-    <label for="apellido">Apellido</label>
-    <input type="text" name="apellido">
-    <label for="email">Email</label>
-    <input type="email" name="email">
-    <label for="phone">Teléfono</label>
-    <input type="text" name="phone">
-    <label for="rut">Rut</label>
-    <input type="text" name="rut">
-    <label for="empresa">¿Es cliente empresa?</label>
-    <input type="radio" name="empresa" id="inputEmpresa">
-    <input type="submit" value="Enviar" id="pedidoSubmit">
-    <h2>Datos facturación</h2>
-    <label for="direccion">Direccion</label>
-    <input type="text" name="direccion">
-    <label for="comuna">Comuna</label>
-    <input type="text" name="comuna">
+    <input class="btn-style"type="submit" value="Enviar" id="pedidoSubmit">
 </form>                     
+
+{{!--  <div class="lds-dual-ring"></div> --}}
+
+
+
+
+
+
+
 
 
 

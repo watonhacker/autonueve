@@ -22,11 +22,10 @@ d.addEventListener("DOMContentLoaded", () => {
 
 })
 
-console.log(window.localStorage.getItem("listaproducto").length)
-console.log(window.localStorage.getItem("productos").length)
+
 
 setTimeout(() => {
-    if (window.localStorage.getItem("listaproducto").length == 0 || window.localStorage.getItem("productos") == 0) {
+    if (window.localStorage.getItem("listaproducto").split(",").length == 0 || window.localStorage.getItem("productos").split(",") == 0) {
 
         window.localStorage.removeItem("listaproducto")
         window.localStorage.removeItem("productos")

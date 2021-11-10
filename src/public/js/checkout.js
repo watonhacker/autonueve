@@ -596,6 +596,7 @@ if (document.querySelector("#buttonComprar")) {
 
         actualizarCarrito(true)
         document.querySelector("body > section.main > div > table").outerHTML = "<div class='lds-ring'><div></div><div></div><div></div><div></div></div>"
+        document.querySelector("body > section.main > div.checkout-buttons").outerHTML = ""
         e.preventDefault()
         url = "/checkout"
     

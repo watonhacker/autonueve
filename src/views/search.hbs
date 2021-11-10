@@ -14,14 +14,20 @@
 {{!-- fin de boton cart
  --}}
 
-   <section class="search">
+<section class="search">
 
        <h2>BUSCADOR DE REPUESTOS</h2>
+<div class="arrow bounce">
+  <a class="fa fa-arrow-down fa-2x"></a>
+</div>
+
+
 
    <div class="index-forms">
+
       <form action="/brands" method="POST" id ="formBrand" autocomplete="off">
          <datalist id="brand">
-         {{#each resultados}}
+         {{#each brandResults}}
          <option value="{{nombre}}" data-id ="{{{id}}}">{{{nombre}}}</option>
          {{/each}}
          </datalist>  
@@ -98,3 +104,6 @@
 <script src="/js/scrollUp.js"></script>
 <script src="/js/productsWrapper.js"></script>
 <script src="/js/main.js" type="module"></script>
+
+<script src="/js/scroll-top.js"></script>
+<script src="/js/shoppingCart.js"></script>

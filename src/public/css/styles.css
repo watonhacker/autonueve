@@ -1464,10 +1464,83 @@ body > section.main > div.adminResults > table > tbody {
   text-align: justify; }
 
 #pedidoForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center; }
+  max-width: 1200px;
+  padding: 2rem; }
+  #pedidoForm .client-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center; }
+    #pedidoForm .client-data h3, #pedidoForm .client-data h4 {
+      align-self: flex-start; }
+    #pedidoForm .client-data .wrap-name {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      /*             .name {
+                      label {
+                          align-self: flex-start;
+                          text-align: start;
+                      }
+                  } */ }
+    #pedidoForm .client-data input {
+      width: 100%;
+      border: 1px solid #ccc;
+      height: 2rem;
+      margin: .5rem 0;
+      border-radius: .2rem;
+      -webkit-border-radius: .2rem;
+      -moz-border-radius: .2rem;
+      -ms-border-radius: .2rem;
+      -o-border-radius: .2rem;
+      padding: .5rem; }
+    #pedidoForm .client-data .wrap-empresa {
+      display: flex; }
+      #pedidoForm .client-data .wrap-empresa input {
+        height: 1rem; }
+      #pedidoForm .client-data .wrap-empresa .input-empresa {
+        margin-left: .5rem;
+        display: flex;
+        gap: 1rem; }
+        #pedidoForm .client-data .wrap-empresa .input-empresa input {
+          width: 1rem;
+          padding: 0;
+          margin: 0; }
+  #pedidoForm .shipping-information {
+    display: flex;
+    flex-direction: column; }
+    #pedidoForm .shipping-information select {
+      width: 100%;
+      border: 1px solid #ccc;
+      height: 2.5rem;
+      margin: .5rem 0;
+      border-radius: .2rem;
+      -webkit-border-radius: .2rem;
+      -moz-border-radius: .2rem;
+      -ms-border-radius: .2rem;
+      -o-border-radius: .2rem;
+      padding: .5rem; }
+    #pedidoForm .shipping-information label {
+      align-self: flex-start; }
+  #pedidoForm #inputDireccion {
+    width: 100%;
+    border: 1px solid #ccc;
+    height: 2rem;
+    margin: .5rem 0;
+    border-radius: .2rem;
+    -webkit-border-radius: .2rem;
+    -moz-border-radius: .2rem;
+    -ms-border-radius: .2rem;
+    -o-border-radius: .2rem;
+    padding: .5rem; }
+
+.shipping-information h4 {
+  align-self: flex-start; }
+
+#pedidoSubmit {
+  margin-top: 1rem;
+  width: 100px; }
 
 .scrollUp-btn {
   position: fixed;
@@ -1524,5 +1597,18 @@ body > section.main > div.adminResults > table > tbody {
     transform: rotate(360deg); } }
 * {
   font-family: 'Libre Franklin', sans-serif; }
+
+.btn-style {
+  font-family: 'Libre Franklin', sans-serif;
+  color: #fff;
+  background-color: #6EA0F3;
+  border: none;
+  padding: .5rem;
+  cursor: pointer;
+  box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.25); }
+
+.btn-style:hover {
+  color: #6EA0F3;
+  background-color: #fff; }
 
 /*# sourceMappingURL=styles.css.map */

@@ -65,9 +65,38 @@ router.post('/', async (req, res) => {
 router.get('/', (req, res) =>  {
     listaProductos = []
     listaProductos = test
-    res.render("pedido", {
-        listaProductos
+
+    let comunas;
+    let regiones;
+    let documentos;
+    let entregas;
+
+    mysqlConnection.query("SELECT * FROM comuna", (err, results) => {
+        results=JSON.parse(JSON.stringify(results))
+        comunas = results;
+        mysqlConnection.query("SELECT * FROM region", (err, results) => {
+            results=JSON.parse(JSON.stringify(results))
+            regiones = results
+            mysqlConnection.query("SELECT * FROM tipodocumento", (err, results) => {
+                results=JSON.parse(JSON.stringify(results))
+                documentos = results
+                mysqlConnection.query("SELECT * FROM metodoentrega", (err, results) => {
+                    results=JSON.parse(JSON.stringify(results))
+                    entregas = results
+                    console.log(entregas)
+                    res.render("pedido", {
+                        listaProductos,
+                        regiones,
+                        comunas,
+                        documentos,
+                        entregas
+                    })
+                })
+            })
+
+        })
     })
+
 
 
 })
