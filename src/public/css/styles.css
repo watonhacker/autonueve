@@ -591,7 +591,7 @@ body h3 {
   .main .slider-text,
   .main .us-text {
     text-align: center;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
     max-width: 1440px;
     display: flex;
@@ -613,10 +613,12 @@ body h3 {
     .main .slider-text p,
     .main .us-text p {
       line-height: 1.5rem; }
-  .main .suppliers-text h2 {
-    color: #4C6EA7; }
-  .main .suppliers-text p span {
-    font-weight: bolder; }
+  .main .suppliers-text {
+    max-width: 1200px; }
+    .main .suppliers-text h2 {
+      color: #4C6EA7; }
+    .main .suppliers-text p span {
+      font-weight: bolder; }
   .main .logos {
     display: flex;
     margin: 2rem 0 3rem 0;
@@ -847,7 +849,7 @@ body > section.main > div > div.swiper-button-next {
 /* SliderLogos */
 .swiperLogos {
   overflow: hidden;
-  width: 90%;
+  width: 100%;
   margin: 2rem auto;
   height: 100%; }
   .swiperLogos .swiper-slide {
@@ -1004,10 +1006,9 @@ img {
   -o-transform: translateX(0%); }
 
 .search {
-  padding: 2rem 0 4rem;
+  padding: 2rem 0 2rem;
   background-color: #6EA0F3;
   width: 100%;
-  height: 350px;
   line-height: 0;
   margin-bottom: 3rem; }
   .search h2 {
@@ -1019,22 +1020,19 @@ img {
     color: #fff;
     margin-top: 1.6rem;
     padding: 0;
-    font-size: .9rem; }
+    font-size: .9rem;
+    white-space: nowrap; }
 
 @media (min-width: 440px) {
-  .search {
-    height: 270px; }
-    .search h2 {
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      margin-bottom: 2.5rem; } }
+  .search h2 {
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 2.5rem; } }
 @media (min-width: 992px) {
-  .search {
-    height: 230px; }
-    .search .search-info {
-      margin-top: 2.2rem;
-      font-size: 1rem; } }
+  .search .search-info {
+    margin-top: 2.2rem;
+    font-size: 1rem; } }
 .wrap-search {
   height: 100px;
   background-color: #6EA0F3;
@@ -1088,6 +1086,18 @@ img {
     font-size: 15px;
     text-align: left;
     font-weight: bold; } }
+.cart-title,
+.pedido-title {
+  padding: 2rem 0 4rem;
+  background-color: #6EA0F3;
+  width: 100%;
+  padding: 3rem;
+  line-height: 0;
+  margin: 0;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 2rem; }
+
 .signin-form {
   display: flex;
   flex-direction: column;
@@ -1465,7 +1475,10 @@ body > section.main > div.adminResults > table > tbody {
 
 #pedidoForm {
   max-width: 1200px;
-  padding: 2rem; }
+  padding: 2rem;
+  color: #555; }
+  #pedidoForm select {
+    color: #555; }
   #pedidoForm .client-data {
     display: flex;
     flex-direction: column;
@@ -1474,6 +1487,9 @@ body > section.main > div.adminResults > table > tbody {
     align-content: center; }
     #pedidoForm .client-data h3, #pedidoForm .client-data h4 {
       align-self: flex-start; }
+    #pedidoForm .client-data h3 {
+      font-size: 1.5rem;
+      color: #6EA1F5; }
     #pedidoForm .client-data .wrap-name {
       display: flex;
       gap: 1rem;
@@ -1541,6 +1557,10 @@ body > section.main > div.adminResults > table > tbody {
 #pedidoSubmit {
   margin-top: 1rem;
   width: 100px; }
+
+#tableVenta > thead > tr > th {
+  background-color: transparent !important;
+  color: #6EA0F3 !important; }
 
 .scrollUp-btn {
   position: fixed;

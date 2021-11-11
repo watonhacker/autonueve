@@ -1,5 +1,5 @@
 
- <h1>Datos de envío</h1>
+ <h1 class="pedido-title">Datos de envío</h1>
 
  <form action="/venta" method="POST" id="pedidoForm" autocomplete="ÑÖcompletes">
 
@@ -40,7 +40,7 @@
 
     <div class="shipping-information">
 
-        <h4>Datos de Envío</h4>
+        <h4 id="shipping-title">Datos de Envío</h4>
         <label for="direccion">Direccion<span style="color:red; margin-left:5px;">*</span></label>
         <input type="text" name="direccion" id="inputDireccion" required>
 
@@ -51,15 +51,14 @@
                 <option value="{{id}}" data-id ="{{{id}}}">{{{documento}}}</option>
             {{/each}}
         </select>  
-     {{!--    <input placeholder="Tipo de documento" list="documento" name="documento" id="inputDocumento" autocomplete="ÑÖcompletes"> --}}
-
+     
         <label for="region">Region<span style="color:red; margin-left:5px;">*</span></label>
         <select id="region" name="region">
             {{#each regiones}}
                 <option value="{{id}}" data-id ="{{{id}}}">{{{region}}}</option>
             {{/each}}
         </select>  
-        {{!-- <input placeholder="Region" list="region" name="region" id="inputRegion" autocomplete="ÑÖcompletes"> --}}
+
 
 
         <label for="comuna">Comuna<span style="color:red; margin-left:5px;">*</span></label>
@@ -68,7 +67,7 @@
                 <option value="{{id}}">{{{nombre}}}</option>
             {{/each}}
         </select>  
-       {{!--  <input placeholder="Comuna" list="comuna" name="comuna" id="inputComuna" autocomplete="ÑÖcompletes"> --}}
+
 
         <label for="entregas">Entrega<span style="color:red; margin-left:5px;">*</span></label>
         <select id="entregas" name="entrega">
@@ -76,14 +75,14 @@
                 <option value="{{id}}" >{{{entrega}}}</option>
             {{/each}}
         </select>  
-        {{!-- <input placeholder="Tipo de entrega" list="entregas" name="entregas" id="inputEntrega" autocomplete="ÑÖcompletes"> --}}
+     
     </div>
 
 {{#if listaProductos}}
 <div class="wrapperResults">
-    <table class="tableResults">
+    <table class="tableResults" id="tableVenta">
         <thead>
-            {{!-- <tr class="firstColumn"><td></td><td>Producto</td><td>Precio</td></tr> --}}
+
 
             <th>Producto</th>
 
@@ -101,7 +100,7 @@
         <tr>
             <td><strong>Total</strong></td>
             <td id="totalPrice"></td>
-            {{!-- <td id="totalPrice"><input type="text" name="total"></td> --}}
+
         </tr>
     </tbody>
 
@@ -117,7 +116,7 @@
     <input class="btn-style"type="submit" value="Enviar" id="pedidoSubmit">
 </form>                     
 
-{{!--  <div class="lds-dual-ring"></div> --}}
+
 
 
 

@@ -206,7 +206,7 @@ body {
             background-color: $primary-color;
         } 
         text-align: center;
-        width:95%;
+        width:100%;
         margin:0 auto;
         max-width:1440px;
 
@@ -226,6 +226,7 @@ body {
     /* Proveedores */
 
     .suppliers-text {
+        max-width:1200px;
         h2 {
             color:#4C6EA7;
         }

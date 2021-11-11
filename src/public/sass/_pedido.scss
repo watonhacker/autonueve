@@ -2,8 +2,14 @@
 
     max-width:1200px;
     padding:2rem;
+    color:#555;
+
+    select {
+        color:#555; 
+    }
     .client-data {
 
+        
         
         display: flex;
         flex-direction: column;
@@ -14,6 +20,13 @@
         h3, h4 {
             align-self: flex-start;
         }
+
+        h3 {
+            font-size: 1.5rem;
+            color:#6EA1F5 ;
+        }
+
+
 
         .wrap-name {
             display: flex;
@@ -114,4 +127,9 @@
 #pedidoSubmit {
     margin-top:1rem;
     width:100px;
+}
+
+#tableVenta > thead > tr > th{
+    background-color: transparent !important;
+    color:#6EA0F3 !important;
 }
