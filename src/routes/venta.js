@@ -82,10 +82,12 @@ router.post('/', (req, res) => {
                     })
                     .then(guardarDireccion(newId, req.body['comuna'], req.body['direccion'], req.body['region']))
                     .then(guardarPedido(newId, req.body['pago'], req.body['documento'], req.body['entrega']))
-                }                  
+                }     
+                
             })
         }
         if (err) throw err;
+        res.render("success")
     })
 
 
