@@ -7,6 +7,8 @@ let queryDone = false;
 let dataListaProductoLen;
 let contadorInterno;
 let ultimoElemento;
+let productos;
+let canti
 
 router.post('/', async (req, res) => {
     dataListaProductoLen = 0
@@ -18,8 +20,10 @@ router.post('/', async (req, res) => {
 
     for (element in dataListaProducto) {
         dataListaProductoLen++
+        console.log(element, "-----*-----)")
     }
     
+
 
     for (element in dataListaProducto) {
   
@@ -42,6 +46,7 @@ router.post('/', async (req, res) => {
                 ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
                 contadorInterno = 0
                 dataListaProductoLen = 0
+
                 res.send({
                     length: test.length
                 })
@@ -70,6 +75,7 @@ router.get('/', (req, res) =>  {
     let regiones;
     let documentos;
     let entregas;
+    let pagos;
 
     mysqlConnection.query("SELECT * FROM comuna", (err, results) => {
         results=JSON.parse(JSON.stringify(results))
@@ -84,12 +90,17 @@ router.get('/', (req, res) =>  {
                     results=JSON.parse(JSON.stringify(results))
                     entregas = results
                     console.log(entregas)
-                    res.render("pedido", {
-                        listaProductos,
-                        regiones,
-                        comunas,
-                        documentos,
-                        entregas
+                    mysqlConnection.query("SELECT * FROM metodopago", (err, results) => {
+                        results=JSON.parse(JSON.stringify(results))
+                        pagos = results
+                        res.render("pedido", {
+                            listaProductos,
+                            regiones,
+                            comunas,
+                            documentos,
+                            entregas,
+                            pagos
+                        })
                     })
                 })
             })

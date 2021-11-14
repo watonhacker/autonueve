@@ -96,6 +96,7 @@ app.use('/pedido', pedidoRoutes)
 app.use('/checkout', checkoutRoutes)
 app.use('/venta', ventaRoutes)
 
+
 app.listen(app.get('port'), () => {
     console.log("Inició el servidor en el puerto", app.get("port"))
 })

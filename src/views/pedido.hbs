@@ -75,6 +75,14 @@
                 <option value="{{id}}" >{{{entrega}}}</option>
             {{/each}}
         </select>  
+
+        <label for="pago">Tipo de pago<span style="color:red; margin-left:5px;">*</span></label>
+        <select id="pago" name="pago">
+            {{#each pagos}}
+                <option value="{{id}}" >{{{pago}}}</option>
+            {{/each}}
+        </select>  
+
      
     </div>
 
