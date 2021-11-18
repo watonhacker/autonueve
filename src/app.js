@@ -25,6 +25,7 @@ const logoutRoutes = require('./routes/logout')
 const pedidoRoutes = require('./routes/pedido')
 const checkoutRoutes = require('./routes/checkout')
 const ventaRoutes = require('./routes/venta')
+const successRoutes = require('./routes/success')
 
 /* Initializations */
 const app = express()
@@ -95,6 +96,7 @@ app.use('/logout', logoutRoutes)
 app.use('/pedido', pedidoRoutes)
 app.use('/checkout', checkoutRoutes)
 app.use('/venta', ventaRoutes)
+app.use('/success', successRoutes)
 
 
 app.listen(app.get('port'), () => {

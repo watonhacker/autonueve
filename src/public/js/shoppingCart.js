@@ -75,6 +75,9 @@
                     window.location.href = "/checkout"
                 } 
             })
+            .catch(err => {
+                throw err;
+            })
         }
     })
 
@@ -160,6 +163,9 @@
                     window.location.href = "/checkout"
                 } 
             })
+            .catch(err => {
+                throw err;
+            })
         }
 
 
@@ -233,6 +239,9 @@
                         window.location.href = "/checkout"
                     } 
     
+                })
+                .catch(err => {
+                    throw err;
                 })
             
             } catch(err) {

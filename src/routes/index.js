@@ -2,9 +2,6 @@ const router = require('express').Router();
 const mysqlConnection = require('../database/database')
 
 router.get('/', (req, res) => {
-
-
-    let results;
     let lastProducts;
 
     mysqlConnection.query("SELECT * FROM marca", (err, results, row) => {
@@ -14,16 +11,13 @@ router.get('/', (req, res) => {
 
                 lastProducts = results
 
-                console.log(lastProducts)
                 res.render('index', {
                     resultados,
                     lastProducts
                 })
             })
         
-        
-
-    /*  resultados = 1 */
+    
     })
 })
 

@@ -93,7 +93,6 @@ router.get('/', (req, res) =>  {
 })
 
 router.post('/update/', async (req, res) => {
-    console.log("Entraron a update -!-!-!-!-!-!-!-!-!-!-!-!-!-!-!-!")
     dataListaProductoLen = 0
     contadorInterno = 0
     queryDone = false;

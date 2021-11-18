@@ -63,15 +63,46 @@
 
     })
 
-/*     pedidoForm.addEventListener("submit", e => {
-        alert("ok")
+    pedidoForm.addEventListener("submit", e => {
         e.preventDefault()
         formDataPedido = new FormData(pedidoForm)
-        console.log(formDataPedido.get("direccion"))
+        let listaproducto = window.localStorage.getItem("listaproducto").split(",")
+        let idProductos = window.localStorage.getItem("productos").split(",")
+        let nuevoObjeto = {}
+        formDataPedido.append("productos", listaproducto)
+        formDataPedido.append("idproductos", idProductos)
+
+        for (element of formDataPedido.keys()) {
+            console.log(`'${element}' : ${formDataPedido.get(element)}`)
+            nuevoObjeto[element] = formDataPedido.get(element)
+        }
+
+
+        console.log("NUEVO OBJETITO")
+        console.log(nuevoObjeto)
+
+        console.log(JSON.stringify(formDataPedido))
+        console.log(JSON.parse(JSON.stringify(formDataPedido)))
+
+        fetch("/venta", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuevoObjeto)
+         })
+         .then(window.location.href = '/success')
+         .catch(err => {console.log(err)})
+
+
+            
 
 
 
 
-    }) */
+
+
+    })
 
 })());

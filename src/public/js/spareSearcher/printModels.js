@@ -30,6 +30,9 @@ export function printModels () {
             $inputBrand.disabled = true;
         
         })
+        .catch(err => {
+            throw err;
+        })
     });
 
 

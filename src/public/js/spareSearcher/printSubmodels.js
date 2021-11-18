@@ -29,6 +29,9 @@ export function printSubmodels () {
             $inputModel.disabled = true;
         
         })
+        .catch(err => {
+            throw err;
+        })
     });
 
 

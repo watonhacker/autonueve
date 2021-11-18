@@ -53,9 +53,8 @@
 
 
   
-    formPedido.addEventListener("submit", (e) => {
-        
-        e.preventDefault()
+    formPedido.addEventListener("click", (e) => {
+
         let formDataPedido = new FormData(formPedido)
         console.log(formDataPedido.get("nombre"))
         console.log(formDataPedido.get("empresa"))
