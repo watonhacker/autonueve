@@ -1045,17 +1045,19 @@ img {
     font-size: 1.5rem;
     text-align: center; }
 
-.wrapperResults .tableResults {
-  width: 100%;
-  border-collapse: collapse; }
-.wrapperResults .tableResults td, .wrapperResults .tableResults th {
-  padding: 1rem;
-  border: 1px solid #ddd; }
-.wrapperResults .tableResults th {
-  background-color: #6EA0F3;
-  color: #fff; }
-.wrapperResults .tableResults tbody tr:nth-child(even) {
-  background-color: #f5f5f5; }
+.wrapperResults {
+  margin-top: 1rem; }
+  .wrapperResults .tableResults {
+    width: 100%;
+    border-collapse: collapse; }
+  .wrapperResults .tableResults td, .wrapperResults .tableResults th {
+    padding: 1rem;
+    border: 1px solid #ddd; }
+  .wrapperResults .tableResults th {
+    background-color: #6EA0F3;
+    color: #fff; }
+  .wrapperResults .tableResults tbody tr:nth-child(even) {
+    background-color: #f5f5f5; }
 
 .checkout-buttons {
   display: flex;
@@ -1561,6 +1563,24 @@ body > section.main > div.adminResults > table > tbody {
 #tableVenta > thead > tr > th {
   background-color: transparent !important;
   color: #6EA0F3 !important; }
+
+#terms {
+  background-color: #6EA0F3;
+  color: #fff;
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0;
+  display: block;
+  text-decoration: none; }
+
+.termsContainer {
+  max-width: 1200px;
+  text-align: start;
+  width: 80%;
+  margin: 0 auto;
+  line-height: 1.5rem; }
+  .termsContainer h2 {
+    padding: 1rem 0; }
 
 .scrollUp-btn {
   position: fixed;

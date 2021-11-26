@@ -133,3 +133,26 @@
     background-color: transparent !important;
     color:#6EA0F3 !important;
 }
+
+#terms {
+    background-color: #6EA0F3;
+    color:#fff;
+    width:100%; 
+    padding:1rem;
+    margin:1rem 0;
+    display: block;
+    text-decoration: none;
+}
+
+.termsContainer {
+    max-width:1200px;
+    text-align: start;
+    width:80%;
+    margin:0 auto;
+    line-height: 1.5rem;
+
+    h2 {
+        padding:1rem 0;
+    }
+
+}

@@ -99,6 +99,9 @@ exports.login = async (req, res) => {
 
             }
 
+            //Crear promesa que al resolverla, me envíe el id del usuario que ingresó, de esa forma
+            // puedo enviar despues la info de este usuario, su panel, sus pedidos, etc.
+
     
 
     } catch (err) {

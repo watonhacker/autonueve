@@ -3,7 +3,6 @@ const mysqlConnection = require('../database/database')
 const ventaControllers = require('../controllers/ventaControllers')
 
 let newId;
-let idPedido;
 let email;
 let idClienteCreado;
 

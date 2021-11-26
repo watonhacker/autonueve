@@ -26,6 +26,7 @@ const pedidoRoutes = require('./routes/pedido')
 const checkoutRoutes = require('./routes/checkout')
 const ventaRoutes = require('./routes/venta')
 const successRoutes = require('./routes/success')
+const termsRoutes = require('./routes/terms')
 
 /* Initializations */
 const app = express()
@@ -97,6 +98,7 @@ app.use('/pedido', pedidoRoutes)
 app.use('/checkout', checkoutRoutes)
 app.use('/venta', ventaRoutes)
 app.use('/success', successRoutes)
+app.use('/terms', termsRoutes)
 
 
 app.listen(app.get('port'), () => {
