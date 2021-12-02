@@ -27,6 +27,7 @@ const checkoutRoutes = require('./routes/checkout')
 const ventaRoutes = require('./routes/venta')
 const successRoutes = require('./routes/success')
 const termsRoutes = require('./routes/terms')
+const androidRoutes = require('./routes/android')
 
 /* Initializations */
 const app = express()
@@ -99,7 +100,7 @@ app.use('/checkout', checkoutRoutes)
 app.use('/venta', ventaRoutes)
 app.use('/success', successRoutes)
 app.use('/terms', termsRoutes)
-
+app.use('/android', androidRoutes)
 
 app.listen(app.get('port'), () => {
     console.log("Inició el servidor en el puerto", app.get("port"))
