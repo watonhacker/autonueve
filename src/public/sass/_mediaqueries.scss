@@ -269,6 +269,21 @@
 
     /* Footer */
 
+    /* single product */
+
+    body {
+
+        .products {
+
+            .product-card {
+                display:flex;
+                flex-direction: row;
+            }
+        }
+
+    }
+
+
 
 }
 

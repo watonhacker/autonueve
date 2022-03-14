@@ -82,7 +82,9 @@
     <div class="products-index products">
         {{#each lastProducts}}
         <div class="product" id="product-{{id}}">
-            <img style="max-width:100%; height:200px;"src="{{selectImg imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}}" alt="">
+                        <a href="/single-product/{{id}}">
+                          <img style="max-width:100%; height:200px;"src="{{selectImg imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}}" alt="">
+            </a>
             <h3 class="product-name">{{nombre}}</h3>
             <p class="product-sku">SKU: {{SKU}}</p>
             <p class="product-brand">{{marca}}</p>

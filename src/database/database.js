@@ -8,7 +8,7 @@ console.log(process.env.DATABASE)
 console.log("***") */
 
 const mysql = require('mysql');
-const host = 'localhost' /* || 'mobalzen-autonueve-do-user-9924163-0.b.db.ondigitalocean.com' */
+const host = '143.198.233.238' /* || 'mobalzen-autonueve-do-user-9924163-0.b.db.ondigitalocean.com' */
 
 /*     mysqlConnection = mysql.createConnection({
     host,
@@ -20,8 +20,8 @@ const host = 'localhost' /* || 'mobalzen-autonueve-do-user-9924163-0.b.db.ondigi
  */
     mysqlConnection = mysql.createConnection({
         host,
-        user:"root",
-        password:proccess.env.PASSWORD,
+        user:"keyzen",
+        password:'$Autonueve2022',
         database:"autonueve",
         port:'3306'
         })

@@ -50,74 +50,92 @@
         }
         if (e.target.href != undefined) {
             e.preventDefault()
+
+            let selectedProduct = undefined;
+
             
-            if (myStorage.getItem("listaproducto") == null) {
-              
-                selectedProduct = document.querySelector(`#product-${e.target.dataset.id}> div > a`)
-                selectedProductAmount = selectedProduct.previousElementSibling.value
-    
-                myStorage.setItem("productos", e.target.dataset.id)
-                myStorage.setItem("listaproducto", `${e.target.dataset.id}:${selectedProductAmount}`)
-    
-                
-                productList = myStorage.getItem("listaproducto")
-    
-                shoppingCartAmount = productList.split(',').length
-                shoppingCart.innerHTML = shoppingCartAmount   
-                asideCart.innerHTML = shoppingCartAmount
- 
-                
-    
-            } else {
-                esIgual = false;
+                if (myStorage.getItem("listaproducto") == null) {
 
-                productList = myStorage.getItem("listaproducto")
-                idList = myStorage.getItem("productos")
-    
-    
-                productoActual = e.target.dataset.id  
-                productArray = idList.split(',')
-    
-                productArray.forEach(e => {
-        
-                    if (e == productoActual) {
-                        esIgual = true
-                        console.log(e)
-                    } 
-                   
-                })
-    
-                if (esIgual == false) {
-    
-                    /* Añadiendo cantidad */
-                    
-                    selectedProduct = document.querySelector(`#product-${e.target.dataset.id}> div > a`)
-                    selectedProductAmount = selectedProduct.previousElementSibling.value
-    
-                    if (firstTime == false) {
-                        productList += `,${productoActual}:${selectedProductAmount}`
-                        idList += `,${productoActual}`
-                        firstTime = true;
-                        alert("first time, no recortamos el ultimo")
+                    if(e.target.dataset.type === 'single') {
+                        selectedProduct = document.querySelector(`#product-${e.target.dataset.id} > div > div > div > a`)
                     } else {
-                        /* productList = productList.slice(0, -1) */
-                        productList += `,${productoActual}:${selectedProductAmount}`
-                        idList += `,${productoActual}`
+                        selectedProduct = document.querySelector(`#product-${e.target.dataset.id}> div > a`)
                     }
-      
-                    myStorage.removeItem("productos")
-                    myStorage.setItem("productos",idList )
-                
-                    myStorage.removeItem("listaproducto")
-                    myStorage.setItem("listaproducto", productList)
+              
+                    
+                    console.log(selectedProduct)
+                    selectedProductAmount = selectedProduct.previousElementSibling.value
+        
+                    myStorage.setItem("productos", e.target.dataset.id)
+                    myStorage.setItem("listaproducto", `${e.target.dataset.id}:${selectedProductAmount}`)
+        
+                    
+                    productList = myStorage.getItem("listaproducto")
+        
                     shoppingCartAmount = productList.split(',').length
-                    shoppingCart.innerHTML = shoppingCartAmount
+                    shoppingCart.innerHTML = shoppingCartAmount   
                     asideCart.innerHTML = shoppingCartAmount
-
-                } 
+     
+                    
+        
+                } else {
+                    esIgual = false;
     
-            }
+                    productList = myStorage.getItem("listaproducto")
+                    idList = myStorage.getItem("productos")
+        
+        
+                    productoActual = e.target.dataset.id  
+                    productArray = idList.split(',')
+        
+                    productArray.forEach(e => {
+            
+                        if (e == productoActual) {
+                            esIgual = true
+                            console.log(e)
+                        } 
+                       
+                    })
+        
+                    if (esIgual == false) {
+        
+                        /* Añadiendo cantidad */
+                        
+                        if(e.target.dataset.type === 'single') {
+                            selectedProduct = document.querySelector(`#product-${e.target.dataset.id} > div > div > div> a`)
+                        } else {
+                            selectedProduct = document.querySelector(`#product-${e.target.dataset.id}> div > a`)
+                        }
+                        console.log(selectedProduct) 
+                        selectedProductAmount = selectedProduct.previousElementSibling.value
+        
+                        if (firstTime == false) {
+                            productList += `,${productoActual}:${selectedProductAmount}`
+                            idList += `,${productoActual}`
+                            firstTime = true;
+                            alert("first time, no recortamos el ultimo")
+                        } else {
+                            /* productList = productList.slice(0, -1) */
+                            productList += `,${productoActual}:${selectedProductAmount}`
+                            idList += `,${productoActual}`
+                        }
+          
+                        myStorage.removeItem("productos")
+                        myStorage.setItem("productos",idList )
+                    
+                        myStorage.removeItem("listaproducto")
+                        myStorage.setItem("listaproducto", productList)
+                        shoppingCartAmount = productList.split(',').length
+                        shoppingCart.innerHTML = shoppingCartAmount
+                        asideCart.innerHTML = shoppingCartAmount
     
+                    } 
+        
+                }
+        
+            
+            
+         
     
         }
     })

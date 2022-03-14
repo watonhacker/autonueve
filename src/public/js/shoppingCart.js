@@ -13,7 +13,6 @@
 
         url = "/checkout"
 
-        let inputData = {id: "abc123", text: "sometext"}
         let product_list = myStorage.getItem("listaproducto")
         
         if (product_list == undefined ){ 
