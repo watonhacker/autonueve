@@ -29,6 +29,7 @@ const successRoutes = require('./routes/success')
 const termsRoutes = require('./routes/terms')
 const androidRoutes = require('./routes/android')
 const singleproductRoutes = require('./routes/singleproduct')
+const categoriesRoutes = require('./routes/categories')
 
 /* Initializations */
 const app = express()
@@ -59,6 +60,12 @@ const hbs = exphbs.create({
         },
         selectImg : function (bddImg, image) {
             return bddImg || image
+        },
+        json : function (results) {
+            console.log("!?!?!?!?!?!?!?!?!??!?!?!?!??!?!!??!?!?!?!?!?!??!?!?!??!?!??!??!")
+            let parsedResults = JSON.stringify(results)
+            console.log(typeof(parsedResults))
+            return parsedResults
         }
     }
 })
@@ -103,6 +110,8 @@ app.use('/success', successRoutes)
 app.use('/terms', termsRoutes)
 app.use('/android', androidRoutes)
 app.use('/single-product', singleproductRoutes)
+app.use('/categories', categoriesRoutes)
+
 
 app.listen(app.get('port'), () => {
     console.log("Inició el servidor en el puerto", app.get("port"))

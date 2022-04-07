@@ -1,0 +1,11 @@
+<form class="edit-form" action="/admin/categories/edit" method="post">
+    <label for="nombre">Nombre</label><input type="text"  name="nombre" value={{results.nombre}} >
+    <label for="imagen">Imagen</label><input type="text"  name="imagen" value={{results.imagen}} >
+    <input type="hidden" name="id" value={{results.id}}>
+    <input type="submit" value="Enviar">
+    
+</form>
+
+<script src="/js/hamburgerBtnCopy.js"></script>
+<script src="/js/responsiveCopy.js"></script>
+<script src="/js/hiddenSearch.js"></script>

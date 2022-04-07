@@ -8,7 +8,6 @@ router.get('/', authController.isAuthenticated, (req, res) => {
     console.log("USUARIOOO")
 })
 
-
                             /* Rutas para modelos */
 
 router.get('/models', authController.isAuthenticated, (req, res) => {
@@ -23,6 +22,41 @@ router.get('/models', authController.isAuthenticated, (req, res) => {
    
 })
 
+router.get('/models/edit/', authController.isAuthenticated, (req, res) => {
+    console.log(req.query)
+    let id = req.query.id
+    let sql = `SELECT id, nombre FROM modelo WHERE id = ${id}`
+    mysqlConnection.query(sql, (err, results) => {
+        results = JSON.parse(JSON.stringify(results))
+        console.log(results)
+        res.render("edit/models", {
+            results:results[0]
+        })
+    })
+})
+
+
+router.post('/models/edit/', authController.isAuthenticated, (req, res) => {
+    let nombre = req.body['nombre']
+
+    let id = req.body['id']
+
+
+    let sql = `UPDATE modelo SET nombre='${nombre}' WHERE id = ${id}`
+    
+    mysqlConnection.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(sql)
+        results = JSON.parse(JSON.stringify(results))
+        console.log(results)
+    })
+    
+    res.redirect("/admin/models")
+   
+})
+
+
+
 router.get('/submodels', authController.isAuthenticated, (req,res) => {
     
     mysqlConnection.query("SELECT * from submodelo", (err, results) => {
@@ -34,6 +68,8 @@ router.get('/submodels', authController.isAuthenticated, (req,res) => {
 
 })
 
+/* Brand routes */
+
 router.get('/brands', authController.isAuthenticated, (req,res) => {
     
     mysqlConnection.query("SELECT * from marca", (err, results) => {
@@ -43,6 +79,35 @@ router.get('/brands', authController.isAuthenticated, (req,res) => {
         })
     })
 
+})
+
+router.get('/brands/edit/', authController.isAuthenticated, (req, res) => {
+    console.log(req.query)
+    let id = req.query.id
+    let sql = `SELECT id, nombre FROM marca WHERE id = ${id}`
+    mysqlConnection.query(sql, (err, results) => {
+        results = JSON.parse(JSON.stringify(results))
+        console.log(results)
+        res.render("edit/brands", {
+            results:results[0]
+        })
+    })
+})
+
+router.post('/brands/edit/', authController.isAuthenticated, (req, res) => {
+    let nombre = req.body['nombre']
+    let id = req.body['id']
+    let sql = `UPDATE marca SET nombre='${nombre}' WHERE id = ${id}`
+    
+    mysqlConnection.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(sql)
+        results = JSON.parse(JSON.stringify(results))
+        console.log(results)
+    })
+    
+    res.redirect("/admin/brands")
+   
 })
 
 /* Edicion*/
@@ -70,29 +135,12 @@ router.get('/submodels/add', authController.isAuthenticated, (req, res) => {
         })
     })
 
-    /* Estos servían para algo pero nose para que jaja */
-/*     mysqlConnection.query(`SELECT * FROM submodelo WHERE id = ${submodelId}`, (err, results) => {
-        let editedSubmodel = results;
-        let resultados;
-        mysqlConnection.query("SELECT * FROM modelo", (err, results) => {
-            results=JSON.parse(JSON.stringify(results))
-            resultados = results;
-
-
-            res.render("add-submodel", {
-                editedSubmodel,
-                resultados
-            })
-        })
-
-
-    }) */
 })
 
 
                             /* Rutas para productos */
 
-router.get('/products', (req, res) => {
+router.get('/products', authController.isAuthenticated, (req, res) => {
 
     mysqlConnection.query("SELECT * FROM producto", (err, results) => {
         let productResults = results
@@ -102,7 +150,46 @@ router.get('/products', (req, res) => {
     })
 })
 
-router.get('/categories', (req,res) => {
+router.get('/products/edit/', authController.isAuthenticated, (req, res) => {
+    console.log(req.query)
+    let id = req.query.id
+    let sql = `SELECT id, nombre, precio, marca, descripcion, cantidad, imagen FROM producto WHERE id = ${id}`
+    mysqlConnection.query(sql, (err, results) => {
+        results = JSON.parse(JSON.stringify(results))
+        console.log(results)
+        res.render("edit/products", {
+            results:results[0]
+        })
+    })
+})
+
+router.post('/products/edit/', authController.isAuthenticated, (req, res) => {
+    let nombre = req.body['nombre']
+    let precio = req.body['precio']
+    let marca = req.body['marca']
+    let descripcion = req.body['descripcion']
+    let cantidad = req.body['cantidad']
+    let imagen = req.body['imagen']
+    let id = req.body['id']
+
+
+    let sql = `UPDATE producto SET nombre='${nombre}', precio = ${precio}, marca='${marca}', descripcion="${descripcion}", cantidad=${cantidad}, imagen='${imagen}' WHERE id = ${id}`
+    
+    mysqlConnection.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(sql)
+        results = JSON.parse(JSON.stringify(results))
+        console.log(results)
+    })
+    
+    res.redirect("/admin/products")
+   
+})
+
+
+/* Rutas para categorías */
+
+router.get('/categories', authController.isAuthenticated,  (req,res) => {
     mysqlConnection.query("SELECT * FROM categoria", (err, results) => {
         let categoriesResults = results
         res.render("categories", {
@@ -111,10 +198,39 @@ router.get('/categories', (req,res) => {
     })
 })
 
+router.get('/categories/edit/', authController.isAuthenticated, (req, res) => {
+    console.log(req.query)
+    let id = req.query.id
+    let sql = `SELECT id, nombre, imagen FROM categoria WHERE id = ${id}`
+    mysqlConnection.query(sql, (err, results) => {
+        results = JSON.parse(JSON.stringify(results))
+        res.render("edit/categories", {
+            results:results[0]
+        })
+    })
+})
+
+router.post('/categories/edit/', authController.isAuthenticated, (req, res) => {
+    let nombre = req.body['nombre']
+    let imagen = req.body['imagen']
+    let id = req.body['id']
+    let sql = `UPDATE categoria SET nombre='${nombre}', imagen = '${imagen}' WHERE id = ${id}`
+    
+    mysqlConnection.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(sql)
+        results = JSON.parse(JSON.stringify(results))
+        console.log(results)
+    })
+    
+    res.redirect("/admin/categories")
+   
+})
+
 
                             /* Rutas para clientes */
 
-router.get('/clients', (req,res) => {
+router.get('/clients', authController.isAuthenticated,  (req,res) => {
     mysqlConnection.query("SELECT * FROM cliente", (err, results) => {
 
         if (err) throw err;
@@ -125,5 +241,67 @@ router.get('/clients', (req,res) => {
         })
     })
 })
+
+router.get('/submodels/edit/', authController.isAuthenticated, (req, res) => {
+    console.log(req.query)
+    let id = req.query.id
+    let sql = `SELECT id, nombre FROM submodelo WHERE id = ${id}`
+    mysqlConnection.query(sql, (err, results) => {
+        results = JSON.parse(JSON.stringify(results))
+        res.render("edit/submodels", {
+            results:results[0]
+        })
+    })
+})
+
+router.post('/submodels/edit/', authController.isAuthenticated, (req, res) => {
+    let nombre = req.body['nombre']
+    let id = req.body['id']
+    let sql = `UPDATE submodelo SET nombre='${nombre}' WHERE id = ${id}`
+    
+    mysqlConnection.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(sql)
+        results = JSON.parse(JSON.stringify(results))
+        console.log(results)
+    })
+    
+    res.redirect("/admin/submodels")
+   
+})
+
+router.get('/clients/edit/', authController.isAuthenticated, (req, res) => {
+    console.log(req.query)
+    let id = req.query.id
+    let sql = `SELECT id, nombre, apellido, email, telefono, rut FROM cliente WHERE id = ${id}`
+    mysqlConnection.query(sql, (err, results) => {
+        results = JSON.parse(JSON.stringify(results))
+        res.render("edit/clients", {
+            results:results[0]
+        })
+    })
+})
+
+router.post('/clients/edit/', authController.isAuthenticated, (req, res) => {
+    let nombre = req.body['nombre']
+    let apellido = req.body['apellido']
+    let email = req.body['email']
+    let telefono = req.body['telefono']
+    let rut = req.body['rut']
+    let id = req.body['id']
+
+    let sql = `UPDATE cliente SET nombre='${nombre}', apellido = '${apellido}', email='${email}', telefono='${telefono}', rut='${rut}' WHERE id = ${id}`
+    
+    mysqlConnection.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(sql)
+        results = JSON.parse(JSON.stringify(results))
+        console.log(results)
+    })
+    
+    res.redirect("/admin/clients")
+   
+})
+
 
 module.exports = router;

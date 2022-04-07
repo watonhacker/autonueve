@@ -176,7 +176,11 @@ router.get('/', (req, res) => {
             
                             previousPage = parseInt(page) 
                             
-                            res.render('search', {
+                            res.render('search', { 
+
+
+
+                                
                                 brandResults,
                                 resultados,
                                 contadorPagina,

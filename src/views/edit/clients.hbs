@@ -1,0 +1,14 @@
+<form class="edit-form" action="/admin/clients/edit" method="post">
+    <label for="nombre">Nombre</label><input type="text"  name="nombre" value={{results.nombre}} >
+    <label for="apellido">Apellido</label><input type="text" name="apellido" value={{{results.apellido}}} >
+    <label for="email">Email</label><input type="text"  name="email" value={{results.email}} >
+    <label for="telefono">Telefono</label><input type="text"  name="telefono"value={{results.telefono}} >
+    <label for="rut">Rut</label><input type="text" id="rut"name="rut" value={{results.rut}} >
+    <input type="hidden" name="id" value={{results.id}}>
+    <input type="submit" value="Enviar">
+    
+</form>
+
+<script src="/js/hamburgerBtnCopy.js"></script>
+<script src="/js/responsiveCopy.js"></script>
+<script src="/js/hiddenSearch.js"></script>

@@ -49,6 +49,17 @@ router.get('/', (req, res) => {
 
 })
 
+router.get('/edit/:id', (req, res) => {
+    let id = req.params.id
+    res.render("index")
+})
+
+
+
+router.get('/edit', (req, res) => {
+    console.log("ALO")
+})
+
 
 
 

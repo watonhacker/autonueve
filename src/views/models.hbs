@@ -31,9 +31,9 @@
         
     </div>
     <table class="resultsTable">
-    <tr class="firstColumn"><td>Acciones</td><td>ID</td><td>Modelo</td></tr>
+    <tr class="firstColumn"><td>Editar</td><td>ID</td><td>Modelo</td></tr>
    {{#each resultsModels}}
-    <tr><td><a href="#"><i class="far fa-edit"></i></a></td><td>{{id}}</td><td>{{nombre}}</td></tr>
+    <tr><td><a href="/admin/models/edit?id={{id}}"><i class="far fa-edit"></i></a></td><td>{{id}}</td><td>{{nombre}}</td></tr>
     {{/each}}
     </table>
 </div>
