@@ -664,6 +664,7 @@ body h3 {
   -ms-border-radius: 0.5rem;
   -o-border-radius: 0.5rem;
   -webkit-border-radius: 0.5rem;
+  cursor: pointer;
   color: #fff;
   font-weight: bolder;
 }
@@ -1272,7 +1273,7 @@ img {
 }
 
 .dropdown-content a {
-  color: black;
+  color: #4C6EA7 !important;
   padding: 18px 16px;
   text-decoration: none;
   display: block;
