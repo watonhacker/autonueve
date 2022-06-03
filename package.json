@@ -30,8 +30,10 @@
     "express-session": "^1.17.2",
     "handlebars": "^4.7.7",
     "jsonwebtoken": "^8.5.1",
+    "lightbox2": "^2.11.3",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "pagination": "^0.4.6",
     "path": "^0.12.7",
     "swiper": "^7.2.0"
   },
