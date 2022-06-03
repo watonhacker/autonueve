@@ -15,7 +15,7 @@
                 <a class="nav-menu__item" href="/">INICIO</a>
                 <div class="dropdown">
                 <button class="dropbtn nav-menu__item">CATEGORÍAS</button>
-                <div class="dropdown-content">
+                <div id="categories-dropdown" class="dropdown-content">
                     
                 </div>
                 </div>
@@ -29,6 +29,7 @@
                 </a>
      
             </div>
+      
 
             <script>
                 (() => {
@@ -43,7 +44,7 @@
                         data.map(category => {
   
                             let nombre = category['nombre'];
-                            let listedCategory = `<a href="/categories/${nombre.toLowerCase()}">${nombre.toUpperCase()}</a>`;
+                            let listedCategory = `<a href="/categories/${nombre.toLowerCase()}/1">${nombre.toUpperCase()}</a>`;
                             dropdown.insertAdjacentHTML('afterbegin', listedCategory)
 
                         })
@@ -54,6 +55,36 @@
 
 
         </nav>
+        <div class="search-container">
+            <div class="search-component">
+
+                    <input id="search-input" type="text" name="search">
+                    <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+                    <script>
+                            const searchRequest = async (search) => {
+                                window.location.href = `/search/${search}/1`
+                            }
+                        const searchBtn = document.getElementById("search-btn");
+                          const searchInput = document.getElementById("search-input")
+
+                        searchBtn.addEventListener("click", e => {
+                                searchRequest(searchInput.value)
+                         })
+                        searchInput.addEventListener("keypress", function(event) {
+                            // If the user presses the "Enter" key on the keyboard
+                            if (event.key === "Enter") {
+                            // Cancel the default action, if needed
+                            event.preventDefault();
+                            searchRequest(event.target.value)
+                            // Trigger the button element with a click
+                            document.getElementById("myBtn").click();
+                            }
+                        });
+                    </script>
+
+            </div>
+        </div>
 
         <!-- Imagen principal -->
         <div class="main-image">
@@ -62,6 +93,8 @@
                 <img src="https://res.cloudinary.com/keyzen/image/upload/v1619995231/mobalzen/repuestosMontenegro/Group_1_jms7zj.svg" alt="">
                 <h1>Tenemos los repuestos que necesitas</h1>
             </div>
+
+             
 
         </div>
 

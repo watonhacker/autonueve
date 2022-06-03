@@ -14,15 +14,29 @@
 {{!-- fin de boton cart
  --}}
 
-
+    <link href="/css/lightbox.min.css" rel="stylesheet" />
 
     {{#if resultado}}
 
     <div class="products">
        <div id="product-{{resultado.id}}">
              <div class="product-card">
-       <div class="product-card__images">
-          <img src={{selectImg resultado.imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} alt="">
+       <div  class="product-card__images">
+           <a href={{selectImg resultado.imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} data-lightbox="image-1" data-title="Imagen referencial">
+            <img class="main-product-image"src={{selectImg resultado.imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} alt="">
+            </a>
+            <div class="extra-images">
+            {{#if resultado.imagen_2}}
+                <a href={{selectImg resultado.imagen_2 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} data-lightbox="image-1" data-title="Imagen referencial">
+                    <img src={{selectImg resultado.imagen_2 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} alt="">
+                </a>
+            {{/if}}
+            {{#if resultado.imagen_3}}
+                <a href={{selectImg resultado.imagen_3 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} data-lightbox="image-1" data-title="Imagen referencial">
+                    <img src={{selectImg resultado.imagen_3 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} alt="">
+                </a>
+            {{/if}}
+            </div>
        </div>
        <div class="product-card__info">
            <h2>{{resultado.nombre}}</h2>
@@ -52,7 +66,7 @@
     {{/if}}
 
 </section>
-
+<script src="/js/lightbox-plus-jquery.js"></script>
 <button class="scrollUp-btn"><i class="fas fa-arrow-alt-circle-up"></i></button>
 <script src="/js/scrollUp.js"></script>
 <script src="/js/productsWrapper.js"></script>

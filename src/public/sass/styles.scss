@@ -18,11 +18,16 @@
 @import 'loader';
 @import 'single-product';
 @import 'edit-form';
+@import 'search';
 
 * {
     font-family: 'Libre Franklin', sans-serif;
 }
 
+
+a {
+    text-decoration: none;
+}
 
 .btn-style {
 

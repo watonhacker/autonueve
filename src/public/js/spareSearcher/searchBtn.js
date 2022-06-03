@@ -4,6 +4,27 @@ export function searchBtn () {
     
     let submodelsBox = document.getElementById("formYears");
     let modelsBox = document.getElementById("formSubmodels");
+    const searchBtn = document.getElementById("search-btn")
+    const searchInput = document.getElementById("search-input")
+
+    const searchRequest = async (search) => {
+        window.location.href = `/search/${search}/1`
+    }
+
+    searchInput.addEventListener("keypress", function(event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+          // Cancel the default action, if needed
+          event.preventDefault();
+          searchRequest(event.target.value)
+          // Trigger the button element with a click
+          document.getElementById("myBtn").click();
+        }
+      });
+
+    searchBtn.addEventListener("click", e => {
+        alert("click")
+    })
 
 
 

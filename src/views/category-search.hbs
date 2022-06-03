@@ -13,13 +13,16 @@
         </div>
 
       </div>
- 
 
-   
 
-<a href="javascript:prevPage()" id="btn_prev">Atrás</a>
-<a href="javascript:nextPage()" id="btn_next">Siguiente</a>
-<br/>Página: <span id="page"></span>
+{{{paginator}}}
+
+
+
+
+
+
+
 
 
 
@@ -29,6 +32,8 @@
 
 
         <script>
+
+            
 
             var resultadosArray = "{{json resultados}}"
             resultadosArray = resultadosArray.replace(/&quot;/g,'"')
@@ -123,6 +128,7 @@
         </script>
 
 
+
     </div>
    {{else}}
 
@@ -131,3 +137,5 @@
 {{#else}}
     <h2>No hay niuna wea</h2>
 {{/else}}
+
+

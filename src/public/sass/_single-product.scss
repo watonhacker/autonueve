@@ -1,16 +1,18 @@
 .product-card {
     display:flex;
     flex-direction:column;
-    padding:2rem;
+
     width:100%;
     max-width:1200px;
     margin:2rem auto;
-    border:1px solid #ddd   ;   
+    gap:2rem;
+
 
 
     div {
         width:100%;
-        padding:1rem;
+        /* padding:1rem; */
+        
     }
 
     .product-card__info {
@@ -37,4 +39,20 @@
 
 
     }
+}
+
+
+.extra-images {
+    display:flex;
+    justify-content:center;
+    align-items:baseline;
+    align-content: baseline;
+    a  img {
+        width:100px;
+
+    }
+}
+
+.main-product-image {
+    border:1px solid #ddd;
 }

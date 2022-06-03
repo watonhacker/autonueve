@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const mysqlConnection = require('../database/database')
+const globalControllers = require('../controllers/globalControllers')
+const categoriesControllers = require('../controllers/categories.controller')
 
 /* Variables para rescatar los resultados en un array de arrays */
 let lenResults = 0;
@@ -247,6 +249,23 @@ router.get('/', (req, res) => {
     
 
 
+})
+
+router.get('/:busqueda/:page', async (req, res) => {
+    const busqueda = req.params.busqueda;
+    const page = req.params.page;
+
+    const data = await globalControllers.globalSearch(busqueda, page)
+    const resultados = data.results;
+    const paginator = data.paginator;
+
+
+    res.render("category-search", {
+        resultados,
+        paginator
+    })
+
+    
 })
 
 
