@@ -1,0 +1,26 @@
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
+
+const mysql = require('mysql');
+const host = 'localhost' 
+const password = "$Autonueve2022";
+X
+
+    const mysqlConnection = mysql.createConnection({
+        host,
+        user:"keyzenlocal",
+        password,
+        database:"autonueve",
+        port:'3306'
+    })
+
+
+
+    mysqlConnection.connect((err) => {
+        if (err) throw err;
+        console.log("Conectado a la base de datos ", host)
+    })
+
+
+module.exports = mysqlConnection;
