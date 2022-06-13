@@ -19,8 +19,7 @@ router.post('/', async (req, res) => {
     let resultados;
 
     for (element in dataListaProducto) {
-        dataListaProductoLen++
-        console.log(element, "-----*-----)")
+        dataListaProductoLen++;
     }
     
 
@@ -89,7 +88,6 @@ router.get('/', (req, res) =>  {
                 mysqlConnection.query("SELECT * FROM metodoentrega", (err, results) => {
                     results=JSON.parse(JSON.stringify(results))
                     entregas = results
-                    console.log(entregas)
                     mysqlConnection.query("SELECT * FROM metodopago", (err, results) => {
                         results=JSON.parse(JSON.stringify(results))
                         pagos = results

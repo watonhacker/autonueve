@@ -13,6 +13,8 @@
 
     
     productWrapper.addEventListener("click", e => {
+
+        alert("clickazo")
         
         if (e.target.type == "submit") {
 
@@ -56,8 +58,7 @@
     formPedido.addEventListener("click", (e) => {
 
         let formDataPedido = new FormData(formPedido)
-        console.log(formDataPedido.get("nombre"))
-        console.log(formDataPedido.get("empresa"))
+
     })
 
 

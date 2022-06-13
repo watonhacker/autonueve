@@ -10,7 +10,6 @@
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap:1rem;
     .product {
         border:1px solid #f1f1f1;
 
@@ -120,4 +119,18 @@
 
 .wrap-lastProducts {
     max-width: 1200px;
+}
+
+@media (min-width: 576px) {
+    /* Header */
+
+    .products {
+        gap:2rem;
+    }
+
+    /* Main */
+
+    /* Footer */
+
+
 }

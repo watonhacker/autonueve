@@ -1,8 +1,7 @@
 
 
 ((function(){
-    let swiper = new Swiper(".mySwiper", {
-        spaceBetween: 30,
+    let swiper = new Swiper(".myMainSwiper", {
         centeredSlides: true,
         autoplay: {
           delay: 4500,

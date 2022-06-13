@@ -42,13 +42,13 @@ exports.getCategoryProducts = (categoryId) => {
     })
 }
 
-exports.getElementsByPageRender = (isCategory, category, results, page) => {
+exports.getElementsByPageRender = (type, search, results, page) => {
 
 
     let orderedArray = globalControllers.getElementsByPage(results, 12);
     let paginator;
 
-    paginator = globalControllers.boostrapPaginator(isCategory, category, page, results.length).render()
+    paginator = globalControllers.boostrapPaginator(type, search, page, results.length).render()
     paginator = paginator.replace(/\?page\=/g, "")
 
     return {
@@ -71,7 +71,7 @@ exports.getCategoryProductsPage = (categoryId, page, category) => {
         mysqlConnection.query(sql, (err, results, rows) => {
             results=JSON.parse(JSON.stringify(results))
             
-            resolve(this.getElementsByPageRender(true, category, results, page))
+            resolve(this.getElementsByPageRender('category', {data:category}, results, page))
 
             if (err) {
                 console.error(err);
@@ -103,7 +103,6 @@ exports.setCategory = (categoryId) => {
             break;
 
     }
-    console.log("category dentro", category)
 
     return category;
 

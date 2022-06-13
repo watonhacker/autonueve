@@ -98,13 +98,6 @@
 
     })
 
-
-/*     document.querySelector(".main > .wrapperResults").addEventListener("click", e => {
-        
-        if (e.target.parentElement.href != undefined) {alert("clickazo")}
-    }) */
-
-
     document.querySelector(".wrapperResults").addEventListener("click", e => {
         e.preventDefault()
 
@@ -182,7 +175,10 @@
     
 
                                     if (window.localStorage.getItem("productos").split(",") == "") {
-             
+                                        
+                                        window.localStorage.removeItem('listaproducto');
+                                        window.localStorage.removeItem('productos');
+                                        
                                         document.querySelector("body > section.main > div").outerHTML = "<h2>No tiene productos en el carrito</h2>"
                                         setTimeout(() => {
 
@@ -273,7 +269,9 @@
 
     })
 
-    $tableResults.addEventListener("click", e => {
+    
+/*     $tableResults.addEventListener("click", e => {
+        alert("2")
         if (e.target.href != undefined) {
             e.preventDefault()
 
@@ -349,7 +347,6 @@
 
                                     if (objetoFetch) {
 
-                                        console.log(objetoFetch, "aca")
                                         
                                     fetch("/checkout/update", {
                                         method: 'POST',
@@ -361,9 +358,6 @@
                                     })
                                     .then(res => res.json())
                                     .then(data => {
-                                    
-                                        console.log(data.test)
-
 
                                         updatedTable = `
                                         <table class="tableResults">
@@ -425,7 +419,7 @@
 
             })
         } 
-    })
+    }) */
 
 
     function actualizarCarrito (pedido) {
@@ -465,7 +459,6 @@
     window.localStorage.setItem("productos", updatedProductos)
 
     updatedListaProducto = updatedListaProducto.split(",")
-    console.log(updatedListaProducto)
 
     primerNumero = ""
     segundoNumero = ""
@@ -515,9 +508,6 @@
     })
     .then(res => res.json())
     .then(data => {
-    
-
-        console.log(data.test)
 
         if(!pedido) {
             

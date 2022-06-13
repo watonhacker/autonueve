@@ -9,7 +9,9 @@ const exphbs = require('express-handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
-
+const ftpService = require('./ftp/ftpService')
+//Esto inicia el script para leer el ftp y traermelo si se actualiza
+/* ftpService.main() */
 
 /* Variables de ruteo */
 const indexRoutes = require('./routes/index')
@@ -30,6 +32,8 @@ const termsRoutes = require('./routes/terms')
 const androidRoutes = require('./routes/android')
 const singleproductRoutes = require('./routes/singleproduct')
 const categoriesRoutes = require('./routes/categories')
+const mailRoutes = require('./routes/mail')
+const contactoRoutes = require('./routes/contacto')
 
 /* Initializations */
 const app = express()
@@ -62,11 +66,13 @@ const hbs = exphbs.create({
             return bddImg || image
         },
         json : function (results) {
-            console.log("!?!?!?!?!?!?!?!?!??!?!?!?!??!?!!??!?!?!?!?!?!??!?!?!??!?!??!??!")
             let parsedResults = JSON.stringify(results)
-            console.log(typeof(parsedResults))
             return parsedResults
+        },
+        addToCart: function (id) {
+            console.log(id);
         }
+
     }
 })
 
@@ -111,6 +117,8 @@ app.use('/terms', termsRoutes)
 app.use('/android', androidRoutes)
 app.use('/single-product', singleproductRoutes)
 app.use('/categories', categoriesRoutes)
+app.use('/mail', mailRoutes)
+app.use('/contacto', contactoRoutes)
 
 
 app.listen(app.get('port'), () => {

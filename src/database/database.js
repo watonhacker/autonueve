@@ -3,23 +3,19 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 
 const mysql = require('mysql');
-const host = '143.198.233.238' 
-const password = "$Autonueve2022";
-
 
     const mysqlConnection = mysql.createConnection({
-        host,
-        user:"keyzen",
-        password,
-        database:"autonueve",
-        port:'3306'
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE,
+        port: process.env.DATABASE_PORT
     })
-
 
 
     mysqlConnection.connect((err) => {
         if (err) throw err;
-        console.log("Conectado a la base de datos ", host)
+        console.log("Conectado a la base de datos ", process.env.HOST)
     })
 
 

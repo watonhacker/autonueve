@@ -54,9 +54,24 @@ exports.getElementsByPage = (results, limit) => {
 
 }
 
-exports.boostrapPaginator = (isCategory, category, page, total) => {
+exports.boostrapPaginator = (type, searchObject, page, total) => {
 
-  const url = isCategory === false ? `/search/${category}/` : `/categories/${category}/`;
+
+  let url;
+  let search = searchObject.data;
+  let year = searchObject.year || undefined;
+  
+  switch (type) {
+    case 'search':
+      url = `/search/${search}/`;
+      break;
+    case 'category':
+      url = `/categories/${search}/`;
+      break;
+    case 'submodel':
+      url = `/search/${search}/${year}/`;
+      break;
+  }
 
     return new pagination.TemplatePaginator({
         prelink:`${url}`, current: `${page}`, rowsPerPage: 12,
@@ -98,7 +113,7 @@ exports.globalSearch = (busqueda, page) => {
   return new Promise((resolve, reject) => {
       mysqlConnection.query(sql, (err, results, rows) => {
           results=JSON.parse(JSON.stringify(results))
-          resolve(categoriesControllers.getElementsByPageRender(false, busqueda, results, page))
+          resolve(categoriesControllers.getElementsByPageRender('search', {data:busqueda}, results, page))
 
           if (err) {
               console.error(err);

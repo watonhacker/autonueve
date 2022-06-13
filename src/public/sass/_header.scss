@@ -23,6 +23,11 @@ img {
 .header {
 
     .nav {
+        #nav-menu {
+            align-content: center;
+            align-items: center;
+        }
+
         #nav-menu > a:nth-child(7) > i,
         #nav-menu > a.shopping-cart {
             margin-top:1rem;
@@ -68,7 +73,7 @@ img {
 
 }
         .nav-menu {
-
+            z-index:30;
             line-height: 0;
 
 
@@ -80,52 +85,7 @@ img {
         }
     }
 
-    .main-image {
-        background-image: url('https://res.cloudinary.com/keyzen/image/upload/v1633315176/Group_167_vt12w7.png');
-        background-position: center;
-        background-clip: border-box;
-        background-repeat: no-repeat;
-        background-size: cover;
-        overflow: hidden;
-   
-        display: flex;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-        padding:0;
-        margin:0;
-        line-height: 0;
-      
-
-        height:350px;
-
-        .image-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            align-content: center;
-            img {
-
-                margin-left:2rem;
-                width:100px;
-            }
-
-            h1 {
-                color:#fff;
-                font-family: $primary-font;
-                font-size: 5vw;
-                
-                
-
-            }
-
-
-        }
-
-        #main-swiper {
-            width:100%;
-        }
-    }
+    
 }
 
 
@@ -135,6 +95,7 @@ img {
         .nav {
 
             .nav-menu {
+                z-index:30;
 
                 
                 background-color: rgba($color: #000000, $alpha: 
@@ -194,7 +155,7 @@ img {
     background-color: #6EA0F3;
     width:100%;
     line-height: 0;
-    margin-bottom: 3rem;
+    padding-bottom: 3rem;
 
     h2 {
         color:#fff;
@@ -298,3 +259,36 @@ img {
 
 .dropdown:hover .dropdown-content {display: block;}
 
+.main-image {
+
+  
+    overflow: hidden;
+    width:100%;
+
+    .image-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+        img {
+
+            margin-left:2rem;
+            width:100px;
+        }
+
+        h1 {
+            color:#fff;
+            font-family: $primary-font;
+            font-size: 5vw;
+            
+            
+
+        }
+
+
+    }
+
+    #main-swiper {
+        width:100%;
+    }
+}

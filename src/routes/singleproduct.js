@@ -1,18 +1,19 @@
 const router = require('express').Router();
 const mysqlConnection = require('../database/database');
+const singleProductController = require('../controllers/singleProductController')
 
 
-router.get('/:id', (req, res) => {
-    let sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.id = ${req.params.id}; `
-    mysqlConnection.query(sql, (err, results) => {
+router.get('/:id', async (req, res) => {
 
-        results = JSON.parse(JSON.stringify(results))
-        results = results[0]
-        res.render("single-product", {
-            resultado:results
-        })
 
+    const resultado = await singleProductController.getSingleProduct(req.params.id);
+    const associatedProducts = await singleProductController.getAssociatedProducts(req.params.id);
+    res.render("single-product", {
+        resultado,
+        associatedProducts
     })
+
+
 
 })
 

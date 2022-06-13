@@ -11,8 +11,6 @@ const w = window;
     w.addEventListener("scroll", e => {
 
         scrollTop = w.pageYOffset || d.documentElement.scrollTop;
-
-     /*    console.log(scrollTop) */
         
         if(scrollTop > 1000) {
       
@@ -25,9 +23,6 @@ const w = window;
         }
 
     })
-    
-    console.log($btn)
-    console.log($btn.firstChild)
 
 
     d.addEventListener("click", e => {

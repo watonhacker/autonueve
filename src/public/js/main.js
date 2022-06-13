@@ -23,11 +23,13 @@ d.addEventListener("DOMContentLoaded", () => {
 })
 
 
+if (window.localStorage.getItem("listaproducto")) {
+    setTimeout(() => {
+        if (window.localStorage.getItem("listaproducto").split(",").length == 0 || window.localStorage.getItem("productos").split(",") == 0) {
+    
+            window.localStorage.removeItem("listaproducto")
+            window.localStorage.removeItem("productos")
+        }
+    }, 100)
+}
 
-setTimeout(() => {
-    if (window.localStorage.getItem("listaproducto").split(",").length == 0 || window.localStorage.getItem("productos").split(",") == 0) {
-
-        window.localStorage.removeItem("listaproducto")
-        window.localStorage.removeItem("productos")
-    }
-}, 100)

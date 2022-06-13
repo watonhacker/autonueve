@@ -1,5 +1,9 @@
 {{!-- Boton --}}
 
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
 <button style="z-index:30;" class="btnCart"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
     </svg>
@@ -23,25 +27,62 @@
              <div class="product-card">
        <div  class="product-card__images">
            <a href={{selectImg resultado.imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} data-lightbox="image-1" data-title="Imagen referencial">
-            <img class="main-product-image"src={{selectImg resultado.imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} alt="">
+            <div class="main-product-image__wrapper">
+                <img class="main-product-image"src={{selectImg resultado.imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} alt="">
+            </div>
             </a>
             <div class="extra-images">
-            {{#if resultado.imagen_2}}
+   
                 <a href={{selectImg resultado.imagen_2 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} data-lightbox="image-1" data-title="Imagen referencial">
                     <img src={{selectImg resultado.imagen_2 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} alt="">
                 </a>
-            {{/if}}
-            {{#if resultado.imagen_3}}
+
                 <a href={{selectImg resultado.imagen_3 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} data-lightbox="image-1" data-title="Imagen referencial">
                     <img src={{selectImg resultado.imagen_3 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} alt="">
                 </a>
-            {{/if}}
+
             </div>
        </div>
        <div class="product-card__info">
            <h2>{{resultado.nombre}}</h2>
-           <h4>{{resultado.marca}}</h4>
-           <h3>${{resultado.precio}}</h3>
+           <h1>${{resultado.precio}}</h1>
+
+           <table class="table" style="text-align:left;">
+
+  <tbody>
+
+    {{#if resultado.categoria}}
+    <tr>
+      <th scope="row">Categoria</th>
+      <td>{{resultado.categoria}}</td>
+      
+    </tr>
+    {{/if}}
+  {{#if resultado.marca}}
+      <tr>
+      <th scope="row">Marca</th>
+      <td>{{resultado.marca}}</td>
+
+    </tr>
+  {{/if}}
+  {{#if resultado.SKU}}
+      <tr>
+      <th scope="row">SKU</th>
+      <td>{{resultado.SKU}}</td>
+    </tr>
+  {{/if}}
+    {{#if resultado.cantidad}}
+      <tr>
+      <th scope="row">Stock</th>
+      <td>{{resultado.cantidad}}</td>
+    </tr>
+  {{/if}}
+    <tr>
+      <th scope="row">Precio</th>
+      <td>{{resultado.precio}}</td>
+    </tr>
+  </tbody>
+</table>
            <p>{{resultado.descripcion}}</p>
                        <div class="product-button">
                 
@@ -49,15 +90,40 @@
                 <a class="add-button"href="{{resultado.id}}" data-id="{{resultado.id}}" data-type="single">Añadir</a>
             </div> 
        </div>
-
    </div> 
        </div>
 
     </div>
+    
+     
+
+
+    
+    
 
    
 
+      <h2 style="text-align:center; margin:4rem;">Productos relacionados</h2>
+      <div style=" max-width:1400px; width:100%; padding:1rem;   box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);">
+         <div class="swiper mySwiper" >
+      <div class="swiper-wrapper related-swiper">
+        {{#each associatedProducts}}
+            <div class="swiper-slide">
+                <a href="/single-product/{{this.id}}">
+                    <img class="related-product"src={{selectImg this.imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} alt="">
+                </a>
+                <div style="display:flex; justify-content:flex-start; flex-direction:column; gap:10px; max-width: 180px;">
+                <a style="text-align:left" style="font-size:.9rem" href="/single-product/{{this.id}}">{{this.nombre}}</a>
+                <a style="text-align:left" href="/single-product/{{this.id}}">${{this.precio}}</a>
+                </div>
 
+            </div>
+        {{/each}}
+      </div>
+
+    </div>
+      </div>
+ 
 
 
    {{else}}
@@ -66,6 +132,79 @@
     {{/if}}
 
 </section>
+
+
+
+
+    <!-- Swiper JS -->
+
+     <style>
+      html,
+      body {
+        position: relative;
+        height: 100%;
+      }
+
+
+
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+   <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+
+          },
+          768: {
+            slidesPerView: 3,
+
+          },
+          1024: {
+            slidesPerView: 4,
+
+          },
+        },
+                autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+      });
+    </script>
+    
 <script src="/js/lightbox-plus-jquery.js"></script>
 <button class="scrollUp-btn"><i class="fas fa-arrow-alt-circle-up"></i></button>
 <script src="/js/scrollUp.js"></script>

@@ -18,7 +18,6 @@ let $btnCart = d.querySelector(".btnCart")
     w.addEventListener("scroll", e => {
     scrollTop = w.pageYOffset || d.documentElement.scrollTop;
 
-    /*    console.log(scrollTop) */
        
        if(scrollTop > 1000) {
             $btnCart.style.visibility = "visible"
