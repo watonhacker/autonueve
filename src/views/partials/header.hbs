@@ -15,12 +15,12 @@
                 <a class="nav-menu__item" href="/">INICIO</a>
                 <div class="dropdown">
                 <button class="dropbtn nav-menu__item">CATEGORÍAS</button>
-                <div class="dropdown-content">
+                <div id="categories-dropdown" class="dropdown-content">
                     
                 </div>
                 </div>
                 <a class="nav-menu__item" href="/location">UBICACION</a>
-                <a class="nav-menu__item" id="contact-btn" href="/contacto.html">CONTACTO</a>
+                <a class="nav-menu__item" id="contact-btn" href="/contacto">CONTACTO</a>
                 <div class="nav-menu__item"><a id ="signin-btn" class="nav-menu__item"  href="/signin">INGRESAR</a></div>
                 
                 <a href="/checkout" style="display:flex; justify-content:center; align-items:center; align-content:center; text-decoration:none;">
@@ -29,6 +29,7 @@
                 </a>
      
             </div>
+      
 
             <script>
                 (() => {
@@ -43,7 +44,7 @@
                         data.map(category => {
   
                             let nombre = category['nombre'];
-                            let listedCategory = `<a href="/categories/${nombre.toLowerCase()}">${nombre.toUpperCase()}</a>`;
+                            let listedCategory = `<a href="/categories/${nombre.toLowerCase()}/1">${nombre.toUpperCase()}</a>`;
                             dropdown.insertAdjacentHTML('afterbegin', listedCategory)
 
                         })
@@ -54,16 +55,17 @@
 
 
         </nav>
+        <div class="search-container">
+            <div class="search-component">
 
-        <!-- Imagen principal -->
-        <div class="main-image">
+                    <input id="search-input" type="text" name="search">
+                    <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 
-            <div class="image-content">
-                <img src="https://res.cloudinary.com/keyzen/image/upload/v1619995231/mobalzen/repuestosMontenegro/Group_1_jms7zj.svg" alt="">
-                <h1>Tenemos los repuestos que necesitas</h1>
+
+
             </div>
-
         </div>
+
 
 
 

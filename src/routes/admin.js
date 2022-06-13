@@ -4,8 +4,6 @@ const authController = require('../controllers/authControllers')
 
 router.get('/', authController.isAuthenticated, (req, res) => {
     res.render("admin", {user:req.user})
-    console.log(req.user)
-    console.log("USUARIOOO")
 })
 
                             /* Rutas para modelos */
@@ -23,12 +21,12 @@ router.get('/models', authController.isAuthenticated, (req, res) => {
 })
 
 router.get('/models/edit/', authController.isAuthenticated, (req, res) => {
-    console.log(req.query)
+
     let id = req.query.id
     let sql = `SELECT id, nombre FROM modelo WHERE id = ${id}`
     mysqlConnection.query(sql, (err, results) => {
         results = JSON.parse(JSON.stringify(results))
-        console.log(results)
+
         res.render("edit/models", {
             results:results[0]
         })
@@ -46,9 +44,7 @@ router.post('/models/edit/', authController.isAuthenticated, (req, res) => {
     
     mysqlConnection.query(sql, (err, results) => {
         if (err) throw err;
-        console.log(sql)
         results = JSON.parse(JSON.stringify(results))
-        console.log(results)
     })
     
     res.redirect("/admin/models")
@@ -82,12 +78,12 @@ router.get('/brands', authController.isAuthenticated, (req,res) => {
 })
 
 router.get('/brands/edit/', authController.isAuthenticated, (req, res) => {
-    console.log(req.query)
+
     let id = req.query.id
     let sql = `SELECT id, nombre FROM marca WHERE id = ${id}`
     mysqlConnection.query(sql, (err, results) => {
         results = JSON.parse(JSON.stringify(results))
-        console.log(results)
+
         res.render("edit/brands", {
             results:results[0]
         })
@@ -101,9 +97,8 @@ router.post('/brands/edit/', authController.isAuthenticated, (req, res) => {
     
     mysqlConnection.query(sql, (err, results) => {
         if (err) throw err;
-        console.log(sql)
         results = JSON.parse(JSON.stringify(results))
-        console.log(results)
+
     })
     
     res.redirect("/admin/brands")
@@ -113,7 +108,7 @@ router.post('/brands/edit/', authController.isAuthenticated, (req, res) => {
 /* Edicion*/
 
 router.post('/submodels/add', authController.isAuthenticated, (req, res) => {
-    console.log(req.body)
+
     mysqlConnection.query(`INSERT INTO submodelo (nombre, modelo_id) VALUES ('${req.body.name}', ${req.body.model})`, (err, results) => {
         if (err) throw err;
         res.redirect("/submodels")
@@ -151,12 +146,12 @@ router.get('/products', authController.isAuthenticated, (req, res) => {
 })
 
 router.get('/products/edit/', authController.isAuthenticated, (req, res) => {
-    console.log(req.query)
+
     let id = req.query.id
     let sql = `SELECT id, nombre, precio, marca, descripcion, cantidad, imagen FROM producto WHERE id = ${id}`
     mysqlConnection.query(sql, (err, results) => {
         results = JSON.parse(JSON.stringify(results))
-        console.log(results)
+
         res.render("edit/products", {
             results:results[0]
         })
@@ -177,9 +172,8 @@ router.post('/products/edit/', authController.isAuthenticated, (req, res) => {
     
     mysqlConnection.query(sql, (err, results) => {
         if (err) throw err;
-        console.log(sql)
         results = JSON.parse(JSON.stringify(results))
-        console.log(results)
+
     })
     
     res.redirect("/admin/products")
@@ -199,7 +193,7 @@ router.get('/categories', authController.isAuthenticated,  (req,res) => {
 })
 
 router.get('/categories/edit/', authController.isAuthenticated, (req, res) => {
-    console.log(req.query)
+
     let id = req.query.id
     let sql = `SELECT id, nombre, imagen FROM categoria WHERE id = ${id}`
     mysqlConnection.query(sql, (err, results) => {
@@ -218,9 +212,8 @@ router.post('/categories/edit/', authController.isAuthenticated, (req, res) => {
     
     mysqlConnection.query(sql, (err, results) => {
         if (err) throw err;
-        console.log(sql)
         results = JSON.parse(JSON.stringify(results))
-        console.log(results)
+
     })
     
     res.redirect("/admin/categories")
@@ -235,7 +228,6 @@ router.get('/clients', authController.isAuthenticated,  (req,res) => {
 
         if (err) throw err;
         let clientsResults = results
-        console.log(results)
         res.render("clients", {
             clientsResults
         })
@@ -243,7 +235,6 @@ router.get('/clients', authController.isAuthenticated,  (req,res) => {
 })
 
 router.get('/submodels/edit/', authController.isAuthenticated, (req, res) => {
-    console.log(req.query)
     let id = req.query.id
     let sql = `SELECT id, nombre FROM submodelo WHERE id = ${id}`
     mysqlConnection.query(sql, (err, results) => {
@@ -261,9 +252,7 @@ router.post('/submodels/edit/', authController.isAuthenticated, (req, res) => {
     
     mysqlConnection.query(sql, (err, results) => {
         if (err) throw err;
-        console.log(sql)
         results = JSON.parse(JSON.stringify(results))
-        console.log(results)
     })
     
     res.redirect("/admin/submodels")
@@ -271,7 +260,6 @@ router.post('/submodels/edit/', authController.isAuthenticated, (req, res) => {
 })
 
 router.get('/clients/edit/', authController.isAuthenticated, (req, res) => {
-    console.log(req.query)
     let id = req.query.id
     let sql = `SELECT id, nombre, apellido, email, telefono, rut FROM cliente WHERE id = ${id}`
     mysqlConnection.query(sql, (err, results) => {
@@ -294,9 +282,7 @@ router.post('/clients/edit/', authController.isAuthenticated, (req, res) => {
     
     mysqlConnection.query(sql, (err, results) => {
         if (err) throw err;
-        console.log(sql)
         results = JSON.parse(JSON.stringify(results))
-        console.log(results)
     })
     
     res.redirect("/admin/clients")

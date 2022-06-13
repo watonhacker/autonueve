@@ -16,17 +16,11 @@ router.get('/', (req, res) => {
     
     if (selectedModel != undefined) {
 
-        console.log("tenemos model")
-        console.log(selectedModel)
-
         mysqlConnection.query(`SELECT modelo.id FROM modelo WHERE modelo.nombre = '${selectedModel}'`, (err, results, rows) => {
             
             if (results[0]) {
-
-                console.log(results, "results")
-
                 let resultsId = results[0]['id']
-                console.log(resultsId, "model")
+
                 idSubmodel = resultsId
                 mysqlConnection.query(`SELECT * FROM submodelo WHERE modelo_id = ${resultsId}`, (err, results, rows) => {
 
@@ -34,9 +28,7 @@ router.get('/', (req, res) => {
         
                     if (err) {
                         console.log(err)
-                    } else {
-                        console.log(results)
-                    }
+                    } 
                     res.send({
                         results
                     })                
@@ -57,7 +49,7 @@ router.get('/edit/:id', (req, res) => {
 
 
 router.get('/edit', (req, res) => {
-    console.log("ALO")
+    res.send('ok');
 })
 
 

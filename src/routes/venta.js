@@ -8,28 +8,55 @@ let idClienteCreado;
 
 router.post('/', (req, res) => {
 
+    email = req.body['email'];
+    const phone = req.body['phone'];
+    const rut = req.body['rut'];
+
     console.log(req.body)
 
+    console.log(email, phone, rut)
 
-    email = req.body['email']
-
-    mysqlConnection.query(`SELECT cliente.id FROM cliente WHERE cliente.email = '${email}'`, (err, results) => {
+    mysqlConnection.query(`SELECT cliente.id FROM cliente WHERE cliente.email = '${email}' OR cliente.telefono = ${phone} OR cliente.rut = ${rut}`, (err, results) => {
         results=JSON.parse(JSON.stringify(results))
+        console.log(results)
         if (results[0] != undefined) {
             //Creando pedido de cliente ya asociado
-
+            console.log("Cliente ya asociado")
             idClienteCreado = results[0]['id']
-            crearPedidoPromise = new Promise(function(resolve, reject) {
-                resolve(ventaControllers.guardarPedido(idClienteCreado, req.body['pago'], req.body['documento'], req.body['entrega']))
-            })
+            try {
+                let crearPedidoPromise = function () {
+                    return new Promise(function(resolve, reject) {
+                        resolve(ventaControllers.guardarPedido(idClienteCreado, req.body['pago'], req.body['documento'], req.body['entrega']))
+                    })
+                } 
+
+                crearPedidoPromise()
+                .then(res => {
+                    return ventaControllers.obtenerPedidoId()
+                })
+                .then(res =>{ 
+                    return ventaControllers.guardarListaPedido(res, req.body['productos'])
+                })
+                .then(res => {
+                    return ventaControllers.obtenerPrecioPedido(res)
+                })
+                .then(res => ventaControllers.guardarPrecioPedido(res))
+
+            } catch (err) {
+                console.log(err)
+            }
+
             
         } else {
-            mysqlConnection.query(`SELECT id FROM cliente ORDER BY id DESC LIMIT 1`, (err, results) => {
+
+            console.log('nuevo cliente')
+
+            try {
+                        mysqlConnection.query(`SELECT id FROM cliente ORDER BY id DESC LIMIT 1`, (err, results) => {
 
 
                 results=JSON.parse(JSON.stringify(results))
                 newId = results[0]['id'] + 1
-                console.log("ultimo id fue ", results, "El nuevo será", newId)
                     
                 // Creando NUEVO cliente particular o empresa
                 if (req.body['cliente'] == 1) {
@@ -83,6 +110,10 @@ router.post('/', (req, res) => {
                 }     
                 
             })
+            } catch (err) {
+                console.log(err)
+            }
+    
 
         }
         if (err) throw err;

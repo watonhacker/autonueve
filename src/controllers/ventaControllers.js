@@ -26,7 +26,7 @@ exports.guardarPedido = (idCliente, pago, documento, entrega) => {
 
         sql =`INSERT INTO pedido (cliente_id, metodopago_id, tipodocumento_id, estado_id, metodoentrega_id, fecha) VALUES (${idCliente}, ${pago}, ${documento}, 1, ${entrega}, current_time())`
 
-        console.log(sql)
+       
 
         mysqlConnection.query(sql, (err, res) => {
             if (err) throw err;
@@ -110,25 +110,22 @@ exports.guardarListaPedido = function (res, listaIdProductos) {
                 })
         
                 for (element in objeto) {
-                    console.log(`${element}:${objeto[element]}`)
                     sql += `(${element}, ${res}, ${objeto[element]}),`
                 }
         
-                console.log(sql)
         
                 sql = sql.slice(0, -1)
                 sql += ";"
         
-                console.log(sql)
                         
             mysqlConnection.query(sql, (err, results) => {
                 if (err) throw err;
-                console.log(results)
+
             })
     
     
             resolve(res)
-            console.log(res, "Esto se envia")
+ 
     
             
         })
@@ -154,7 +151,6 @@ exports.obtenerPrecioPedido = function(id) {
             mysqlConnection.query(sql, (err, res) => {
                 res = JSON.parse(JSON.stringify(res))
                 let total = 0
-                console.log(res, "ESto me trajeron")
                 res.forEach(element => {
                     total += element['subtotal']
                 })

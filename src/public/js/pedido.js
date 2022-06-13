@@ -14,7 +14,6 @@
         num = parseInt(n.lastElementChild.innerHTML)
  
         if (num > 0) {
-            console.log(num, total)
             total += num
         }
       
@@ -73,36 +72,45 @@
         formDataPedido.append("idproductos", idProductos)
 
         for (element of formDataPedido.keys()) {
-            console.log(`'${element}' : ${formDataPedido.get(element)}`)
             nuevoObjeto[element] = formDataPedido.get(element)
         }
 
-
-        console.log("NUEVO OBJETITO")
-        console.log(nuevoObjeto)
-
-        console.log(JSON.stringify(formDataPedido))
-        console.log(JSON.parse(JSON.stringify(formDataPedido)))
-
-        fetch("/venta", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(nuevoObjeto)
-         })
-         .then(window.location.href = '/success')
-         .catch(err => {console.log(err)})
+        const mailObject = {
+            message: "Este es un mensaje enviado desde autonueve.cl",
+            mail: formDataPedido.get('email'),
+            subject: "[Pedido desde Autonueve.cl]",
+            html: `<div>
+            <h1 style="color:orange">Felicidades, has generado exitosamente tu pedido</h1>
+            <p>Estos son los datos de transferencia: </p>
+            <p>Recuerda enviar un correo de confirmación con la foto de tu transferencia a <strong>ventas@autonueve.cl</strong></p>
+            </div>`
+        }
 
 
-            
+        Promise.all([
+            fetch("/venta", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nuevoObjeto)
+            }),
+            fetch("/mail/generar", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(mailObject)
 
-
-
-
-
-
+            })
+        ])
+        .catch(err => {console.log(err)})
+        
+        window.localStorage.removeItem('listaproducto')
+        window.localStorage.removeItem('productos')
+        window.location.href = '/success';
     })
 
 })());

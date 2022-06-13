@@ -1,9 +1,33 @@
+    <button style="z-index:30;" class="btnCart"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+    </svg>
+        <div id="cart-circle"  class="circle">
+    </svg>
+    </div>
+    <p style="color:#6EA0F3; margin:0;padding:0;font-weight:bold;">0</p>
+    <a class="shopping-cart" style="color:#ccc; display:flex; justify-content:center; align-items:center; align-content:center;text-decoration:none; " href="/checkout"></a>
+</button>
+
+    
     {{#if resultados}}
     <div class="wrap-lastProducts">
     <h4 class="subtitle-products">Productos encontrados</h4>
-    <div class="products" id="listingTable">
+    <div class="products">
+        {{#each resultados}}
+        <div class="product" id="product-{{id}}">
 
-
+            <a href="/single-product/{{id}}">
+                          <img style="max-width:100%; height:200px;"src="{{selectImg imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}}" alt="">
+            </a>
+            <h3 class="product-name">{{nombre}}</h3>
+            <p class="product-sku">SKU: {{SKU}}</p>
+            <p class="product-brand">{{marca}}</p>
+            <p>${{precio}}</p>
+            <div class="product-button">
+                
+                <input type="number" class="number" min="1" value="1" max="20">
+                <a href="{{id}}" data-id="{{id}}">Añadir</a>
+            </div>  
 
 
             
@@ -11,117 +35,19 @@
 
         {{!--     <p>descripcion: {{loud descripcion}}</p> --}}
         </div>
-
+        {{/each}}
       </div>
  
 
    
 
-<a href="javascript:prevPage()" id="btn_prev">Atrás</a>
-<a href="javascript:nextPage()" id="btn_next">Siguiente</a>
-<br/>Página: <span id="page"></span>
 
 
 
     </div>
 
     <div class="pages">
-
-
-        <script>
-
-            var resultadosArray = "{{json resultados}}"
-            resultadosArray = resultadosArray.replace(/&quot;/g,'"')
-            resultadosArray = JSON.parse(resultadosArray)
-            console.log(resultadosArray)
-
-            var current_page = 1;
-            var records_per_page = 12;
-
-            var objJson = resultadosArray; // Can be obtained from another source, such as your objJson variable
-
-            function prevPage()
-            {
-                if (current_page > 1) {
-                    current_page--;
-                    changePage(current_page);
-                }
-            }
-
-            function nextPage()
-            {
-                if (current_page < numPages()) {
-                    current_page++;
-                    changePage(current_page);
-                }
-            }
-                
-            function changePage(page)
-            {
-
-                window.location.href = "#"
-                var btn_next = document.getElementById("btn_next");
-                var btn_prev = document.getElementById("btn_prev");
-                var listing_table = document.getElementById("listingTable");
-                var page_span = document.getElementById("page");
-            
-                // Validate page
-                if (page < 1) page = 1;
-                if (page > numPages()) page = numPages();
-
-                listing_table.innerHTML = "";
-
-                for (var i = (page-1) * records_per_page; i < (page * records_per_page) && i < objJson.length; i++) {
-
-
-                    let product =      `<div class="product" id="product-${objJson[i].id}">
-
-                                            <a href="/single-product/${objJson[i].id}">
-                                                <img style="max-width:100%; height:200px;"src="${objJson[i].imagen ||'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}" alt="">
-                                            </a>
-                                            <h3 class="product-name">${objJson[i].nombre}</h3>
-                                            <p class="product-sku">SKU: ${objJson[i].SKU}</p>
-                                            <p class="product-brand">${objJson[i].marca}</p>
-                                            <p>${objJson[i].precio}</p>
-                                            <div class="product-button">
-                                                
-                                                <input type="number" class="number" min="1" value="1" max="20">
-                                                <a href="${objJson[i].id}" data-id="${objJson[i].id}">Añadir</a>
-                                            </div>  
-
-
-                                        
-                                        </div>`
-
-
-                    listing_table.innerHTML += product;
-                }
-                page_span.innerHTML = page + "/" + numPages();
-
-                if (page == 1) {
-                    btn_prev.style.visibility = "hidden";
-                } else {
-                    btn_prev.style.visibility = "visible";
-                }
-
-                if (page == numPages()) {
-                    btn_next.style.visibility = "hidden";
-                } else {
-                    btn_next.style.visibility = "visible";
-                }
-            }
-
-            function numPages()
-            {
-                return Math.ceil(objJson.length / records_per_page);
-            }
-
-            window.onload = function() {
-                changePage(1);
-            };
-
-        </script>
-
+{{{paginator}}}
 
     </div>
    {{else}}
@@ -129,5 +55,15 @@
     <div>NO HAY RESULTADOS</div>
     {{/if}}
 {{#else}}
-    <h2>No hay niuna wea</h2>
+    <h2>NO HAY RESULTADOS</h2>
 {{/else}}
+
+
+
+<button class="scrollUp-btn"><i class="fas fa-arrow-alt-circle-up"></i></button>
+<script src="/js/scrollUp.js"></script>
+<script src="/js/productsWrapper.js"></script>
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/scroll-top.js"></script>
+<script src="/js/shoppingCart.js"></script>
