@@ -3,15 +3,19 @@ export default function hamburgerMenu (hamburgerBtn, hamburgerMenu, hamburgerLin
 
     d.addEventListener("click", e => {
 
+        const isCategory = e.target.matches("#nav-categories")
 
-        if (e.target.matches(hamburgerBtn) || (e.target.matches(`${hamburgerBtn} *`)) ) {
+        if (!isCategory) {
+            if (e.target.matches(hamburgerBtn) || (e.target.matches(`${hamburgerBtn} *`)) ) {
         
-            d.querySelector(hamburgerMenu).classList.add(panelActive)
-        }
-
-        if (e.target.matches(`${hamburgerMenu} *`) || e.target.matches(hamburgerLink) || e.target.matches(".nav-menu.active")){
-
-            d.querySelector(hamburgerMenu).classList.remove(panelActive);
+                d.querySelector(hamburgerMenu).classList.add(panelActive)
+            }
+    
+            if (e.target.matches(`${hamburgerMenu} *`) || e.target.matches(hamburgerLink) || e.target.matches(".nav-menu.active")){
+    
+                d.querySelector(hamburgerMenu).classList.remove(panelActive);
+            }
+    
         }
 
   

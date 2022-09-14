@@ -12,18 +12,17 @@ const config = {
 
 async function main() {
     const client = new Client('upload-test');
-    const dst = `src/ftp/${path}`;
+    const dst = `${process.env.FTP_FOLDER}${path}`;
     const src = path;
 
-    console.log(src, "SRC")
-    console.log(dst, "DST")
-  
     try {
       await client.connect(config);
       client.on('download', info => {
       console.log(`Listener: Download ${info.source}`);
       });
-      return await client.downloadDir(src, dst);
+      const downloadedFile = await client.downloadDir(src, dst);
+      console.log(downloadedFile)
+      return downloadedFile
     } finally {
       client.end();
     }
