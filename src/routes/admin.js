@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const mysqlConnection = require('../database/database')
 const authController = require('../controllers/authControllers')
+const adminController = require('../controllers/admin.controller')
 
 router.get('/', authController.isAuthenticated, (req, res) => {
     res.render("admin", {user:req.user})
@@ -167,8 +168,8 @@ router.post('/products/edit/', authController.isAuthenticated, (req, res) => {
     let imagen = req.body['imagen']
     let id = req.body['id']
 
-
-    let sql = `UPDATE producto SET nombre='${nombre}', precio = ${precio}, marca='${marca}', descripcion="${descripcion}", cantidad=${cantidad}, imagen='${imagen}' WHERE id = ${id}`
+ 
+    let sql = `UPDATE producto SET nombre='${nombre}', precio = ${precio}, marca='${marca}', descripcion='${descripcion}', cantidad=${cantidad}, imagen='${imagen}' WHERE id = ${id}`
     
     mysqlConnection.query(sql, (err, results) => {
         if (err) throw err;
@@ -270,6 +271,8 @@ router.get('/clients/edit/', authController.isAuthenticated, (req, res) => {
     })
 })
 
+
+
 router.post('/clients/edit/', authController.isAuthenticated, (req, res) => {
     let nombre = req.body['nombre']
     let apellido = req.body['apellido']
@@ -288,6 +291,23 @@ router.post('/clients/edit/', authController.isAuthenticated, (req, res) => {
     res.redirect("/admin/clients")
    
 })
+
+router.get('/quotations', authController.isAuthenticated, async (req, res) => {
+
+    //nos traemos todas las cotizaciones select * from pedido
+    // luego seleccionamos el id del pedido y lo mandamos en la consulta para ver el detalle
+    // este detalle a su vez debe tener un estado,
+    const pedidos = await adminController.getPedidos()
+    //Aca agarro los pedidos y los renderizo en aspectos generales
+    // cada pedido tendra un link que será el id, ese id lo usaremos para recorrer luego listapedidos y traernos la info de ese pedido
+    // el pedido a su ve
+    res.send(pedidos)
+
+
+
+   
+})
+
 
 
 module.exports = router;

@@ -14,8 +14,6 @@
     
     productWrapper.addEventListener("click", e => {
 
-        alert("clickazo")
-        
         if (e.target.type == "submit") {
 
             if (myStorage.getItem("listaproducto") == null) {

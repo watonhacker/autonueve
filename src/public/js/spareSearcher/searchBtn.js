@@ -8,7 +8,9 @@ export function searchBtn () {
     const searchInput = document.getElementById("search-input")
 
     const searchRequest = async (search) => {
-        window.location.href = `/search/${search}/1`
+        if (search != undefined && search !== '') {
+            window.location.href = `/search/${search}/1`
+        }
     }
 
     searchInput.addEventListener("keypress", function(event) {
@@ -16,17 +18,28 @@ export function searchBtn () {
         if (event.key === "Enter" && event.target.value != "" && event.target.value != undefined) {
           // Cancel the default action, if needed
           event.preventDefault();
-          searchRequest(event.target.value)
+          if (event.target.value !== undefined) {
+              searchRequest(event.target.value)
+          }
           // Trigger the button element with a click
           document.getElementById("myBtn").click();
         }
       });
 
     searchBtn.addEventListener("click", e => {
-        if (e.target.value != undefined) {
+        if (searchInput.value != undefined) {
             searchRequest(searchInput.value);   
         }
     })
+
+    searchInput.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.key === "Enter") {
+        if (event.target.value != undefined) {
+            searchRequest(event.target.value);   
+        }
+    }
+});
 
 
     if (submodelsBox) {

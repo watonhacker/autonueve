@@ -5,11 +5,11 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 const mysql = require('mysql');
 
     const mysqlConnection = mysql.createConnection({
-        host: process.env.HOST,
-        user: process.env.USER,
-        password: process.env.PASSWORD,
-        database: process.env.DATABASE,
-        port: process.env.DATABASE_PORT
+        host: process.env.FTP_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.FTP_PASSWORD,
+        database: process.env.DB_DATABASE,
+        port: process.env.DB_PORT
     })
 
 

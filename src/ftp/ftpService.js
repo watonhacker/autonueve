@@ -4,10 +4,10 @@ exports.read = (path) => {
     
 let Client = require('ssh2-sftp-client');
 const config = {
-    host: '143.198.233.238',
-    port: '22',
-    username: 'root',
-    password: 'Autonueve2022'
+  host: process.env.FTP_HOST,
+  port: process.env.FTP_PORT,
+  username: process.env.FTP_USERNAME,
+  password: process.env.FTP_PASSWORD
 }
 
 async function main() {
@@ -39,10 +39,10 @@ exports.list = async (path) => {
   
 let Client = require('ssh2-sftp-client');
 const config = {
-    host: process.env.HOST,
-    port: process.env.FTP_PORT,
-    username: process.env.FTP_USERNAME,
-    password: process.env.FTP_PASSWORD
+  host: process.env.FTP_HOST,
+  port: process.env.FTP_PORT,
+  username: process.env.FTP_USERNAME,
+  password: process.env.FTP_PASSWORD
 }
 
     const client = new Client('read');  

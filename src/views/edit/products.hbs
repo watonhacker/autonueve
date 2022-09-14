@@ -1,11 +1,11 @@
 <form class="edit-form" action="/admin/products/edit" method="post">
-    <label for="nombre">Nombre</label><input type="text"  name="nombre" value='{{results.nombre}}' >
-    <label for="precio">Precio</label><input type="number" name="precio" value={{results.precio}} >
-    <label for="marca">Marca</label><input type="text"  name="marca" value='{{results.marca}}' >
+    <label for="nombre">Nombre</label><input type="text"  name="nombre"  required value='{{results.nombre}}' >
+    <label for="precio">Precio</label><input type="number" name="precio"  required value={{results.precio}} >
+    <label for="marca">Marca</label><input type="text"  name="marca" required value='{{results.marca}}' >
   
     <label for="descripcion">Descripcion</label><textarea name="descripcion" >'{{results.descripcion}}'</textarea>
-    <label for="cantidad">Cantidad</label><input type="number" id="rut"name="cantidad" value={{results.cantidad}} >
-    <label for="imagen">Imagen</label><input type="text" id="rut"name="imagen" value='{{results.imagen}}' >
+    <label for="cantidad">Cantidad</label><input type="number" id="rut"name="cantidad" required value={{results.cantidad}}>
+    <label for="imagen">Imagen</label><input type="text" id="rut"name="imagen" placeholder="Ingrese el link de la imagen" value='{{results.imagen}}' >
     <input type="hidden" name="id" value={{results.id}}>
     <input type="submit" value="Enviar">
     
