@@ -14,6 +14,9 @@ async function main() {
     const client = new Client('upload-test');
     const dst = `src/ftp/${path}`;
     const src = path;
+
+    console.log(src, "SRC")
+    console.log(dst, "DST")
   
     try {
       await client.connect(config);
