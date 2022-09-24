@@ -131,7 +131,7 @@ app.use('/models', modelRoutes)
 app.use('/location', locationRoutes)
 app.use('/search', searchRoutes)
 app.use('/signin', signinRoutes)
-app.use('/signup', signupRoutes)
+/* app.use('/signup', signupRoutes) */
 app.use('/admin', adminRoutes)
 app.use('/logout', logoutRoutes)
 app.use('/pedido', pedidoRoutes)
