@@ -1,0 +1,117 @@
+
+
+{{#if pedidosResults}}
+<div class="results-title">
+    <h2>PEDIDOS</h2>
+</div>
+
+<div class="models-panel">
+    <div class="models">
+        <a href="/admin/products">Productos</a>
+    </div>
+    <div class="models">
+        <a href="/admin/categories">Categorías</a>
+    </div>
+    <div class="models">
+        <a href="/admin/compatibility">Asignación</a>
+    </div>
+
+</div>
+
+
+<div class="btnToAdmin">
+    <a href="/admin"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
+    <a class="backToPanel" href="/admin">Volver al panel</a>
+</div>
+
+<div class="adminResults">
+    
+    <div class="options-box">
+        
+        <a href="/admin/submodels/add"><i class="fas fa-plus-circle"></i></a>
+        <a href="">Agregar producto</a>
+        
+    </div>
+    <table class="resultsTable">
+        
+    <tr class="firstColumn">
+        <td>Acciones</td>
+        <td>ID</td>
+        <td>Cliente</td>
+        <td>Tipo pago</td>
+        <td>Precio</td>
+        <td>Direccion</td>
+        <td>Estado</td>
+    </tr>
+   {{#each pedidosResults}}
+    <tr>
+        <td>
+            <a class="option" href="/admin/categories/edit?id={{id}}">
+                <i class="far fa-edit"></i>
+            </a>
+            <a class="option"href="#">
+                <i class="far fa-trash-alt"></i>
+            </a>
+        </td>
+        <td>{{id}}</td>
+        <td>{{nombre}}</td>
+        <td>{{pago}}</td>
+        <td>{{precio}}</td>
+        <td>{{direccion}}</td>
+        <td>
+        <select data-pedido="{{id}}"class="form-select estado-select" aria-label="Default select example" >
+            <option value="1" {{selectedState estado_id "1"}}>Pago pendiente</option>
+            <option value="2" {{selectedState estado_id "2"}}>Pago realizado</option>
+            <option value="3" {{selectedState estado_id "3"}}>Despachado</option>
+        </select>
+        </td>
+    </tr>
+    {{/each}}
+    </table>
+</div>
+    
+
+
+
+</div>
+{{/if}}
+
+<script src="/js/hamburgerBtnCopy.js"></script>
+<script src="/js/responsiveCopy.js"></script>
+<script src="/js/hiddenSearch.js"></script>
+
+<script>
+    const estadoSelect = document.querySelectorAll(".estado-select");
+    console.log(estadoSelect)
+
+    estadoSelect.forEach(select => {
+        select.addEventListener("change", e => {
+            console.log(e.target.value)
+            console.log(e.target.dataset.pedido)
+
+            const mailObject = {
+                "pedido_id": e.target.dataset.pedido,
+                "estado_id": e.target.value
+            }
+
+            
+                fetch("/admin/pedidos/estado", {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(mailObject)
+                })
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(error => {
+                    window.alert("Ha ocurrido un error al generar tu pedido, reintantalo o comunícate con el administrador")
+                    window.location.reload()
+                    console.error(error);
+                })
+
+        })
+    })
+</script>

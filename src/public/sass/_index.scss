@@ -335,3 +335,28 @@ body {
 
 }
 
+.compatibility-option {
+    width:300px;
+}
+
+.container-selector {
+
+        width:100%;
+        display:flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        gap:1rem;
+        
+        div {
+            width:90%;
+            max-width: 700px;
+            
+        }
+
+
+
+}
+

@@ -1,127 +1,94 @@
 const router = require("express").Router()
-const mysqlConnection = require('../database/database')
 const ventaControllers = require('../controllers/ventaControllers')
+const clientesService = require('../api/clientes/clientes.service')
+const pedidoService = require('../api/pedido/pedido.service')
 
-let newId;
-let email;
-let idClienteCreado;
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 
-    email = req.body['email'];
-    const phone = req.body['phone'];
-    const rut = req.body['rut'];
+    const cliente = req.body
+    const clienteId = await clientesService.clienteByFilter(req.body.email, req.body.phone, req.body.rut);
 
-    console.log(req.body)
-
-    console.log(email, phone, rut)
-
-    mysqlConnection.query(`SELECT cliente.id FROM cliente WHERE cliente.email = '${email}' OR cliente.telefono = ${phone} OR cliente.rut = ${rut}`, (err, results) => {
-        results=JSON.parse(JSON.stringify(results))
-        console.log(results)
-        if (results[0] != undefined) {
-            //Creando pedido de cliente ya asociado
-            console.log("Cliente ya asociado")
-            idClienteCreado = results[0]['id']
-            try {
-                let crearPedidoPromise = function () {
-                    return new Promise(function(resolve, reject) {
-                        resolve(ventaControllers.guardarPedido(idClienteCreado, req.body['pago'], req.body['documento'], req.body['entrega']))
-                    })
-                } 
-
-                crearPedidoPromise()
-                .then(res => {
-                    return ventaControllers.obtenerPedidoId()
-                })
-                .then(res =>{ 
-                    return ventaControllers.guardarListaPedido(res, req.body['productos'])
-                })
-                .then(res => {
-                    return ventaControllers.obtenerPrecioPedido(res)
-                })
-                .then(res => ventaControllers.guardarPrecioPedido(res))
-
-            } catch (err) {
-                console.log(err)
+    try {
+        if (clienteId !== null){
+            const dataPedido = {
+                cliente_id: clienteId,
+                metodopago_id: cliente.pago,
+                tipodocumento_id: cliente.documento,
+                estado_id: 1, //esto esta hardcodeado, esto deberia mandarlo el front en caso de que despues se pueda comprar altiro, no siempre quedara con un estado 1 
+                metodoentrega_id: cliente.entrega,
+                fecha: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                direccion: cliente.direccion
             }
-
-            
-        } else {
-
-            console.log('nuevo cliente')
-
-            try {
-                        mysqlConnection.query(`SELECT id FROM cliente ORDER BY id DESC LIMIT 1`, (err, results) => {
-
-
-                results=JSON.parse(JSON.stringify(results))
-                newId = results[0]['id'] + 1
-                    
-                // Creando NUEVO cliente particular o empresa
-                if (req.body['cliente'] == 1) {
-
-                    let crearClientePromise = function () {
-                        return new Promise((resolve, reject) => {
-                            resolve(ventaControllers.crearCliente(newId, req.body['nombre'], req.body['apellido'], req.body['email'], req.body['phone'], req.body['rut'], req.body['cliente']))
-                        })
-                    }
-
-                    crearClientePromise()
-                        .then(ventaControllers.guardarDireccion(newId, req.body['comuna'], req.body['direccion'], req.body['region']))
-                        .then(ventaControllers.guardarPedido(newId, req.body['pago'], req.body['documento'], req.body['entrega']))
-                        .then(res => {
-                            return ventaControllers.obtenerPedidoId()
-                        })
-                        .then(res =>{ 
-                            return ventaControllers.guardarListaPedido(res, req.body['productos'])
-                        })
-                        .then(res => {
-                            return ventaControllers.obtenerPrecioPedido(res)
-                        })
-                        .then(res => ventaControllers.guardarPrecioPedido(res))
-        
-                      
-
-
-
-                } else if (req.body['cliente'] == 2) {
-
-                    let crearEmpresaPromise = function () {
-                       return new Promise((resolve, reject) => {
-                           resolve(ventaControllers.crearEmpresa(newId, req.body['nombre'], req.body['giro'], req.body['email'], req.body['phone'], req.body['rut'], req.body['cliente']))
-                       }) 
-                    }
-
-                    crearEmpresaPromise()
-                    .then(ventaControllers.guardarDireccion(newId, req.body['comuna'], req.body['direccion'], req.body['region']))
-                    .then(ventaControllers.guardarPedido(newId, req.body['pago'], req.body['documento'], req.body['entrega']))
-                    .then(res => {
-                        return ventaControllers.obtenerPedidoId()
-                    })
-                    .then(res =>{ 
-                        return ventaControllers.guardarListaPedido(res, req.body['productos'])
-                    })
-                    .then(res => {
-                        return ventaControllers.obtenerPrecioPedido(res)
-                    })
-                    .then(res => ventaControllers.guardarPrecioPedido(res))
-   
-                }     
-                
+            const nuevoPedido = await pedidoService.createPedido(dataPedido);
+            const listaPedido = await ventaControllers.guardarListaPedido(nuevoPedido.insertId, req.body['productos']);
+            const precioPedido = await ventaControllers.obtenerPrecioPedido(listaPedido);
+            const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido(precioPedido);
+            res.send({
+                "pedido": nuevoPedido.insertId,
+                "listaPedido": listaPedido,
+                "precioPedido": precioPedido,
+                "guardarPrecioPedido": guardarPrecioPedido,
+                "status": "success"
             })
-            } catch (err) {
-                console.log(err)
-            }
     
+        } else {
+            if (cliente.cliente == 1){
+                const clienteParticular = await ventaControllers.crearCliente(cliente.nombre, cliente.apellido, cliente.email, cliente.phone, cliente.rut, cliente.cliente)
 
+                const dataPedido = {
+                    cliente_id: clienteParticular.insertId,
+                    metodopago_id: cliente.pago,
+                    tipodocumento_id: cliente.documento,
+                    estado_id: 1, //esto esta hardcodeado, esto deberia mandarlo el front en caso de que despues se pueda comprar altiro, no siempre quedara con un estado 1 
+                    metodoentrega_id: cliente.entrega,
+                    fecha: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                    direccion: cliente.direccion
+                }
+                const nuevoPedido = await pedidoService.createPedido(dataPedido);
+                const listaPedido = await ventaControllers.guardarListaPedido(nuevoPedido.insertId, req.body['productos']);
+                const precioPedido = await ventaControllers.obtenerPrecioPedido(listaPedido);
+                const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido(precioPedido);
+                res.send({
+                    "pedido": nuevoPedido.insertId,
+                    "listaPedido": listaPedido,
+                    "precioPedido": precioPedido,
+                    "guardarPrecioPedido": guardarPrecioPedido,
+                    "status": "success"
+                })
+            } else {
+                
+                const clienteEmpresa = await ventaControllers.crearEmpresa(cliente.nombre, cliente.giro, cliente.email, cliente.phone, cliente.rut, cliente.cliente)
+
+                const dataPedido = {
+                    cliente_id: clienteEmpresa.insertId,
+                    metodopago_id: cliente.pago,
+                    tipodocumento_id: cliente.documento,
+                    estado_id: 1, //esto esta hardcodeado, esto deberia mandarlo el front en caso de que despues se pueda comprar altiro, no siempre quedara con un estado 1 
+                    metodoentrega_id: cliente.entrega,
+                    fecha: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                    direccion: cliente.direccion
+                }
+
+                const nuevoPedido = await pedidoService.createPedido(dataPedido);
+                const listaPedido = await ventaControllers.guardarListaPedido(nuevoPedido.insertId, req.body['productos']);
+                const precioPedido = await ventaControllers.obtenerPrecioPedido(listaPedido);
+                const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido(precioPedido);
+                res.send({
+                    "pedido": nuevoPedido.insertId,
+                    "listaPedido": listaPedido,
+                    "precioPedido": precioPedido,
+                    "guardarPrecioPedido": guardarPrecioPedido,
+                    "status": "success"
+                })
+            }
         }
-        if (err) throw err;
+    } catch (error) {
+        res.send(error)
+        console.error(error);
+    }
 
-    })
-
-    })
-
+})
 
 
 

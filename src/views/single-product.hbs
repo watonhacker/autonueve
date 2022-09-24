@@ -109,12 +109,12 @@
       <div class="swiper-wrapper related-swiper">
         {{#each associatedProducts}}
             <div class="swiper-slide">
-                <a href="/single-product/{{this.id}}">
+                <a href="/producto/{{this.id}}">
                     <img class="related-product"src={{selectImg this.imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}} alt="">
                 </a>
                 <div style="display:flex; justify-content:flex-start; flex-direction:column; gap:10px; max-width: 180px;">
-                <a style="text-align:left" style="font-size:.9rem" href="/single-product/{{this.id}}">{{this.nombre}}</a>
-                <a style="text-align:left" href="/single-product/{{this.id}}">${{this.precio}}</a>
+                <a style="text-align:left" style="font-size:.9rem" href="/producto/{{this.id}}">{{this.nombre}}</a>
+                <a style="text-align:left" href="/producto/{{this.id}}">${{this.precio}}</a>
                 </div>
 
             </div>

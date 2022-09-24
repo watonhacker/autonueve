@@ -7,6 +7,7 @@
     let productosLen = window.localStorage.getItem("productos").split(",").length
     let formDataPedido;
     let pedidoForm = document.querySelector("#pedidoForm")
+    let tableVenta = document.querySelector("#tableVenta")
 
 
     shoppingCart.innerHTML = productosLen
@@ -80,14 +81,62 @@
             mail: formDataPedido.get('email'),
             subject: "[Pedido desde Autonueve.cl]",
             html: `<div>
-            <h1 style="color:orange">Felicidades, has generado exitosamente tu pedido</h1>
-            <p>Estos son los datos de transferencia: </p>
-            <p>Recuerda enviar un correo de confirmación con la foto de tu transferencia a <strong>ventas@autonueve.cl</strong></p>
-            </div>`
+            <h1 style="color:#4C6EA7">¡Felicidades, has generado exitosamente tu pedido en <a href="https://autonueve.cl">autonueve.cl</a>!</h1>
+            <h3>Tienes <strong>24h</strong> para realizar el pago y envío de comprobantes</h3>
+            <h2>Datos de transferencia</h2>
+<table style="border: 1px solid #ccc; display:inline-block; padding:.5rem">
+  <tr>
+    <td>Nombre</td>
+    <td>Jorge Urrutia</td>
+  </tr>
+  <tr>
+    <td>Banco</td>
+    <td>Banco de Chile</td>
+  </tr>
+  <tr>
+    <td>Tipo de cuenta</td>
+    <td>Cuenta corriente</td>
+  </tr>
+  <tr>
+    <td>Numero de cuenta</td>
+    <td>7011182291</td>
+  </tr>
+  <tr>
+    <td>Correo</td>
+    <td>ventasautonueve@gmail.com</td>
+  </tr>
+</table>
+            
+            </div>
+            <br>
+            <h2>Productos seleccionados</h2>
+            <div id="table-wrapper"style="border: 1px solid #ccc; display:inline-block; padding:.5rem">
+            ${tableVenta.outerHTML}
+            </div>
+            <p>Recuerda enviar un correo de confirmación con la foto de tu transferencia a <strong>ventasautonueve@gmail.com</strong></p>
+            <p>¡Muchas gracias por tu preferencia!</p>
+            <style>
+            table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+            }
+            
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+            </style>
+           `
         }
 
+        console.log(JSON.parse(JSON.stringify(nuevoObjeto)))
 
-        Promise.all([
             fetch("/venta", {
                 method: 'POST',
                 headers: {
@@ -95,22 +144,42 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(nuevoObjeto)
-            }),
-            fetch("/mail/generar", {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(mailObject)
-
             })
-        ])
-        .catch(err => {console.log(err)})
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.status === "success") {
+                    fetch("/mail/generar", {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(mailObject)
+                    })
+                    .then(res => {
+                        if (res.status === 200) {
+                            window.localStorage.removeItem('listaproducto')
+                            window.localStorage.removeItem('productos')
+                            window.location.href = '/success';
+                        }
+                    })
+                    .catch(error => {
+                        window.alert("Ha ocurrido un error al generar tu pedido, reintantalo o comunícate con el administrador")
+                        window.location.reload()
+                        console.error(error);
+                    })
+                }
+            })
+            .catch(error => {
+                window.alert("Ha ocurrido un error al generar tu pedido, reintantalo o comunícate con el administrador")
+                window.location.reload()
+                console.error(error);
+            })
+
+
         
-        window.localStorage.removeItem('listaproducto')
-        window.localStorage.removeItem('productos')
-        window.location.href = '/success';
+
     })
 
 })());

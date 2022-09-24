@@ -2,6 +2,8 @@ const router = require('express').Router()
 const mysqlConnection = require('../database/database')
 const authController = require('../controllers/authControllers')
 const adminController = require('../controllers/admin.controller')
+const pedidoService = require('../api/pedido/pedido.service');
+const mailControllers = require('../controllers/mailControllers')
 
 router.get('/', authController.isAuthenticated, (req, res) => {
     res.render("admin", {user:req.user})
@@ -292,20 +294,50 @@ router.post('/clients/edit/', authController.isAuthenticated, (req, res) => {
    
 })
 
-router.get('/quotations', authController.isAuthenticated, async (req, res) => {
+router.get('/pedidos', async (req, res) => {
+    
+
 
     //nos traemos todas las cotizaciones select * from pedido
     // luego seleccionamos el id del pedido y lo mandamos en la consulta para ver el detalle
     // este detalle a su vez debe tener un estado,
-    const pedidos = await adminController.getPedidos()
+    const pedidos = await pedidoService.getPedidosFormat();
+    res.render("pedidos", {
+        pedidosResults: pedidos
+    })
     //Aca agarro los pedidos y los renderizo en aspectos generales
     // cada pedido tendra un link que será el id, ese id lo usaremos para recorrer luego listapedidos y traernos la info de ese pedido
     // el pedido a su ve
-    res.send(pedidos)
+})
+
+router.put('/pedidos/estado', authController.isAuthenticated, async (req, res) => {
+
+    const cambiarEstado = await pedidoService.cambiarEstadoPedido(req.body.pedido_id, req.body.estado_id);
+    const pedido = await pedidoService.getPedidoFormatById(req.body.pedido_id);
+
+    const mailTo = pedido.email;
+
+    const dataPedido = {
+        mailTo,
+        "pedidoId": req.body.pedido_id,
+    }
+
+    if (cambiarEstado.affectedRows > 0) {
+        if (req.body.estado_id == 1) {
+            const response = mailControllers.generarMailsPedido(dataPedido);
+            return response;
+        } else if (req.body.estado_id == 2) {
+                        //ACA hay que descontar los productos del stock y en caso de pasar a este estado debe bloquearse en el front, ya que estariamos descontando nuevamente el pedido
+            const response = mailControllers.generarMailsPago(dataPedido);
+            return response;
+        } else if (req.body.estado_id == 3) {
+
+            const response = mailControllers.generarMailsDespachado(dataPedido);
+            return response;
+        }
+    }
 
 
-
-   
 })
 
 

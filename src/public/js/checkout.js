@@ -637,23 +637,12 @@ if (document.querySelector("#buttonComprar")) {
             })
 
 
+            const selectedProducts = Object.keys(objeto);
+            const selectedAmounts = Object.values(objeto);
+            
     
-    
-            fetch("/pedido", {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(objeto)
-            })
-            .then(res => res.json())
-            .then(data => {
-    
-                if (data.length == product_list.length) {
-                    window.location.href = "/pedido"
-                } 
-            })
+            window.location.href = `/pedido?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
+
         }
     
     })

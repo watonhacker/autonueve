@@ -1,113 +1,45 @@
 const router = require('express').Router()
-const mysqlConnection = require('../database/database')
+const comunaService = require('../api/comuna/comuna.service')
+const regionService = require('../api/region/region.service')
+const tipoDocumentoService = require('../api/tipodocumento/tipodocumento.service')
+const metodoEntregaService = require('../api/metodoentrega/metodoentrega.service')
+const metodoPagoService = require('../api/metodopago/metodopago.service')
+const productoService = require('../api/producto/producto.service')
 
-let listaProductos =[]
-let test = []
-let queryDone = false;
-let dataListaProductoLen;
-let contadorInterno;
-let ultimoElemento;
-let productos;
-let canti
 
 router.post('/', async (req, res) => {
-    dataListaProductoLen = 0
-    contadorInterno = 0
-    queryDone = false;
-    test = []
-    let dataListaProducto = req.body
-    let resultados;
-
-    for (element in dataListaProducto) {
-        dataListaProductoLen++;
-    }
-    
-
-
-    for (element in dataListaProducto) {
-  
-        await mysqlConnection.query(`SELECT * FROM producto WHERE producto.id = ${element}`, (err, results) => {
-
-            results=JSON.parse(JSON.stringify(results))
-            resultados = results  
-
-            /* Se le agrega la cantidad al objeto que estamos recorriendo */
-            ultimoElemento = test.slice(-1)
-            if (ultimoElemento[0]) {
-
-                ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
-            }
-
-            test.push(resultados[0])
-
-            if (test.length == dataListaProductoLen) {
-                ultimoElemento = test.slice(-1)
-                ultimoElemento[0].cantidad = dataListaProducto[ultimoElemento[0].id]
-                contadorInterno = 0
-                dataListaProductoLen = 0
-
-                res.send({
-                    length: test.length
-                })
-            } 
-        })     
-        
-
-    } 
-    
-
-
- 
-
-
-
-
-
-
+    res.send("POST/")
 })
 
-router.get('/', (req, res) =>  {
-    listaProductos = []
-    listaProductos = test
+router.get('/', async (req, res) =>  {
+    const productos = JSON.parse(req.query.items);
+    const cantidades = JSON.parse(req.query.amounts)
+    const listaProductos = await productoService.getProductsAmountsByIds(productos, cantidades)
 
-    let comunas;
-    let regiones;
-    let documentos;
-    let entregas;
-    let pagos;
 
-    mysqlConnection.query("SELECT * FROM comuna", (err, results) => {
-        results=JSON.parse(JSON.stringify(results))
-        comunas = results;
-        mysqlConnection.query("SELECT * FROM region", (err, results) => {
-            results=JSON.parse(JSON.stringify(results))
-            regiones = results
-            mysqlConnection.query("SELECT * FROM tipodocumento", (err, results) => {
-                results=JSON.parse(JSON.stringify(results))
-                documentos = results
-                mysqlConnection.query("SELECT * FROM metodoentrega", (err, results) => {
-                    results=JSON.parse(JSON.stringify(results))
-                    entregas = results
-                    mysqlConnection.query("SELECT * FROM metodopago", (err, results) => {
-                        results=JSON.parse(JSON.stringify(results))
-                        pagos = results
-                        res.render("pedido", {
-                            listaProductos,
-                            regiones,
-                            comunas,
-                            documentos,
-                            entregas,
-                            pagos
-                        })
-                    })
-                })
-            })
-
+    await Promise.all([
+        comunaService.getAllComuna(),
+        regionService.getAllRegion(),
+        tipoDocumentoService.getAllTipoDocumento(),
+        metodoEntregaService.getAllMetodoEntrega(),
+        metodoPagoService.getAllMetodoPago()
+    ])
+    .then(values => {
+        res.render("pedido", {
+            listaProductos,
+            comunas: values[0],
+            regiones: values[1],
+            documentos: values[2],
+            entregas: values[3],
+            pagos: values[4]
         })
     })
-
-
-
+    .catch(
+        error => {
+            console.error(error);
+            res.send(error)
+        }
+    )
 })
 
 module.exports = router;

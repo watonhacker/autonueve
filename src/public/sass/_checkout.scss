@@ -34,7 +34,7 @@
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 568px) {
 
     .wrapperResults {
         .tableResults thead {
@@ -42,7 +42,7 @@
         }
         .tableResults, .tableResults tbody, .tableResults tr, .tableResults td {
             display:block;
-            width:100%;
+            width:90vw;
         }
         .tableResults tr {
             margin-bottom: 1rem;

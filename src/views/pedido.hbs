@@ -33,9 +33,9 @@
         <label for="email">Email<span style="color:red; margin-left:5px;">*</span></label>
         <input type="email" name="email" required>
         <label for="phone">Teléfono<span style="color:red; margin-left:5px;">*</span></label>
-        <input type="text" name="phone" required>
+        <input type="number" max="999999999999" maxlength="12" min="1" oninput="this.value=this.value.slice(0,this.maxLength)"onkeydown="if(event.key==='.' || event.key===','){event.preventDefault();}" onpaste="let pasteData = event.clipboardData.getData('text'); if(pasteData){pasteData.replace(/[^0-9]*/g,'');} "name="phone" placeholder="Ej: 940008291" required>
         <label for="rut">Rut<span style="color:red; margin-left:5px;">*</span></label>
-        <input type="text" name="rut" required>
+        <input type="number" max="999999999" maxlength="9" min="1" oninput="this.value=this.value.slice(0,this.maxLength)" onkeydown="if(event.key==='.' || event.key===','){event.preventDefault();}" onpaste="let pasteData = event.clipboardData.getData('text'); if(pasteData){pasteData.replace(/[^0-9]*/g,'');} "name="rut" placeholder="Ej: 178218394 (Sin punto ni guión)"required>
     </div>
 
     <div class="shipping-information">
@@ -104,7 +104,7 @@
     <tbody>
         {{#each listaProductos}}    
                 <tr data-number="{{id}}">
-                    <td style="font-size:.9rem;"data-label="Producto"="">{{nombre}} x <strong>{{cantidad}}</strong></td>
+                    <td data-label="Producto"="">{{nombre}} x <strong>{{cantidad}}</strong></td>
                     <td data-label="Subtotal">{{{price precio cantidad}}}</td>
                 </tr>
         {{/each}}

@@ -1,6 +1,13 @@
 const router = require('express').Router()
 
 const mysqlConnection = require('../database/database')
+const comunaService = require('../api/comuna/comuna.service')
+const regionService = require('../api/region/region.service')
+const tipoDocumentoService = require('../api/tipodocumento/tipodocumento.service')
+const metodoEntregaService = require('../api/metodoentrega/metodoentrega.service')
+const metodoPagoService = require('../api/metodopago/metodopago.service')
+const productoService = require('../api/producto/producto.service')
+
 
 let listaProductos =[]
 let test = []
@@ -81,20 +88,26 @@ router.post('/', async (req, res) => {
 
 })
 
-router.get('/', (req, res) =>  {
+router.get('/', async (req, res) =>  {
 
 
-    try {
-
-        listaProductos = []
-        listaProductos = test
+    const productos = JSON.parse(req.query.items);
+    const cantidades = JSON.parse(req.query.amounts)
+    const listaProductos = await productoService.getProductsAmountsByIds(productos, cantidades)
+    await Promise.all([
+        comunaService.getAllComuna()
+    ]).then(values => {
+        console.log(listaProductos)
         res.render("checkout", {
             listaProductos
         })
-    } catch (err) {
-        console.log(err)
-    }
-
+    })
+    .catch(
+        error => {
+            console.log(error);
+            res.send(error)
+        }
+    )
 
 
 })

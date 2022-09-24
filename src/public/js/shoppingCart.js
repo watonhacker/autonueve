@@ -57,26 +57,12 @@
     
             })
     
+            const selectedProducts = Object.keys(objeto);
+            const selectedAmounts = Object.values(objeto);
             
     
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(objeto)
-            })
-            .then(res => res.json())
-            .then(data => {
-    
-                if (data.length == product_list.length) {
-                    window.location.href = "/checkout"
-                } 
-            })
-            .catch(err => {
-                throw err;
-            })
+            window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
+
         }
     })
 
@@ -147,24 +133,13 @@
     
             
     
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(objeto)
-            })
-            .then(res => res.json())
-            .then(data => {
     
-                if (data.length == product_list.length) {
-                    window.location.href = "/checkout"
-                } 
-            })
-            .catch(err => {
-                throw err;
-            })
+            const selectedProducts = Object.keys(objeto);
+            const selectedAmounts = Object.values(objeto);
+            
+    
+            window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
+
         }
 
 
@@ -222,26 +197,14 @@
                 })
                 
       
-              
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(objeto)
-                })
-                .then(res => res.json())
-                .then(data => {
-                 
-                    if (data.length == product_list.length) {
-                        window.location.href = "/checkout"
-                    } 
     
-                })
-                .catch(err => {
-                    throw err;
-                })
+                const selectedProducts = Object.keys(objeto);
+                const selectedAmounts = Object.values(objeto);
+            
+    
+                window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
+
+    
             
             } catch(err) {
                 console.log(err)

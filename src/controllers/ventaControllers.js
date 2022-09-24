@@ -1,30 +1,50 @@
+const { resolve } = require('path');
 const mysqlConnection = require('../database/database')
 
-exports.crearCliente = (id, nombre, apellido, email, telefono, rut, tipocliente) => {
-    try {
+exports.crearCliente = (nombre, apellido, email, telefono, rut, tipocliente) => {
+    return new Promise((resolve, reject) => {
+        try {
+            mysqlConnection.query("INSERT INTO cliente SET ?", {nombre:nombre, apellido:apellido, email:email, telefono:telefono, rut:rut, tipocliente_id:tipocliente}, (err, results) => {
+                if (err) {
+                    console.error(err);
+                    resolve(err);
+                }
 
-        mysqlConnection.query("INSERT INTO cliente SET ?", {id:id, nombre:nombre, apellido:apellido, email:email, telefono:telefono, rut:rut, tipocliente_id:tipocliente})
+                resolve(results)
+            })
+    
+        } catch (err) {
+            throw err;
+        }
+    })
 
-    } catch (err) {
-        throw err;
-    }
 }
 
-exports.crearEmpresa = (id, nombre, giro, email, telefono, rut, tipocliente) => {
-    try {
+exports.crearEmpresa = (nombre, giro, email, telefono, rut, tipocliente) => {
 
-        mysqlConnection.query("INSERT INTO cliente SET ?", {id:id, nombre:nombre, giroempresa:giro, email:email, telefono:telefono, rut:rut, tipocliente_id:tipocliente})
+    return new Promise((resolve, reject) => {
+        try {
+            mysqlConnection.query("INSERT INTO cliente SET ?", {nombre:nombre, giroempresa:giro, email:email, telefono:telefono, rut:rut, tipocliente_id:tipocliente}, (err, results) => {
+                if (err) {
+                    console.error(err);
+                    resolve(err);
+                }
 
-    } catch (err) {
-        throw err;
-    }
+                resolve(results)
+            })
+    
+        } catch (err) {
+            throw err;
+        }       
+    })
+
 }
 
-exports.guardarPedido = (idCliente, pago, documento, entrega) => {
+exports.guardarPedido = (idCliente, pago, documento, entrega, direccion) => {
 
     try {
 
-        sql =`INSERT INTO pedido (cliente_id, metodopago_id, tipodocumento_id, estado_id, metodoentrega_id, fecha) VALUES (${idCliente}, ${pago}, ${documento}, 1, ${entrega}, current_time())`
+        sql =`INSERT INTO pedido (cliente_id, metodopago_id, tipodocumento_id, estado_id, metodoentrega_id, fecha, direccion) VALUES (${idCliente}, ${pago}, ${documento}, 1, ${entrega}, current_time(), '${direccion}')`
 
        
 
@@ -174,14 +194,21 @@ exports.obtenerPrecioPedido = function(id) {
 
 exports.guardarPrecioPedido = function (respuesta) {
 
-    try {
-        sql = `UPDATE pedido SET precio=${respuesta['total']} WHERE pedido.id = ${respuesta['id']}`
-        mysqlConnection.query(sql, (err, res) => {
-            if (err) throw err;
-        })
-    } catch (err) {
-        console.error(err)
-    }
+
+    return new Promise((resolve, reject) => {
+        try {
+            sql = `UPDATE pedido SET precio=${respuesta['total']} WHERE pedido.id = ${respuesta['id']}`
+            mysqlConnection.query(sql, (err, res) => {
+                if (err) throw err;
+                resolve(res)
+            })
+        } catch (error) {
+            console.error(error);
+            resolve(error);
+        }
+    })
+
+
     
 
 

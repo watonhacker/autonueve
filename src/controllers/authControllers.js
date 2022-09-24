@@ -63,9 +63,6 @@ exports.login = async (req, res) => {
                             timer:false,
                             ruta:"signin"
                         })
-
-                        console.log(pass)
-                        console.log(results[0].pass)
                     } else {
 
                         // INICIO OK

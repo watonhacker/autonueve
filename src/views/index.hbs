@@ -3,6 +3,7 @@
 
 {{!-- Boton --}}
 
+
 <button style="z-index:30;" class="btnCart"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
     </svg>
@@ -41,32 +42,32 @@
   <a class="fa fa-arrow-down fa-2x"></a>
 </div>
 
+<div class="container-selector">
+    <div>
+        <select class="form-select"  id="brand-selector" aria-label="Default select example">
+            <option selected>Marca</option>
+        </select>
+    </div>
+    <div>
+        <select class="form-select" id="modelo-selector" aria-label="Default select example" disabled>
+            <option selected>Modelo</option>
+        </select>
+    </div>
+    <div>
+        <select class="form-select" id="submodelo-selector" aria-label="Default select example" disabled>
+            <option selected>Submodelo</option>
+        </select>
+    </div>
+    <div>
+        <select class="form-select" id="year-selector" aria-label="Default select example" disabled >
+            <option selected>Año</option>
+        </select>
+    </div>
+
+</div>
 
 
-   <div class="index-forms">
-
-      <form action="/brands" method="POST" id ="formBrand" autocomplete="off">
-         <datalist id="brand">
-         {{#each resultados}}
-         <option value="{{nombre}}" data-id ="{{{id}}}">{{{nombre}}}</option>
-         {{/each}}
-         </datalist>  
-         <input placeholder="Marca" list="brand" name="brand" id="inputBrand">
-      </form>
-
-
-      <form action="/models" method="POST" id ="formModels" autocomplete="off">
-         <input placeholder="Modelo" list="model" name="model" id="inputModel" disabled>
-      </form>
-
-      <form action="/submodels" method="POST" id ="formSubmodels" autocomplete="off">
-         <input placeholder="Submodelo"list="submodel" name="submodel" id="inputSubmodel" disabled>
-      </form>
-
-      <form action="/years" method="POST" id ="formYears" autocomplete="off">
-         <input placeholder="Año"list="year" name="year" id="inputYear"disabled>
-      </form>
-   </div>
+    <a type="button" class="btn btn-info" href="javascript:window.location.reload(true)" style="margin-top:1rem;">Reiniciar búsqueda</a>
 
     <p class="search-info">¡Navega por las principales marcas y modelos!</p>
    </section>
@@ -127,7 +128,7 @@
     <div class="products-index products">
         {{#each lastProducts}}
         <div class="product" id="product-{{id}}">
-                        <a href="/single-product/{{id}}">
+                        <a href="/producto/{{id}}">
                           <img style="max-width:100%; height:200px;"src="{{selectImg imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}}" alt="">
             </a>
             <h3 class="product-name">{{nombre}}</h3>
@@ -252,6 +253,7 @@ var swiperLogos = new Swiper(".swiperLogos", {
 
     </script>
 
+
 <button class="scrollUp-btn"><i class="fas fa-arrow-alt-circle-up"></i></button>
 
 
@@ -265,3 +267,133 @@ var swiperLogos = new Swiper(".swiperLogos", {
 
 <script src="/js/scroll-top.js"></script>
 <script src="/js/shoppingCart.js"></script>
+
+
+<script>
+
+    const marcas = JSON.parse(window.localStorage.getItem('marca'))
+    const modelos = JSON.parse(window.localStorage.getItem('modelo'))
+    const submodelos = JSON.parse(window.localStorage.getItem('submodelo'))
+    const listaSubmodelos = JSON.parse(window.localStorage.getItem('listasubmodelo'))
+    const fabricacion = JSON.parse(window.localStorage.getItem('fabricacion'))
+
+    const brandSelector = document.getElementById('brand-selector');
+    const modeloSelector = document.getElementById('modelo-selector');
+    const submodelSelector = document.getElementById('submodelo-selector');
+    const yearSelector = document.getElementById('year-selector');
+
+    let submodelId = undefined;
+    
+    
+    marcas.forEach(marca => {
+        const html = `<option value="${marca.id}" class="brand-option">${marca.nombre}</option>`
+        brandSelector.insertAdjacentHTML("beforeend", html)
+    })
+
+
+
+    if (brandSelector) {
+    brandSelector.addEventListener("change", e => {
+       e.preventDefault();
+       const brandId = e.target.value;
+       const modelosAsociados = modelos.filter((modelo) => {
+            if (modelo.marca_id == brandId) {
+                return true
+            }
+       })
+
+       modelosAsociados.forEach(modelo => {
+            const html = `<option value="${modelo.id}" class="brand-option">${modelo.nombre}</option>`
+            modeloSelector.insertAdjacentHTML("beforeend", html)
+       })
+
+        brandSelector.disabled = true;
+        modeloSelector.disabled = false;
+
+    })
+    }
+
+    
+    if (modeloSelector) {
+    modeloSelector.addEventListener("change", e => {
+       e.preventDefault();
+       const modeloId = e.target.value;
+       const submodelosAsociados = submodelos.filter((submodelo) => {
+            if (submodelo.modelo_id == modeloId) {
+                return true
+            }
+       })
+
+       submodelosAsociados.forEach(submodelo => {
+            const html = `<option value="${submodelo.id}" class="brand-option">${submodelo.nombre}</option>`
+            submodelSelector.insertAdjacentHTML("beforeend", html)
+       })
+
+       modeloSelector.disabled = true;
+       submodelSelector.disabled = false;
+
+    })
+    }
+
+    if (submodelSelector) {
+    submodelSelector.addEventListener("change", e => {
+       e.preventDefault();
+       submodelId = e.target.value;
+       window.localStorage.setItem('submodelId', submodelId)
+       const listaSubmodelosAsociados = listaSubmodelos.filter((listaSubmodelo) => {
+            if (listaSubmodelo.submodelo_id == submodelId) {
+                return true
+            }
+       })
+
+        const yearsAsociados = []
+
+        listaSubmodelosAsociados.forEach((listaSubmodelo) => {
+            fabricacion.forEach((year) => {
+                if (listaSubmodelo.fabricacion_id == year.id) {
+                    yearsAsociados.push(year)
+                }
+            })
+        })
+
+
+       yearsAsociados.forEach(year => {
+            const html = `<option value="${year.id}" class="brand-option">${year.fecha}</option>`
+            yearSelector.insertAdjacentHTML("beforeend", html)
+       })
+
+
+
+       submodelSelector.disabled = true;
+       yearSelector.disabled = false;
+
+    })
+    }
+
+
+if (yearSelector) {
+    yearSelector.addEventListener("change", e => {
+       e.preventDefault();
+       const yearId = fabricacion.filter(year => {
+            if (year.id == e.target.value) {
+                return true;
+            }
+       })
+
+       const fecha = yearId[0].fecha;
+
+       window.location.href = `/search/${submodelId}/${fecha}/1`
+
+
+    })
+    }
+
+    
+
+
+
+
+
+
+
+</script>
