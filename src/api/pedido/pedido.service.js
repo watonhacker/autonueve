@@ -28,3 +28,7 @@ exports.getPedidoFormatById = (pedidoId) => {
 exports.cambiarEstadoPedido = (pedidoId, estadoId) => {
     return pedidoStorageService.cambiarEstadoPedido(pedidoId, estadoId)
 }
+
+exports.getListaPedidoAssociated = (id) => {
+    return pedidoStorageService.getListaPedidoAssociated(id);
+}

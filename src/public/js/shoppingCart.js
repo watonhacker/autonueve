@@ -16,7 +16,7 @@
         let product_list = myStorage.getItem("listaproducto")
         
         if (product_list == undefined ){ 
-            alert("No tiene productos agregados a su carrito")
+            Swal.fire("No tiene productos agregados a su carrito")
         } else {
             product_list = product_list.split(",")
             let objeto = {}
@@ -90,7 +90,7 @@
         let product_list = myStorage.getItem("listaproducto")
         
         if (product_list == undefined ){ 
-            alert("No tiene productos agregados a su carrito")
+            Swal.fire("No tiene productos agregados a su carrito")
         } else {
             product_list = product_list.split(",")
             let objeto = {}
@@ -151,7 +151,7 @@
         let product_list = myStorage.getItem("listaproducto")
         
         if (product_list == undefined ){ 
-            alert("No tiene productos agregados a su carrito")
+            Swal.fire("No tiene productos agregados a su carrito")
         } else {
 
             try {

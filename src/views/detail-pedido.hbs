@@ -1,0 +1,73 @@
+
+
+{{#if infoPedido}}
+<form id="infoPedido">
+    <h1 style="padding:1rem;">Información del cliente</h1>
+  <div class="form-group row">
+    <label  class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" placeholder={{infoPedido.email}} readonly disabled>
+    </div>
+  </div>
+    <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Nombre</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" placeholder={{infoPedido.nombre}} readonly disabled>
+    </div>
+  </div>
+    <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Tipo de pago</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" placeholder={{infoPedido.pago}} readonly disabled>
+    </div>
+  </div>
+    <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Dirección</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" placeholder={{infoPedido.direccion}} readonly disabled>
+    </div>
+  </div>
+    <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Fecha</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control"  placeholder={{infoPedido.documento}} readonly disabled>
+    </div>
+  </div>
+      <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Total</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" placeholder={{infoPedido.precio}} readonly disabled>
+    </div>
+  </div>
+</form>
+    <table class="table" style="max-width:1200px; margin:2rem 0;">
+        <h2>Datos de la compra</h2>
+        <thead class="thead-dark">
+            <tr>
+            <th scope="col">SKU</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each productosYCantidades}}
+                <tr>
+                    <th scope="row">{{SKU}}</th>
+                    <td>{{nombre}}</td>
+                    <td>{{marca}}</td>
+                    <td>{{precio}}</td>
+                    <td>{{cantidad}}</td>
+                    <td>{{subtotal}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+
+    </table>
+{{/if}}
+
+<script src="/js/hamburgerBtnCopy.js"></script>
+<script src="/js/responsiveCopy.js"></script>
+<script src="/js/hiddenSearch.js"></script>

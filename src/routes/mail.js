@@ -7,7 +7,8 @@ router.post('/generar', (req, res) => {
         message: req.body.message,
         subject: req.body.subject,
         mail: req.body.mail,
-        html: req.body.html || undefined
+        html: req.body.html || undefined,
+        pedidoId: req.body.pedidoId
     }
 
     const response = mailControllers.generarPedido(body);  

@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const mysqlConnection = require('../database/database')
 const authController = require('../controllers/authControllers')
-const adminController = require('../controllers/admin.controller')
+const productoService = require('../api/producto/producto.service')
 const pedidoService = require('../api/pedido/pedido.service');
 const mailControllers = require('../controllers/mailControllers')
 
@@ -325,19 +325,62 @@ router.put('/pedidos/estado', authController.isAuthenticated, async (req, res) =
     if (cambiarEstado.affectedRows > 0) {
         if (req.body.estado_id == 1) {
             const response = mailControllers.generarMailsPedido(dataPedido);
-            return response;
+            res.send(response) 
         } else if (req.body.estado_id == 2) {
                         //ACA hay que descontar los productos del stock y en caso de pasar a este estado debe bloquearse en el front, ya que estariamos descontando nuevamente el pedido
             const response = mailControllers.generarMailsPago(dataPedido);
-            return response;
+            res.send(response) ;
         } else if (req.body.estado_id == 3) {
-
             const response = mailControllers.generarMailsDespachado(dataPedido);
-            return response;
+            res.send(response) 
         }
+    } else {
+        res.send({
+            message: "No se ha podido cambiar el estado del pedido"
+        }) 
     }
 
 
+})
+
+router.get('/pedidos/:id', async (req, res) => {
+    const pedidoId = parseInt(req.params.id)
+    
+    if (!isNaN(pedidoId)) {
+        const listaProducto =  await pedidoService.getListaPedidoAssociated(pedidoId);
+
+        if (listaProducto.length > 0) {
+
+            const cantidades = listaProducto.map((producto) => {
+                return producto.cantidad;
+            })
+            const productosIds = listaProducto.map((producto) => {
+                return producto.producto_id;
+            })
+            const infoPedido = await pedidoService.getPedidoFormatById(pedidoId)
+            const productos = await productoService.getProductsByIds(productosIds)
+        
+            const productosYCantidades = productos[0].map((producto, key) => {
+                producto['cantidad'] = cantidades[key];
+                producto['subtotal'] = producto['cantidad'] * producto['precio']
+                return producto
+            })
+        
+            
+        
+            //productosYcantidades debe ser renderizado, además con la info del pedido/cliente
+            res.render("detail-pedido", {
+                infoPedido, 
+                productosYCantidades
+            })
+        } else {
+            res.render("pedido-not-found")
+        }
+        } else {
+            res.render("pedido-not-found")
+        }
+
+    
 })
 
 

@@ -149,6 +149,7 @@
             .then(data => {
                 console.log(data)
                 if (data.status === "success") {
+                  mailObject.pedidoId = data.pedido
                     fetch("/mail/generar", {
                         method: 'POST',
                         headers: {
@@ -161,18 +162,25 @@
                         if (res.status === 200) {
                             window.localStorage.removeItem('listaproducto')
                             window.localStorage.removeItem('productos')
-                            window.location.href = '/success';
+                            Swal.fire(
+                                'Su pedido ha sido ingresado con éxito!',
+                                'Recibirá un correo con los datos del pedido',
+                                'success'
+                            )
+                            setTimeout(() => {
+                              window.location.href = '/';
+                            }, 3000)
                         }
                     })
                     .catch(error => {
-                        window.alert("Ha ocurrido un error al generar tu pedido, reintantalo o comunícate con el administrador")
+                        Swal.fire("Ha ocurrido un error al generar tu pedido, reintantalo o comunícate con el administrador")
                         window.location.reload()
                         console.error(error);
                     })
                 }
             })
             .catch(error => {
-                window.alert("Ha ocurrido un error al generar tu pedido, reintantalo o comunícate con el administrador")
+                Swal.fire("Ha ocurrido un error al generar tu pedido, reintantalo o comunícate con el administrador")
                 window.location.reload()
                 console.error(error);
             })

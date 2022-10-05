@@ -25,7 +25,15 @@
 </div>
 
 <div class="adminResults">
-    
+
+    <div style="padding:.5rem;">
+        <label for="site-search">Busca el pedido:</label>
+        <input type="number" id="pedido-search">
+        <button class="btn btn-info">Buscar</button>
+    </div>
+
+
+
     <div class="options-box">
         
         <a href="/admin/submodels/add"><i class="fas fa-plus-circle"></i></a>
@@ -46,12 +54,7 @@
    {{#each pedidosResults}}
     <tr>
         <td>
-            <a class="option" href="/admin/categories/edit?id={{id}}">
-                <i class="far fa-edit"></i>
-            </a>
-            <a class="option"href="#">
-                <i class="far fa-trash-alt"></i>
-            </a>
+            <a class="btn btn-success" style="color:#fff;" href="/admin/pedidos/{{id}}">Revisar</a>
         </td>
         <td>{{id}}</td>
         <td>{{nombre}}</td>
@@ -79,21 +82,29 @@
 <script src="/js/hamburgerBtnCopy.js"></script>
 <script src="/js/responsiveCopy.js"></script>
 <script src="/js/hiddenSearch.js"></script>
+<script src="/js/sweetalert2.all.min.js"></script>
 
 <script>
     const estadoSelect = document.querySelectorAll(".estado-select");
-    console.log(estadoSelect)
 
     estadoSelect.forEach(select => {
         select.addEventListener("change", e => {
-            console.log(e.target.value)
-            console.log(e.target.dataset.pedido)
 
+
+            Swal.fire({
+            title: '¿Estás seguro que deseas cambiar el estado del pedido?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si',
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
             const mailObject = {
                 "pedido_id": e.target.dataset.pedido,
                 "estado_id": e.target.value
             }
-
             
                 fetch("/admin/pedidos/estado", {
                 method: 'PUT',
@@ -103,15 +114,29 @@
                 },
                 body: JSON.stringify(mailObject)
                 })
-                .then(res => {
-                    console.log(res)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 200) {
+                        Swal.fire(data.message);
+                    }
                 })
-                .catch(error => {
-                    window.alert("Ha ocurrido un error al generar tu pedido, reintantalo o comunícate con el administrador")
-                    window.location.reload()
-                    console.error(error);
+                .catch(err => {
+                    Swal.fire(err.message);
+                    window.location.reload();
                 })
+            } else {
+                window.location.reload();
+            }
+            })
+
 
         })
+    })
+
+
+    const pedidoSearch = document.getElementById("pedido-search")
+    pedidoSearch.addEventListener("change", e => {
+        e.preventDefault();
+        window.location.href = `/admin/pedidos/${e.target.value}`
     })
 </script>
