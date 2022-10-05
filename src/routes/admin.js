@@ -294,7 +294,7 @@ router.post('/clients/edit/', authController.isAuthenticated, (req, res) => {
    
 })
 
-router.get('/pedidos', async (req, res) => {
+router.get('/pedidos', authController.isAuthenticated, async (req, res) => {
     
 
 
@@ -343,7 +343,7 @@ router.put('/pedidos/estado', authController.isAuthenticated, async (req, res) =
 
 })
 
-router.get('/pedidos/:id', async (req, res) => {
+router.get('/pedidos/:id', authController.isAuthenticated, async (req, res) => {
     const pedidoId = parseInt(req.params.id)
     
     if (!isNaN(pedidoId)) {
