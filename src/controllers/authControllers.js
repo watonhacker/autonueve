@@ -75,7 +75,7 @@ exports.login = async (req, res) => {
                         console.log("token", token)
 
                         const cookiesOptions = {
-                            expires: new Date(Date.now()+90 * 24 * 60 * 60 * 10),
+                            expires: new Date(Date.now()+90 * 24 * 60 * 60 * 70),
                             httpOnly:true
                         }
 
