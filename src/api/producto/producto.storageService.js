@@ -96,3 +96,43 @@ exports.updateProducto = (producto) => {
         }
     })    
 }
+
+
+exports.getProductoInfoByListaSubmodelo = (listaSubmodeloId) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `SELECT producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
+            INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id WHERE listasubmodelo.id = ${listaSubmodeloId} AND producto.cantidad > 5;`;
+
+            mysqlConnection.query(sql, (err, results) => {
+                if (err) throw err;
+
+                if (results) {
+                    resolve(JSON.parse(JSON.stringify(results)))
+                }
+                
+            })
+        } catch (error) {
+            console.error(error.message);
+        }
+    })
+}
+
+exports.getProductosUniversal = () => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `SELECT producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM producto WHERE tipouniversal_id = 1 AND producto.cantidad > 5;`;
+
+            mysqlConnection.query(sql, (err, results) => {
+                if (err) throw err;
+
+                if (results) {
+                    resolve(JSON.parse(JSON.stringify(results)))
+                }
+                
+            })
+        } catch (error) {
+            console.error(error.message);
+        }
+    })
+}

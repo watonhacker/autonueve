@@ -97,6 +97,11 @@ const hbs = exphbs.create({
             if (selected == id){
                 return "selected"
             }
+        },
+        estadoDeVenta: function(estado_id, num) {
+            if (estado_id == num) {
+                return true
+            }
         }
     }
 })

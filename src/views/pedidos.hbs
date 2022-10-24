@@ -23,23 +23,18 @@
     <a href="/admin"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
     <a class="backToPanel" href="/admin">Volver al panel</a>
 </div>
-
-<div class="adminResults">
-
-    <div style="padding:.5rem;">
+    <div style="padding:2rem 0 0 0">
         <label for="site-search">Busca el pedido:</label>
         <input type="number" id="pedido-search">
         <button class="btn btn-info">Buscar</button>
     </div>
 
 
+<div class="adminResults">
 
-    <div class="options-box">
-        
-        <a href="/admin/submodels/add"><i class="fas fa-plus-circle"></i></a>
-        <a href="">Agregar producto</a>
-        
-    </div>
+
+
+
     <table class="resultsTable">
         
     <tr class="firstColumn">
@@ -62,12 +57,31 @@
         <td>{{precio}}</td>
         <td>{{direccion}}</td>
         <td>
+            
+        {{#if (estadoDeVenta estado_id "2")}}
+                <select data-pedido="{{id}}"class="form-select estado-select" aria-label="Default select example" >
+            <option value="2" {{selectedState estado_id "2"}}>Pago realizado</option>
+            <option value="3" {{selectedState estado_id "3"}}>Despachado</option>
+        </select>
+        
+        {{else}}
+
+            {{#if (estadoDeVenta estado_id "3")}}
+                    <select data-pedido="{{id}}"class="form-select estado-select" aria-label="Default select example" >
+                <option value="3" {{selectedState estado_id "3"}}>Despachado</option>
+            </select>
+        
+            {{else}}
+
         <select data-pedido="{{id}}"class="form-select estado-select" aria-label="Default select example" >
             <option value="1" {{selectedState estado_id "1"}}>Pago pendiente</option>
             <option value="2" {{selectedState estado_id "2"}}>Pago realizado</option>
             <option value="3" {{selectedState estado_id "3"}}>Despachado</option>
         </select>
         </td>
+        {{/if}}
+    {{/if}}
+
     </tr>
     {{/each}}
     </table>

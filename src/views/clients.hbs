@@ -24,19 +24,32 @@
     <a class="backToPanel" href="/admin">Volver al panel</a>
 </div>
 
+    <div style="padding:2rem 0 0 0">
+        <label for="site-search">Busca el cliente:</label>
+        <input type="number" id="cliente-search">
+        <button class="btn btn-info">Buscar</button>
+    </div>
+
 <div class="adminResults">
     
-    <div class="options-box">
+{{!--     <div class="options-box">
         
         <a href="/admin/submodels/add"><i class="fas fa-plus-circle"></i></a>
         <a href="">Agregar producto</a>
         
-    </div>
+    </div> --}}
     <table class="resultsTable">
         
     <tr class="firstColumn"><td>Acciones</td><td>ID</td><td>Nombre</td></tr>
    {{#each clientsResults}}
-    <tr><td><a class="option" href="/admin/clients/edit?id={{id}}"><i class="far fa-edit"></i></a><a class="option"href="#"><i class="far fa-trash-alt"></i></a></td><td>{{id}}</td><td>{{nombre}}</td></tr>
+    <tr>
+        <td>
+            <a class="btn btn-warning" style="color:#000;" href="/admin/clients/edit?id={{id}}">Editar</a>
+            <a class="btn btn-success" style="color:#fff;"href="#">Revisar</i></a>
+        </td>
+        <td>{{id}}</td>
+        <td>{{nombre}}</td>
+    </tr>
     {{/each}}
     </table>
 </div>
@@ -50,3 +63,11 @@
 <script src="/js/hamburgerBtnCopy.js"></script>
 <script src="/js/responsiveCopy.js"></script>
 <script src="/js/hiddenSearch.js"></script>
+
+<script>
+        const pedidoSearch = document.getElementById("cliente-search")
+    pedidoSearch.addEventListener("change", e => {
+        e.preventDefault();
+        window.location.href = `/admin/clients/${e.target.value}`
+    })
+</script>

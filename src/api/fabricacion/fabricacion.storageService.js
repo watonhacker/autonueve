@@ -51,3 +51,24 @@ exports.getFabricacionById = (id) => {
         }
     })    
 }
+
+
+
+exports.getFabricacionByFecha = (fecha) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `SELECT id FROM fabricacion WHERE fecha = ${fecha}`;
+            mysqlConnection.query(sql, (err, results) => {
+                if (err) throw err;
+
+                if (results) {
+                    resolve(JSON.parse(JSON.stringify(results[0])))
+                }
+                
+            })
+        } catch (error) {
+            console.error(error.message);
+        }
+    })
+}
+

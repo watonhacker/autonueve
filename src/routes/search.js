@@ -2,7 +2,10 @@ const router = require('express').Router()
 const mysqlConnection = require('../database/database')
 const globalControllers = require('../controllers/globalControllers')
 const categoriesControllers = require('../controllers/categories.controller')
-const singleProductController = require('../controllers/singleProductController.js')
+const fabricacionService = require('../api/fabricacion/fabricacion.service')
+const listaSubmodeloService = require('../api/listasubmodelo/listasubmodelo.service')
+const productoService = require('../api/producto/producto.service')
+const marcaService = require('../api/marca/marca.service')
 
 let page = 0
 let posicionArrayProductos = 0
@@ -27,59 +30,37 @@ router.get('/:busqueda/:page', async (req, res) => {
 
     
 })
-
+                                                                            
 router.get('/:submodelo/:year/:page', async (req, res) => {
 
-
+    console.log("hello")
     $submodeloId = req.params.submodelo
     $anyoName = req.params.year
     page = req.params.page
     posicionArrayProductos = parseInt(page) - 1
 
-      mysqlConnection.query(`SELECT id FROM fabricacion WHERE fecha = ${$anyoName}`, (err, results) => {
-        
-        $anyoId = results[0]['id']
-
-        mysqlConnection.query("SELECT * FROM marca", (err, results) => {
-            let brandResults = results;
-
-             mysqlConnection.query(`SELECT listasubmodelo.id FROM listasubmodelo INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id INNER JOIN fabricacion ON fabricacion.id = listasubmodelo.fabricacion_id WHERE submodelo.id = ${$submodeloId} AND fabricacion.id = ${$anyoId};`, (err, results, rows) => {
-                
-                if (results[0] == undefined || results.length == 0) {
-                    res.render("search")
-                } else {
-
-                    $listaSubmodeloId = results[0]['id']
-            
-                    mysqlConnection.query(`SELECT producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
-                    INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id WHERE listasubmodelo.id = ${$listaSubmodeloId};`, (err, results, rows) => {
-                            
-                        results=JSON.parse(JSON.stringify(results))
-                        
-                        const busqueda = req.params.submodelo;
-                        const year = req.params.year;
-                        const data = categoriesControllers.getElementsByPageRender('submodel', {data:busqueda, year:req.params.year}, results, page)
-                        const resultados = data.results;
-                        const paginator = data.paginator;
-
-                        
-                        res.render('search', { 
-                            brandResults,
-                            resultados,
-                            paginator
-                        })
-            
-                    })
-
-                }
+    //Tengo que aplicar async await aca con promesas, agarrar todo lo del submodelo, agarrar todos los universales y hacer un array 
+    // ese array despues puedo crear un Set y me quedara todo filtradito y ahi lo imprimo
 
 
-            })
-        
+    const fabricacionId = await fabricacionService.getFabricacionByFecha($anyoName);
+    const brandResults = await marcaService.getAllMarca();
+    const listaSubmodeloId = await listaSubmodeloService.getListaSubmodeloBySubmodelAndYear($submodeloId, fabricacionId)
+    const resultsSubmodelo = await productoService.getProductoInfoByListaSubmodelo(listaSubmodeloId);
+    const resultsUniversal = await productoService.getProductosUniversal();
+    const results = [...resultsSubmodelo, ...resultsUniversal];  
 
-        })
+    const busqueda = req.params.submodelo;
+    const data = categoriesControllers.getElementsByPageRender('submodel', {data:busqueda, year:req.params.year}, results, page)
+    const resultados = data.results;
+    const paginator = data.paginator;
+
+    
+    res.render('search', { 
+        brandResults,
+        resultados,
+        paginator
     })
-
 })
 
 

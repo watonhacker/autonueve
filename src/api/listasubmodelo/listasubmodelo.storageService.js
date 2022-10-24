@@ -69,3 +69,23 @@ exports.updateListaProducto = (listaproducto) => {
         }
     })    
 }
+
+
+exports.getListaSubmodeloBySubmodelAndYear = (submodeloId, anyoId) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `SELECT listasubmodelo.id FROM listasubmodelo INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id INNER JOIN fabricacion ON fabricacion.id = listasubmodelo.fabricacion_id WHERE submodelo.id = ${submodeloId} AND fabricacion.id = ${anyoId};`;
+
+            mysqlConnection.query(sql, (err, results) => {
+                if (err) throw err;
+
+                if (results) {
+                    resolve(JSON.parse(JSON.stringify(results)))
+                }
+                
+            })
+        } catch (error) {
+            console.error(error.message);
+        }
+    })
+}

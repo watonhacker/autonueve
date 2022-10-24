@@ -39,11 +39,19 @@ exports.getProductsAmountsByIds = async(products, amounts) => {
         })
         return data
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 
 }
 
 exports.updateProducto = (producto) => {
     return productoStorageService.updateProducto(producto);    
+}
+
+exports.getProductoInfoByListaSubmodelo = (listaSubmodeloId) => {
+    return productoStorageService.getProductoInfoByListaSubmodelo(listaSubmodeloId);
+}
+
+exports.getProductosUniversal = () => { 
+    return productoStorageService.getProductosUniversal();
 }

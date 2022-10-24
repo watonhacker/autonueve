@@ -1,11 +1,44 @@
+
 <form class="edit-form" action="/admin/clients/edit" method="post">
-    <label for="nombre">Nombre</label><input type="text"  name="nombre" value={{results.nombre}} >
-    <label for="apellido">Apellido</label><input type="text" name="apellido" value={{{results.apellido}}} >
-    <label for="email">Email</label><input type="text"  name="email" value={{results.email}} >
-    <label for="telefono">Telefono</label><input type="text"  name="telefono"value={{results.telefono}} >
-    <label for="rut">Rut</label><input type="text" id="rut"name="rut" value={{results.rut}} >
+    <h2>Datos del cliente</h2>
+    <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="nombre">Nombre</label>
+    <div class="col-sm-10">
+            <input type="text"  name="nombre" value={{results.nombre}} >
+    </div>
+    </div>
+
+        <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="apellido">Apellido</label>
+    <div class="col-sm-10">
+            <input type="text"  name="apellido" value={{results.apellido}} >
+    </div>
+
+    </div>
+
+        <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="email">Email</label>
+    <div class="col-sm-10">
+            <input type="text"  name="email" value={{results.email}} >
+    </div>
+    </div>
+
+        <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="telefono">Telefono</label>
+    <div class="col-sm-10">
+            <input type="text"  name="telefono" value={{results.telefono}} >
+    </div>
+    </div>
+
+        <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="rut">Rut</label>
+    <div class="col-sm-10">
+            <input type="text"  name="rut" value={{results.rut}} >
+    </div>
+    </div>
+
     <input type="hidden" name="id" value={{results.id}}>
-    <input type="submit" value="Enviar">
+    <input type="submit" class="btn btn-primary"value="Enviar">
     
 </form>
 

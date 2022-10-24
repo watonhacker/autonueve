@@ -13,3 +13,8 @@ exports.getFabricacionById = (id) => {
     return fabricacionStorageService.getFabricacionById(id); 
 }
 
+exports.getFabricacionByFecha = async (fecha) => {
+    const fabricacionId = await fabricacionStorageService.getFabricacionByFecha(fecha);
+    return fabricacionId['id'];
+}
+
