@@ -327,9 +327,19 @@ router.put('/pedidos/estado', authController.isAuthenticated, async (req, res) =
             const response = mailControllers.generarMailsPedido(dataPedido);
             res.send(response) 
         } else if (req.body.estado_id == 2) {
-                        //ACA hay que descontar los productos del stock y en caso de pasar a este estado debe bloquearse en el front, ya que estariamos descontando nuevamente el pedido
-            const response = mailControllers.generarMailsPago(dataPedido);
-            res.send(response) ;
+            //aca estamos obteniendo los productos asociados al pedido
+            const associatedProducts = await productoService.getProductosAssociated(req.body.pedido_id)
+            //aca tamos generando las promesas de sustraccion
+            const updatedProducts = associatedProducts.map(async (producto) => {
+                const response = await productoService.substractStock(producto.cantidad, producto.producto_id);
+                return response
+            })
+            //aplicamos promesas y si todo ok mandamos mensajitos.
+            Promise.all(updatedProducts).then(values => {
+                const response = mailControllers.generarMailsPago(dataPedido);
+                res.send(response) ;
+            }).catch(err => console.log(err)) 
+
         } else if (req.body.estado_id == 3) {
             const response = mailControllers.generarMailsDespachado(dataPedido);
             res.send(response) 

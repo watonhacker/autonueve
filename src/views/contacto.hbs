@@ -5,7 +5,7 @@
     <textarea name="message" required placeholder="Escriba su mensaje..."></textarea>
     <button id="btn-contacto" class="btn-style">Enviar</button>
 </form>
-
+<script src="/js/sweetalert2.all.min.js"></script>
 <script>
     document.querySelector("#btn-contacto").addEventListener("click", e => {
         
@@ -27,7 +27,7 @@
         <p>Mensaje: ${mensaje}</p>
         </div>`
         }
-        fetch("/mail/generar", {
+        fetch("/mail/generar/contacto", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -36,6 +36,16 @@
             body: JSON.stringify(mailObject)
         })
         .then(res => res.json())
+        .then(data => {
+            if (data.status === 200) {
+                Swal.fire(data.message);
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 2000)
+            } else {
+                 Swal.fire("Ha ocurrido algún error al procesar su solicitud, contacte al administrador");
+            }
+        })
     })
 </script>
 

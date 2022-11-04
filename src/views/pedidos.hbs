@@ -132,6 +132,8 @@
                 .then(data => {
                     if (data.status === 200) {
                         Swal.fire(data.message);
+                    } else {
+                         Swal.fire("Ha ocurrido algún error al procesar su solicitud, contacte al administrador");
                     }
                 })
                 .catch(err => {

@@ -136,3 +136,35 @@ exports.getProductosUniversal = () => {
         }
     })
 }
+
+exports.getProductosAssociated = (id) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `SELECT producto_id, cantidad FROM listapedido WHERE listapedido.pedido_id = ${id}`;
+            mysqlConnection.query(sql, (err, result) => {
+                if (err) throw err;
+                resolve(JSON.parse(JSON.stringify(result)))
+            })
+        } catch (error) {
+            reject(error)
+            console.error(error.message)
+            throw error;
+        }
+    })  
+}
+
+exports.substractStock = (quantity, id) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `UPDATE producto SET cantidad = (producto.cantidad - ${quantity}) where id = ${id}; `;
+            mysqlConnection.query(sql, (err, result) => {
+                if (err) throw err;
+                resolve(JSON.parse(JSON.stringify(result)))
+            })
+        } catch (error) {
+            reject(error)
+            console.error(error.message)
+            throw error;
+        }
+    }) 
+}

@@ -15,6 +15,19 @@ router.post('/generar', (req, res) => {
     res.send(response)
 })
 
+router.post('/generar/contacto', (req, res) => {
+    const body = {
+        message: req.body.message,
+        subject: req.body.subject,
+        mail: req.body.mail,
+        html: req.body.html || undefined
+    }
+
+    const response = mailControllers.generarPedidoContacto(body);  
+    res.send(response)
+})
+
+
 router.get('/pagado', (req, res) => {
     const bodyCliente = {
         message: req.body.message,

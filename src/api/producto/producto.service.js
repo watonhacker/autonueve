@@ -55,3 +55,11 @@ exports.getProductoInfoByListaSubmodelo = (listaSubmodeloId) => {
 exports.getProductosUniversal = () => { 
     return productoStorageService.getProductosUniversal();
 }
+
+exports.substractStock = (quantity, id) => {
+    return productoStorageService.substractStock(quantity, id);
+}
+
+exports.getProductosAssociated = (id) => {
+    return productoStorageService.getProductosAssociated(id);
+}

@@ -251,6 +251,80 @@ exports.generarMailsPedido = (dataPedido) => {
             message: 'Los correos no han podido ser enviados'
         }
     }
+    
+
+    
+}
+
+
+exports.generarPedidoContacto = (body) => {
+
+    try {
+        const transporter = nodemailer.createTransport({
+            service:'gmail',
+            auth: {
+                user: process.env.MAIL,
+                pass: process.env.PASS
+            }
+        })
+        
+        const mensaje = body.message;
+        const subject = body.subject;
+        const mailTo = body.mail;
+        const html = body.html;
+    
+        const mailOptionsCliente = {
+            from: process.env.MAIL,
+            to: mailTo,
+            subject,
+            text: mensaje,
+            html: html || mensaje
+        }
+    
+        const mailOptionsAdmin = {
+            from: process.env.MAIL,
+            to: process.env.MAIL,
+            subject,
+            text: `Ha sido contactado a través de la web autonueve.cl`,
+            html: html || mensaje
+        }
+    
+    
+    
+        async function sendCliente() {
+            try {
+                const response = await transporter.sendMail(mailOptionsCliente);
+                return response
+                
+            } catch(err) {
+                console.log(err);
+            }
+        }
+    
+        async function sendAdmin() {
+            try {
+                const response = await transporter.sendMail(mailOptionsAdmin);
+                return response
+                
+            } catch(err) {
+                console.log(err);
+            }
+        }
+    
+        sendCliente();
+        sendAdmin();
+        return {
+            status: 200,
+            message: 'El mensaje ha sido enviado con éxito'
+        }
+
+    } catch (err) {
+        console.error(err)
+        return {
+            status: 500,
+            message: 'Los correos no han podido ser enviados'
+        }
+    }
 
     
 }
