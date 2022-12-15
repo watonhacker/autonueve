@@ -33,6 +33,11 @@ a {
 
 }
 
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  
+}
+
 .btn-style {
 
     font-family: 'Libre Franklin', sans-serif;

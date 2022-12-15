@@ -6,10 +6,8 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 html {
-  line-height: 1.15;
-  /* 1 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
 }
 
 /* Sections
@@ -43,12 +41,9 @@ h1 {
  * 2. Show the overflow in Edge and IE.
  */
 hr {
-  box-sizing: content-box;
-  /* 1 */
-  height: 0;
-  /* 1 */
-  overflow: visible;
-  /* 2 */
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
 }
 
 /**
@@ -56,10 +51,8 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-  font-family: monospace, monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
 }
 
 /* Text-level semantics
@@ -76,12 +69,9 @@ a {
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
 abbr[title] {
-  border-bottom: none;
-  /* 1 */
-  text-decoration: underline;
-  /* 2 */
-  text-decoration: underline dotted;
-  /* 2 */
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
 }
 
 /**
@@ -99,10 +89,8 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
 }
 
 /**
@@ -152,14 +140,10 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: inherit;
-  /* 1 */
-  font-size: 100%;
-  /* 1 */
-  line-height: 1.15;
-  /* 1 */
-  margin: 0;
-  /* 2 */
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
 }
 
 /**
@@ -167,8 +151,7 @@ textarea {
  * 1. Show the overflow in Edge.
  */
 button,
-input {
-  /* 1 */
+input { /* 1 */
   overflow: visible;
 }
 
@@ -177,8 +160,7 @@ input {
  * 1. Remove the inheritance of text transform in Firefox.
  */
 button,
-select {
-  /* 1 */
+select { /* 1 */
   text-transform: none;
 }
 
@@ -227,18 +209,12 @@ fieldset {
  *    `fieldset` elements in all browsers.
  */
 legend {
-  box-sizing: border-box;
-  /* 1 */
-  color: inherit;
-  /* 2 */
-  display: table;
-  /* 1 */
-  max-width: 100%;
-  /* 1 */
-  padding: 0;
-  /* 3 */
-  white-space: normal;
-  /* 1 */
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
 }
 
 /**
@@ -261,10 +237,8 @@ textarea {
  */
 [type=checkbox],
 [type=radio] {
-  box-sizing: border-box;
-  /* 1 */
-  padding: 0;
-  /* 2 */
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
 }
 
 /**
@@ -280,10 +254,8 @@ textarea {
  * 2. Correct the outline style in Safari.
  */
 [type=search] {
-  -webkit-appearance: textfield;
-  /* 1 */
-  outline-offset: -2px;
-  /* 2 */
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
 }
 
 /**
@@ -298,10 +270,8 @@ textarea {
  * 2. Change font properties to `inherit` in Safari.
  */
 ::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  /* 1 */
-  font: inherit;
-  /* 2 */
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
 }
 
 /* Interactive
@@ -380,7 +350,6 @@ template {
   body .main .suppliers .logos .logo-image {
     width: 150px;
   }
-
   /* Footer */
   body .footer {
     margin-top: 5rem;
@@ -409,7 +378,7 @@ template {
     justify-content: space-around;
   }
   body .header .nav #nav-menu > a:nth-child(7) > i,
-body .header .nav #nav-menu > a.shopping-cart {
+  body .header .nav #nav-menu > a.shopping-cart {
     margin: 0;
   }
   body .header .nav .nav-menu {
@@ -433,7 +402,6 @@ body .header .nav #nav-menu > a.shopping-cart {
     font-size: 0.9rem;
     color: #fff;
   }
-
   /* Main */
   body .main .services .services-text .services-title {
     font-size: 2rem;
@@ -485,7 +453,6 @@ body .header .nav #nav-menu > a.shopping-cart {
   body .main .us .us-text .border-line {
     display: none;
   }
-
   /* Footer */
   /* single product */
   body .products .product-card {
@@ -499,7 +466,6 @@ body .header .nav #nav-menu > a.shopping-cart {
     height: 400px;
     width: 100%;
   }
-
   /* Main */
   /* Footer */
 }
@@ -507,14 +473,12 @@ body .header .nav #nav-menu > a.shopping-cart {
   .header .nav #signin-btn {
     padding: 0.5rem;
   }
-
   #nav-menu .nav-menu__item {
     margin: 1rem 0;
     padding: 0;
     font-size: 1.2rem !important;
     color: #fff;
   }
-
   /* Header */
   body {
     max-width: 2560px;
@@ -524,7 +488,6 @@ body .header .nav #nav-menu > a.shopping-cart {
     height: 400px;
     width: 100%;
   }
-
   /* Main */
   body .main .services .services-images {
     justify-content: center;
@@ -542,10 +505,9 @@ body .header .nav #nav-menu > a.shopping-cart {
     gap: 4.5rem;
   }
   body .main .suppliers .logos .first-row,
-body .main .suppliers .logos .second-row {
+  body .main .suppliers .logos .second-row {
     gap: 4.5rem;
   }
-
   /* Footer */
   /* CRUD Models */
 }
@@ -891,34 +853,22 @@ body h3 {
   line-height: 10px;
 }
 .products .product .product-button {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto;
-  grid-template: "price button";
-  line-height: 0;
+  display: flex;
+  justify-content: space-around;
 }
 .products .product .product-button input {
-  width: 80%;
   text-align: center;
   margin: 0 auto;
   color: #555;
 }
-.products .product .product-button a {
-  color: #fff;
-  font-weight: bold;
-  grid-area: button;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  align-content: center;
-  text-decoration: none;
-  background-color: #6EA0F3;
+.products .product .product-button button {
+  width: 50px;
+  margin: 0 1rem;
+  border: none;
   border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
+}
+.products .product .product-button button:hover {
+  cursor: pointer;
 }
 .products .product .product-amount .amount {
   padding-top: 1rem;
@@ -941,7 +891,6 @@ body h3 {
   .products {
     gap: 2rem;
   }
-
   /* Main */
   /* Footer */
 }
@@ -2618,7 +2567,6 @@ body > section.main > div.adminResults > table > tbody {
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
   }
-
   .table-responsive-sm > .table-bordered {
     border: 0;
   }
@@ -2631,7 +2579,6 @@ body > section.main > div.adminResults > table > tbody {
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
   }
-
   .table-responsive-md > .table-bordered {
     border: 0;
   }
@@ -2644,7 +2591,6 @@ body > section.main > div.adminResults > table > tbody {
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
   }
-
   .table-responsive-lg > .table-bordered {
     border: 0;
   }
@@ -2657,7 +2603,6 @@ body > section.main > div.adminResults > table > tbody {
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
   }
-
   .table-responsive-xl > .table-bordered {
     border: 0;
   }
@@ -2690,6 +2635,10 @@ body > section.main > div.adminResults > table > tbody {
 
 a {
   text-decoration: none;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
 .btn-style {

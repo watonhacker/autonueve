@@ -3,6 +3,7 @@ const mysqlConnection = require('../database/database')
 
 router.get('/', (req, res) => {
     let lastProducts;
+    let resultados;
 
     mysqlConnection.query("SELECT * FROM marca", (err, results, row) => {
             if (results !== undefined) {
