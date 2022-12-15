@@ -2,7 +2,7 @@
     <h1 style="color:#444;">Formulario de contacto</h1>
     <input type="text" name="nombre" placeholder="Ingrese su nombre" required>
     <input type="email" name="email"placeholder="Ingrese su email" required>
-    <textarea name="message" required placeholder="Escriba su mensaje..."></textarea>
+    <textarea name="message" placeholder="Escriba su mensaje..."required></textarea>
     <button id="btn-contacto" class="btn-style">Enviar</button>
 </form>
 <script src="/js/sweetalert2.all.min.js"></script>
@@ -11,41 +11,63 @@
         
         e.preventDefault()
 
+    
+
         let contactForm = new FormData(document.querySelector("#contact-form"))
         const nombre = contactForm.get("nombre");
         const mensaje = contactForm.get("message");
         const mail = contactForm.get("email");
 
-        const mailObject = {
-        message: "Este es un mensaje enviado desde autonueve.cl",
-        mail,
-        subject: "[Mensaje enviado desde Autonueve.cl]",
-        html: `<div>
-        <h1 style="color:orange">Haz recibido un nuevo mensaje!</h1>
-        <p>Remitente: ${nombre}</p>
-        <p>Email: ${mail}</p>
-        <p>Mensaje: ${mensaje}</p>
-        </div>`
+        if (nombre.length < 1) {
+            Swal.fire({
+            icon: 'warn',
+            text: 'Debes ingresar tu nombre'
+            })        
+        } else if (mail.length < 1) {
+            Swal.fire({
+            icon: 'warn',
+            text: 'Debes ingresar tu correo'
+            })  
+        } else if (mensaje.length < 1) {
+            Swal.fire({
+            icon: 'warn',
+            text: 'Debes ingresar tu mensaje'
+            })  
+        } else {
+                const mailObject = {
+                message: "Este es un mensaje enviado desde autonueve.cl",
+                mail,
+                subject: "[Mensaje enviado desde Autonueve.cl]",
+                html: `<div>
+                <h1 style="color:orange">Haz recibido un nuevo mensaje!</h1>
+                <p>Remitente: ${nombre}</p>
+                <p>Email: ${mail}</p>
+                <p>Mensaje: ${mensaje}</p>
+                </div>`
+                }
+                fetch("/mail/generar/contacto", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(mailObject)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === 200) {
+                        Swal.fire(data.message);
+                        setTimeout(() => {
+                            window.location.href = "/";
+                        }, 2000)
+                    } else {
+                        Swal.fire("Ha ocurrido algún error al procesar su solicitud, contacte al administrador");
+                    }
+                })
         }
-        fetch("/mail/generar/contacto", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(mailObject)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.status === 200) {
-                Swal.fire(data.message);
-                setTimeout(() => {
-                    window.location.href = "/";
-                }, 2000)
-            } else {
-                 Swal.fire("Ha ocurrido algún error al procesar su solicitud, contacte al administrador");
-            }
-        })
+
+
+     
     })
 </script>
 
