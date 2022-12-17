@@ -34,7 +34,7 @@ exports.getProductsAmountsByIds = async(products, amounts) => {
         let data = []
         products.forEach(async (id, key) => {
             const product = await this.getProductoById(id);
-            product[0]['cantidad'] = amounts[key]
+            product[0]['cantidad_comprada'] = amounts[key]
             data.push(product[0])
         })
         return data

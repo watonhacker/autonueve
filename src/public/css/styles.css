@@ -495,8 +495,8 @@ template {
   }
   body .main .services .services-images .services-image {
     width: 50%;
-    height: 400px;
-    max-width: 400px;
+    height: 250px;
+    max-width: 250px;
   }
   body .main .services .services-images .services-image h4 {
     font-size: 1.5rem;
@@ -612,8 +612,8 @@ body h3 {
 }
 .main .services .services-images .services-image {
   width: 90%;
-  max-width: 500px;
-  height: 150px;
+  max-width: 300px;
+  height: 100px;
   background-position: center;
   background-clip: border-box;
   background-repeat: no-repeat;
@@ -883,7 +883,7 @@ body h3 {
 }
 
 .wrap-lastProducts {
-  max-width: 1200px;
+  max-width: 100%;
 }
 
 @media (min-width: 576px) {

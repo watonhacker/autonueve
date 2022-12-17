@@ -60,7 +60,7 @@
             const selectedProducts = Object.keys(objeto);
             const selectedAmounts = Object.values(objeto);
             
-    
+            debugger;
             window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
         }
@@ -126,7 +126,7 @@
                     }
                 }
             
-                objeto[primerNumero] = segundoNumero
+                objeto[primerNumero] = segundoNumero.split("").reverse().join("")
             
     
             })
@@ -137,7 +137,7 @@
             const selectedProducts = Object.keys(objeto);
             const selectedAmounts = Object.values(objeto);
             
-    
+            debugger;
             window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
         }
@@ -201,7 +201,7 @@
                 const selectedProducts = Object.keys(objeto);
                 const selectedAmounts = Object.values(objeto);
             
-    
+                debugger;
                 window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
     

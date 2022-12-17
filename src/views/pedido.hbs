@@ -1,4 +1,12 @@
-
+<script>
+        window.addEventListener("DOMContentLoaded", e => {
+        window.history.replaceState(
+            {},
+            '',
+            `${window.location.pathname}`,
+        )
+    })
+</script>
  <h1 class="pedido-title">DATOS DE ENVÍO</h1>
 
  <form action="/venta" method="POST" id="pedidoForm" autocomplete="ÑÖcompletes">
@@ -104,8 +112,8 @@
     <tbody>
         {{#each listaProductos}}    
                 <tr data-number="{{id}}">
-                    <td data-label="Producto"="">{{nombre}} x <strong>{{cantidad}}</strong></td>
-                    <td data-label="Subtotal">{{{price precio cantidad}}}</td>
+                    <td data-label="Producto"="">{{nombre}} x <strong>{{cantidad_comprada}}</strong></td>
+                    <td data-label="Subtotal">{{{price precio cantidad_comprada}}}</td>
                 </tr>
         {{/each}}
 

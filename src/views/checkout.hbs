@@ -12,7 +12,107 @@
             <th>Cantidad</th>
             <th>Subtotal</th>
         </thead>
-        
+
+             <script>
+                
+                function actualizarCarrito (pedido) {
+
+                    updatedProductos =""
+                    updatedListaProducto =""
+                    contadorPedido = 1;
+                    datosPedido = document.querySelectorAll("body > section.main > div > table > tbody > tr > td")
+                    datosPedido.forEach(n => {
+                        if (n.dataset.label == "Cantidad") {
+                            debugger;
+                            if (document.querySelectorAll("body > section.main > div > table > tbody > tr").length == contadorPedido) {
+                                updatedListaProducto += `${n.parentElement.dataset.number}:${parseInt(n.firstElementChild.nextElementSibling.value)}`
+                                updatedProductos += n.parentElement.dataset.number
+                            } else {
+                                updatedProductos += n.parentElement.dataset.number + ","
+                                updatedListaProducto += `${n.parentElement.dataset.number}:${parseInt(n.firstElementChild.nextElementSibling.value)},`
+                            }
+                            
+
+                            
+                            contadorPedido++
+                        }
+                    })
+
+                    /* Se cambian los datos a nivel localStorage */
+                    window.localStorage.removeItem("listaproducto")
+                    window.localStorage.removeItem("productos")
+                    window.localStorage.setItem("listaproducto", updatedListaProducto)
+                    window.localStorage.setItem("productos", updatedProductos)
+
+                    updatedListaProducto = updatedListaProducto.split(",")
+
+                    primerNumero = ""
+                    segundoNumero = ""
+                    objetoPedido = {}
+
+                    updatedListaProducto.forEach((par) => {
+                        primerNumero = ""
+                        segundoNumero = ""
+                        for (element of par) {
+                            
+                            if (element != ":") {
+                                primerNumero += element
+                            } else {
+                                break
+                            }
+                        }
+                        
+                        let newString = "";
+                        for (let i = par.length - 1; i >= 0; i--) {
+                            newString += par[i];
+                        }
+                    
+                    
+                        for (element of newString) {
+                            if (element != ":") {
+                                segundoNumero += element
+                            } else {
+
+                                break
+                            }
+                        }
+                    
+                        objetoPedido[primerNumero] = segundoNumero.split("").reverse().join("")
+                    
+
+                    })
+                
+                    }
+                    function restarCantidad(e){
+                        debugger;
+                        const valueBox = e.target.nextElementSibling;
+                        const valorCantidad = parseInt(e.target.nextElementSibling.value);
+                        const valorPrecio = parseInt(e.target.parentElement.previousElementSibling.innerHTML);
+                        const subtotal = e.target.parentNode.nextElementSibling;
+                        if (parseInt(valueBox.value) > 1) {
+                            valueBox.value = parseInt(valueBox.value) -1
+                            subtotal.innerHTML = parseInt(valueBox.value) * valorPrecio;
+                            actualizarCarrito()
+                        }
+       
+                    }
+
+                    function sumarCantidad(e){
+                        debugger;
+                        const valueBox = e.target.previousElementSibling;
+                        const valorCantidad = parseInt(e.target.previousElementSibling.value);
+                        const valorPrecio = parseInt(e.target.parentElement.previousElementSibling.innerHTML);
+                        const subtotal = e.target.parentNode.nextElementSibling;
+
+                        if (parseInt(valueBox.value) < parseInt(valueBox.max)){
+                            valueBox.value = parseInt(valueBox.value) +1
+                            subtotal.innerHTML = parseInt(valueBox.value) * valorPrecio;
+                            actualizarCarrito()
+
+                        }
+                    }
+                </script>
+                
     <tbody>
         {{#each listaProductos}}    
                 <tr data-number="{{id}}">
@@ -20,9 +120,11 @@
                     <td data-label="Producto"="">{{nombre}}</td>
                     <td data-label="Precio">{{ precio }}</td>
                     <td data-label="Cantidad">
-                        <input type="number" class="number" min="1" value="{{cantidad}}" max="20">
+                        <button onclick="restarCantidad(event)">-</button>
+                        <input type="number" class="number" min="1" value="{{cantidad_comprada}}" max={{cantidad}} disabled>
+                        <button onclick="sumarCantidad(event)">+</button>     
                     </td>
-                    <td data-label="Subtotal">{{{price precio cantidad}}}</td>
+                    <td data-label="Subtotal">{{{price precio cantidad_comprada}}}</td>
                  
                 </tr>
         {{/each}}
@@ -32,7 +134,6 @@
 </div>
 <div class="checkout-buttons">
 
-    <button class="btn-style"id="buttonPedido">Actualizar carrito</button>
     <button class="btn-style"id="buttonComprar">Finalizar compra</button>
 </div>
 {{else}}
@@ -40,7 +141,148 @@
 {{/if}}
 
 
+<script>
+    window.addEventListener("DOMContentLoaded", e => {
+        window.history.replaceState(
+            {},
+            '',
+            `${window.location.pathname}`,
+        )
+    })
 
+    document.querySelectorAll("[href='/checkout']")[0].addEventListener("click", e => {
+        e.preventDefault()
+        url = "/checkout"
+
+        let inputData = {id: "abc123", text: "sometext"}
+        let product_list = myStorage.getItem("listaproducto")
+        
+        if (product_list == undefined ){ 
+            Swal.fire("No tiene productos agregados a su carrito")
+        } else {
+            product_list = product_list.split(",")
+            let objeto = {}
+    
+            let primerNumero ="";
+            let segundoNumero ="";
+    
+    
+            product_list.forEach((par) => {
+                primerNumero = ""
+                segundoNumero = ""
+                for (element of par) {
+                    
+                    if (element != ":") {
+                        primerNumero += element
+                    } else {
+                        break
+                    }
+                }
+                
+                let newString = "";
+                for (let i = par.length - 1; i >= 0; i--) {
+                    newString += par[i];
+                }
+            
+            
+                for (element of newString) {
+                    if (element != ":") {
+                        segundoNumero += element
+                    } else {
+    
+                        break
+                    }
+                }
+            
+                objeto[primerNumero] = segundoNumero
+            
+    
+            })
+    
+            
+    
+    
+            const selectedProducts = Object.keys(objeto);
+            const selectedAmounts = Object.values(objeto);
+            
+        debugger;
+            window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
+
+        }
+
+
+    })
+    document.querySelectorAll("[href='/checkout']")[1].addEventListener("click", e => {
+        e.preventDefault()
+        url = "/checkout"
+
+        let product_list = myStorage.getItem("listaproducto")
+        
+        if (product_list == undefined ){ 
+            Swal.fire("No tiene productos agregados a su carrito")
+        } else {
+
+            try {
+                product_list = product_list.split(",")
+
+                let objeto = {}
+       
+        
+                let primerNumero ="";
+                let segundoNumero ="";
+        
+        
+                product_list.forEach((par) => {
+                    primerNumero = ""
+                    segundoNumero = ""
+                    for (element of par) {
+                        
+                        if (element != ":") {
+                            primerNumero += element
+                        } else {
+                            break
+                        }
+                    }
+                    
+                    let newString = "";
+                    for (let i = par.length - 1; i >= 0; i--) {
+                        newString += par[i];
+                    }
+                
+                
+                    for (element of newString) {
+                        if (element != ":") {
+                            segundoNumero += element
+                        } else {
+        
+                            break
+                        }
+                    }
+    
+                    objeto[primerNumero] = segundoNumero.split("").reverse().join("")
+                
+        
+                })
+                
+      
+    
+                const selectedProducts = Object.keys(objeto);
+                const selectedAmounts = Object.values(objeto);
+            
+    
+                window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
+
+    
+            
+            } catch(err) {
+                console.log(err)
+            }
+            
+        }
+
+    })
+
+</script>
     
 
 
