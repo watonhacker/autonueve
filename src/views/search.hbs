@@ -69,10 +69,35 @@
             <p class="product-brand">{{marca}}</p>
             <p>${{precio}}</p>
             <div class="product-button">
-                
-                <input type="number" class="number" min="1" value="1" max="20">
-                <a href="{{id}}" data-id="{{id}}">Añadir</a>
+                 <script>
+                    function restarCantidad(e){
+                        const valueBox = e.target.nextElementSibling;
+                        if (parseInt(valueBox.value) > 1) {
+                            valueBox.value = parseInt(valueBox.value) -1
+                        }
+       
+                    }
+
+ 
+                   function sumarCantidad(e){
+                        const valueBox = e.target.previousElementSibling;
+                        debugger;
+                        if (parseInt(valueBox.value) < parseInt(valueBox.max)){
+                            valueBox.value = parseInt(valueBox.value) +1
+
+                        }
+                  
+                    }
+
+    </script>
+                <button onclick="restarCantidad(event)">-</button>
+                <input type="number" class="number" min="1" value="1" max={{cantidad}}>
+                <button onclick="sumarCantidad(event)">+</button>     
             </div>  
+            <a class="btn btn-primary w-100" style="margin-top:.5rem;" href="{{id}}" data-id="{{id}}">Añadir</a>
+
+
+            
 
 
             

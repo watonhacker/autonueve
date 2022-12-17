@@ -1,5 +1,3 @@
-const { last } = require('lodash');
-
 exports.read = (path) => {
     
 let Client = require('ssh2-sftp-client');
@@ -64,14 +62,6 @@ const config = {
 
 }
 
-exports.familias = () => {
-
-}
-
-exports.productos = () => {
-
-}
-
 exports.getUpdatedData = async (path) => {
 
   let lastGlobalDate = 0;
@@ -96,8 +86,8 @@ exports.getUpdatedData = async (path) => {
 }
 
 exports.main  = () => {
-  this.getUpdatedData('RECIBIR/FAMILIAS')
-  this.getUpdatedData('RECIBIR/PRUEBAS')
-  this.getUpdatedData('RECIBIR/PRODUCTOS')
+  this.getUpdatedData('/RECIBIR/FAMILIAS')
+  this.getUpdatedData('/RECIBIR/PRUEBAS')
+  this.getUpdatedData('/RECIBIR/PRODUCTOS')
 }
 

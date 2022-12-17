@@ -11,8 +11,8 @@ const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const ftpService = require('./ftp/ftpService')
 //Esto inicia el script para leer el ftp y traermelo si se actualiza
-/* ftpService.main() */
-
+/* ftpService.main()
+ */
 /* Variables de ruteo */
 const indexRoutes = require('./routes/index')
 const submodelRoutes = require('./routes/submodels')

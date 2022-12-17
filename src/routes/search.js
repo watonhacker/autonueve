@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const mysqlConnection = require('../database/database')
+
 const globalControllers = require('../controllers/globalControllers')
 const categoriesControllers = require('../controllers/categories.controller')
 const fabricacionService = require('../api/fabricacion/fabricacion.service')
@@ -10,9 +10,8 @@ const marcaService = require('../api/marca/marca.service')
 let page = 0
 let posicionArrayProductos = 0
 let $anyoName;
-let $anyoId;
 let $submodeloId;
-let $listaSubmodeloId
+
 
 router.get('/:busqueda/:page', async (req, res) => {
     const busqueda = req.params.busqueda;
