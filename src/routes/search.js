@@ -32,7 +32,6 @@ router.get('/:busqueda/:page', async (req, res) => {
                                                                             
 router.get('/compatibilidad/:listasubmodelo/:page', async (req, res) => {
 
-    console.log("hello")
     page = req.params.page
     posicionArrayProductos = parseInt(page) - 1
     const listaSubmodeloId = req.params.listasubmodelo

@@ -538,12 +538,14 @@ exports.getUpdatedData = async (path, firstTime, lastDate) => {
 }
 
 exports.main  = async () => {
+  console.log("ejecutando main...")
   try {
     //La rutina se ejecuta automáticamente al iniciar el servidor
     //Luego comienza una rutina donde cada 1 minuto se verifica y actualiza
-
+    console.log("ejecutando try...")
     const lastDate = await this.getUpdatedData('RECIBIR/PRUEBAS', true, 0)
     setTimeout(() => {
+      console.log("ejecutando timeout...")
       this.getUpdatedData('RECIBIR/PRUEBAS', false, lastDate)
     }, 60000)
 
