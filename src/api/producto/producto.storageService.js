@@ -36,9 +36,14 @@ exports.createProducto = (producto) => {
 }
 
 exports.getProductosByIds = (ids) => {
+    const itemsString = JSON.stringify(ids);
+    const parseandoItems = itemsString.replace("[", "")
+    const productos = parseandoItems.replace("]", "").split(",")
+
+
     return new Promise(async (resolve, reject) => {
         try {
-            const sql = `SELECT * FROM producto WHERE id IN(${ids});`;
+            const sql = `SELECT * FROM producto WHERE id IN(${productos});`;
             mysqlConnection.query(sql, (err, result) => {
                 if (err) {
                     console.error("No se ha podido obtener el producto", err.message)
@@ -62,7 +67,7 @@ exports.getProductosByIds = (ids) => {
 exports.getProductoById = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const sql = `SELECT * FROM producto WHERE id = ${id};`;
+            const sql = `SELECT * FROM producto WHERE id = '${id}';`;
             mysqlConnection.query(sql, (err, result) => {
                 if (err) {
                     this.logger.error("No se ha podido obtener el producto", err.message)
@@ -81,8 +86,8 @@ exports.getProductoById = (id) => {
 exports.updateProducto = (producto) => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = 'UPDATE producto SET codigo = ? , categoria_id = ? , tipouniversal_id = ?, SKU = ?, nombre = ?, precio = ?, marca = ?, descripcion = ?, cantidad = ?, imagen = ?, imagen_2 = ?, imagen_3 = ? WHERE id = ?';
-            const dataProducto = [producto.codigo, producto.categoria_id, producto.tipouniversal_id, producto.SKU, producto.nombre, producto.precio, producto.marca, producto.descripcion, producto.cantidad, producto.imagen, producto.imagen_2, producto.imagen_3, producto.id]
+            const sql = 'UPDATE producto SET imagen = ?, imagen_2 = ?, imagen_3 = ? WHERE id = ?';
+            const dataProducto = [producto.imagen, producto.imagen_2, producto.imagen_3, `${producto.id}`]
             mysqlConnection.query(sql, dataProducto, (error, result) => {
                 if (error) {
                     console.log(error.message);
@@ -156,7 +161,7 @@ exports.getProductosAssociated = (id) => {
 exports.substractStock = (quantity, id) => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = `UPDATE producto SET cantidad = (producto.cantidad - ${quantity}) where id = ${id}; `;
+            const sql = `UPDATE producto SET cantidad = (producto.cantidad - ${quantity}) where id = '${id}'; `;
             mysqlConnection.query(sql, (err, result) => {
                 if (err) throw err;
                 resolve(JSON.parse(JSON.stringify(result)))
@@ -167,4 +172,20 @@ exports.substractStock = (quantity, id) => {
             throw error;
         }
     }) 
+}
+
+exports.insertOrUpdate = (id, nombre, precio, cantidad, precio_local, descripcion) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `INSERT INTO producto (id, codigo, SKU, nombre, precio, cantidad, precio_local, descripcion) VALUES('${id}','${id}','${id}','${nombre}',${precio}, ${cantidad}, ${precio_local}, '${descripcion}') ON DUPLICATE KEY UPDATE codigo='${id}',SKU='${id}', nombre='${nombre}', precio=${precio}, cantidad =${cantidad}, precio_local =${precio_local}, descripcion = '${descripcion}';`
+            mysqlConnection.query(sql, (err, result) => {
+                if (err) throw err;
+                resolve(result)
+            })
+        } catch (err) {
+            reject(err);
+            console.error(err.message);
+            throw err;
+        }
+    })
 }

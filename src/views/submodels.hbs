@@ -36,7 +36,11 @@
         
     <tr class="firstColumn"><td>Editar</td><td>ID</td><td>Submodelo</td></tr>
    {{#each resultsSubmodels}}
-    <tr><td><a class="option" href="/admin/submodels/edit?id={{id}}"><i class="far fa-edit"></i></a></td><td>{{id}}</td><td>{{nombre}}</td></tr>
+    <tr>
+        <td>
+            <a class="option btn btn-info" style="color:#fff;" href="/admin/submodels/edit?id={{id}}">Revisar</a>
+            </td>
+            <td>{{id}}</td><td>{{nombre}}</td></tr>
     {{/each}}
     </table>
 </div>

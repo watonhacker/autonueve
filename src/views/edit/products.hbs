@@ -1,13 +1,20 @@
+<div class="btnToAdmin">
+    <a href="/admin"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
+    <a class="backToPanel" href="/admin/products">Volver al panel</a>
+</div>
+<h1 style="color:#4C6EA7; margin:2rem 0;">Detalle producto</h1>
+
+
 <form class="edit-form" action="/admin/products/edit" method="post">
-    <label for="nombre">Nombre</label><input type="text"  name="nombre"  required value='{{results.nombre}}' >
-    <label for="precio">Precio</label><input type="number" name="precio"  required value={{results.precio}} >
-    <label for="marca">Marca</label><input type="text"  name="marca" required value='{{results.marca}}' >
+    <label for="nombre">Nombre</label><input type="text"  name="nombre"  required disabled value='{{results.nombre}}' >
+    <label for="precio">Precio</label><input type="number" name="precio"  required disabled  value={{results.precio}} >
+    <label for="marca">Marca</label><input type="text"  name="marca" required  disabled value='{{results.marca}}' >
   
-    <label for="descripcion">Descripcion</label><textarea name="descripcion" >'{{results.descripcion}}'</textarea>
-    <label for="cantidad">Cantidad</label><input type="number" id="rut"name="cantidad" required value={{results.cantidad}}>
+    <label for="descripcion">Descripcion</label><textarea disabled name="descripcion" >'{{results.descripcion}}' </textarea>
+    <label for="cantidad">Cantidad</label><input type="number" id="rut"name="cantidad" required value={{results.cantidad}} disabled>
     <label for="imagen">Imagen</label><input type="text" id="rut"name="imagen" placeholder="Ingrese el link de la imagen" value='{{results.imagen}}' >
     <input type="hidden" name="id" value={{results.id}}>
-    <input type="submit" value="Enviar">
+    <input class="btn btn-info w-100" style="margin-top:.5rem;" type="submit" value="Enviar">
     
 </form>
 

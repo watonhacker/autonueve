@@ -69,3 +69,20 @@ exports.updateListaProducto = (listaproducto) => {
         }
     })    
 }
+
+
+exports.insertOrUpdate = (id, producto_id, listasubmodelo_id) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `INSERT INTO listaproducto (id, producto_id, listasubmodelo_id) VALUES('${id}', '${producto_id}', ${listasubmodelo_id}) ON DUPLICATE KEY UPDATE producto_id='${producto_id}', listasubmodelo_id=${listasubmodelo_id};`
+            mysqlConnection.query(sql, (err, result) => {
+                if (err) throw err;
+                resolve(result)
+            })
+        } catch (err) {
+            reject(err);
+            console.error(err.message);
+            throw err;
+        }
+    })
+}

@@ -12,9 +12,6 @@
     <div class="models">
         <a href="/admin/categories">Categorías</a>
     </div>
-    <div class="models">
-        <a href="/admin/compatibility">Asignación</a>
-    </div>
 
 </div>
 
@@ -36,7 +33,12 @@
         
     <tr class="firstColumn"><td>Acciones</td><td>SKU</td><td>Nombre</td><td>Precio</td></tr>
    {{#each productResults}}
-    <tr><td><a class="option" href="/admin/products/edit?id={{id}}"><i class="far fa-edit"></i></a><a class="option"href="#"><i class="far fa-trash-alt"></i></a></td><td>{{SKU}}</td><td>{{nombre}}</td><td>{{precio}}</td></tr>
+    <tr>
+        <td>
+            <a class="option btn btn-info" style="color:#fff;" href="/admin/products/edit?id={{id}}">Editar</a>
+            
+        </td>
+            <td>{{SKU}}</td><td>{{nombre}}</td><td>{{precio}}</td></tr>
     {{/each}}
     </table>
 </div>

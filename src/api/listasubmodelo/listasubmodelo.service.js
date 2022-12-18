@@ -21,3 +21,8 @@ exports.getListaSubmodeloBySubmodelAndYear = async (submodeloId) => {
     const listaSubmodeloId = await listaSubmodeloStorageService.getListaSubmodeloBySubmodelAndYear(submodeloId);
     return listaSubmodeloId[0]['id'];
 }
+
+exports.insertOrUpdate = (id, submodelo_id, fecha) => {
+    return listaSubmodeloStorageService.insertOrUpdate(id, submodelo_id, fecha);
+}
+

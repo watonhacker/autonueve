@@ -12,9 +12,7 @@
     <div class="models">
         <a href="/admin/categories">Categorías</a>
     </div>
-    <div class="models">
-        <a href="/admin/compatibility">Asignación</a>
-    </div>
+
 
 </div>
 
@@ -38,8 +36,8 @@
    {{#each categoriesResults}}
     <tr>
         <td>
-            <a class="option" href="/admin/categories/edit?id={{id}}">
-                <i class="far fa-edit"></i>
+            <a class="option btn btn-info" style="color:#fff;" href="/admin/categories/edit?id={{id}}">
+                Editar
             </a>
         </td>
         <td>{{id}}</td>

@@ -19,8 +19,11 @@ router.get('/', async (req, res) =>  {
     // en realidad creo que debería hacer la petición considerando lo que esta en el dom ya ir
     // a buscar el id y la cantidad al formulario y usar eso
     if (Object.entries(req.query).length > 0) {
-        const productos = JSON.parse(req.query.items);
-        const cantidades = JSON.parse(req.query.amounts)
+        const parseandoItems = req.query.items.replace("[", "")
+        const productos = parseandoItems.replace("]", "").split(",")
+    
+        const parseandoCantidades = req.query.amounts.replace("[","");
+        const cantidades = parseandoCantidades.replace("]","").split(",");
         const listaProductos = await productoService.getProductsAmountsByIds(productos, cantidades)
     
     

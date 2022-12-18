@@ -98,25 +98,35 @@ router.get('/:category/:page', async (req, res) => {
     let resultados = data.results
     const paginator = data.paginator;
 
-    const resultadosPrecioFormat = resultados.map((result) => {
-        if (result.precio.toString().length == 4) {
-            result.precio = result.precio.toString().slice(0, 1) + "." + result.precio.toString().slice(1) 
-        } else if (result.precio.toString().length == 5) {
-            result.precio = result.precio.toString().slice(0, 2) + "." + result.precio.toString().slice(2)
-        } else if (result.precio.toString().length == 6){
-            result.precio = result.precio.toString().slice(0, 3) + "." + result.precio.toString().slice(3)
-        } else {
-            result.precio = result.precio;
-        }
+    if (resultados !== undefined) {
+        const resultadosPrecioFormat = resultados.map((result) => {
+            if (result.precio.toString().length == 4) {
+                result.precio = result.precio.toString().slice(0, 1) + "." + result.precio.toString().slice(1) 
+            } else if (result.precio.toString().length == 5) {
+                result.precio = result.precio.toString().slice(0, 2) + "." + result.precio.toString().slice(2)
+            } else if (result.precio.toString().length == 6){
+                result.precio = result.precio.toString().slice(0, 3) + "." + result.precio.toString().slice(3)
+            } else {
+                result.precio = result.precio;
+            }
+    
+            return result
+        })
 
-        return result
-    })
+        res.render("category-search", {
+            resultados: resultadosPrecioFormat,
+            paginator
+        })
+    
+    } else {
+        resultados = []
 
+        res.render("category-search", {
+            resultados,
+            paginator
+        })
+    }
 
-    res.render("category-search", {
-        resultados: resultadosPrecioFormat,
-        paginator
-    })
 })
 
 

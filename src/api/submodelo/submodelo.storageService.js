@@ -63,7 +63,7 @@ exports.insertOrUpdate = (id, id_modelo, nombre) => {
         } catch (err) {
             reject(err);
             console.error(err.message);
-            throw err;
+            return;
         }
     })
 }

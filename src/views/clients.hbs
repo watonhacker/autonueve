@@ -2,20 +2,7 @@
 
 {{#if clientsResults}}
 <div class="results-title">
-    <h2>Clientes</h2>
-</div>
-
-<div class="models-panel">
-    <div class="models">
-        <a href="/admin/products">Productos</a>
-    </div>
-    <div class="models">
-        <a href="/admin/categories">Categorías</a>
-    </div>
-    <div class="models">
-        <a href="/admin/compatibility">Asignación</a>
-    </div>
-
+    <h2>CLIENTES</h2>
 </div>
 
 
@@ -23,12 +10,11 @@
     <a href="/admin"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
     <a class="backToPanel" href="/admin">Volver al panel</a>
 </div>
-
-    <div style="padding:2rem 0 0 0">
-        <label for="site-search">Busca el cliente:</label>
+{{!--     <h3 style="margin-top:2rem;">Busca el cliente por ID</h3>
+    <div>
         <input type="number" id="cliente-search">
         <button class="btn btn-info">Buscar</button>
-    </div>
+    </div> --}}
 
 <div class="adminResults">
     
@@ -45,7 +31,6 @@
     <tr>
         <td>
             <a class="btn btn-warning" style="color:#000;" href="/admin/clients/edit?id={{id}}">Editar</a>
-            <a class="btn btn-success" style="color:#fff;"href="#">Revisar</i></a>
         </td>
         <td>{{id}}</td>
         <td>{{nombre}}</td>

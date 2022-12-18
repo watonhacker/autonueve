@@ -130,7 +130,7 @@ exports.guardarListaPedido = function (res, listaIdProductos) {
                 })
         
                 for (element in objeto) {
-                    sql += `(${element}, ${res}, ${objeto[element]}),`
+                    sql += `('${element}', ${res}, ${objeto[element]}),`
                 }
         
         

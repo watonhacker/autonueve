@@ -1,8 +1,9 @@
 .edit-form {
     display:flex;
+    border:1px solid #ddd;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     align-content: center;
     max-width:800px;
     padding:2rem;
@@ -18,6 +19,12 @@
         max-height:300px;
         min-width:200px;
         max-width:300px;
+    }
+
+    label {
+        margin: .5rem 0;
+        color:#333;
+        font-weight: bold;
     }
     
 }

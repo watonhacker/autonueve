@@ -2,6 +2,9 @@ const lineReader = require('line-reader');
 const marcaService = require('../api/marca/marca.service')
 const modeloService = require('../api/modelo/modelo.service')
 const submodeloService = require('../api/submodelo/submodelo.service')
+const listasubmodeloService = require('../api/listasubmodelo/listasubmodelo.service')
+const productoService = require('../api/producto/producto.service')
+const listaproductoService = require('../api/listaproducto/listaproducto.service')
 
 //leer y meter a la carpeta
 exports.read = (path) => {
@@ -22,7 +25,6 @@ function cleanZeros (numbers) {
     if (gotANumber === false) {
       if (number === '0') {
         if (numbersToArray[key+1] === '0'){ 
-          debugger;
           return false
         } else {
           gotANumber = true;
@@ -38,6 +40,164 @@ function cleanZeros (numbers) {
   return cleanedNumber.join("")
   
 }
+
+async function readGeneCodi () {
+  
+  console.log("reading...")
+  try {
+    let headers = undefined;
+    let arrayDeObjetosGenerados = [];
+     lineReader.eachLine('src/ftp/RECIBIR/PRUEBAS/GENECODI.txt', function(line, last) {        
+        if (line.length > 1) {
+          if (headers === undefined) {
+            //seteando lo que son los "key" o la primera linea del txt  /  columnas 
+            headers = line.split(' | ').map((element) => element.trim())
+          } else {
+            const currentLine = line.split('|')
+            if (currentLine.length === headers.length) {
+              console.log(currentLine)
+              let lineObject = {}
+              currentLine.forEach((element, index) => {
+                lineObject[headers[index]] = element;
+              })
+              arrayDeObjetosGenerados.push(lineObject)
+          }
+        }
+  
+        }
+  
+        //Cod.Marca | Cod.Modelo | Cod.Submodelo | Nomb.Sub-Modelo 
+        if(last) {
+          if (arrayDeObjetosGenerados.length > 1) {
+            console.log(arrayDeObjetosGenerados)
+            arrayDeObjetosGenerados.forEach((objeto) => {
+              
+              const idMarca = cleanZeros(objeto['Marca'])
+              const idModelo = cleanZeros(objeto['Modelo'])
+              const idSubmodelo = cleanZeros(objeto['Submodelo'])
+              const idAnoFab = cleanZeros(objeto['Anofab'])
+              const idListaSubmodelo = `${idMarca}${idModelo}${idSubmodelo}${idAnoFab}`;
+              const id = `${objeto['Codigo']}${idListaSubmodelo}`;
+              const idProducto = objeto['Codigo']
+              
+              //marcaService.insertOrUpdate(objeto['Cod.Marca'], objeto['Nomb.Marca'])
+              listaproductoService.insertOrUpdate(id, idProducto, idListaSubmodelo);
+
+              console.log("ok")
+            })
+            
+          }
+        }
+      });
+  
+      
+  } catch (err) {
+    console.log(err)
+  }
+  
+  }
+
+async function readProducto () {
+  
+  console.log("reading...")
+  try {
+    let headers = undefined;
+    let arrayDeObjetosGenerados = [];
+     lineReader.eachLine('src/ftp/RECIBIR/PRUEBAS/PRODUCTO.txt', function(line, last) {        
+        if (line.length > 1) {
+          if (headers === undefined) {
+            //seteando lo que son los "key" o la primera linea del txt  /  columnas 
+            headers = line.split(' | ').map((element) => element.trim())
+          } else {
+            const currentLine = line.split('|')
+            if (currentLine.length === headers.length) {
+              console.log(currentLine)
+              let lineObject = {}
+              currentLine.forEach((element, index) => {
+                lineObject[headers[index]] = element;
+              })
+              arrayDeObjetosGenerados.push(lineObject)
+          }
+        }
+  
+        }
+  
+        //Cod.Marca | Cod.Modelo | Cod.Submodelo | Nomb.Sub-Modelo 
+        if(last) {
+          if (arrayDeObjetosGenerados.length > 1) {
+            console.log(arrayDeObjetosGenerados)
+            arrayDeObjetosGenerados.forEach((objeto) => {
+              const id = objeto['Codigo'];
+              const glosa = `${objeto['Glosa 1']} ${objeto['Glosa 2']} ${objeto['Glosa 3']} ${objeto['Glosa 4']} ${objeto['Glosa 5']} ${objeto['Glosa 6']} ${objeto['Glosa 7']} ${objeto['Glosa 8']} ${objeto['Glosa 9']} ${objeto['Glosa 10']} `
+              console.log(id)
+              //marcaService.insertOrUpdate(objeto['Cod.Marca'], objeto['Nomb.Marca'])
+              productoService.insertOrUpdate(id, objeto['Descripcion'], objeto['Precio Vta.'], objeto['Stock'], objeto['Prec.Local'], glosa)
+
+              console.log("ok")
+            })
+            
+          }
+        }
+      });
+  
+      
+  } catch (err) {
+    console.log(err)
+  }
+  
+  }
+
+async function readAnoFab () {
+  
+  console.log("reading...")
+  try {
+    let headers = undefined;
+    let arrayDeObjetosGenerados = [];
+     lineReader.eachLine('src/ftp/RECIBIR/PRUEBAS/ANOFAB.txt', function(line, last) {        
+        if (line.length > 1) {
+          if (headers === undefined) {
+            //seteando lo que son los "key" o la primera linea del txt  /  columnas 
+            headers = line.split(' | ').map((element) => element.trim())
+          } else {
+            const currentLine = line.split('|')
+            if (currentLine.length === headers.length) {
+              console.log(currentLine)
+              let lineObject = {}
+              currentLine.forEach((element, index) => {
+                lineObject[headers[index]] = element;
+              })
+              arrayDeObjetosGenerados.push(lineObject)
+          }
+        }
+  
+        }
+  
+        //Cod.Marca | Cod.Modelo | Cod.Submodelo | Nomb.Sub-Modelo 
+        if(last) {
+          if (arrayDeObjetosGenerados.length > 1) {
+            console.log(arrayDeObjetosGenerados)
+            arrayDeObjetosGenerados.forEach((objeto) => {
+              const idMarca = cleanZeros(objeto['Cod.Marca'])
+              const idModelo = cleanZeros(objeto['Cod.Modelo'])
+              const idSubmodelo = cleanZeros(objeto['Cod.Submodelo'])
+              const idAno = cleanZeros(objeto['Ano'])
+              const id = `${idMarca}${idModelo}${idSubmodelo}${idAno}`
+              console.log(id)
+              //marcaService.insertOrUpdate(objeto['Cod.Marca'], objeto['Nomb.Marca'])
+              listasubmodeloService.insertOrUpdate(id, `${idMarca}${idModelo}${idSubmodelo}`, objeto['Nomb.Ano'])
+              console.log("ok")
+            })
+            
+          }
+        }
+      });
+  
+      
+  } catch (err) {
+    console.log(err)
+  }
+  
+  }
 
 async function readSubmodelo () {
   
@@ -75,7 +235,7 @@ try {
             const id = `${idMarca}${idModelo}${idSubmodelo}`
             console.log(id)
             //marcaService.insertOrUpdate(objeto['Cod.Marca'], objeto['Nomb.Marca'])
-            submodeloService.insertOrUpdate(id, objeto['Cod.Modelo'], objeto['Nomb.Sub-Modelo'])
+            submodeloService.insertOrUpdate(id, `${idMarca}${idModelo}`, objeto['Nomb.Sub-Modelo'])
             console.log("ok")
           })
           
@@ -198,9 +358,13 @@ async function main() {
       throw err;
     } finally {
       client.end();
-      await readMarca()
-      await readModelo()
-      await readSubmodelo()
+/*       await readMarca()
+      await readModelo() */
+      //me faltan datos que entren, da error pq faltan modelos para asociar
+/*       await readSubmodelo() 
+      await readAnoFab() */
+      await readProducto()
+      readGeneCodi()
     }
 
     

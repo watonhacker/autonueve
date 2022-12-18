@@ -12,9 +12,6 @@
     <div class="models">
         <a href="/admin/categories">Categorías</a>
     </div>
-    <div class="models">
-        <a href="/admin/compatibility">Asignación</a>
-    </div>
 
 </div>
 
@@ -131,7 +128,17 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.status === 200) {
-                        Swal.fire(data.message);
+                        Swal.fire({
+                           icon: 'success',
+                           title:data.message
+                        })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 1000)
+                            }
+                        })
                     } else {
                          Swal.fire("Ha ocurrido algún error al procesar su solicitud, contacte al administrador");
                     }

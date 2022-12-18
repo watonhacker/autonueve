@@ -53,8 +53,8 @@ exports.getCategoriaById = (id) => {
 exports.updateCategoria = (categoria) => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = 'UPDATE categoria SET nombre = ?, imagen = ? WHERE id = ?';
-            const dataCliente = [categoria.nombre, categoria.imagen, categoria.id]
+            const sql = 'UPDATE categoria SET imagen = ? WHERE id = ?';
+            const dataCliente = [categoria.imagen, categoria.id]
             mysqlConnection.query(sql, dataCliente, (error, result) => {
                 if (error) {
                     console.log(error.message);

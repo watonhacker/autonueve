@@ -151,7 +151,7 @@ router.get('/products', authController.isAuthenticated, (req, res) => {
 router.get('/products/edit/', authController.isAuthenticated, (req, res) => {
 
     let id = req.query.id
-    let sql = `SELECT id, nombre, precio, marca, descripcion, cantidad, imagen FROM producto WHERE id = ${id}`
+    let sql = `SELECT id, nombre, precio, marca, descripcion, cantidad, imagen FROM producto WHERE id = '${id}'`
     mysqlConnection.query(sql, (err, results) => {
         results = JSON.parse(JSON.stringify(results))
 
@@ -162,16 +162,11 @@ router.get('/products/edit/', authController.isAuthenticated, (req, res) => {
 })
 
 router.post('/products/edit/', authController.isAuthenticated, (req, res) => {
-    let nombre = req.body['nombre']
-    let precio = req.body['precio']
-    let marca = req.body['marca']
-    let descripcion = req.body['descripcion']
-    let cantidad = req.body['cantidad']
     let imagen = req.body['imagen']
     let id = req.body['id']
 
  
-    let sql = `UPDATE producto SET nombre='${nombre}', precio = ${precio}, marca='${marca}', descripcion='${descripcion}', cantidad=${cantidad}, imagen='${imagen}' WHERE id = ${id}`
+    let sql = `UPDATE producto SET imagen='${imagen}' WHERE id = '${id}'`
     
     mysqlConnection.query(sql, (err, results) => {
         if (err) throw err;
@@ -208,10 +203,10 @@ router.get('/categories/edit/', authController.isAuthenticated, (req, res) => {
 })
 
 router.post('/categories/edit/', authController.isAuthenticated, (req, res) => {
-    let nombre = req.body['nombre']
+
     let imagen = req.body['imagen']
     let id = req.body['id']
-    let sql = `UPDATE categoria SET nombre='${nombre}', imagen = '${imagen}' WHERE id = ${id}`
+    let sql = `UPDATE categoria SET imagen = '${imagen}' WHERE id = ${id}`
     
     mysqlConnection.query(sql, (err, results) => {
         if (err) throw err;

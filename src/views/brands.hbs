@@ -36,7 +36,10 @@
     <table class="resultsTable">
     <tr class="firstColumn"><td>Editar</td><td>ID</td><td>Marca</td></tr>
    {{#each resultsBrands}}
-    <tr><td><a href="/admin/brands/edit?id={{id}}"><i class="far fa-edit"></i></a></td><td>{{id}}</td><td>{{nombre}}</td></tr>
+    <tr><td>
+        <a class="btn btn-info" style="color:#fff" href="/admin/brands/edit?id={{id}}">Revisar</a>
+        </td>
+        <td>{{id}}</td><td>{{nombre}}</td></tr>
     {{/each}}
     </table>
 </div>

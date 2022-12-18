@@ -3,7 +3,7 @@ const mysqlConnection = require('../database/database');
 exports.getSingleProduct = (id) => {
     return new Promise((resolve, reject) => {
 
-        let sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.id = ${id}; `
+        let sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.id = '${id}'; `
 
         mysqlConnection.query(sql, (err, results) => {
             if (err) throw err;
@@ -18,7 +18,7 @@ exports.getSingleProduct = (id) => {
 exports.getProductCategory = (id) => {
     return new Promise((resolve, reject) => {
 
-        let sql = `SELECT categoria_id FROM producto WHERE producto.id = ${id}; `
+        let sql = `SELECT categoria_id FROM producto WHERE producto.id = '${id}'; `
 
         mysqlConnection.query(sql, (err, results) => {
             if (err) throw err;

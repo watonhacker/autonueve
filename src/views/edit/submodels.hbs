@@ -1,7 +1,11 @@
+<div class="btnToAdmin">
+    <a href="/admin"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
+    <a class="backToPanel" href="/admin/submodels">Volver al panel</a>
+</div>
+<h1 style="color:#4C6EA7; margin:2rem 0;">Detalle Submodelo</h1>
 <form class="edit-form" action="/admin/submodels/edit" method="post">
-    <label for="nombre">Nombre</label><input type="text"  name="nombre" value="{{results.nombre}}">
+    <label for="nombre">Nombre</label><input type="text"  name="nombre" value="{{results.nombre}}" required>
     <input type="hidden" name="id" value={{results.id}}>
-    <input type="submit" value="Enviar">
     
 </form>
 

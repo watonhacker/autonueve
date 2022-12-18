@@ -16,3 +16,7 @@ exports.getListaProductoById = (id) => {
 exports.updateListaProducto = (listaproducto) => {
     return listaProductoStorageService.updateListaProducto(listaproducto);  
 }
+
+exports.insertOrUpdate = (id, producto_id, listasubmodelo_id) => {
+    return listaProductoStorageService.insertOrUpdate(id, producto_id, listasubmodelo_id);
+}
