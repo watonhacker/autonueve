@@ -1,6 +1,6 @@
-const fs = require('fs');
 const lineReader = require('line-reader');
 const marcaService = require('../api/marca/marca.service')
+const modeloService = require('../api/modelo/modelo.service')
 
 //leer y meter a la carpeta
 exports.read = (path) => {
@@ -13,7 +13,85 @@ const config = {
   password: process.env.FTP_PASSWORD
 }
 
-function readTest () {
+function cleanZeros (numbers) {
+  const numbersToArray = numbers.toString().split("");
+  let gotANumber = false;
+  const cleanedNumber = numbersToArray.filter((number, key) => {
+    
+    if (gotANumber === false) {
+      if (number === '0') {
+        if (numbersToArray[key+1] === '0'){ 
+          debugger;
+          return false
+        } else {
+          gotANumber = true;
+          return false
+        }
+      }
+    } else {
+      return true;
+    }
+    debugger;
+
+  })
+  return cleanedNumber.join("")
+}
+
+async function readModelo () {
+/*   Cod.Marca | Cod.Modelo | Nomb.Modelo 
+013|001|ASIA MODELO
+025|001|MOD.BAIC
+013|002|CHEVROLET */
+
+
+console.log("reading...")
+  try {
+    let headers = undefined;
+    let arrayDeObjetosGenerados = [];
+     lineReader.eachLine('src/ftp/RECIBIR/PRUEBAS/MODELO.txt', function(line, last) {        
+        if (line.length > 1) {
+          if (headers === undefined) {
+            //seteando lo que son los "key" o la primera linea del txt  /  columnas 
+            headers = line.split(' | ').map((element) => element.trim())
+          } else {
+            const currentLine = line.split('|')
+            if (currentLine.length === headers.length) {
+              console.log(currentLine)
+              let lineObject = {}
+              currentLine.forEach((element, index) => {
+                lineObject[headers[index]] = element;
+              })
+              arrayDeObjetosGenerados.push(lineObject)
+          }
+        }
+
+        }
+        if(last) {
+          if (arrayDeObjetosGenerados.length > 1) {
+            console.log(arrayDeObjetosGenerados)
+            arrayDeObjetosGenerados.forEach((objeto) => {
+              const idMarca = cleanZeros(objeto['Cod.Marca'])
+              const idModelo = cleanZeros(objeto['Cod.Modelo'])
+              const id = `${idMarca}${idModelo}`
+              console.log(id)
+              //marcaService.insertOrUpdate(objeto['Cod.Marca'], objeto['Nomb.Marca'])
+              modeloService.insertOrUpdate(id, objeto['Cod.Marca'], objeto['Nomb.Modelo'])
+              console.log("ok")
+            })
+            
+          }
+        }
+      });
+
+      
+  } catch (err) {
+    console.log(err)
+  }
+
+
+}
+
+async function readMarca () {
   console.log("reading...")
   try {
     let headers = undefined;
@@ -30,7 +108,6 @@ function readTest () {
               let lineObject = {}
               currentLine.forEach((element, index) => {
                 lineObject[headers[index]] = element;
-                
               })
               arrayDeObjetosGenerados.push(lineObject)
           }
@@ -38,9 +115,6 @@ function readTest () {
 
         }
         if(last) {
-          console.log('Last line printed.');
-          const used = process.memoryUsage().heapUsed / 1024 / 1024;
-          console.log(`The script uses approximately ${Math.round(used * 100) / 100} MB`);
           if (arrayDeObjetosGenerados.length > 1) {
             console.log(arrayDeObjetosGenerados)
             arrayDeObjetosGenerados.forEach((objeto) => {
@@ -76,7 +150,8 @@ async function main() {
       throw err;
     } finally {
       client.end();
-      readTest()
+      await readMarca()
+      await readModelo()
     }
 
     
