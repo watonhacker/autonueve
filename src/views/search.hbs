@@ -141,7 +141,7 @@
     const modelos = JSON.parse(window.localStorage.getItem('modelo'))
     const submodelos = JSON.parse(window.localStorage.getItem('submodelo'))
     const listaSubmodelos = JSON.parse(window.localStorage.getItem('listasubmodelo'))
-    const fabricacion = JSON.parse(window.localStorage.getItem('fabricacion'))
+
 
     const brandSelector = document.getElementById('brand-selector');
     const modeloSelector = document.getElementById('modelo-selector');
@@ -191,7 +191,7 @@
        })
 
        submodelosAsociados.forEach(submodelo => {
-            const html = `<option value="${submodelo.id}" class="brand-option">${submodelo.nombre}</option>`
+            const html = `<option value="${submodelo.id}" data-id="${submodelo.id}" class="brand-option">${submodelo.nombre}</option>`
             submodelSelector.insertAdjacentHTML("beforeend", html)
        })
 
@@ -212,23 +212,11 @@
             }
        })
 
-        const yearsAsociados = []
 
-        listaSubmodelosAsociados.forEach((listaSubmodelo) => {
-            fabricacion.forEach((year) => {
-                if (listaSubmodelo.fabricacion_id == year.id) {
-                    yearsAsociados.push(year)
-                }
-            })
-        })
-
-
-       yearsAsociados.forEach(year => {
-            const html = `<option value="${year.id}" class="brand-option">${year.fecha}</option>`
-            yearSelector.insertAdjacentHTML("beforeend", html)
+       listaSubmodelosAsociados.forEach(listasubmodelo => {
+            const html = `<option value="${listasubmodelo.id}" data-id="${listasubmodelo.id}" class="brand-option">${listasubmodelo.nombre}</option>`
+            listaSubmodelosAsociados.insertAdjacentHTML("beforeend", html)
        })
-
-
 
        submodelSelector.disabled = true;
        yearSelector.disabled = false;
@@ -237,21 +225,7 @@
     }
 
 
-if (yearSelector) {
-    yearSelector.addEventListener("change", e => {
-       e.preventDefault();
-       const yearId = fabricacion.filter(year => {
-            if (year.id == e.target.value) {
-                return true;
-            }
-       })
 
-       const fecha = yearId[0].fecha;
-
-       window.location.href = `/search/${submodelId}/${fecha}/1`;
-
-    })
-    }
 
     
 

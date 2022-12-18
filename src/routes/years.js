@@ -4,6 +4,8 @@ const mysqlConnection = require('../database/database')
 router.get('/', (req, res) => {
     let selectedSubmodel = req.query.submodel
     let SubmodelId;
+
+    //aca deberia ser select * from listasubmodelo where submodelo id = x
     
     if (selectedSubmodel != undefined) {
 

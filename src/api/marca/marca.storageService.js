@@ -50,3 +50,20 @@ exports.getMarcaById = (id) => {
     })    
 }
 
+
+exports.insertOrUpdate = (id, nombre) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `INSERT INTO marca (id, nombre) VALUES(${id}, '${nombre}') ON DUPLICATE KEY UPDATE nombre='${nombre}'`;
+            mysqlConnection.query(sql, (err, result) => {
+                if (err) throw err;
+                resolve(result)
+            })
+        } catch (err) {
+            reject(err);
+            console.error(err.message);
+            throw err;
+        }
+    })
+}
+

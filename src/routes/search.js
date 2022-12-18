@@ -30,27 +30,24 @@ router.get('/:busqueda/:page', async (req, res) => {
     
 })
                                                                             
-router.get('/:submodelo/:year/:page', async (req, res) => {
+router.get('/compatibilidad/:listasubmodelo/:page', async (req, res) => {
 
     console.log("hello")
-    $submodeloId = req.params.submodelo
-    $anyoName = req.params.year
     page = req.params.page
     posicionArrayProductos = parseInt(page) - 1
+    const listaSubmodeloId = req.params.listasubmodelo
 
     //Tengo que aplicar async await aca con promesas, agarrar todo lo del submodelo, agarrar todos los universales y hacer un array 
     // ese array despues puedo crear un Set y me quedara todo filtradito y ahi lo imprimo
 
 
-    const fabricacionId = await fabricacionService.getFabricacionByFecha($anyoName);
     const brandResults = await marcaService.getAllMarca();
-    const listaSubmodeloId = await listaSubmodeloService.getListaSubmodeloBySubmodelAndYear($submodeloId, fabricacionId)
-    const resultsSubmodelo = await productoService.getProductoInfoByListaSubmodelo(listaSubmodeloId);
+    const resultsListaSubmodelo = await productoService.getProductoInfoByListaSubmodelo(listaSubmodeloId);
     const resultsUniversal = await productoService.getProductosUniversal();
-    const results = [...resultsSubmodelo, ...resultsUniversal];  
+    const results = [...resultsListaSubmodelo, ...resultsUniversal];  
 
-    const busqueda = req.params.submodelo;
-    const data = categoriesControllers.getElementsByPageRender('submodel', {data:busqueda, year:req.params.year}, results, page)
+    const busqueda = req.params.listasubmodelo;
+    const data = categoriesControllers.getElementsByPageRender('submodel', {data:busqueda}, results, page)
     const resultados = data.results;
     const paginator = data.paginator;
 

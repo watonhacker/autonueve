@@ -59,7 +59,6 @@ exports.boostrapPaginator = (type, searchObject, page, total) => {
 
   let url;
   let search = searchObject.data;
-  let year = searchObject.year || undefined;
   
   switch (type) {
     case 'search':
@@ -69,7 +68,7 @@ exports.boostrapPaginator = (type, searchObject, page, total) => {
       url = `/categories/${search}/`;
       break;
     case 'submodel':
-      url = `/search/${search}/${year}/`;
+      url = `/search/compatibilidad/${search}/`;
       break;
   }
 

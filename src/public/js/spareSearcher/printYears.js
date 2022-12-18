@@ -1,7 +1,6 @@
 const d = document;
 
 export function printYears () {
-    var submodelsBox = document.getElementById("formSubmodels");
     const $searchBtn = d.querySelector('#btnSearch')
 
     if (document.getElementById('inputSubmodel')) {
@@ -18,6 +17,8 @@ export function printYears () {
             fetch(url)
             .then(res => res.json())
             .then(data => {
+
+                debugger;
     
                 $yearDatalist.setAttribute("id", "year")
     

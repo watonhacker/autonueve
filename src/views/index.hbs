@@ -360,6 +360,7 @@ var swiperLogos = new Swiper(".swiperLogos", {
     if (submodelSelector) {
     submodelSelector.addEventListener("change", e => {
        e.preventDefault();
+       debugger;
        submodelId = e.target.value;
        window.localStorage.setItem('submodelId', submodelId)
        const listaSubmodelosAsociados = listaSubmodelos.filter((listaSubmodelo) => {
@@ -368,19 +369,8 @@ var swiperLogos = new Swiper(".swiperLogos", {
             }
        })
 
-        const yearsAsociados = []
-
-        listaSubmodelosAsociados.forEach((listaSubmodelo) => {
-            fabricacion.forEach((year) => {
-                if (listaSubmodelo.fabricacion_id == year.id) {
-                    yearsAsociados.push(year)
-                }
-            })
-        })
-
-
-       yearsAsociados.forEach(year => {
-            const html = `<option value="${year.id}" class="brand-option">${year.fecha}</option>`
+       listaSubmodelosAsociados.forEach(year => {
+            const html = `<option value="${year.id}" data-id="${year.id}" class="brand-option">${year.fecha}</option>`
             yearSelector.insertAdjacentHTML("beforeend", html)
        })
 
@@ -396,15 +386,12 @@ var swiperLogos = new Swiper(".swiperLogos", {
 if (yearSelector) {
     yearSelector.addEventListener("change", e => {
        e.preventDefault();
-       const yearId = fabricacion.filter(year => {
-            if (year.id == e.target.value) {
-                return true;
-            }
-       })
+       
+       const listaSubmodelId = e.target.value;
+        debugger;
 
-       const fecha = yearId[0].fecha;
 
-       window.location.href = `/search/${submodelId}/${fecha}/1`
+       window.location.href = `/search/compatibilidad/${listaSubmodelId}/1`
 
 
     })

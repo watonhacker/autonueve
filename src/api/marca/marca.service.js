@@ -11,3 +11,7 @@ exports.createMarca = (marca) => {
 exports.getMarcaById = (id) => {
     return marcaStorageService.getMarcaById(id);  
 }
+
+exports.insertOrUpdate = (id, nombre) => {
+    return marcaStorageService.insertOrUpdate(id, nombre);
+}
