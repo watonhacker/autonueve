@@ -1,0 +1,4 @@
+Cod.Marca | Cod.Modelo | Cod.Submodelo | Ano | Nomb.Ano 
+013|001|001|001|ASIA ANO+
+013|001|001|002|2020-2022
+025|001|001|001|AN_BAIC

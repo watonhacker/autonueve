@@ -1,0 +1,4 @@
+Cod.Marca | Cod.Modelo | Nomb.Modelo 
+013|001|ASIA MODELO
+025|001|MOD.BAIC
+013|002|CHEVROLET

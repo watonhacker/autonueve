@@ -1,0 +1,3 @@
+ Codigo | Descripcion | Marca | Modelo | Submodelo | Anofab
+AB-01|ABRAZADERA (10-15)XI|013|001|001|001
+AB-01|ABRAZADERA (10-15)XI|013|001|001|002
