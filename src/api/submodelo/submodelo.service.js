@@ -12,3 +12,11 @@ exports.createSubmodelo = (submodelo) => {
 exports.getSubmodeloById = (id) => {
     return submodeloStorageService.getSubmodeloById(id);   
 }
+
+exports.insertOrUpdate = (id, id_modelo, nombre) => {
+    return submodeloStorageService.insertOrUpdate(id, id_modelo, nombre);
+}
+
+
+
+

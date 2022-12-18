@@ -1,6 +1,7 @@
 const lineReader = require('line-reader');
 const marcaService = require('../api/marca/marca.service')
 const modeloService = require('../api/modelo/modelo.service')
+const submodeloService = require('../api/submodelo/submodelo.service')
 
 //leer y meter a la carpeta
 exports.read = (path) => {
@@ -35,14 +36,61 @@ function cleanZeros (numbers) {
 
   })
   return cleanedNumber.join("")
+  
+}
+
+async function readSubmodelo () {
+  
+console.log("reading...")
+try {
+  let headers = undefined;
+  let arrayDeObjetosGenerados = [];
+   lineReader.eachLine('src/ftp/RECIBIR/PRUEBAS/SUBMODELO.txt', function(line, last) {        
+      if (line.length > 1) {
+        if (headers === undefined) {
+          //seteando lo que son los "key" o la primera linea del txt  /  columnas 
+          headers = line.split(' | ').map((element) => element.trim())
+        } else {
+          const currentLine = line.split('|')
+          if (currentLine.length === headers.length) {
+            console.log(currentLine)
+            let lineObject = {}
+            currentLine.forEach((element, index) => {
+              lineObject[headers[index]] = element;
+            })
+            arrayDeObjetosGenerados.push(lineObject)
+        }
+      }
+
+      }
+
+      //Cod.Marca | Cod.Modelo | Cod.Submodelo | Nomb.Sub-Modelo 
+      if(last) {
+        if (arrayDeObjetosGenerados.length > 1) {
+          console.log(arrayDeObjetosGenerados)
+          arrayDeObjetosGenerados.forEach((objeto) => {
+            const idMarca = cleanZeros(objeto['Cod.Marca'])
+            const idModelo = cleanZeros(objeto['Cod.Modelo'])
+            const idSubmodelo = cleanZeros(objeto['Cod.Submodelo'])
+            const id = `${idMarca}${idModelo}${idSubmodelo}`
+            console.log(id)
+            //marcaService.insertOrUpdate(objeto['Cod.Marca'], objeto['Nomb.Marca'])
+            submodeloService.insertOrUpdate(id, objeto['Cod.Modelo'], objeto['Nomb.Sub-Modelo'])
+            console.log("ok")
+          })
+          
+        }
+      }
+    });
+
+    
+} catch (err) {
+  console.log(err)
+}
+
 }
 
 async function readModelo () {
-/*   Cod.Marca | Cod.Modelo | Nomb.Modelo 
-013|001|ASIA MODELO
-025|001|MOD.BAIC
-013|002|CHEVROLET */
-
 
 console.log("reading...")
   try {
@@ -152,6 +200,7 @@ async function main() {
       client.end();
       await readMarca()
       await readModelo()
+      await readSubmodelo()
     }
 
     
