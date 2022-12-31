@@ -140,7 +140,7 @@ router.get('/submodels/add', authController.isAuthenticated, (req, res) => {
 
 router.get('/products', authController.isAuthenticated, (req, res) => {
 
-    mysqlConnection.query("SELECT * FROM producto", (err, results) => {
+    mysqlConnection.query("SELECT * FROM producto WHERE estado='A'", (err, results) => {
         let productResults = results
         res.render("products", {
             productResults
@@ -151,7 +151,7 @@ router.get('/products', authController.isAuthenticated, (req, res) => {
 router.get('/products/edit/', authController.isAuthenticated, (req, res) => {
 
     let id = req.query.id
-    let sql = `SELECT id, nombre, precio, marca, descripcion, cantidad, imagen FROM producto WHERE id = '${id}'`
+    let sql = `SELECT id, nombre, precio, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE id = '${id}' AND estado="A"`
     mysqlConnection.query(sql, (err, results) => {
         results = JSON.parse(JSON.stringify(results))
 
@@ -162,11 +162,13 @@ router.get('/products/edit/', authController.isAuthenticated, (req, res) => {
 })
 
 router.post('/products/edit/', authController.isAuthenticated, (req, res) => {
-    let imagen = req.body['imagen']
-    let id = req.body['id']
 
- 
-    let sql = `UPDATE producto SET imagen='${imagen}' WHERE id = '${id}'`
+    const imagen = req.body['imagen'];
+    const imagen_2 = req.body['imagen_2'];
+    const imagen_3 = req.body['imagen_3'];
+    const id = req.body['id'];
+
+    let sql = `UPDATE producto SET imagen='${imagen}', imagen_2 = '${imagen_2}', imagen_3 = '${imagen_3}' WHERE id = '${id}'`;
     
     mysqlConnection.query(sql, (err, results) => {
         if (err) throw err;

@@ -4,7 +4,7 @@ const mysqlConnection = require('../../database/database')
 exports.getAllProducto = () => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = 'SELECT * FROM producto';
+            const sql = 'select * from producto WHERE estado="A"';
             mysqlConnection.query(sql, (err, result) => {
                 if (err) throw err;
                 resolve(result)
@@ -43,7 +43,7 @@ exports.getProductosByIds = (ids) => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            const sql = `SELECT * FROM producto WHERE id IN(${productos});`;
+            const sql = `SELECT * FROM producto WHERE id IN(${productos}) AND estado="A";`;
             mysqlConnection.query(sql, (err, result) => {
                 if (err) {
                     console.error("No se ha podido obtener el producto", err.message)
@@ -67,7 +67,7 @@ exports.getProductosByIds = (ids) => {
 exports.getProductoById = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const sql = `SELECT * FROM producto WHERE id = '${id}';`;
+            const sql = `SELECT * FROM producto WHERE id = '${id}' AND estado="A";`;
             mysqlConnection.query(sql, (err, result) => {
                 if (err) {
                     this.logger.error("No se ha podido obtener el producto", err.message)
@@ -107,7 +107,7 @@ exports.getProductoInfoByListaSubmodelo = (listaSubmodeloId) => {
     return new Promise((resolve, reject) => {
         try {
             const sql = `SELECT producto.cantidad, tipouniversal_id, producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
-            INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id WHERE listasubmodelo.id = ${listaSubmodeloId} AND producto.cantidad > 5 AND NOT producto.tipouniversal_id = 1`;
+            INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id WHERE listasubmodelo.id = ${listaSubmodeloId} AND producto.cantidad > 4 AND NOT producto.tipouniversal_id = 1`;
 
             mysqlConnection.query(sql, (err, results) => {
                 if (err) throw err;
@@ -126,7 +126,7 @@ exports.getProductoInfoByListaSubmodelo = (listaSubmodeloId) => {
 exports.getProductosUniversal = () => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = `SELECT producto.cantidad, tipouniversal_id, producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM producto WHERE tipouniversal_id = 1 AND producto.cantidad > 5;`;
+            const sql = `SELECT producto.cantidad, tipouniversal_id, producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM producto WHERE tipouniversal_id = 1 AND producto.cantidad > 4 AND estado="A";`;
 
             mysqlConnection.query(sql, (err, results) => {
                 if (err) throw err;

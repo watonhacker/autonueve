@@ -26,7 +26,7 @@ exports.getCategories = () => {
 
 
 exports.getCategoryProducts = (categoryId) => {
-    let sql = `SELECT * FROM producto WHERE producto.categoria_id = ${categoryId}`;
+    let sql = `SELECT * FROM producto WHERE producto.categoria_id = ${categoryId} AND estado="A"`;
 
     return new Promise((resolve, reject) => {
         mysqlConnection.query(sql, (err, results, rows) => {
@@ -64,7 +64,7 @@ exports.getElementsByPageRender = (type, search, results, page) => {
 
 exports.getCategoryProductsPage = (categoryId, page, category) => {
 
-    let sql = `SELECT * FROM producto WHERE producto.categoria_id = ${categoryId}`;
+    let sql = `SELECT * FROM producto WHERE producto.categoria_id = ${categoryId} AND estado="A"`;
 
     
     return new Promise((resolve, reject) => {

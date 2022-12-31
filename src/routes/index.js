@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
             if (results !== undefined) {
                 results=JSON.parse(JSON.stringify(results))
                 resultados = results
-                mysqlConnection.query(`SELECT * FROM producto WHERE cantidad > 5 ORDER BY id DESC LIMIT 12;`, (err, results, rows) => {
+                mysqlConnection.query(`SELECT * FROM producto WHERE cantidad > 4 AND estado="A" ORDER BY id DESC LIMIT 12;`, (err, results, rows) => {
 
                     lastProducts = results.map((result) => {
                         if (result.precio.toString().length == 4) {

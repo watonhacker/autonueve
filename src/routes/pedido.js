@@ -55,7 +55,7 @@ router.get('/', async (req, res) =>  {
             if (results !== undefined) {
                 results=JSON.parse(JSON.stringify(results))
                 resultados = results
-                mysqlConnection.query(`SELECT * FROM producto ORDER BY id DESC LIMIT 12;`, (err, results, rows) => {
+                mysqlConnection.query(`SELECT * FROM producto WHERE estado ="A" ORDER BY id DESC LIMIT 12;`, (err, results, rows) => {
 
                     lastProducts = results
     
