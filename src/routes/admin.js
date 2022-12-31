@@ -151,7 +151,7 @@ router.get('/products', authController.isAuthenticated, (req, res) => {
 router.get('/products/edit/', authController.isAuthenticated, (req, res) => {
 
     let id = req.query.id
-    let sql = `SELECT id, nombre, precio, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE id = '${id}' AND estado="A"`
+    let sql = `SELECT id, nombre, precio, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE id = '${id}'`
     mysqlConnection.query(sql, (err, results) => {
         results = JSON.parse(JSON.stringify(results))
 

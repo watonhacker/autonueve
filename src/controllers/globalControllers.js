@@ -105,7 +105,7 @@ exports.boostrapPaginator = (type, searchObject, page, total) => {
 };
 
 exports.globalSearch = (busqueda, page) => {
-  const sql = `SELECT * FROM producto WHERE producto.nombre LIKE '%${busqueda}%' AND estado="A";`;
+  const sql = `SELECT * FROM producto WHERE producto.nombre LIKE '%${busqueda}%' AND producto.estado="A";`;
 
   console.log(sql)
     

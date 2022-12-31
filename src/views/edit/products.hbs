@@ -12,7 +12,11 @@
   
     <label for="descripcion">Descripcion</label><textarea disabled name="descripcion" >'{{results.descripcion}}' </textarea>
     <label for="cantidad">Cantidad</label><input type="number" id="rut"name="cantidad" required value={{results.cantidad}} disabled>
-    <label for="imagen">Imagen</label><input type="text" id="rut"name="imagen" placeholder="Ingrese el link de la imagen" value='{{results.imagen}}' >
+    <label for="imagen">Imagen Principal</label><input type="text" id="rut"name="imagen" placeholder="Ingrese el link de la imagen" value='{{results.imagen}}' >
+    <label for="imagen_2">Imagen Secundaria</label><input type="text" id="rut"name="imagen_2" placeholder="Ingrese el link de la imagen" value='{{results.imagen_2}}' >
+    <label for="imagen_3">Imagen Secundaria</label><input type="text" id="rut"name="imagen_3" placeholder="Ingrese el link de la imagen" value='{{results.imagen_3}}' >
+
+
     <input type="hidden" name="id" value={{results.id}}>
     <input class="btn btn-info w-100" style="margin-top:.5rem;" type="submit" value="Enviar">
     

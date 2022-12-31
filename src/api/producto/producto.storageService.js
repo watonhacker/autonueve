@@ -107,7 +107,7 @@ exports.getProductoInfoByListaSubmodelo = (listaSubmodeloId) => {
     return new Promise((resolve, reject) => {
         try {
             const sql = `SELECT producto.cantidad, tipouniversal_id, producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
-            INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id WHERE listasubmodelo.id = ${listaSubmodeloId} AND producto.cantidad > 4 AND NOT producto.tipouniversal_id = 1`;
+            INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id WHERE listasubmodelo.id = ${listaSubmodeloId} AND producto.cantidad > 4 AND producto.estado="A" AND NOT producto.tipouniversal_id = 1`;
 
             mysqlConnection.query(sql, (err, results) => {
                 if (err) throw err;
@@ -126,7 +126,7 @@ exports.getProductoInfoByListaSubmodelo = (listaSubmodeloId) => {
 exports.getProductosUniversal = () => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = `SELECT producto.cantidad, tipouniversal_id, producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM producto WHERE tipouniversal_id = 1 AND producto.cantidad > 4 AND estado="A";`;
+            const sql = `SELECT producto.cantidad, tipouniversal_id, producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM producto WHERE tipouniversal_id = 1 AND producto.cantidad > 4 AND producto.estado="A";`;
 
             mysqlConnection.query(sql, (err, results) => {
                 if (err) throw err;
@@ -145,7 +145,7 @@ exports.getProductosUniversal = () => {
 exports.getProductosAssociated = (id) => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = `SELECT producto_id, cantidad FROM listapedido WHERE listapedido.pedido_id = ${id}`;
+            const sql = `SELECT producto_id, cantidad FROM listapedido WHERE listapedido.pedido_id = ${id} AND producto.estado = "A"`;
             mysqlConnection.query(sql, (err, result) => {
                 if (err) throw err;
                 resolve(JSON.parse(JSON.stringify(result)))

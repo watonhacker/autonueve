@@ -3,7 +3,7 @@ const mysqlConnection = require('../database/database');
 exports.getSingleProduct = (id) => {
     return new Promise((resolve, reject) => {
 
-        let sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.id = '${id}' AND estado="A"; `
+        let sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.id = '${id}' AND producto.estado="A"; `
 
         mysqlConnection.query(sql, (err, results) => {
             if (err) throw err;
@@ -18,7 +18,7 @@ exports.getSingleProduct = (id) => {
 exports.getProductCategory = (id) => {
     return new Promise((resolve, reject) => {
 
-        let sql = `SELECT categoria_id FROM producto WHERE producto.id = '${id}' AND estado="A"; `
+        let sql = `SELECT categoria_id FROM producto WHERE producto.id = '${id}' AND producto.estado="A"; `
 
         mysqlConnection.query(sql, (err, results) => {
             if (err) throw err;
@@ -33,7 +33,7 @@ exports.getProductCategory = (id) => {
 exports.getAssociatedProducts = async (id) => {
 
     const categoryId = await this.getProductCategory(id);
-    const sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.categoria_id = ${categoryId} AND estado="A" ORDER BY id DESC limit 9; `
+    const sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.categoria_id = ${categoryId} AND producto.estado="A" ORDER BY id DESC limit 9; `
 
     return new Promise((resolve, reject) => {
         mysqlConnection.query(sql, (err, results) => {
