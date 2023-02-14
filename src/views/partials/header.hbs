@@ -85,7 +85,7 @@
                 <img style="max-width:70px; cursor:pointer;" src="images/whatsapp.png" alt="whatsapp" onclick="myTestFunction()">
                 </a>`;
 
-                if ((window.location.href.split("/")[3] !== 'categories') || (window.location.href.split("/")[4] !== 'categories' ) {
+                if (window.location.href.split("/")[3] !== 'categories' && window.location.href.split("/")[4] !== 'compatibilidad' ) {
                     const wrapperWhatsapp = document.querySelector(".wrapper-whatsapp");
                     wrapperWhatsapp.insertAdjacentHTML("beforebegin", btn)
                 }
