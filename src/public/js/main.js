@@ -21,9 +21,9 @@ const getFamilias = async () => {
     fetch('/api/listasubmodelo').then(res => res.json()).then(data => {
         window.localStorage.setItem('listasubmodelo', JSON.stringify(data))
     })
-    fetch('/api/fabricacion').then(res => res.json()).then(data => {
-        window.localStorage.setItem('fabricacion', JSON.stringify(data))
-    })
+    // fetch('/api/fabricacion').then(res => res.json()).then(data => {
+    //     window.localStorage.setItem('fabricacion', JSON.stringify(data))
+    // })
 }
 
 d.addEventListener("DOMContentLoaded", () => {

@@ -2,8 +2,8 @@ const router = require('express').Router()
 
 const globalControllers = require('../controllers/globalControllers')
 const categoriesControllers = require('../controllers/categories.controller')
-const fabricacionService = require('../api/fabricacion/fabricacion.service')
-const listaSubmodeloService = require('../api/listasubmodelo/listasubmodelo.service')
+// const fabricacionService = require('../api/fabricacion/fabricacion.service')
+// const listaSubmodeloService = require('../api/listasubmodelo/listasubmodelo.service')
 const productoService = require('../api/producto/producto.service')
 const marcaService = require('../api/marca/marca.service')
 

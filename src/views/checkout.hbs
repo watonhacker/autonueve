@@ -120,9 +120,9 @@
                     <td data-label="Producto"="">{{nombre}}</td>
                     <td data-label="Precio">{{ precio }}</td>
                     <td data-label="Cantidad">
-                        <button onclick="restarCantidad(event)">-</button>
-                        <input type="number" class="number" min="1" value="{{cantidad_comprada}}" max={{cantidad}} disabled>
-                        <button onclick="sumarCantidad(event)">+</button>     
+                        <button class="restar-btn" onclick="restarCantidad(event)">-</button>
+                        <input type="number" class="number input-cantidad" min="1" value="{{cantidad_comprada}}" max={{cantidad}} disabled>
+                        <button class="sumar-btn" onclick="sumarCantidad(event)">+</button>     
                     </td>
                     <td data-label="Subtotal">{{{price precio cantidad_comprada}}}</td>
                  

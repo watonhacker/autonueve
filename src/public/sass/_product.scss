@@ -13,7 +13,7 @@
     .product {
         border:1px solid #f1f1f1;
 
-
+        padding:.5rem;
         width:47%;
 
 
@@ -29,9 +29,9 @@
         }
 
         .product-name {
-            height:50px;
+            height:90px;
             color:#555;
-            font-size: 1rem;
+            font-size: .9rem;
         }
 
         .product-sku {
@@ -72,10 +72,9 @@
             }
 
             button {
-                width:50px;
+
                 margin:0 1rem;
-                border:none;
-                border-radius:.5rem;
+
             }
 
             button:hover {

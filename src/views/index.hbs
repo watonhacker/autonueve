@@ -157,9 +157,9 @@
                     }
                 </script>
                 
-               <button onclick="restarCantidad(event)">-</button>
-                <input type="number" class="number" min="1" value="1" max={{cantidad}} disabled>
-                <button onclick="sumarCantidad(event)">+</button>                
+               <button class="restar-btn" onclick="restarCantidad(event)">-</button>
+                <input type="number" class="number input-cantidad" min="1" value="1" max={{cantidad}} disabled>
+                <button class="sumar-btn" onclick="sumarCantidad(event)">+</button>                
             </div>  
             <a class="btn btn-primary w-100" style="margin-top:.5rem" href="{{id}}" data-id="{{id}}">Añadir</a>
         </div>
@@ -277,7 +277,14 @@ var swiperLogos = new Swiper(".swiperLogos", {
 
 
 <button class="scrollUp-btn"><i class="fas fa-arrow-alt-circle-up"></i></button>
-
+<script>
+    function myTestFunction() {
+        window.open("https://google.cl")
+    }
+</script>
+<a style="border: none; background:none; position: fixed; z-index: 30; right: 1rem; bottom:6rem">
+    <img style="max-width:70px" src="../images/whatsapp.png" alt="whatsapp" onclick="myTestFunction()">
+</a>
 
 
 <script src="/js/serviceLinks.js"></script>
