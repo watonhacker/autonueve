@@ -5,7 +5,7 @@ router.get('/', (req, res) => {
     let lastProducts;
     let resultados;
 
-    mysqlConnection.query("SELECT * FROM marca", (err, results, row) => {
+    mysqlConnection.query("SELECT * FROM marca order by nombre", (err, results, row) => {
             if (results !== undefined) {
                 results=JSON.parse(JSON.stringify(results))
                 resultados = results

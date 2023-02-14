@@ -4,7 +4,7 @@ const mysqlConnection = require('../../database/database')
 exports.getAllModelo = () => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = 'SELECT * FROM modelo';
+            const sql = 'SELECT * FROM modelo order by nombre';
             mysqlConnection.query(sql, (err, result) => {
                 if (err) throw err;
                 resolve(result)

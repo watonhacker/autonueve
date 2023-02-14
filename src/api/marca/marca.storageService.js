@@ -3,7 +3,7 @@ const mysqlConnection = require('../../database/database')
 exports.getAllMarca = () => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = 'SELECT * FROM marca';
+            const sql = 'SELECT * FROM marca order by nombre';
             mysqlConnection.query(sql, (err, result) => {
                 if (err) throw err;
                 resolve(result)

@@ -13,7 +13,7 @@ router.get('/', authController.isAuthenticated, (req, res) => {
 
 router.get('/models', authController.isAuthenticated, (req, res) => {
 
-    mysqlConnection.query("SELECT * FROM modelo", (err, results) => {
+    mysqlConnection.query("SELECT * FROM modelo order by nombre", (err, results) => {
         let resultsModels = results
         res.render("models", {
             resultsModels
@@ -71,7 +71,7 @@ router.get('/submodels', authController.isAuthenticated, (req,res) => {
 
 router.get('/brands', authController.isAuthenticated, (req,res) => {
     
-    mysqlConnection.query("SELECT * from marca", (err, results) => {
+    mysqlConnection.query("SELECT * from marca order by nombre", (err, results) => {
         let resultsBrands = results;
         res.render("brands", {
             resultsBrands
@@ -123,7 +123,7 @@ router.get('/submodels/add', authController.isAuthenticated, (req, res) => {
     let submodelId = req.query.id
 
     let resultados;
-    mysqlConnection.query("SELECT * FROM modelo", (err, results) => {
+    mysqlConnection.query("SELECT * FROM modelo order by nombre", (err, results) => {
         results=JSON.parse(JSON.stringify(results))
         resultados = results;
 

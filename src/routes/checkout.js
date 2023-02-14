@@ -34,7 +34,7 @@ router.get('/', async (req, res) =>  {
     // ahora estoy renderizando si esque viene algo en el params (ya que lo estoy borrando)
     // en realidad creo que debería hacer la petición considerando lo que esta en el dom ya ir
     // a buscar el id y la cantidad al formulario y hacer la consulta
-    mysqlConnection.query("SELECT * FROM marca", (err, results, row) => {
+    mysqlConnection.query("SELECT * from marca order by nombre", (err, results, row) => {
         if (results !== undefined) {
             results=JSON.parse(JSON.stringify(results))
             resultados = results

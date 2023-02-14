@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
             if (results[0]) {
                 let resultsId = results[0]['id']
     
-                mysqlConnection.query(`SELECT * FROM modelo WHERE marca_id = ${resultsId}`, (err, results, rows) => {
+                mysqlConnection.query(`SELECT * FROM modelo WHERE marca_id = ${resultsId} order by nombre`, (err, results, rows) => {
                     if (err) {
                         console.log(err)
                     } 
