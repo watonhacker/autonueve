@@ -31,7 +31,9 @@
                 </a>
      
             </div>
-      
+
+
+
 
             <script>
                 (() => {
@@ -69,6 +71,26 @@
         </div>
 
 
+<script>
+    function myTestFunction() {
+        window.open("https://wa.link/vnopzx")
+    }
+</script>
+                    <div class="wrapper-whatsapp"></div>
+
+
+
+            <script>
+                const btn = `<a style="border: none; background:none; position: fixed; z-index: 30; right: 1rem; bottom:6rem">
+                <img style="max-width:70px; cursor:pointer;" src="images/whatsapp.png" alt="whatsapp" onclick="myTestFunction()">
+                </a>`;
+
+                if (window.location.href.split("/")[3] !== 'categories') {
+                    const wrapperWhatsapp = document.querySelector(".wrapper-whatsapp");
+                    wrapperWhatsapp.insertAdjacentHTML("beforebegin", btn)
+                }
+
+            </script>
 
 
 

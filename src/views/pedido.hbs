@@ -1,3 +1,14 @@
+<button style="z-index:30;" class="btnCart"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+    </svg>
+        <div id="cart-circle"  class="circle">
+    </svg>
+    </div>
+    <p style="color:#6EA0F3; margin:0;padding:0;font-weight:bold;">0</p>
+    <a class="shopping-cart" style="color:#ccc; display:flex; justify-content:center; align-items:center; align-content:center;text-decoration:none; " href="/checkout"></a>
+</button>
+
+
 <script>
         window.addEventListener("DOMContentLoaded", e => {
         window.history.replaceState(
@@ -8,6 +19,10 @@
     })
 </script>
  <h1 class="pedido-title">DATOS DE ENVÍO</h1>
+
+                 <a href="/checkout" style="display:flex; justify-content:center; align-items:center; align-content:center; text-decoration:none;">
+                    <a class="shopping-cart" style="color:#fff; background-color:#6EA0F3; padding:1rem; border-radius:.5rem;" href="/checkout" >Volver</a>
+                </a>
 
  <form action="/venta" method="POST" id="pedidoForm" autocomplete="ÑÖcompletes">
 
@@ -45,6 +60,8 @@
         <label for="rut">Rut<span style="color:red; margin-left:5px;">*</span></label>
         <input type="number" max="999999999" maxlength="9" min="1" oninput="this.value=this.value.slice(0,this.maxLength)" onkeydown="if(event.key==='.' || event.key===','){event.preventDefault();}" onpaste="let pasteData = event.clipboardData.getData('text'); if(pasteData){pasteData.replace(/[^0-9]*/g,'');} "name="rut" placeholder="Ej: 178218394 (Sin punto ni guión)"required>
     </div>
+
+
 
     <div class="shipping-information">
 
@@ -134,6 +151,9 @@
     </div>
 {{/if}}
 
+    <a class="shopping-cart" style="color:#ccc; display:flex; justify-content:center; align-items:center; align-content:center;text-decoration:none; " href="/checkout"></a>
+
+
 
 
     <input class="btn-style"type="submit" value="Enviar" id="pedidoSubmit">
@@ -160,3 +180,4 @@
 <script src="/js/hamburgerBtnCopy.js"></script>
 <script src="/js/responsiveCopy.js"></script>
 <script src="/js/hiddenSearch.js"></script>
+<script src="/js/shoppingCart.js"></script>
