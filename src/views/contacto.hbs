@@ -1,9 +1,9 @@
 <form id="contact-form">
-    <h1 style="color:#444;">Formulario de contacto</h1>
+    <h1 style="color:#6EA0F3;">Formulario de contacto</h1>
     <input type="text" name="nombre" placeholder="Ingrese su nombre" required>
     <input type="email" name="email"placeholder="Ingrese su email" required>
     <textarea name="message" placeholder="Escriba su mensaje..."required></textarea>
-    <button id="btn-contacto" class="btn-style">Enviar</button>
+    <button id="btn-contacto" class="btn btn-primary">Enviar</button>
 </form>
 <script src="/js/sweetalert2.all.min.js"></script>
 <script>
@@ -74,14 +74,18 @@
 <style>
     #contact-form {
         max-width:1200px;
-        width:100%;
-
+        width:80%;
+        margin:2rem auto;
         display:flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         align-content: center;
         gap:.4rem;
+        border:1px solid #ddd;
+        padding:1.5rem;
+        background-color:#fefeff;
+
     }
 
     #contact-form input,
@@ -92,7 +96,7 @@
         min-width:250px;
         padding:.4rem;
         border:1px solid #ccc;
-        border-radius:.4rem;
+        border-radius:.2rem;
     }
 
     #contact-form textarea {
