@@ -380,6 +380,12 @@ body {
     color:#fff;
     font-weight: bold;
 }
+
+.restar-btn:hover,
+.sumar-btn:hover {
+    cursor:pointer;
+}
+
 .input-cantidad {
     color:#007bff;
     margin:0 .7rem;
