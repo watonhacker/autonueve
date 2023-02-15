@@ -145,7 +145,7 @@ exports.getProductosUniversal = () => {
 exports.getProductosAssociated = (id) => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = `SELECT producto_id, cantidad FROM listapedido WHERE listapedido.pedido_id = ${id} AND producto.estado = "A"`;
+            const sql = `SELECT producto_id, cantidad FROM listapedido WHERE listapedido.pedido_id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
                 if (err) throw err;
                 resolve(JSON.parse(JSON.stringify(result)))

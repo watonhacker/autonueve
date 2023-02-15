@@ -4,13 +4,12 @@ const ventaControllers = require('../controllers/ventaControllers')
 
 /* Vistas */
 
-router.get('/', (req, res) => {
-    ventaControllers.guardarListaPedido()
-    res.render("signup")
+    // router.get('/', (req, res) => {
+    //     res.render("signup")
 
-})
+    // })
 
-router.post('/', authControllers.register)
+    // router.post('/', authControllers.register)
 
 
 
