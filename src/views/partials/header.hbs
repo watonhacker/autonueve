@@ -3,7 +3,7 @@
 
             <a class="logo-container" href="/">
                 <img class="nav-logo" src="https://res.cloudinary.com/keyzen/image/upload/v1633300448/mobalzen/autonueve/Group_166_n0avie.svg" alt="" >
-
+                {{!-- <img class="nav-logo" src="https://res.cloudinary.com/keyzen/image/upload/v1676435777/252049896_156257380108324_5539956518987705601_n-removebg-preview_2_knedc2.png" alt=""> --}}
 
             </a>
 
@@ -69,28 +69,20 @@
 
             </div>
         </div>
-
-
-<script>
+        <script>
     function myTestFunction() {
         window.open("https://wa.link/vnopzx")
     }
 </script>
+<a style="border: none; background:none; position: fixed; z-index: 30; right: 1rem; bottom:6rem">
+                <img style="max-width:70px; cursor:pointer;" src="images/whatsapp.png" alt="whatsapp" onclick="myTestFunction()">
+                </a>
+
+
                     <div class="wrapper-whatsapp"></div>
 
 
 
-            <script>
-                const btn = `<a style="border: none; background:none; position: fixed; z-index: 30; right: 1rem; bottom:6rem">
-                <img style="max-width:70px; cursor:pointer;" src="images/whatsapp.png" alt="whatsapp" onclick="myTestFunction()">
-                </a>`;
-
-                if (window.location.href.split("/")[3] !== 'categories' && window.location.href.split("/")[4] !== 'compatibilidad' ) {
-                    const wrapperWhatsapp = document.querySelector(".wrapper-whatsapp");
-                    wrapperWhatsapp.insertAdjacentHTML("beforebegin", btn)
-                }
-
-            </script>
-
+            
 
 
