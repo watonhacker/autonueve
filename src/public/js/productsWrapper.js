@@ -81,12 +81,18 @@
                     shoppingCartAmount = productList.split(',').length
                     shoppingCart.innerHTML = shoppingCartAmount   
                     asideCart.innerHTML = shoppingCartAmount
-     
-                    
+         
+                    Swal.fire({
+                        html:"El producto ha sido agregado con éxito"
+                    })
         
                 } else {
                     esIgual = false;
-    
+                            
+            
+                    Swal.fire({
+                        html:"El producto ya ha sido agregado"
+                    })
                     productList = myStorage.getItem("listaproducto")
                     idList = myStorage.getItem("productos")
         
@@ -104,7 +110,10 @@
                     })
         
                     if (esIgual == false) {
-        
+                        
+                        Swal.fire({
+                            html:"El producto ha sido agregado con éxito"
+                        })
                         /* Añadiendo cantidad */
 /*                         if(e.target.dataset.type === 'single') {
                             selectedProduct = document.querySelector(`#product-${e.target.dataset.id} input`)
@@ -125,6 +134,7 @@
                             idList += `,${productoActual}`
                         }
           
+
                         myStorage.removeItem("productos")
                         myStorage.setItem("productos",idList )
                     
@@ -137,9 +147,7 @@
                     } 
         
                 }
-        
-            
-            
+
          
     
         }

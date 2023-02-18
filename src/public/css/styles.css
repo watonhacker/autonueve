@@ -1338,11 +1338,10 @@ img {
 }
 
 .search {
-  padding: 2rem 0 2rem;
   background-color: #6EA0F3;
   width: 100%;
   line-height: 0;
-  padding-bottom: 3rem;
+  padding: 1rem 0;
 }
 .search h2 {
   color: #fff;
