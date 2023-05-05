@@ -1517,6 +1517,12 @@ img {
   margin-bottom: 2rem;
 }
 
+.info-checkout {
+  border: 1px solid #6EA0F3;
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
 .signin-form {
   display: flex;
   flex-direction: column;
@@ -2218,20 +2224,21 @@ body > section.main > div.adminResults > table > tbody {
   justify-content: flex-start;
   align-items: flex-start;
   align-content: center;
-  max-width: 800px;
   padding: 2rem;
   gap: 0.3rem;
+  width: 50%;
+  min-width: 350px;
 }
 .edit-form input {
   padding: 0.5rem;
+  width: 90%;
+  min-width: 300px;
 }
 .edit-form textarea {
-  width: 300px;
+  width: 90%;
   height: 150px;
-  min-height: 150px;
-  max-height: 300px;
-  min-width: 200px;
-  max-width: 300px;
+  min-width: 300px;
+  resize: none;
 }
 .edit-form label {
   margin: 0.5rem 0;
