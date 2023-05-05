@@ -162,14 +162,22 @@
                         if (res.status === 200) {
                             window.localStorage.removeItem('listaproducto')
                             window.localStorage.removeItem('productos')
-                            Swal.fire(
-                                'Su pedido ha sido ingresado con éxito!',
-                                'Recibirá un correo con los datos del pedido',
-                                'success'
-                            )
+                            Swal.fire({
+                                title: 'Su pedido ha sido ingresado con éxito!ß',
+                                html: 'Recibirá un correo con los datos del pedido',
+                                icon: 'success'
+                        })
                             setTimeout(() => {
                               window.location.href = '/';
                             }, 3000)
+                        } else {
+                          Swal.fire({
+                            title: 'Ha ocurrido un error en su solicitud',
+                            icon: 'success'
+                          })
+                        setTimeout(() => {
+                          window.location.href = '/';
+                        }, 3000)
                         }
                     })
                     .catch(error => {
