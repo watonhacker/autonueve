@@ -6,13 +6,12 @@ exports.getAllEstado = () => {
         try {
             const sql = 'SELECT * FROM estado';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
         }
     })    
 }
@@ -23,13 +22,12 @@ exports.getEstadoById = (id) => {
         try {
             const sql = `SELECT * FROM estado WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
         }
     })    
 }

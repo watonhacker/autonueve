@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     if (selectedSubmodel != undefined) {
 
         mysqlConnection.query(`SELECT submodelo.id FROM submodelo WHERE submodelo.nombre = '${selectedSubmodel}'`, (err, results, rows) => {
-            if (err) throw err;
+            if (err) { console.error(err) }
 
             SubmodelId = results[0]['id']
 

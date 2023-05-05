@@ -31,7 +31,7 @@ export function printModels () {
             
             })
             .catch(err => {
-                throw err;
+                console.log(err);
             })
         });
     }

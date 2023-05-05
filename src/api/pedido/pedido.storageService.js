@@ -6,13 +6,12 @@ exports.getAllPedido = () => {
         try {
             const sql = 'SELECT * FROM pedido';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(JSON.parse(JSON.stringify(result)))
             })
         } catch (error) {
             reject(error)
-            console.error(error.message)
-            throw error;
+            console.error(error.message);
         }
     })    
 }
@@ -40,13 +39,12 @@ exports.getPedidoById = (id) => {
         try {
             const sql = `SELECT * FROM pedido WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
-            console.error(error.message)
-            throw error;
+            console.error(error.message);
         } 
     })    
 }
@@ -75,13 +73,13 @@ exports.getPedidosFormat = () => {
         try {
             const sql = "SELECT pedido.id, cliente.nombre, metodopago.pago, pedido.precio, pedido.direccion, pedido.receptor, pedido.fecha, tipodocumento.documento, pedido.estado_id FROM pedido INNER JOIN cliente on cliente.id = pedido.cliente_id INNER JOIN metodopago on metodopago.id = pedido.metodopago_id INNER JOIN tipodocumento on tipodocumento.id = pedido.tipodocumento_id order by id desc;"
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(JSON.parse(JSON.stringify(result)))
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     })    
 }
@@ -91,13 +89,13 @@ exports.cambiarEstadoPedido = (pedidoId, estadoId) => {
         try {
             const sql = `UPDATE pedido SET estado_id = ${estadoId} where id = ${pedidoId};`
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(JSON.parse(JSON.stringify(result)))
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     })    
 
@@ -108,14 +106,14 @@ exports.getPedidoFormatById = (pedidoId) => {
         try {
             const sql = `SELECT pedido.id, cliente.email, cliente.nombre, metodopago.pago, pedido.precio, pedido.direccion, pedido.receptor, pedido.fecha, tipodocumento.documento, pedido.estado_id FROM pedido INNER JOIN cliente on cliente.id = pedido.cliente_id INNER JOIN metodopago on metodopago.id = pedido.metodopago_id INNER JOIN tipodocumento on tipodocumento.id = pedido.tipodocumento_id WHERE pedido.id = ${pedidoId}`
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 const selectedPedido = JSON.parse(JSON.stringify(result))
                 resolve(selectedPedido[0])
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     })    
 }
@@ -125,13 +123,13 @@ exports.getListaPedidoAssociated = (id) => {
         try {
             const sql = `SELECT producto_id, cantidad FROM listapedido WHERE listapedido.pedido_id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(JSON.parse(JSON.stringify(result)))
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     })    
 }
@@ -141,13 +139,13 @@ exports.getProductosAssociated = (id) => {
         try {
             const sql = `SELECT producto_id, cantidad FROM listapedido WHERE listapedido.pedido_id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(JSON.parse(JSON.stringify(result)))
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     })  
 }

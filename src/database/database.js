@@ -14,7 +14,7 @@ const mysql = require('mysql');
 
 
     mysqlConnection.connect((err) => {
-        if (err) throw err;
+        if (err) { console.error(err) }
         console.log("Conectado a la base de datos ", process.env.HOST)
     })
 

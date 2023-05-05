@@ -6,13 +6,12 @@ exports.getAllComuna = () => {
         try {
             const sql = 'SELECT * FROM comuna';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
         }
     })    
 }
@@ -40,13 +39,12 @@ exports.getComunaById = (id) => {
         try {
             const sql = `SELECT * FROM comuna WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
         }
     })    
 }

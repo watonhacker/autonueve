@@ -6,13 +6,12 @@ exports.getAllModelo = () => {
         try {
             const sql = 'SELECT * FROM modelo order by nombre';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
-            console.error(error.message)
-            throw error;
+            console.error(error.message);
         }
     })    
 }
@@ -40,13 +39,12 @@ exports.getModeloById = (id) => {
         try {
             const sql = `SELECT * FROM modelo WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
-            console.error(error.message)
-            throw error;
+            console.error(error.message);
         }
     })    
 }
@@ -56,13 +54,13 @@ exports.insertOrUpdate = (id, id_marca, nombre) => {
         try {
             const sql = `INSERT INTO modelo (id, marca_id, nombre) VALUES(${id}, ${id_marca}, '${nombre}') ON DUPLICATE KEY UPDATE nombre='${nombre}';`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (err) {
             reject(err);
             console.error(err.message);
-            throw err;
+
         }
     })
 }

@@ -5,13 +5,12 @@ exports.getAllMarca = () => {
         try {
             const sql = 'SELECT * FROM marca order by nombre';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
-            reject(error)
-            console.error(error.message)
-            throw error;
+            reject(error);
+            console.error(error.message);
         }
     })    
 }
@@ -39,13 +38,12 @@ exports.getMarcaById = (id) => {
         try {
             const sql = `SELECT * FROM marca WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
-            console.error(error.message)
-            throw error;
+            console.error(error.message);
         }
     })    
 }
@@ -56,13 +54,12 @@ exports.insertOrUpdate = (id, nombre) => {
         try {
             const sql = `INSERT INTO marca (id, nombre) VALUES(${id}, '${nombre}') ON DUPLICATE KEY UPDATE nombre='${nombre}'`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (err) {
             reject(err);
             console.error(err.message);
-            throw err;
         }
     })
 }

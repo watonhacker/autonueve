@@ -29,7 +29,7 @@ export function printSubmodels () {
             
             })
             .catch(err => {
-                throw err;
+                console.log(err);            
             })
         });
     

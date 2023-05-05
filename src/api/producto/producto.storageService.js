@@ -6,13 +6,13 @@ exports.getAllProducto = () => {
         try {
             const sql = 'select * from producto WHERE estado="A"';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     })    
 }
@@ -59,7 +59,7 @@ exports.getProductosByIds = (ids) => {
         } catch (error) {
             reject(error)   
             console.error(error.message)
-            throw error;
+            
         } 
     })   
 }
@@ -78,7 +78,7 @@ exports.getProductoById = (id) => {
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         } 
     })    
 }
@@ -110,7 +110,7 @@ exports.getProductoInfoByListaSubmodelo = (listaSubmodeloId) => {
             INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id WHERE listasubmodelo.id = ${listaSubmodeloId} AND producto.cantidad >= 0 AND producto.estado="A" AND NOT producto.tipouniversal_id = 1`;
 
             mysqlConnection.query(sql, (err, results) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
 
                 if (results) {
                     resolve(JSON.parse(JSON.stringify(results)))
@@ -129,7 +129,7 @@ exports.getProductosUniversal = () => {
             const sql = `SELECT producto.cantidad, tipouniversal_id, producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM producto WHERE tipouniversal_id = 1 AND producto.cantidad >= 0 AND producto.estado="A";`;
 
             mysqlConnection.query(sql, (err, results) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
 
                 if (results) {
                     resolve(JSON.parse(JSON.stringify(results)))
@@ -147,13 +147,13 @@ exports.getProductosAssociated = (id) => {
         try {
             const sql = `SELECT producto_id, cantidad FROM listapedido WHERE listapedido.pedido_id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(JSON.parse(JSON.stringify(result)))
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     })  
 }
@@ -163,13 +163,13 @@ exports.substractStock = (quantity, id) => {
         try {
             const sql = `UPDATE producto SET cantidad = (producto.cantidad - ${quantity}) where id = '${id}'; `;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(JSON.parse(JSON.stringify(result)))
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     }) 
 }
@@ -179,13 +179,12 @@ exports.insertOrUpdate = (id, nombre, precio, cantidad, precio_local, descripcio
         try {
             const sql = `INSERT INTO producto (id, codigo, SKU, nombre, precio, cantidad, precio_local, descripcion) VALUES('${id}','${id}','${id}','${nombre}',${precio}, ${cantidad}, ${precio_local}, '${descripcion}') ON DUPLICATE KEY UPDATE codigo='${id}',SKU='${id}', nombre='${nombre}', precio=${precio}, cantidad =${cantidad}, precio_local =${precio_local}, descripcion = '${descripcion}';`
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (err) {
             reject(err);
             console.error(err.message);
-            throw err;
         }
     })
 }

@@ -5,13 +5,12 @@ exports.getAllListaPedido = () => {
         try {
             const sql = 'SELECT * FROM listapedido';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
         }
     })    
 }
@@ -40,13 +39,12 @@ exports.getListaPedidoById = (id) => {
         try {
             const sql = `SELECT * FROM listapedido WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
         }
     })    
 }

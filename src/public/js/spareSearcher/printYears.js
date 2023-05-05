@@ -41,7 +41,7 @@ export function printYears () {
                
             })
             .catch(err => {
-                throw err;
+                console.log(err);
             })
     
             $inputSubmodel.disabled = true;

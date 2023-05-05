@@ -5,13 +5,13 @@ exports.getAllUsuario = () => {
         try {
             const sql = 'SELECT * FROM usuario';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     })    
 }
@@ -39,13 +39,13 @@ exports.getUsuarioById = (id) => {
         try {
             const sql = `SELECT * FROM usuario WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         } 
     })    
 }

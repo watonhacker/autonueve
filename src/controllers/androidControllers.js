@@ -15,6 +15,5 @@ exports.getBrands = function () {
         })
 
     } catch (err) {
-        throw err;
-    }
+        console.log(err);    }
 }

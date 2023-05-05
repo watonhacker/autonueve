@@ -6,13 +6,12 @@ exports.getAllFabricacion = () => {
         try {
             const sql = 'SELECT * FROM fabricacion';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
         }
     })    
 }
@@ -41,13 +40,12 @@ exports.getFabricacionById = (id) => {
         try {
             const sql = `SELECT * FROM fabricacion WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
         }
     })    
 }
@@ -59,7 +57,7 @@ exports.getFabricacionByFecha = (fecha) => {
         try {
             const sql = `SELECT id FROM fabricacion WHERE fecha = ${fecha}`;
             mysqlConnection.query(sql, (err, results) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
 
                 if (results) {
                     resolve(JSON.parse(JSON.stringify(results[0])))

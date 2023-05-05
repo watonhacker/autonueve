@@ -363,7 +363,6 @@ async function main() {
       return downloadedFile
     } catch (err) {
       console.log(err);
-      throw err;
     } finally {
       client.end();
 
@@ -529,7 +528,7 @@ exports.getUpdatedData = async (path, firstTime, lastDate) => {
 
   } catch(err) {
     console.log(err);
-    throw err;
+
   }
 
   

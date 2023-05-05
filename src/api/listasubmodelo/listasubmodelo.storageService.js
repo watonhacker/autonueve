@@ -6,13 +6,12 @@ exports.getAllListaSubmodelo = () => {
         try {
             const sql = 'SELECT * FROM listasubmodelo';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
-            console.error(error.message)
-            throw error;
+            console.error(error.message);
         }
     })    
 }
@@ -40,13 +39,12 @@ exports.getListaSubmodeloById = (id) => {
         try {
             const sql = `SELECT * FROM listasubmodelo WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
-            console.error(error.message)
-            throw error;
+            console.error(error.message);
         } 
     })    
 }
@@ -77,7 +75,7 @@ exports.getListaSubmodeloBySubmodelAndYear = (submodeloId) => {
             const sql = `SELECT listasubmodelo.id FROM listasubmodelo INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id WHERE submodelo.id = ${submodeloId};`;
 
             mysqlConnection.query(sql, (err, results) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
              
                 if (results.length) {
                     resolve(JSON.parse(JSON.stringify(results)))
@@ -96,13 +94,12 @@ exports.insertOrUpdate = (id, submodelo_id, fecha) => {
         try {
             const sql = `INSERT INTO listasubmodelo (id, submodelo_id, fecha) VALUES(${id}, ${submodelo_id},'${fecha}') ON DUPLICATE KEY UPDATE submodelo_id='${submodelo_id}'`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (err) {
             reject(err);
             console.error(err.message);
-            throw err;
         }
     })
 }

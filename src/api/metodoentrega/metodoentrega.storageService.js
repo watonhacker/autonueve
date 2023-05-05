@@ -5,13 +5,12 @@ exports.getAllMetodoEntrega = () => {
         try {
             const sql = 'SELECT * FROM metodoentrega';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
-            console.error(error.message)
-            throw error;
+            console.error(error.message);
         }
     })    
 }
@@ -39,13 +38,12 @@ exports.getMetodoEntregaById = (id) => {
         try {
             const sql = `SELECT * FROM metodoentrega WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
-            console.error(error.message)
-            throw error;
+            console.error(error.message);
         }
     })    
 }

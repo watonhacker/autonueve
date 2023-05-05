@@ -5,13 +5,13 @@ exports.getAllTipoDocumento = () => {
         try {
             const sql = 'SELECT * FROM tipodocumento';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     })    
 }
@@ -21,13 +21,13 @@ exports.getTipoDocumentoById = (id) => {
         try {
             const sql = `SELECT * FROM tipodocumento WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
+            
         }
     })    
 }

@@ -6,7 +6,9 @@ exports.getSingleProduct = (id) => {
         let sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.id = '${id}' AND producto.estado="A"; `
 
         mysqlConnection.query(sql, (err, results) => {
-            if (err) throw err;
+            if (err) {
+                console.error(err);
+            }
             results = JSON.parse(JSON.stringify(results))
             results = results[0]
             resolve(results)
@@ -21,7 +23,7 @@ exports.getProductCategory = (id) => {
         let sql = `SELECT categoria_id FROM producto WHERE producto.id = '${id}' AND producto.estado="A"; `
 
         mysqlConnection.query(sql, (err, results) => {
-            if (err) throw err;
+            if (err) { console.error(err) }
             results = JSON.parse(JSON.stringify(results))
             results = results[0]['categoria_id']
             resolve(results)
@@ -37,7 +39,7 @@ exports.getAssociatedProducts = async (id) => {
 
     return new Promise((resolve, reject) => {
         mysqlConnection.query(sql, (err, results) => {
-            if (err) throw err;
+            if (err) { console.error(err) }
             results = JSON.parse(JSON.stringify(results))
             resolve(results)
         })

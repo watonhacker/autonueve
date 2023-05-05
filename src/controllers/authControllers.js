@@ -16,7 +16,7 @@ exports.register = async (req, res) => {
 
         
         mysqlConnection.query("INSERT INTO usuario SET ?", {nombre:user, clave:passHash}, (err, results, rows) => {
-            if (err) throw err;
+            if (err) { console.error(err) }
             if (results) console.log(results)
         })
 

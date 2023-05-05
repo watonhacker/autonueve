@@ -6,13 +6,12 @@ exports.getAllListaProducto = () => {
         try {
             const sql = 'SELECT * FROM listaproducto';
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
         }
     })    
 }
@@ -40,13 +39,12 @@ exports.getListaProductoById = (id) => {
         try {
             const sql = `SELECT * FROM listaproducto WHERE id = ${id}`;
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (error) {
             reject(error)
             console.error(error.message)
-            throw error;
         } 
     })    
 }
@@ -76,13 +74,12 @@ exports.insertOrUpdate = (id, producto_id, listasubmodelo_id) => {
         try {
             const sql = `INSERT INTO listaproducto (id, producto_id, listasubmodelo_id) VALUES('${id}', '${producto_id}', ${listasubmodelo_id}) ON DUPLICATE KEY UPDATE producto_id='${producto_id}', listasubmodelo_id=${listasubmodelo_id};`
             mysqlConnection.query(sql, (err, result) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(result)
             })
         } catch (err) {
             reject(err);
             console.error(err.message);
-            throw err;
         }
     })
 }

@@ -14,8 +14,7 @@ exports.crearCliente = (nombre, apellido, email, telefono, rut, tipocliente) => 
             })
     
         } catch (err) {
-            throw err;
-        }
+            console.log(err);        }
     })
 
 }
@@ -34,8 +33,7 @@ exports.crearEmpresa = (nombre, giro, email, telefono, rut, tipocliente) => {
             })
     
         } catch (err) {
-            throw err;
-        }       
+            console.log(err);        }       
     })
 
 }
@@ -49,7 +47,7 @@ exports.guardarPedido = (idCliente, pago, documento, entrega, direccion) => {
        
 
         mysqlConnection.query(sql, (err, res) => {
-            if (err) throw err;
+            if (err) { console.error(err) }
             console.log(res)
         })
 
@@ -66,7 +64,7 @@ exports.guardarDireccion = (idCliente, comuna, direccion, region) => {
         mysqlConnection.query("INSERT INTO direccion SET ?", {cliente_id:idCliente, comuna_id:comuna, direccion:direccion, region_id:region})
 
     } catch (err) {
-        throw err;
+        console.log(err);
     }
 }
 
@@ -139,7 +137,7 @@ exports.guardarListaPedido = function (res, listaIdProductos) {
         
                         
             mysqlConnection.query(sql, (err, results) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
 
             })
     
@@ -199,7 +197,7 @@ exports.guardarPrecioPedido = function (respuesta) {
         try {
             sql = `UPDATE pedido SET precio=${respuesta['total']} WHERE pedido.id = ${respuesta['id']}`
             mysqlConnection.query(sql, (err, res) => {
-                if (err) throw err;
+                if (err) { console.error(err) }
                 resolve(res)
             })
         } catch (error) {
