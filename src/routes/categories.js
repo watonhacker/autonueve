@@ -92,9 +92,8 @@ router.get('/bateria', async (req, res) => {
 
 router.get('/:category/:page', async (req, res) => {
 
-    let category = categoriesControllers.setCategory(req.params.category);
     let page = req.params.page
-    let data = await categoriesControllers.getCategoryProductsPage(category, page, req.params.category)
+    let data = await categoriesControllers.getCategoryProductsPage(req.params.category, page, req.params.category)
     let resultados = data.results
     const paginator = data.paginator;
 

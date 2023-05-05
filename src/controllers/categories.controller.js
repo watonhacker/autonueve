@@ -62,9 +62,9 @@ exports.getElementsByPageRender = (type, search, results, page) => {
 
 }
 
-exports.getCategoryProductsPage = (categoryId, page, category) => {
+exports.getCategoryProductsPage = (categoryName, page, category) => {
 
-    let sql = `SELECT * FROM producto WHERE producto.categoria_id = ${categoryId} AND producto.estado="A"`;
+    let sql = `SELECT producto.id, producto.codigo, producto.categoria_id, producto.tipouniversal_id, producto.SKU, producto.nombre, producto.precio, producto.marca, producto.descripcion, producto.cantidad, producto.imagen, producto.imagen_2, producto.imagen_3, producto.precio_local, producto.estado FROM producto INNER JOIN categoria ON categoria.id = producto.categoria_id WHERE categoria.nombre = '${categoryName.toUpperCase()}' AND producto.estado="A"`;
 
     
     return new Promise((resolve, reject) => {
