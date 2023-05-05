@@ -171,6 +171,9 @@ app.use('/api/tipodocumento', tipoDocumento)
 app.use('/api/tipouniversal', tipoUniversal)
 app.use('/api/usuario', usuario)
 
+app.use((req, res) => {
+  res.status(404).render('index');
+});
 
 app.listen(app.get('port'), () => {
     console.log("Inició el servidor en el puerto", app.get("port"))
