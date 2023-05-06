@@ -1,4 +1,4 @@
-const mysqlConnection = require('../database/database')
+const mysqlPool = require('../database/database')
 const globalControllers = require('./globalControllers')
 
 exports.getCategories = () => {
@@ -7,16 +7,19 @@ exports.getCategories = () => {
 
     return new Promise((resolve, reject) => {
 
-        mysqlConnection.query(sql, (err, results) => {
-
-            if (err) {
-                return [];
+        mysqlPool.getConnection((err, connection) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
             }
-    
-            let parsedResults = JSON.parse(JSON.stringify(results));
-    
-            resolve (parsedResults)
-    
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    reject(err)
+                }
+                connection.release(); // Importante liberar la conexión
+                resolve(JSON.parse(JSON.stringify(result)))
+            })
         })
 
     })
@@ -29,15 +32,19 @@ exports.getCategoryProducts = (categoryId) => {
     let sql = `SELECT * FROM producto WHERE producto.categoria_id = ${categoryId} AND producto.estado="A"`;
 
     return new Promise((resolve, reject) => {
-        mysqlConnection.query(sql, (err, results, rows) => {
-            results=JSON.parse(JSON.stringify(results))
-            resolve(results)
-
-            if (err) {
-                console.error(err);
-                return [];
+        mysqlPool.getConnection((err, connection) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
             }
-            
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    reject(err)
+                }
+                connection.release(); // Importante liberar la conexión
+                resolve(JSON.parse(JSON.stringify(result)))
+            })
         })
     })
 }
@@ -68,18 +75,25 @@ exports.getCategoryProductsPage = (categoryName, page, category) => {
 
     
     return new Promise((resolve, reject) => {
-        mysqlConnection.query(sql, (err, results, rows) => {
-            results=JSON.parse(JSON.stringify(results))
-            
-            resolve(this.getElementsByPageRender('category', {data:category}, results, page))
-
-            if (err) {
-                console.error(err);
-                return [];
+        mysqlPool.getConnection((err, connection) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
             }
-            
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    reject(err)
+                }
+                connection.release(); // Importante liberar la conexión
+                const results=JSON.parse(JSON.stringify(result))
+                resolve(this.getElementsByPageRender('category', {data:category}, results, page))
+            })
         })
     })
+
+
+
 }
 
 exports.setCategory = (categoryId) => {

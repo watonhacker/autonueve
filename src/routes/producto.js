@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const mysqlConnection = require('../database/database');
 const singleProductController = require('../controllers/singleProductController')
 
 
@@ -8,7 +7,6 @@ router.get('/:id', async (req, res) => {
     const resultado = await singleProductController.getSingleProduct(req.params.id);
     const associatedProducts = await singleProductController.getAssociatedProducts(req.params.id);
     
-    let resultadoPrecioFormat;
 
     if (resultado.precio.toString().length == 4) {
         resultado.precio = resultado.precio.toString().slice(0, 1) + "." + resultado.precio.toString().slice(1) 

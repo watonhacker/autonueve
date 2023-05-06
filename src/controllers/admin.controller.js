@@ -1,5 +1,4 @@
-const mysqlConnection = require('../database/database')
-const globalControllers = require('./globalControllers')
+const mysqlPool = require('../database/database')
 
 exports.getPedidos = () => {
 
@@ -7,13 +6,19 @@ exports.getPedidos = () => {
 
     return new Promise((resolve, reject) => {
 
-        mysqlConnection.query(sql, (err, results) => {
-            if (err) {
-                return [];
+        mysqlPool.getConnection((err, connection) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
             }
-    
-            let parsedResults = JSON.parse(JSON.stringify(results));
-            resolve (parsedResults)
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    reject(err)
+                }
+                connection.release(); // Importante liberar la conexión
+                resolve(JSON.parse(JSON.stringify(result)))
+            })
         })
 
     })

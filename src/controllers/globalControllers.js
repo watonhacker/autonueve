@@ -1,5 +1,5 @@
 const pagination = require('pagination');
-const mysqlConnection = require('../database/database')
+const mysqlPool = require('../database/database')
 const categoriesControllers = require('../controllers/categories.controller')
 
 exports.getElementsByPage = (results, limit) => {
@@ -110,15 +110,22 @@ exports.globalSearch = (busqueda, page) => {
   console.log(sql)
     
   return new Promise((resolve, reject) => {
-      mysqlConnection.query(sql, (err, results, rows) => {
-          results=JSON.parse(JSON.stringify(results))
-          resolve(categoriesControllers.getElementsByPageRender('search', {data:busqueda}, results, page))
-
-          if (err) {
-              console.error(err);
-              return [];
+    mysqlPool.getConnection((err, connection) => {
+      if (err) { 
+          console.error(err) 
+          reject(err)
+      }
+      connection.query(sql, (err, result) => {
+          if (err) { 
+              console.error(err) 
+              reject(err)
           }
-          
+          connection.release(); // Importante liberar la conexión
+          const results=JSON.parse(JSON.stringify(result))
+          resolve(categoriesControllers.getElementsByPageRender('search', {data:busqueda}, results, page))
       })
+  })
+
+
   })
 }

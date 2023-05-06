@@ -1,41 +1,65 @@
 const router = require('express').Router()
-const mysqlConnection = require('../database/database')
+const mysqlPool = require('../database/database')
 
 router.post('/', (req, res) => {
     console.log(req.body)
     res.send("Ok")
 })
 
-let idSubmodel;
 
 
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     let selectedModel = req.query.model
-    let ModelId;
     
     if (selectedModel != undefined) {
 
-        mysqlConnection.query(`SELECT modelo.id FROM modelo WHERE modelo.nombre = '${selectedModel}'`, (err, results, rows) => {
-            
-            if (results[0]) {
-                let resultsId = results[0]['id']
+        const modelId = await new Promise((resolve) => {
 
-                idSubmodel = resultsId
-                mysqlConnection.query(`SELECT * FROM submodelo WHERE modelo_id = ${resultsId}`, (err, results, rows) => {
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    console.error(err) 
+                    reject(err)
+                }
+                connection.query(`SELECT modelo.id FROM modelo WHERE modelo.nombre = '${selectedModel}'`, (err, result) => {
+                    if (err) { 
+                        console.error(err) 
+                        reject(err)
+                    }
+                    connection.release(); // Importante liberar la conexión
 
-                    idSubmodel = resultsId
-        
-                    if (err) {
-                        console.log(err)
-                    } 
-                    res.send({
-                        results
-                    })                
+             
+                    let resultsId = result[0]['id']   
+                    resolve(JSON.parse(JSON.stringify(resultsId)))
+           
+
                 })
-            }
-            
+            })
+
+
         })
+
+        const results = await new Promise((resolve) => {
+
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    console.error(err) 
+                    reject(err)
+                }
+                connection.query(`SELECT * FROM submodelo WHERE modelo_id = ${modelId}`, (err, result) => {
+                    if (err) { 
+                        console.error(err) 
+                        reject(err)
+                    }
+                    connection.release(); // Importante liberar la conexión
+                    resolve(JSON.parse(JSON.stringify(result)))
+                })
+            })
+        })
+
+        res.send({
+            results
+        })   
 
     } 
 
