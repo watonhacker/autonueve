@@ -111,7 +111,7 @@ exports.login = async (req, res) => {
                     alertIcon: 'success',
                     showConfirmButton: true,
                     timer: 800,
-                    ruta: "/admin"
+                    ruta: "/admin-nueve"
                 })
             }
 

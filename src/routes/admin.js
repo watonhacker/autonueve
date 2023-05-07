@@ -88,7 +88,7 @@ router.post('/models/edit/', authController.isAuthenticated, (req, res) => {
    
     })
     
-    res.redirect("/admin/models")
+    res.redirect("/admin-nueve/models")
    
 })
 
@@ -194,7 +194,7 @@ router.post('/brands/edit/', authController.isAuthenticated, (req, res) => {
    
     })
     
-    res.redirect("/admin/brands")
+    res.redirect("/admin-nueve/brands")
    
 })
 
@@ -325,7 +325,7 @@ router.post('/products/edit/', authController.isAuthenticated, (req, res) => {
    
     })
     
-    res.redirect("/admin/products")
+    res.redirect("/admin-nueve/products")
    
 })
 
@@ -424,7 +424,7 @@ router.post('/categories/edit/', authController.isAuthenticated, (req, res) => {
 
     })
     
-    res.redirect("/admin/categories")
+    res.redirect("/admin-nueve/categories")
    
 })
 
@@ -528,7 +528,7 @@ router.post('/submodels/edit/', authController.isAuthenticated, (req, res) => {
    
     })
     
-    res.redirect("/admin/submodels")
+    res.redirect("/admin-nueve/submodels")
    
 })
 
@@ -602,7 +602,7 @@ router.post('/clients/edit/', authController.isAuthenticated, (req, res) => {
    
     })
     
-    res.redirect("/admin/clients")
+    res.redirect("/admin-nueve/clients")
    
 })
 

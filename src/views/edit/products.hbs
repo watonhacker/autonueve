@@ -1,11 +1,11 @@
 <div class="btnToAdmin">
-    <a href="/admin"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
-    <a class="backToPanel" href="/admin/products">Volver al panel</a>
+    <a href="/admin-nueve"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
+    <a class="backToPanel" href="/admin-nueve/products">Volver al panel</a>
 </div>
 <h1 style="color:#4C6EA7; margin:2rem 0;">Detalle producto</h1>
 
 
-<form class="edit-form" action="/admin/products/edit" method="post">
+<form class="edit-form" action="/admin-nueve/products/edit" method="post">
     <label for="nombre">Nombre</label><input type="text"  name="nombre"  required disabled value='{{results.nombre}}' >
     <label for="precio">Precio</label><input type="number" name="precio"  required disabled  value={{results.precio}} >
     <label for="marca">Marca</label><input type="text"  name="marca" required  disabled value='{{results.marca}}' >

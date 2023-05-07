@@ -7,10 +7,10 @@
 
 <div class="models-panel">
     <div class="models">
-        <a href="/admin/products">Productos</a>
+        <a href="/admin-nueve/products">Productos</a>
     </div>
     <div class="models">
-        <a href="/admin/categories">Categorías</a>
+        <a href="/admin-nueve/categories">Categorías</a>
     </div>
 
 </div>
@@ -18,15 +18,15 @@
 
 
 <div class="btnToAdmin">
-    <a href="/admin"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
-    <a class="backToPanel" href="/admin">Volver al panel</a>
+    <a href="/admin-nueve"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
+    <a class="backToPanel" href="/admin-nueve">Volver al panel</a>
 </div>
 
 <div class="adminResults">
     
 {{!--     <div class="options-box">
         
-        <a href="/admin/submodels/add"><i class="fas fa-plus-circle"></i></a>
+        <a href="/admin-nueve/submodels/add"><i class="fas fa-plus-circle"></i></a>
         <a href="">Agregar producto</a>
         
     </div> --}}
@@ -36,7 +36,7 @@
    {{#each productResults}}
     <tr>
         <td>
-            <a class="option btn btn-info" style="color:#fff;" href="/admin/products/edit?id={{id}}">Editar</a>
+            <a class="option btn btn-info" style="color:#fff;" href="/admin-nueve/products/edit?id={{id}}">Editar</a>
             
         </td>
             <td>{{SKU}}</td><td>{{nombre}}</td><td>{{precio}}</td></tr>

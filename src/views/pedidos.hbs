@@ -7,18 +7,18 @@
 
 <div class="models-panel">
     <div class="models">
-        <a href="/admin/products">Productos</a>
+        <a href="/admin-nueve/products">Productos</a>
     </div>
     <div class="models">
-        <a href="/admin/categories">Categorías</a>
+        <a href="/admin-nueve/categories">Categorías</a>
     </div>
 
 </div>
 
 
 <div class="btnToAdmin">
-    <a href="/admin"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
-    <a class="backToPanel" href="/admin">Volver al panel</a>
+    <a href="/admin-nueve"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
+    <a class="backToPanel" href="/admin-nueve">Volver al panel</a>
 </div>
     <div style="padding:2rem 0 0 0">
         <label for="site-search">Busca el pedido:</label>
@@ -46,7 +46,7 @@
    {{#each pedidosResults}}
     <tr>
         <td>
-            <a class="btn btn-success" style="color:#fff;" href="/admin/pedidos/{{id}}">Revisar</a>
+            <a class="btn btn-success" style="color:#fff;" href="/admin-nueve/pedidos/{{id}}">Revisar</a>
         </td>
         <td>{{id}}</td>
         <td>{{nombre}}</td>
@@ -117,7 +117,7 @@
                 "estado_id": e.target.value
             }
             
-                fetch("/admin/pedidos/estado", {
+                fetch("/admin-nueve/pedidos/estado", {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -160,6 +160,6 @@
     const pedidoSearch = document.getElementById("pedido-search")
     pedidoSearch.addEventListener("change", e => {
         e.preventDefault();
-        window.location.href = `/admin/pedidos/${e.target.value}`
+        window.location.href = `/admin-nueve/pedidos/${e.target.value}`
     })
 </script>

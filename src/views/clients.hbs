@@ -7,8 +7,8 @@
 
 
 <div class="btnToAdmin">
-    <a href="/admin"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
-    <a class="backToPanel" href="/admin">Volver al panel</a>
+    <a href="/admin-nueve"><i id="btnBackAdmin" class="fas fa-arrow-alt-circle-left"></i></a>
+    <a class="backToPanel" href="/admin-nueve">Volver al panel</a>
 </div>
 {{!--     <h3 style="margin-top:2rem;">Busca el cliente por ID</h3>
     <div>
@@ -20,7 +20,7 @@
     
 {{!--     <div class="options-box">
         
-        <a href="/admin/submodels/add"><i class="fas fa-plus-circle"></i></a>
+        <a href="/admin-nueve/submodels/add"><i class="fas fa-plus-circle"></i></a>
         <a href="">Agregar producto</a>
         
     </div> --}}
@@ -30,7 +30,7 @@
    {{#each clientsResults}}
     <tr>
         <td>
-            <a class="btn btn-warning" style="color:#000;" href="/admin/clients/edit?id={{id}}">Editar</a>
+            <a class="btn btn-warning" style="color:#000;" href="/admin-nueve/clients/edit?id={{id}}">Editar</a>
         </td>
         <td>{{id}}</td>
         <td>{{nombre}}</td>
@@ -53,6 +53,6 @@
         const pedidoSearch = document.getElementById("cliente-search")
     pedidoSearch.addEventListener("change", e => {
         e.preventDefault();
-        window.location.href = `/admin/clients/${e.target.value}`
+        window.location.href = `/admin-nueve/clients/${e.target.value}`
     })
 </script>
