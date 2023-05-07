@@ -71,6 +71,8 @@
         let nuevoObjeto = {}
         formDataPedido.append("productos", listaproducto)
         formDataPedido.append("idproductos", idProductos)
+        formDataPedido.append("total", total)
+
 
         for (element of formDataPedido.keys()) {
             nuevoObjeto[element] = formDataPedido.get(element)
@@ -135,6 +137,8 @@
            `
         }
 
+        debugger;
+
         console.log(JSON.parse(JSON.stringify(nuevoObjeto)))
 
             fetch("/venta", {
@@ -163,7 +167,7 @@
                             window.localStorage.removeItem('listaproducto')
                             window.localStorage.removeItem('productos')
                             Swal.fire({
-                                title: 'Su pedido ha sido ingresado con éxito!ß',
+                                title: 'Su pedido ha sido ingresado con éxito!',
                                 html: 'Recibirá un correo con los datos del pedido',
                                 icon: 'success'
                         })

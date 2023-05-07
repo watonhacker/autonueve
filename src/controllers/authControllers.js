@@ -140,12 +140,10 @@ exports.isAuthenticated = async (req, res, next) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
                 }
                 connection.query('SELECT * FROM usuario WHERE id = ?', [decoded.id], (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
                     }
                     if (!result) { return next() }
                     connection.release(); // Importante liberar la conexión

@@ -20,10 +20,14 @@ router.post('/', async (req, res) => {
                 fecha: new Date().toISOString().slice(0, 19).replace('T', ' '),
                 direccion: cliente.direccion
             }
+
             const nuevoPedido = await pedidoService.createPedido(dataPedido);
             const listaPedido = await ventaControllers.guardarListaPedido(nuevoPedido.insertId, req.body['productos']);
-            const precioPedido = await ventaControllers.obtenerPrecioPedido(listaPedido);
-            const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido(precioPedido);
+            const precioPedido = parseInt(req.body.total)
+            const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido({
+                total: precioPedido,
+                id: listaPedido
+            });
             res.send({
                 "pedido": nuevoPedido.insertId,
                 "listaPedido": listaPedido,
@@ -47,8 +51,11 @@ router.post('/', async (req, res) => {
                 }
                 const nuevoPedido = await pedidoService.createPedido(dataPedido);
                 const listaPedido = await ventaControllers.guardarListaPedido(nuevoPedido.insertId, req.body['productos']);
-                const precioPedido = await ventaControllers.obtenerPrecioPedido(listaPedido);
-                const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido(precioPedido);
+                const precioPedido = parseInt(req.body.total)
+                const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido({
+                    total: precioPedido,
+                    id: listaPedido
+                });
                 res.send({
                     "pedido": nuevoPedido.insertId,
                     "listaPedido": listaPedido,
@@ -72,8 +79,11 @@ router.post('/', async (req, res) => {
 
                 const nuevoPedido = await pedidoService.createPedido(dataPedido);
                 const listaPedido = await ventaControllers.guardarListaPedido(nuevoPedido.insertId, req.body['productos']);
-                const precioPedido = await ventaControllers.obtenerPrecioPedido(listaPedido);
-                const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido(precioPedido);
+                const precioPedido = parseInt(req.body.total)
+                const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido({
+                    total: precioPedido,
+                    id: listaPedido
+                });
                 res.send({
                     "pedido": nuevoPedido.insertId,
                     "listaPedido": listaPedido,

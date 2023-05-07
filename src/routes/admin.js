@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const mysqlConnection = require('../database/database')
+const mysqlPool = require('../database/database')
 const authController = require('../controllers/authControllers')
 const productoService = require('../api/producto/producto.service')
 const pedidoService = require('../api/pedido/pedido.service');
@@ -13,11 +13,25 @@ router.get('/', authController.isAuthenticated, (req, res) => {
 
 router.get('/models', authController.isAuthenticated, (req, res) => {
 
-    mysqlConnection.query("SELECT * FROM modelo order by nombre", (err, results) => {
-        let resultsModels = results
-        res.render("models", {
-            resultsModels
+    const sql = "SELECT * FROM modelo order by nombre";
+
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            let resultsModels = result
+            res.render("models", {
+                resultsModels
+            })
         })
+   
     })
 
    
@@ -27,12 +41,25 @@ router.get('/models/edit/', authController.isAuthenticated, (req, res) => {
 
     let id = req.query.id
     let sql = `SELECT id, nombre FROM modelo WHERE id = ${id}`
-    mysqlConnection.query(sql, (err, results) => {
-        results = JSON.parse(JSON.stringify(results))
 
-        res.render("edit/models", {
-            results:results[0]
+
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            const results = JSON.parse(JSON.stringify(result))
+            res.render("edit/models", {
+                results:results[0]
+            })
         })
+   
     })
 })
 
@@ -45,9 +72,20 @@ router.post('/models/edit/', authController.isAuthenticated, (req, res) => {
 
     let sql = `UPDATE modelo SET nombre='${nombre}' WHERE id = ${id}`
     
-    mysqlConnection.query(sql, (err, results) => {
-        if (err) { console.error(err) }
-        results = JSON.parse(JSON.stringify(results))
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            return(JSON.parse(JSON.stringify(result)))
+        })
+   
     })
     
     res.redirect("/admin/models")
@@ -58,11 +96,25 @@ router.post('/models/edit/', authController.isAuthenticated, (req, res) => {
 
 router.get('/submodels', authController.isAuthenticated, (req,res) => {
     
-    mysqlConnection.query("SELECT * from submodelo", (err, results) => {
-        let resultsSubmodels = results;
-        res.render("submodels", {
-            resultsSubmodels
+    const sql = "SELECT * from submodelo order by id";
+
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            let resultsSubmodels = result;
+            res.render("submodels", {
+                resultsSubmodels
+            })
         })
+   
     })
 
 })
@@ -71,11 +123,25 @@ router.get('/submodels', authController.isAuthenticated, (req,res) => {
 
 router.get('/brands', authController.isAuthenticated, (req,res) => {
     
-    mysqlConnection.query("SELECT * from marca order by nombre", (err, results) => {
-        let resultsBrands = results;
-        res.render("brands", {
-            resultsBrands
+    const sql = "SELECT * from marca order by nombre";
+
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            let resultsBrands = result;
+            res.render("brands", {
+                resultsBrands
+            })
         })
+   
     })
 
 })
@@ -84,12 +150,25 @@ router.get('/brands/edit/', authController.isAuthenticated, (req, res) => {
 
     let id = req.query.id
     let sql = `SELECT id, nombre FROM marca WHERE id = ${id}`
-    mysqlConnection.query(sql, (err, results) => {
-        results = JSON.parse(JSON.stringify(results))
 
-        res.render("edit/brands", {
-            results:results[0]
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            const results = JSON.parse(JSON.stringify(result))
+
+            res.render("edit/brands", {
+                results:results[0]
+            })
         })
+   
     })
 })
 
@@ -98,10 +177,21 @@ router.post('/brands/edit/', authController.isAuthenticated, (req, res) => {
     let id = req.body['id']
     let sql = `UPDATE marca SET nombre='${nombre}' WHERE id = ${id}`
     
-    mysqlConnection.query(sql, (err, results) => {
-        if (err) { console.error(err) }
-        results = JSON.parse(JSON.stringify(results))
 
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            const results = JSON.parse(JSON.stringify(result))
+        })
+   
     })
     
     res.redirect("/admin/brands")
@@ -112,25 +202,47 @@ router.post('/brands/edit/', authController.isAuthenticated, (req, res) => {
 
 router.post('/submodels/add', authController.isAuthenticated, (req, res) => {
 
-    mysqlConnection.query(`INSERT INTO submodelo (nombre, modelo_id) VALUES ('${req.body.name}', ${req.body.model})`, (err, results) => {
-        if (err) { console.error(err) }
-        res.redirect("/submodels")
+    const sql = `INSERT INTO submodelo (nombre, modelo_id) VALUES ('${req.body.name}', ${req.body.model})`;
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            res.redirect("/submodels")
+        })
+   
     })
-    res.send("Ok")
+
 })
 
 router.get('/submodels/add', authController.isAuthenticated, (req, res) => {
-    let submodelId = req.query.id
 
-    let resultados;
-    mysqlConnection.query("SELECT * FROM modelo order by nombre", (err, results) => {
-        results=JSON.parse(JSON.stringify(results))
-        resultados = results;
+    const sql = "SELECT * FROM modelo order by nombre";
 
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            const resultados = JSON.parse(JSON.stringify(result))
 
-        res.render("add-submodel", {
-            resultados
+            res.render("add-submodel", {
+                resultados
+            })
         })
+   
     })
 
 })
@@ -140,11 +252,26 @@ router.get('/submodels/add', authController.isAuthenticated, (req, res) => {
 
 router.get('/products', authController.isAuthenticated, (req, res) => {
 
-    mysqlConnection.query("SELECT * FROM producto WHERE estado='A'", (err, results) => {
-        let productResults = results
-        res.render("products", {
-            productResults
+    const sql = "SELECT * FROM producto WHERE estado='A'";
+
+
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            let productResults = result
+            res.render("products", {
+                productResults
+            })
         })
+   
     })
 })
 
@@ -152,12 +279,24 @@ router.get('/products/edit/', authController.isAuthenticated, (req, res) => {
 
     let id = req.query.id
     let sql = `SELECT id, nombre, precio, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE id = '${id}'`
-    mysqlConnection.query(sql, (err, results) => {
-        results = JSON.parse(JSON.stringify(results))
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+            const results = JSON.parse(JSON.stringify(result))
 
-        res.render("edit/products", {
-            results:results[0]
+            res.render("edit/products", {
+                results:results[0]
+            })
         })
+   
     })
 })
 
@@ -170,10 +309,20 @@ router.post('/products/edit/', authController.isAuthenticated, (req, res) => {
 
     let sql = `UPDATE producto SET imagen='${imagen}', imagen_2 = '${imagen_2}', imagen_3 = '${imagen_3}' WHERE id = '${id}'`;
     
-    mysqlConnection.query(sql, (err, results) => {
-        if (err) { console.error(err) }
-        results = JSON.parse(JSON.stringify(results))
 
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        connection.query(sql, (err, result) => {
+            if (err) { 
+                console.error(err) 
+                reject(err)
+            }
+            connection.release(); // Importante liberar la conexión
+        })
+   
     })
     
     res.redirect("/admin/products")
@@ -184,11 +333,32 @@ router.post('/products/edit/', authController.isAuthenticated, (req, res) => {
 /* Rutas para categorías */
 
 router.get('/categories', authController.isAuthenticated,  (req,res) => {
-    mysqlConnection.query("SELECT * FROM categoria", (err, results) => {
-        let categoriesResults = results
-        res.render("categories", {
-            categoriesResults
-        })
+
+    const sql = "SELECT * FROM categoria";
+
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        try {
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    reject(err)
+                }
+                connection.release(); // Importante liberar la conexión
+                let categoriesResults = result
+                res.render("categories", {
+                    categoriesResults
+                })
+            })
+        } catch (err) {
+            console.error(err);
+            reject(err);
+        }
+
+   
     })
 })
 
@@ -196,11 +366,30 @@ router.get('/categories/edit/', authController.isAuthenticated, (req, res) => {
 
     let id = req.query.id
     let sql = `SELECT id, nombre, imagen FROM categoria WHERE id = ${id}`
-    mysqlConnection.query(sql, (err, results) => {
-        results = JSON.parse(JSON.stringify(results))
-        res.render("edit/categories", {
-            results:results[0]
-        })
+
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            console.error(err) 
+            reject(err)
+        }
+        try {
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    reject(err)
+                }
+                connection.release(); // Importante liberar la conexión
+                const results = JSON.parse(JSON.stringify(result))
+                res.render("edit/categories", {
+                    results:results[0]
+                })
+            })
+        } catch (err) {
+            console.error(err);
+            reject(err);
+        }
+
+   
     })
 })
 
@@ -210,9 +399,28 @@ router.post('/categories/edit/', authController.isAuthenticated, (req, res) => {
     let id = req.body['id']
     let sql = `UPDATE categoria SET imagen = '${imagen}' WHERE id = ${id}`
     
-    mysqlConnection.query(sql, (err, results) => {
-        if (err) { console.error(err) }
-        results = JSON.parse(JSON.stringify(results))
+
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            mysqlPool.emit('error', err)
+            console.error(err) 
+
+        }
+        try {
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    mysqlPool.emit('error', err)
+
+                }
+                connection.release(); // Importante liberar la conexión
+                return result;
+            })
+        } catch (error) {
+            mysqlPool.emit('error', err)
+            console.error(error);
+
+        }
 
     })
     
@@ -224,35 +432,100 @@ router.post('/categories/edit/', authController.isAuthenticated, (req, res) => {
                             /* Rutas para clientes */
 
 router.get('/clients', authController.isAuthenticated,  (req,res) => {
-    mysqlConnection.query("SELECT * FROM cliente", (err, results) => {
 
-        if (err) { console.error(err) }
-        let clientsResults = results
-        res.render("clients", {
-            clientsResults
-        })
+
+    const sql = "SELECT * FROM cliente";
+
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            mysqlPool.emit('error', err)
+            console.error(err) 
+
+        }
+        try {
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    mysqlPool.emit('error', err)
+
+                }
+                connection.release(); // Importante liberar la conexión
+                let clientsResults = result
+                res.render("clients", {
+                    clientsResults
+                })
+            })
+        } catch (error) {
+            mysqlPool.emit('error', err)
+            console.error(error);
+
+        }
+
     })
 })
 
 router.get('/submodels/edit/', authController.isAuthenticated, (req, res) => {
     let id = req.query.id
-    let sql = `SELECT id, nombre FROM submodelo WHERE id = ${id}`
-    mysqlConnection.query(sql, (err, results) => {
-        results = JSON.parse(JSON.stringify(results))
-        res.render("edit/submodels", {
-            results:results[0]
-        })
+
+    const sql = `SELECT id, nombre FROM submodelo WHERE id = ${id}`
+        
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            mysqlPool.emit('error', err)
+            console.error(err) 
+
+        }
+        try {
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    mysqlPool.emit('error', err)
+                }
+                connection.release(); // Importante liberar la conexión
+                const results = JSON.parse(JSON.stringify(result))
+                res.render("edit/submodels", {
+                    results:results[0]
+                })
+            })
+        } catch (err) {
+            mysqlPool.emit('error', err)
+            console.error(err);
+
+        }
+
+   
     })
 })
 
 router.post('/submodels/edit/', authController.isAuthenticated, (req, res) => {
     let nombre = req.body['nombre']
     let id = req.body['id']
-    let sql = `UPDATE submodelo SET nombre='${nombre}' WHERE id = ${id}`
-    
-    mysqlConnection.query(sql, (err, results) => {
-        if (err) { console.error(err) }
-        results = JSON.parse(JSON.stringify(results))
+
+
+    const sql = `UPDATE submodelo SET nombre='${nombre}' WHERE id = ${id}`
+        
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            mysqlPool.emit('error', err)
+            console.error(err) 
+
+        }
+        try {
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    mysqlPool.emit('error', err)
+                }
+                connection.release(); // Importante liberar la conexión
+                return(JSON.parse(JSON.stringify(result))) // cambiar esto
+            })
+        } catch (err) {
+            mysqlPool.emit('error', err)
+            console.error(err);
+
+        }
+
+   
     })
     
     res.redirect("/admin/submodels")
@@ -261,12 +534,35 @@ router.post('/submodels/edit/', authController.isAuthenticated, (req, res) => {
 
 router.get('/clients/edit/', authController.isAuthenticated, (req, res) => {
     let id = req.query.id
-    let sql = `SELECT id, nombre, apellido, email, telefono, rut FROM cliente WHERE id = ${id}`
-    mysqlConnection.query(sql, (err, results) => {
-        results = JSON.parse(JSON.stringify(results))
-        res.render("edit/clients", {
-            results:results[0]
-        })
+
+
+    const sql = `SELECT id, nombre, apellido, email, telefono, rut FROM cliente WHERE id = ${id}`
+        
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            mysqlPool.emit('error', err)
+            console.error(err) 
+
+        }
+        try {
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    mysqlPool.emit('error', err)
+                }
+                connection.release(); // Importante liberar la conexión
+                const results = JSON.parse(JSON.stringify(result))
+                res.render("edit/clients", {
+                    results:results[0]
+                })
+            })
+        } catch (err) {
+            mysqlPool.emit('error', err)
+            console.error(err);
+
+        }
+
+   
     })
 })
 
@@ -280,11 +576,30 @@ router.post('/clients/edit/', authController.isAuthenticated, (req, res) => {
     let rut = req.body['rut']
     let id = req.body['id']
 
-    let sql = `UPDATE cliente SET nombre='${nombre}', apellido = '${apellido}', email='${email}', telefono='${telefono}', rut='${rut}' WHERE id = ${id}`
-    
-    mysqlConnection.query(sql, (err, results) => {
-        if (err) { console.error(err) }
-        results = JSON.parse(JSON.stringify(results))
+    const sql = `UPDATE cliente SET nombre='${nombre}', apellido = '${apellido}', email='${email}', telefono='${telefono}', rut='${rut}' WHERE id = ${id}`
+        
+    mysqlPool.getConnection((err, connection) => {
+        if (err) { 
+            mysqlPool.emit('error', err)
+            console.error(err) 
+
+        }
+        try {
+            connection.query(sql, (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                    mysqlPool.emit('error', err)
+                }
+                connection.release(); // Importante liberar la conexión
+                return(JSON.parse(JSON.stringify(result))) // cambiar esto
+            })
+        } catch (err) {
+            mysqlPool.emit('error', err)
+            console.error(err);
+
+        }
+
+   
     })
     
     res.redirect("/admin/clients")

@@ -1,13 +1,31 @@
-const mysqlConnection = require('../../database/database')
+const mysqlPool = require('../../database/database')
 
 
 exports.getAllEstado = () => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = 'SELECT * FROM estado';
-            mysqlConnection.query(sql, (err, result) => {
-                if (err) { console.error(err) }
-                resolve(result)
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    mysqlPool.emit('error', err)
+                    console.error(err) 
+                    reject(err)
+                }
+                try {
+                    connection.query(sql, (err, result) => {
+                        if (err) { 
+                            console.error(err) 
+                            mysqlPool.emit('error', err)
+                            reject(err)
+                        }
+                        connection.release(); // Importante liberar la conexión
+                        resolve(JSON.parse(JSON.stringify(result)))
+                    })
+                } catch (error) {
+                    mysqlPool.emit('error', err)
+                    console.error(error);
+                    reject(error);
+                }
+      
             })
         } catch (error) {
             reject(error)
@@ -21,9 +39,28 @@ exports.getEstadoById = (id) => {
     return new Promise((resolve, reject) => {
         try {
             const sql = `SELECT * FROM estado WHERE id = ${id}`;
-            mysqlConnection.query(sql, (err, result) => {
-                if (err) { console.error(err) }
-                resolve(result)
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    mysqlPool.emit('error', err)
+                    console.error(err) 
+                    reject(err)
+                }
+                try {
+                    connection.query(sql, (err, result) => {
+                        if (err) { 
+                            console.error(err) 
+                            mysqlPool.emit('error', err)
+                            reject(err)
+                        }
+                        connection.release(); // Importante liberar la conexión
+                        resolve(JSON.parse(JSON.stringify(result)))
+                    })
+                } catch (error) {
+                    mysqlPool.emit('error', err)
+                    console.error(error);
+                    reject(error);
+                }
+      
             })
         } catch (error) {
             reject(error)
@@ -37,12 +74,28 @@ exports.updateDireccion = (cliente) => {
         try {
             const sql = 'UPDATE cliente SET nombre = ?, apellido = ?, contraseña = ?, email = ?, telefono = ?, rut = ?, giroempresa = ?, tipocliente_id = ? WHERE id = ?';
             const dataCliente = [cliente.nombre, cliente.apellido, cliente.contraseña, cliente.email, cliente.telefono, cliente.rut, cliente.giroempresa, cliente.tipocliente_id, cliente.id]
-            mysqlConnection.query(sql, dataCliente, (error, result) => {
-                if (error) {
-                    console.log(error.message);
-                    resolve(error)
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    mysqlPool.emit('error', err)
+                    console.error(err) 
+                    reject(err)
                 }
-                resolve(result)
+                try {
+                    connection.query(sql, dataCliente, (err, result) => {
+                        if (err) { 
+                            console.error(err) 
+                            mysqlPool.emit('error', err)
+                            reject(err)
+                        }
+                        connection.release(); // Importante liberar la conexión
+                        resolve(JSON.parse(JSON.stringify(result)))
+                    })
+                } catch (error) {
+                    mysqlPool.emit('error', err)
+                    console.error(error);
+                    reject(error);
+                }
+      
             })
         } catch (error) {
             reject(error)

@@ -1,8 +1,8 @@
 const { resolve } = require('path');
 const mysqlPool = require('../database/database')
 
-exports.crearCliente = (nombre, apellido, email, telefono, rut, tipocliente) => {
-    return new Promise((resolve, reject) => {
+exports.crearCliente = async (nombre, apellido, email, telefono, rut, tipocliente) => {
+    return await new Promise((resolve, reject) => {
         try {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
@@ -25,9 +25,9 @@ exports.crearCliente = (nombre, apellido, email, telefono, rut, tipocliente) => 
 
 }
 
-exports.crearEmpresa = (nombre, giro, email, telefono, rut, tipocliente) => {
+exports.crearEmpresa = async (nombre, giro, email, telefono, rut, tipocliente) => {
 
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
         try {
 
             mysqlPool.getConnection((err, connection) => {
@@ -52,27 +52,31 @@ exports.crearEmpresa = (nombre, giro, email, telefono, rut, tipocliente) => {
 
 }
 
-exports.guardarPedido = (idCliente, pago, documento, entrega, direccion) => {
+exports.guardarPedido = async (idCliente, pago, documento, entrega, direccion) => {
 
     try {
 
-        const sql =`INSERT INTO pedido (cliente_id, metodopago_id, tipodocumento_id, estado_id, metodoentrega_id, fecha, direccion) VALUES (${idCliente}, ${pago}, ${documento}, 1, ${entrega}, current_time(), '${direccion}')`
+        return await new Promise((resolve) => {
+            const sql =`INSERT INTO pedido (cliente_id, metodopago_id, tipodocumento_id, estado_id, metodoentrega_id, fecha, direccion) VALUES (${idCliente}, ${pago}, ${documento}, 1, ${entrega}, current_time(), '${direccion}')`
         
-        mysqlPool.getConnection((err, connection) => {
-            if (err) { 
-                console.error(err) 
-                reject(err)
-            }
-            connection.query(sql, (err, result) => {
+            mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
                     reject(err)
                 }
-                connection.release(); // Importante liberar la conexión
-                resolve(JSON.parse(JSON.stringify(result)))
+                connection.query(sql, (err, result) => {
+                    if (err) { 
+                        console.error(err) 
+                        reject(err)
+                    }
+                    connection.release(); // Importante liberar la conexión
+                    resolve(JSON.parse(JSON.stringify(result)))
+                })
             })
+           
         })
-       
+
+   
 
     } catch(err) {
         console.error(err)
@@ -81,22 +85,26 @@ exports.guardarPedido = (idCliente, pago, documento, entrega, direccion) => {
 
 }
 
-exports.guardarDireccion = (idCliente, comuna, direccion, region) => {
+exports.guardarDireccion = async (idCliente, comuna, direccion, region) => {
     try {
 
-        mysqlPool.getConnection((err, connection) => {
-            if (err) { 
-                console.error(err) 
-                reject(err)
-            }
-            connection.query("INSERT INTO direccion SET ?", {cliente_id:idCliente, comuna_id:comuna, direccion:direccion, region_id:region}, (err, result) => {
+        return await new Promise((resolve) => {
+
+            mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
                     reject(err)
                 }
-                connection.release(); // Importante liberar la conexión
-                resolve(JSON.parse(JSON.stringify(result)))
+                connection.query("INSERT INTO direccion SET ?", {cliente_id:idCliente, comuna_id:comuna, direccion:direccion, region_id:region}, (err, result) => {
+                    if (err) { 
+                        console.error(err) 
+                        reject(err)
+                    }
+                    connection.release(); // Importante liberar la conexión
+                    resolve(JSON.parse(JSON.stringify(result)))
+                })
             })
+    
         })
 
 
@@ -107,11 +115,11 @@ exports.guardarDireccion = (idCliente, comuna, direccion, region) => {
     }
 }
 
-exports.obtenerPedidoId = function () {
+exports.obtenerPedidoId = async function () {
 
     try {
 
-        return new Promise((resolve, reject) => {
+        return await new Promise((resolve, reject) => {
 
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
@@ -138,10 +146,10 @@ exports.obtenerPedidoId = function () {
 
 }
 
-exports.guardarListaPedido = function (res, listaIdProductos) {
+exports.guardarListaPedido = async function (res, listaIdProductos) {
 
     try {
-        return new Promise((resolve, reject) => {
+        return await new Promise((resolve, reject) => {
 
             let listaProductos = listaIdProductos.split(",")
             let sql = "INSERT INTO listapedido (producto_id, pedido_id, cantidad) VALUES"
@@ -219,43 +227,58 @@ exports.guardarListaPedido = function (res, listaIdProductos) {
    
 }
 
-exports.obtenerPrecioPedido = function(id) {
+const obtenerValorProductos = async (id) => {
+    return await new Promise((resolve) => {
+        
+    
+        // const sql = `SELECT listapedido.cantidad * producto.precio as subtotal FROM listapedido INNER JOIN producto ON producto.id = listapedido.producto_id INNER JOIN pedido ON pedido.id = listapedido.pedido_id WHERE pedido.id = ${id};`
+        const sql = `SELECT * FROM pedido WHERE id = ${id}`
+   
+
+        mysqlPool.getConnection((err, connection) => {
+            if (err) { 
+                console.error(err) 
+            }
+            connection.query(sql, async (err, result) => {
+                if (err) { 
+                    console.error(err) 
+                }
+                connection.release(); // Importante liberar la conexión
+
+                // let total = 0
+                // res.forEach(element => {
+                //     total += element['subtotal']
+                // })
+                resolve(result)
+                // resolve({
+                //     total,
+                //     id
+                // })
+            })
+        })
+        
+    })
+}
+
+exports.obtenerPrecioPedido = async function(id) {
 
     try {
 
-        return new Promise((resolve, reject) => {
+        const precioPedido = await obtenerValorProductos(id);
 
-    
-            sql = `SELECT listapedido.cantidad * producto.precio as subtotal FROM listapedido INNER JOIN producto ON producto.id = listapedido.producto_id INNER JOIN pedido ON pedido.id = listapedido.pedido_id WHERE pedido.id = ${id};`
-    
-   
-
-            mysqlPool.getConnection((err, connection) => {
-                if (err) { 
-                    console.error(err) 
-                    reject(err)
-                }
-                connection.query(sql, (err, result) => {
-                    if (err) { 
-                        console.error(err) 
-                        reject(err)
-                    }
-                    connection.release(); // Importante liberar la conexión
-
-                    const res = JSON.parse(JSON.stringify(result))
-                    let total = 0
-                    res.forEach(element => {
-                        total += element['subtotal']
-                    })
-                    resolve({
-                        total,
-                        id
-                    })
-                })
-            })
-            
-    
+        let total = 0
+        precioPedido.forEach(element => {
+            total += element['subtotal']
         })
+
+        return ({
+            total,
+            id
+        });
+
+
+   
+        
 
     } catch (err) {
         console.error(err)
@@ -266,10 +289,10 @@ exports.obtenerPrecioPedido = function(id) {
 
 }
 
-exports.guardarPrecioPedido = function (respuesta) {
+exports.guardarPrecioPedido = async function (respuesta) {
 
 
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
         try {
             const sql = `UPDATE pedido SET precio=${respuesta['total']} WHERE pedido.id = ${respuesta['id']}`
             mysqlPool.getConnection((err, connection) => {

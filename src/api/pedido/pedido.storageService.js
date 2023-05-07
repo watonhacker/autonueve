@@ -28,8 +28,8 @@ exports.getAllPedido = () => {
     })    
 }
 
-exports.createPedido = (pedido) => {
-    return new Promise((resolve, reject) => {
+exports.createPedido = async (pedido) => {
+    return await new Promise((resolve) => {
         try {
             const sql = 'INSERT INTO pedido SET ?';
 
@@ -37,22 +37,23 @@ exports.createPedido = (pedido) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) {
                     console.error(err);
-                    reject(err);
+                    mysqlPool.emit('error', err)
                 }
                 connection.query(sql, pedido, (error, result) => {
                     if (error) {
                         console.error(error.message);
-                        reject(error);
+                        mysqlPool.emit('error', err)
                     }
                     connection.release();
-                    resolve(result);
+                    resolve(result)
+  
                 });
             });
 
 
 
         } catch (error) {
-            reject(error)
+            mysqlPool.emit('error', err)
             console.error(error.message)
         }
     })    

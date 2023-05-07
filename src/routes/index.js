@@ -3,22 +3,32 @@ const mysqlPool = require('../database/database')
 
 router.get('/', async (req, res) => {
   
-    let resultados = await new Promise ((resolve) => {
+    let resultados = await new Promise ((resolve, reject) => {
         const sql = "SELECT * FROM marca order by nombre";
         mysqlPool.getConnection((err, connection) => {
             if (err) { 
+                mysqlPool.emit('error', err)
                 console.error(err) 
                 reject(err)
             }
-            connection.query(sql, (err, result) => {
-                if (err) { 
-                    console.error(err) 
-                    reject(err)
-                }
-                connection.release(); // Importante liberar la conexión
-                resolve(JSON.parse(JSON.stringify(result)))
-            })
+            try {
+                connection.query(sql, (err, result) => {
+                    if (err) { 
+                        console.error(err) 
+                        mysqlPool.emit('error', err)
+                        reject(err)
+                    }
+                    connection.release(); // Importante liberar la conexión
+                    resolve(JSON.parse(JSON.stringify(result)))
+                })
+            } catch (error) {
+                mysqlPool.emit('error', err)
+                console.error(error);
+                reject(error);
+            }
+  
         })
+        
     })
 
     let lastProducts = await new Promise((resolve) => {
@@ -26,17 +36,25 @@ router.get('/', async (req, res) => {
         
         mysqlPool.getConnection((err, connection) => {
             if (err) { 
+                mysqlPool.emit('error', err)
                 console.error(err) 
-                reject(err)
+
             }
-            connection.query(sql, (err, result) => {
-                if (err) { 
-                    console.error(err) 
-                    reject(err)
-                }
-                connection.release(); // Importante liberar la conexión
-                resolve(JSON.parse(JSON.stringify(result)))
-            })
+            try {
+                connection.query(sql, (err, result) => {
+                    if (err) { 
+                        console.error(err) 
+                        mysqlPool.emit('error', err)
+                    }
+                    connection.release(); // Importante liberar la conexión
+                    resolve(JSON.parse(JSON.stringify(result))) // cambiar esto
+                })
+            } catch (err) {
+                mysqlPool.emit('error', err)
+                console.error(err);
+
+            }
+
        
         })
     })

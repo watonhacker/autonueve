@@ -1,12 +1,31 @@
-const mysqlConnection = require('../../database/database')
+const mysqlPool = require('../../database/database')
 
 exports.getAllMarca = () => {
     return new Promise((resolve, reject) => {
         try {
             const sql = 'SELECT * FROM marca order by nombre';
-            mysqlConnection.query(sql, (err, result) => {
-                if (err) { console.error(err) }
-                resolve(result)
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    mysqlPool.emit('error', err)
+                    console.error(err) 
+                    reject(err)
+                }
+                try {
+                    connection.query(sql, (err, result) => {
+                        if (err) { 
+                            console.error(err) 
+                            mysqlPool.emit('error', err)
+                            reject(err)
+                        }
+                        connection.release(); // Importante liberar la conexión
+                        resolve(JSON.parse(JSON.stringify(result)))
+                    })
+                } catch (error) {
+                    mysqlPool.emit('error', err)
+                    console.error(error);
+                    reject(error);
+                }
+      
             })
         } catch (error) {
             reject(error);
@@ -19,12 +38,28 @@ exports.createMarca = (marca) => {
     return new Promise((resolve, reject) => {
         try {
             const sql = 'INSERT INTO marca SET ?';
-            mysqlConnection.query(sql, marca, (error, result) => {
-                if (error) {
-                    console.log(error.message);
-                    resolve(error)
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    mysqlPool.emit('error', err)
+                    console.error(err) 
+                    reject(err)
                 }
-                resolve(result)
+                try {
+                    connection.query(sql, marca, (err, result) => {
+                        if (err) { 
+                            console.error(err) 
+                            mysqlPool.emit('error', err)
+                            reject(err)
+                        }
+                        connection.release(); // Importante liberar la conexión
+                        resolve(JSON.parse(JSON.stringify(result)))
+                    })
+                } catch (error) {
+                    mysqlPool.emit('error', err)
+                    console.error(error);
+                    reject(error);
+                }
+      
             })
         } catch (error) {
             reject(error)
@@ -37,9 +72,28 @@ exports.getMarcaById = (id) => {
     return new Promise((resolve, reject) => {
         try {
             const sql = `SELECT * FROM marca WHERE id = ${id}`;
-            mysqlConnection.query(sql, (err, result) => {
-                if (err) { console.error(err) }
-                resolve(result)
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    mysqlPool.emit('error', err)
+                    console.error(err) 
+                    reject(err)
+                }
+                try {
+                    connection.query(sql, (err, result) => {
+                        if (err) { 
+                            console.error(err) 
+                            mysqlPool.emit('error', err)
+                            reject(err)
+                        }
+                        connection.release(); // Importante liberar la conexión
+                        resolve(JSON.parse(JSON.stringify(result)))
+                    })
+                } catch (error) {
+                    mysqlPool.emit('error', err)
+                    console.error(error);
+                    reject(error);
+                }
+      
             })
         } catch (error) {
             reject(error)
@@ -53,9 +107,28 @@ exports.insertOrUpdate = (id, nombre) => {
     return new Promise((resolve, reject) => {
         try {
             const sql = `INSERT INTO marca (id, nombre) VALUES(${id}, '${nombre}') ON DUPLICATE KEY UPDATE nombre='${nombre}'`;
-            mysqlConnection.query(sql, (err, result) => {
-                if (err) { console.error(err) }
-                resolve(result)
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    mysqlPool.emit('error', err)
+                    console.error(err) 
+                    reject(err)
+                }
+                try {
+                    connection.query(sql, (err, result) => {
+                        if (err) { 
+                            console.error(err) 
+                            mysqlPool.emit('error', err)
+                            reject(err)
+                        }
+                        connection.release(); // Importante liberar la conexión
+                        resolve(JSON.parse(JSON.stringify(result)))
+                    })
+                } catch (error) {
+                    mysqlPool.emit('error', err)
+                    console.error(error);
+                    reject(error);
+                }
+      
             })
         } catch (err) {
             reject(err);
