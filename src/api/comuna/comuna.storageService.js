@@ -9,14 +9,14 @@ exports.getAllComuna = () => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -24,12 +24,12 @@ exports.getAllComuna = () => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -43,14 +43,14 @@ exports.createComuna = (comuna) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, comuna, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -58,12 +58,12 @@ exports.createComuna = (comuna) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -77,14 +77,14 @@ exports.getComunaById = (id) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -92,12 +92,12 @@ exports.getComunaById = (id) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -112,14 +112,14 @@ exports.updateCliente = (cliente) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, dataCliente, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -127,12 +127,12 @@ exports.updateCliente = (cliente) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    

@@ -9,14 +9,14 @@ exports.getAllUsuario = () => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -24,12 +24,12 @@ exports.getAllUsuario = () => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
             
         }
@@ -45,14 +45,14 @@ exports.createUsuario = (usuario) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, usuario, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -60,12 +60,12 @@ exports.createUsuario = (usuario) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -80,14 +80,14 @@ exports.getUsuarioById = (id) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -95,12 +95,12 @@ exports.getUsuarioById = (id) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
             
         } 
@@ -116,14 +116,14 @@ exports.updateUsuario = (producto) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, dataProducto, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -131,12 +131,12 @@ exports.updateUsuario = (producto) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    

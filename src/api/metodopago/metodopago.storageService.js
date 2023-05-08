@@ -8,14 +8,14 @@ exports.getAllMetodoPago = () => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -23,12 +23,12 @@ exports.getAllMetodoPago = () => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message);
         }
     })    
@@ -42,14 +42,14 @@ exports.createMetodoPago = (metodoPago) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, metodoPago, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -57,12 +57,12 @@ exports.createMetodoPago = (metodoPago) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -76,14 +76,14 @@ exports.getMetodoPagoById = (id) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -91,12 +91,12 @@ exports.getMetodoPagoById = (id) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message);
         }
     })    

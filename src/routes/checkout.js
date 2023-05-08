@@ -41,12 +41,12 @@ router.get('/', async (req, res) =>  {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
@@ -62,12 +62,12 @@ router.get('/', async (req, res) =>  {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
@@ -91,12 +91,12 @@ router.get('/', async (req, res) =>  {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
@@ -112,12 +112,12 @@ router.get('/', async (req, res) =>  {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))

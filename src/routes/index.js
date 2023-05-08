@@ -9,14 +9,14 @@ router.get('/', async (req, res) => {
             if (err) { 
                 mysqlPool.emit('error', err)
                 console.error(err) 
-                reject(err)
+                
             }
             try {
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
                         mysqlPool.emit('error', err)
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
             } catch (error) {
                 mysqlPool.emit('error', err)
                 console.error(error);
-                reject(error);
+                ;
             }
   
         })

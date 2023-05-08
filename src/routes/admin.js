@@ -18,12 +18,12 @@ router.get('/models', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             let resultsModels = result
@@ -46,12 +46,12 @@ router.get('/models/edit/', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             const results = JSON.parse(JSON.stringify(result))
@@ -75,12 +75,12 @@ router.post('/models/edit/', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             return(JSON.parse(JSON.stringify(result)))
@@ -101,12 +101,12 @@ router.get('/submodels', authController.isAuthenticated, (req,res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             let resultsSubmodels = result;
@@ -128,12 +128,12 @@ router.get('/brands', authController.isAuthenticated, (req,res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             let resultsBrands = result;
@@ -154,12 +154,12 @@ router.get('/brands/edit/', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             const results = JSON.parse(JSON.stringify(result))
@@ -181,12 +181,12 @@ router.post('/brands/edit/', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             const results = JSON.parse(JSON.stringify(result))
@@ -206,12 +206,12 @@ router.post('/submodels/add', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             res.redirect("/submodels")
@@ -228,12 +228,12 @@ router.get('/submodels/add', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             const resultados = JSON.parse(JSON.stringify(result))
@@ -258,12 +258,12 @@ router.get('/products', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             let productResults = result
@@ -282,12 +282,12 @@ router.get('/products/edit/', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
             const results = JSON.parse(JSON.stringify(result))
@@ -313,12 +313,12 @@ router.post('/products/edit/', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         connection.query(sql, (err, result) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.release(); // Importante liberar la conexión
         })
@@ -339,13 +339,13 @@ router.get('/categories', authController.isAuthenticated,  (req,res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         try {
             connection.query(sql, (err, result) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.release(); // Importante liberar la conexión
                 let categoriesResults = result
@@ -355,7 +355,7 @@ router.get('/categories', authController.isAuthenticated,  (req,res) => {
             })
         } catch (err) {
             console.error(err);
-            reject(err);
+            ;
         }
 
    
@@ -370,13 +370,13 @@ router.get('/categories/edit/', authController.isAuthenticated, (req, res) => {
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
-            reject(err)
+            
         }
         try {
             connection.query(sql, (err, result) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.release(); // Importante liberar la conexión
                 const results = JSON.parse(JSON.stringify(result))
@@ -386,7 +386,7 @@ router.get('/categories/edit/', authController.isAuthenticated, (req, res) => {
             })
         } catch (err) {
             console.error(err);
-            reject(err);
+            ;
         }
 
    

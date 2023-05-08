@@ -9,14 +9,14 @@ exports.getAllListaProducto = () => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -24,12 +24,12 @@ exports.getAllListaProducto = () => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -43,14 +43,14 @@ exports.createListaProducto = (listaProducto) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, listaProducto, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -58,12 +58,12 @@ exports.createListaProducto = (listaProducto) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -77,14 +77,14 @@ exports.getListaProductoById = (id) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -92,12 +92,12 @@ exports.getListaProductoById = (id) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         } 
     })    
@@ -112,14 +112,14 @@ exports.updateListaProducto = (listaproducto) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, dataListaProducto, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -127,12 +127,12 @@ exports.updateListaProducto = (listaproducto) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -147,14 +147,14 @@ exports.insertOrUpdate = (id, producto_id, listasubmodelo_id) => {
                 if (err) { 
                     mysqlPool.emit('error', err)
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 try {
                     connection.query(sql, (err, result) => {
                         if (err) { 
                             console.error(err) 
                             mysqlPool.emit('error', err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))
@@ -162,12 +162,12 @@ exports.insertOrUpdate = (id, producto_id, listasubmodelo_id) => {
                 } catch (error) {
                     mysqlPool.emit('error', err)
                     console.error(error);
-                    reject(error);
+                    ;
                 }
       
             })
         } catch (err) {
-            reject(err);
+            ;
             console.error(err.message);
         }
     })

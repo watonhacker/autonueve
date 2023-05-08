@@ -8,12 +8,12 @@ exports.getAllCategoria = () => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     console.log(result)
@@ -25,7 +25,7 @@ exports.getAllCategoria = () => {
 
 
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -39,19 +39,19 @@ exports.createCategoria = (categoria) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(result)
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -65,12 +65,12 @@ exports.getCategoriaById = (id) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                          reject(err)
+                          
                     }
                     connection.release(); // Importante liberar la conexión
                
@@ -78,7 +78,7 @@ exports.getCategoriaById = (id) => {
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -92,12 +92,12 @@ exports.updateCategoria = (categoria) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, dataCliente, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     console.log(result)
@@ -105,7 +105,7 @@ exports.updateCategoria = (categoria) => {
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    

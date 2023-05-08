@@ -113,12 +113,12 @@ exports.globalSearch = (busqueda, page) => {
     mysqlPool.getConnection((err, connection) => {
       if (err) { 
           console.error(err) 
-          reject(err)
+          
       }
       connection.query(sql, (err, result) => {
           if (err) { 
               console.error(err) 
-              reject(err)
+              
           }
           connection.release(); // Importante liberar la conexión
           const results=JSON.parse(JSON.stringify(result))

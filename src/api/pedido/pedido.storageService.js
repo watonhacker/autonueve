@@ -9,12 +9,12 @@ exports.getAllPedido = () => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
@@ -22,7 +22,7 @@ exports.getAllPedido = () => {
             })
 
         } catch (error) {
-            reject(error)
+            
             console.error(error.message);
         }
     })    
@@ -66,19 +66,19 @@ exports.getPedidoById = (id) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message);
         } 
     })    
@@ -92,19 +92,19 @@ exports.updatePedido = (pedido) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) {
                     console.error(err);
-                    reject(err);
+                    ;
                 }
                 connection.query(sql, dataPedido, (error, result) => {
                     if (error) {
                         console.error(error.message);
-                        reject(error);
+                        ;
                     }
                     connection.release();
                     resolve(result);
                 });
             });
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -117,19 +117,19 @@ exports.getPedidosFormat = () => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
             
         }
@@ -143,19 +143,19 @@ exports.cambiarEstadoPedido = (pedidoId, estadoId) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
             
         }
@@ -172,12 +172,12 @@ exports.getPedidoFormatById = (pedidoId) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result))[0])
@@ -185,7 +185,7 @@ exports.getPedidoFormatById = (pedidoId) => {
             })
             
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
             
         }
@@ -199,19 +199,19 @@ exports.getListaPedidoAssociated = (id) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
             
         }
@@ -225,19 +225,19 @@ exports.getProductosAssociated = (id) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
             
         }

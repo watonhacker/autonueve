@@ -10,12 +10,12 @@ exports.getCategories = () => {
         mysqlPool.getConnection((err, connection) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.query(sql, (err, result) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.release(); // Importante liberar la conexión
                 resolve(JSON.parse(JSON.stringify(result)))
@@ -35,12 +35,12 @@ exports.getCategoryProducts = (categoryId) => {
         mysqlPool.getConnection((err, connection) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.query(sql, (err, result) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.release(); // Importante liberar la conexión
                 resolve(JSON.parse(JSON.stringify(result)))
@@ -78,12 +78,12 @@ exports.getCategoryProductsPage = (categoryName, page, category) => {
         mysqlPool.getConnection((err, connection) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.query(sql, (err, result) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.release(); // Importante liberar la conexión
                 const results=JSON.parse(JSON.stringify(result))

@@ -83,7 +83,7 @@ async function readGeneCodi () {
     
         
     } catch (err) {
-      reject(err);
+      ;
       console.log(err)
     }
     
@@ -132,7 +132,7 @@ async function readProducto () {
     
         
     } catch (err) {
-      reject(err);
+      ;
       console.log(err)
     }
     
@@ -184,7 +184,7 @@ async function readAnoFab () {
     
         
     } catch (err) {
-      reject(err);
+      ;
       console.log(err)
     }
     
@@ -234,7 +234,7 @@ async function readSubmodelo () {
     
         
     } catch (err) {
-      reject(err);
+      ;
       console.log(err)
     }
     
@@ -282,7 +282,7 @@ return new Promise((resolve, reject) => {
 
       
   } catch (err) {
-    reject(err)
+    
     console.log(err)
   }
 })
@@ -328,7 +328,7 @@ async function readMarca () {
   
         
     } catch (err) {
-      reject(err);
+      ;
       console.log(err)
     }
   })

@@ -9,19 +9,19 @@ exports.getAllClientes = () => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -35,19 +35,19 @@ exports.createCliente = (cliente) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, cliente, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -61,19 +61,19 @@ exports.getClienteById = (id) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -87,19 +87,19 @@ exports.updateCliente = (cliente) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, dataCliente, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
                 })
             })
         } catch (error) {
-            reject(error)
+            
             console.error(error.message)
         }
     })    
@@ -114,12 +114,12 @@ exports.clienteByFilter = (email, phone, rut) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))

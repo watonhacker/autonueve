@@ -7,12 +7,12 @@ exports.crearCliente = async (nombre, apellido, email, telefono, rut, tipoclient
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query("INSERT INTO cliente SET ?", {nombre:nombre, apellido:apellido, email:email, telefono:telefono, rut:rut, tipocliente_id:tipocliente}, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
@@ -33,12 +33,12 @@ exports.crearEmpresa = async (nombre, giro, email, telefono, rut, tipocliente) =
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query("INSERT INTO cliente SET ?", {nombre:nombre, giroempresa:giro, email:email, telefono:telefono, rut:rut, tipocliente_id:tipocliente}, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
@@ -62,12 +62,12 @@ exports.guardarPedido = async (idCliente, pago, documento, entrega, direccion) =
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
@@ -93,12 +93,12 @@ exports.guardarDireccion = async (idCliente, comuna, direccion, region) => {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query("INSERT INTO direccion SET ?", {cliente_id:idCliente, comuna_id:comuna, direccion:direccion, region_id:region}, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
@@ -124,12 +124,12 @@ exports.obtenerPedidoId = async function () {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query("SELECT id FROM pedido ORDER BY id DESC LIMIT 1", (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     const results=JSON.parse(JSON.stringify(result))
@@ -199,12 +199,12 @@ exports.guardarListaPedido = async function (res, listaIdProductos) {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))
@@ -298,12 +298,12 @@ exports.guardarPrecioPedido = async function (respuesta) {
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.query(sql, (err, result) => {
                     if (err) { 
                         console.error(err) 
-                        reject(err)
+                        
                     }
                     connection.release(); // Importante liberar la conexión
                     resolve(JSON.parse(JSON.stringify(result)))

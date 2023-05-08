@@ -19,12 +19,12 @@ exports.register = async (req, res) => {
         mysqlPool.getConnection((err, connection) => {
             if (err) {
                 console.error(err)
-                reject(err)
+                
             }
             connection.query("INSERT INTO usuario SET ?", { nombre: user, clave: passHash }, (err, result) => {
                 if (err) {
                     console.error(err)
-                    reject(err)
+                    
                 }
                 connection.release(); // Importante liberar la conexión
                 resolve(JSON.parse(JSON.stringify(result)))
@@ -63,12 +63,12 @@ exports.login = async (req, res) => {
                 mysqlPool.getConnection((err, connection) => {
                     if (err) {
                         console.error(err)
-                        reject(err)
+                        
                     }
                     connection.query("SELECT * FROM usuario WHERE ?", {nombre:user}, (err, result) => {
                         if (err) {
                             console.error(err)
-                            reject(err)
+                            
                         }
                         connection.release(); // Importante liberar la conexión
                         resolve(JSON.parse(JSON.stringify(result)))

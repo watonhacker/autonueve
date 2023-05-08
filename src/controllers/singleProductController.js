@@ -8,12 +8,12 @@ exports.getSingleProduct = (id) => {
         mysqlPool.getConnection((err, connection) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.query(sql, (err, result) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.release(); // Importante liberar la conexión
 
@@ -35,12 +35,12 @@ exports.getProductCategory = (id) => {
         mysqlPool.getConnection((err, connection) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.query(sql, (err, result) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.release(); // Importante liberar la conexión
                 let results = JSON.parse(JSON.stringify(result))
@@ -63,12 +63,12 @@ exports.getAssociatedProducts = async (id) => {
         mysqlPool.getConnection((err, connection) => {
             if (err) { 
                 console.error(err) 
-                reject(err)
+                
             }
             connection.query(sql, (err, result) => {
                 if (err) { 
                     console.error(err) 
-                    reject(err)
+                    
                 }
                 connection.release(); // Importante liberar la conexión
                 resolve(JSON.parse(JSON.stringify(result)))
