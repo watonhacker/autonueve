@@ -745,7 +745,7 @@ body h3 {
   width: 15vw;
 }
 .main .logos .logo-image {
-  min-width: 50px;
+  min-width: 100px;
   width: 21vw;
 }
 
@@ -1189,7 +1189,7 @@ body > section.main > div > div.swiper-button-next {
   font-size: 18px;
   background: #fff;
   width: 100px;
-  height: 70px;
+  height: 120px;
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
