@@ -1,132 +1,145 @@
-{{!--    <a href="/signup">Signup</a> --}}
-{{!--    <a href="/signin">Signin</a> --}}
+{{!-- <a href="/signup">Signup</a> --}}
+{{!-- <a href="/signin">Signin</a> --}}
 
 {{!-- Boton --}}
 
 <script src="/js/main.js" type=module></script>
-<button style="z-index:30;" class="btnCart"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+<button style="z-index:30;" class="btnCart"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+        viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
     </svg>
-        <div id="cart-circle"  class="circle">
-    </svg>
+    <div id="cart-circle" class="circle">
+        </svg>
     </div>
     <p style="color:#6EA0F3; margin:0;padding:0;font-weight:bold;">0</p>
-    <a class="shopping-cart" style="color:#ccc; display:flex; justify-content:center; align-items:center; align-content:center;text-decoration:none; " href="/checkout"></a>
+    <a class="shopping-cart"
+        style="color:#ccc; display:flex; justify-content:center; align-items:center; align-content:center;text-decoration:none; "
+        href="/checkout"></a>
 </button>
-        <!-- Imagen principal -->
-        <div class="main-image">
+<!-- Imagen principal -->
+<div class="main-image">
 
-          
-            <div class="swiper myMainSwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" style=><img src="https://res.cloudinary.com/keyzen/image/upload/v1686346635/d8e10a24-b1f3-4b27-8923-8ebb2bd91cf6_wasysl.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="https://res.cloudinary.com/keyzen/image/upload/v1686346632/88e6419c-e0fc-498b-924c-9507f288af93_azc4wx.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="https://res.cloudinary.com/keyzen/image/upload/v1686346622/672d5c20-b7dc-4543-a899-832e60ab4bbc_h8hp4h.jpg" alt=""></div>
-            </div>
 
-            <div class="swiper-pagination"></div>
-            </div>
-
-             
-
+    <div class="swiper myMainSwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style=><img
+                    src="https://res.cloudinary.com/keyzen/image/upload/v1686346635/d8e10a24-b1f3-4b27-8923-8ebb2bd91cf6_wasysl.jpg"
+                    alt=""></div>
+            <div class="swiper-slide"><img
+                    src="https://res.cloudinary.com/keyzen/image/upload/v1686346632/88e6419c-e0fc-498b-924c-9507f288af93_azc4wx.jpg"
+                    alt=""></div>
+            <div class="swiper-slide"><img
+                    src="https://res.cloudinary.com/keyzen/image/upload/v1686346622/672d5c20-b7dc-4543-a899-832e60ab4bbc_h8hp4h.jpg"
+                    alt=""></div>
         </div>
+
+        <div class="swiper-pagination"></div>
+    </div>
+
+
+
+</div>
 
 
 
 {{!-- fin de boton cart
- --}}
+--}}
 <section class="search">
 
 
-<div class="arrow bounce">
-         
-  <a class="fa fa-arrow-down fa-2x"></a>
-</div>
+    <div class="arrow bounce">
 
-<div class="container-selector">
-    <div>
-        <h3 style="text-align:left; color:#fff">Buscador de repuestos</h3>
-        <select class="form-select"  id="brand-selector" aria-label="Default select example">
-            <option selected>Marca</option>
-        </select>
-    </div>
-    <div>
-        <select class="form-select" id="modelo-selector" aria-label="Default select example" disabled>
-            <option selected>Modelo</option>
-        </select>
-    </div>
-    <div>
-        <select class="form-select" id="submodelo-selector" aria-label="Default select example" disabled>
-            <option selected>Submodelo</option>
-        </select>
-    </div>
-    <div>
-        <select class="form-select" id="year-selector" aria-label="Default select example" disabled >
-            <option selected>Año</option>
-        </select>
+        <a class="fa fa-arrow-down fa-2x"></a>
     </div>
 
-</div>
+    <div class="container-selector">
+        <div>
+            <h3 style="text-align:left; color:#fff">Buscador de repuestos</h3>
+            <select class="form-select" id="brand-selector" aria-label="Default select example">
+                <option selected>Marca</option>
+            </select>
+        </div>
+        <div>
+            <select class="form-select" id="modelo-selector" aria-label="Default select example" disabled>
+                <option selected>Modelo</option>
+            </select>
+        </div>
+        <div>
+            <select class="form-select" id="submodelo-selector" aria-label="Default select example" disabled>
+                <option selected>Submodelo</option>
+            </select>
+        </div>
+        <div>
+            <select class="form-select" id="year-selector" aria-label="Default select example" disabled>
+                <option selected>Año</option>
+            </select>
+        </div>
 
-      <a type="button" class="btn btn-warning" href="javascript:window.location.reload(true)" style="color:#fff; margin-top:1rem;">Reiniciar búsqueda</a> 
+    </div>
 
-  
-
-   </section>
-
-
-   
-        <!-- Slider de imágenes -->
-
-
-   <!-- Sección de servicios -->
-
-        <section class="services">
-            <div class="services-text">
-             <h3>¡Revisa nuestras principales categorías!</h3>
-
-            </div>
-
-
-            <div class="services-images">
-                
-                <!-- Las imagenes se insertarán como background -->
-
-                <div id="battery-logo" class="services-image image-1">
-                    <h4>BATERIAS</h4>
-                </div>
-
-                <div id="filter-logo" class="services-image image-2">
-                    <h4>FILTROS</h4>                    
-                </div>
-
-                <div id="neumaticos-logo" class="services-image image-1">
-                    <h4>NEUMATICOS</h4>
-                </div>
-
-                <div id="aceite-logo" class="services-image image-2">
-                    <h4>ACEITES</h4>                    
-                </div>
-            
-            </div>
-
-        </section>
-     
+    <a type="button" class="btn btn-warning" href="javascript:window.location.reload(true)"
+        style="color:#fff; margin-top:1rem;">Reiniciar búsqueda</a>
 
 
 
-        {{!-- Sección de productos destacados --}}
+</section>
 
 
-    {{#if lastProducts}}
-    <h2 class="title">Productos recientes</h2>
-    <div class="wrap-lastProducts">
+
+<!-- Slider de imágenes -->
+
+
+<!-- Sección de servicios -->
+
+<section class="services">
+    <div class="services-text">
+        <h3>¡Revisa nuestras principales categorías!</h3>
+
+    </div>
+
+
+    <div class="services-images">
+
+        <!-- Las imagenes se insertarán como background -->
+
+        <div id="battery-logo" class="services-image image-1">
+            <h4>BATERIAS</h4>
+        </div>
+
+        <div id="filter-logo" class="services-image image-2">
+            <h4>FILTROS</h4>
+        </div>
+
+        <div id="neumaticos-logo" class="services-image image-1">
+            <h4>NEUMATICOS</h4>
+        </div>
+
+        <div id="aceite-logo" class="services-image image-2">
+            <h4>ACEITES</h4>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+{{!-- Sección de productos destacados --}}
+
+
+{{#if lastProducts}}
+<h2 class="title">Productos recientes</h2>
+<div class="wrap-lastProducts">
 
     <div class="products-index products">
         {{#each lastProducts}}
         <div class="product" id="product-{{id}}">
-                        <a href="/producto/{{id}}">
-                          <img style="max-width:100%; height:200px;"src="{{selectImg imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}}" alt="">
+            <a href="/producto/{{id}}">
+                <img style="max-width:100%; height:200px;"
+                    src="{{selectImg imagen 'https://res.cloudinary.com/keyzen/image/upload/v1636230517/images_s3u714.png'}}"
+                    alt="">
             </a>
             <h3 class="product-name">{{nombre}}</h3>
             <p class="product-sku">SKU: {{SKU}}</p>
@@ -135,132 +148,176 @@
             <div class="product-button">
 
                 <script>
-                    function restarCantidad(e){
+                    function restarCantidad(e) {
                         const valueBox = e.target.nextElementSibling;
                         if (parseInt(valueBox.value) > 1) {
-                            valueBox.value = parseInt(valueBox.value) -1
+                            valueBox.value = parseInt(valueBox.value) - 1
                         }
-       
+
                     }
 
-                    function sumarCantidad(e){
+                    function sumarCantidad(e) {
                         const valueBox = e.target.previousElementSibling;
                         debugger;
-                        if (parseInt(valueBox.value) < parseInt(valueBox.max)){
-                            valueBox.value = parseInt(valueBox.value) +1
+                        if (parseInt(valueBox.value) < parseInt(valueBox.max)) {
+                            valueBox.value = parseInt(valueBox.value) + 1
 
                         }
-                  
+
                     }
                 </script>
-                
-               <button class="restar-btn" onclick="restarCantidad(event)">-</button>
+
+                <button class="restar-btn" onclick="restarCantidad(event)">-</button>
                 <input type="number" class="number" min="1" value="1" max={{cantidad}} disabled>
-                <button class="sumar-btn" onclick="sumarCantidad(event)">+</button>                
-            </div>  
+                <button class="sumar-btn" onclick="sumarCantidad(event)">+</button>
+            </div>
             <a class="btn btn-primary w-100" style="margin-top:.5rem" href="{{id}}" data-id="{{id}}">Añadir</a>
         </div>
         {{/each}}
     </div>
     {{/if}}
- 
-
-   
 
 
 
+
+
+
+
+</div>
+
+
+
+<!-- Proveedores -->
+
+<section class="suppliers">
+    <div class="suppliers-text">
+
+        <h2>Nuestros proveedores</h2>
+        <div class="border-line"></div>
+        <p>Contamos con proveedores con amplia experiencia en la venta de repuestos, es por esto que en <span>Repuestos
+                Autonueve</span> garantizamos la calidad de nuestros productos y por lo tanto tu satisfacción!</p>
 
     </div>
 
 
-
-        <!-- Proveedores -->
-
-        <section class="suppliers">
-                <div class="suppliers-text">   
-                    
-                    <h2>Nuestros proveedores</h2>
-                    <div class="border-line"></div>
-                    <p>Contamos con proveedores con amplia experiencia en la venta de  repuestos, es por esto que en <span>Repuestos Autonueve</span> garantizamos la calidad de nuestros productos y por lo tanto tu satisfacción!</p>
-                
-                </div>
-              
-  
-            <!-- Logos de marcas -->
+    <!-- Logos de marcas -->
     <div class="swiperLogos">
         <div class="swiper-wrapper">
-        
-                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1686348563/peugeot-3_lugyrs.svg" alt="" class="logo-image" >
-                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1686348564/toyota-1_rsyj2r.svg" alt=""class="logo-image"  >
-                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1686348563/samsung-4_ma78fn.svg" alt=""class="logo-image" >
-                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1686348563/daewoo-1_ehtcl2.svg" alt="" class="logo-image">
-                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1686348563/nissan_mhv3cd.svg" alt="" class="logo-image" >
-                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1686348563/opel-1_ro4j15.svg" alt="" class="logo-image" >
-                <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1686348562/citroen-logo_logotyp.us_xu0mbo.svg" alt="" class="logo-image" >
-                <img class="swiper-slide" src=" https://res.cloudinary.com/keyzen/image/upload/v1686348968/chevrolet-1_czjlzo.svg" alt="" class="logo-image" >
+
+            <img class="swiper-slide"
+                src="https://res.cloudinary.com/keyzen/image/upload/v1686348563/peugeot-3_lugyrs.svg" alt=""
+                class="logo-image">
+            <img class="swiper-slide"
+                src="https://res.cloudinary.com/keyzen/image/upload/v1686348564/toyota-1_rsyj2r.svg" alt=""
+                class="logo-image">
+            <img class="swiper-slide"
+                src="https://res.cloudinary.com/keyzen/image/upload/v1686348563/samsung-4_ma78fn.svg" alt=""
+                class="logo-image">
+            <img class="swiper-slide"
+                src="https://res.cloudinary.com/keyzen/image/upload/v1686348563/daewoo-1_ehtcl2.svg" alt=""
+                class="logo-image">
+            <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1686348563/nissan_mhv3cd.svg"
+                alt="" class="logo-image">
+            <img class="swiper-slide" src="https://res.cloudinary.com/keyzen/image/upload/v1686348563/opel-1_ro4j15.svg"
+                alt="" class="logo-image">
+            <img class="swiper-slide"
+                src="https://res.cloudinary.com/keyzen/image/upload/v1686348562/citroen-logo_logotyp.us_xu0mbo.svg"
+                alt="" class="logo-image">
+            <img class="swiper-slide"
+                src=" https://res.cloudinary.com/keyzen/image/upload/v1686348968/chevrolet-1_czjlzo.svg" alt=""
+                class="logo-image">
 
         </div>
 
 
     </div>
 
-                <!-- Swiper -->
+    <!-- Swiper -->
 
 
     <!-- Swiper JS -->
 
 
 
-        </section>
+</section>
 
-        <!-- Nosotros -->
+<!-- Nosotros -->
 
-        <section class="us">
+<section class="us">
 
-            <div class="us-text">
+    <div class="us-text">
 
-                <h2>Nosotros</h2>
-                <div class="border-line"></div>
-                <p>Más de 15 años en el mercado de repuestos automotrices nos han entregado al experiencia necesaria para poder brindarte el mejor servicio. Nuestra empresa nace el año 2005 a raíz de nuestra intención de importar artículos de calidad para los vehículos de nuestro país. </p>
-                <p> La confianza de nuestros clientes significa el cumplimiento de nuestra meta, posicionarnos como vendedores de repuestos acorde a las expectativas del mercado, entregando productos y servicios de calidad, que permitan que tú obtengas los repuestos acordes a tuproyecto.</p>
-            </div>
+        <h2>Nosotros</h2>
+        <div class="border-line"></div>
+        <p>Hace 35 años se estableció AutoNueve Repuestos con una visión de proporcionar soluciones
+            automotrices de alta calidad y servicio. En nuestros primeros años nos enfocamos en desarrollar
+            relaciones sólidas con proveedores confiables y en desarrollar una atención al cliente
+            personalizada y confiable. A medida que crecimos, y fuimos posicionándonos en el mercado,
+            expandimos nuestra variedad de marcas y modelos para adaptarnos a la evolución del mercado
+            automotriz, ofreciendo una amplia selección de repuestos y accesorios, tanto como originales de
+            alta calidad como alternativos para llegar a las demandas de nuestros clientes cada vez más
+            exigentes.
+            Hoy en día, con más de 35 años de antigüedad, AutoNueve Repuestos nos orgullece haberse
+            convertido en un referente de la industria automotriz nacional con despacho hacia todo el
+            territorio nacional. Seguimos comprometidos con nuestros valores de calidad, excelencia al
+            servicio y confiablidad. </p>
+        <p> La confianza de nuestros clientes significa el cumplimiento de nuestra meta, posicionarnos como vendedores
+            de repuestos acorde a las expectativas del mercado, entregando productos y servicios de calidad, que
+            permitan que tú obtengas los repuestos acordes a tuproyecto.</p>
 
-        </section>
+
+               <h2>Compromiso</h2>
+        <div class="border-line"></div>
+        <p>Brindar soluciones automotrices completas, ofreciendo productos de alta calidad, desde repuestos originales y alternativos, además de entregar un servicio excepcional, para satisfacer y responder las necesidades de nuestros consumidores.</p>
+
+   <h2>Visión</h2>
+        <div class="border-line"></div>
+
+    <p>Buscamos establecer relaciones duraderas con nuestros clientes actuales y futuros, convertirnos
+en un referente en la comercialización de repuestos de autos, reconocidos por la variedad de
+productos y eficiencia en la atención al cliente, impulsando el crecimiento y éxito a nuestros
+clientes.</p>
+    </div>
+
+
+
+        
+</section>
 
 
 
 
 
-            <!-- Initialize Swiper -->
-    <script>
-var swiperLogos = new Swiper(".swiperLogos", {
+<!-- Initialize Swiper -->
+<script>
+    var swiperLogos = new Swiper(".swiperLogos", {
         autoplay: {
-          delay: 3500,
-          disableOnInteraction: false
+            delay: 3500,
+            disableOnInteraction: false
         },
         slidesPerView: 2,
-        spaceBetween:20,
+        spaceBetween: 20,
         navigation: {
-          nextEl: ".swiperLogos > .swiper-button-next",
-          prevEl: ".swiperLogos > .swiper-button-prev"
+            nextEl: ".swiperLogos > .swiper-button-next",
+            prevEl: ".swiperLogos > .swiper-button-prev"
         },
         breakpoints: {
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 40,
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 50,
-          },
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+            },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 50,
+            },
         },
-      });
+    });
 
-    </script>
+</script>
 
 
 <button class="scrollUp-btn"><i class="fas fa-arrow-alt-circle-up"></i></button>
@@ -295,15 +352,15 @@ var swiperLogos = new Swiper(".swiperLogos", {
     let submodelId = undefined;
 
     setTimeout(() => {
-    if (marcas === null) {
-        window.location.reload()
-    } else {
-        console.log(marcas, "1")
-    }
+        if (marcas === null) {
+            window.location.reload()
+        } else {
+            console.log(marcas, "1")
+        }
     }, 1000)
 
-    
-    
+
+
     marcas.forEach(marca => {
         const html = `<option value="${marca.id}" class="brand-option">${marca.nombre}</option>`
         brandSelector.insertAdjacentHTML("beforeend", html)
@@ -312,89 +369,89 @@ var swiperLogos = new Swiper(".swiperLogos", {
 
 
     if (brandSelector) {
-    brandSelector.addEventListener("change", e => {
-       e.preventDefault();
-       const brandId = e.target.value;
-       const modelosAsociados = modelos.filter((modelo) => {
-            if (modelo.marca_id == brandId) {
-                return true
-            }
-       })
+        brandSelector.addEventListener("change", e => {
+            e.preventDefault();
+            const brandId = e.target.value;
+            const modelosAsociados = modelos.filter((modelo) => {
+                if (modelo.marca_id == brandId) {
+                    return true
+                }
+            })
 
-       modelosAsociados.forEach(modelo => {
-            const html = `<option value="${modelo.id}" class="brand-option">${modelo.nombre}</option>`
-            modeloSelector.insertAdjacentHTML("beforeend", html)
-       })
+            modelosAsociados.forEach(modelo => {
+                const html = `<option value="${modelo.id}" class="brand-option">${modelo.nombre}</option>`
+                modeloSelector.insertAdjacentHTML("beforeend", html)
+            })
 
-        brandSelector.disabled = true;
-        modeloSelector.disabled = false;
+            brandSelector.disabled = true;
+            modeloSelector.disabled = false;
 
-    })
+        })
     }
 
-    
+
     if (modeloSelector) {
-    modeloSelector.addEventListener("change", e => {
-       e.preventDefault();
-       const modeloId = e.target.value;
-       const submodelosAsociados = submodelos.filter((submodelo) => {
-            if (submodelo.modelo_id == modeloId) {
-                return true
-            }
-       })
+        modeloSelector.addEventListener("change", e => {
+            e.preventDefault();
+            const modeloId = e.target.value;
+            const submodelosAsociados = submodelos.filter((submodelo) => {
+                if (submodelo.modelo_id == modeloId) {
+                    return true
+                }
+            })
 
-       submodelosAsociados.forEach(submodelo => {
-            const html = `<option value="${submodelo.id}" class="brand-option">${submodelo.nombre}</option>`
-            submodelSelector.insertAdjacentHTML("beforeend", html)
-       })
+            submodelosAsociados.forEach(submodelo => {
+                const html = `<option value="${submodelo.id}" class="brand-option">${submodelo.nombre}</option>`
+                submodelSelector.insertAdjacentHTML("beforeend", html)
+            })
 
-       modeloSelector.disabled = true;
-       submodelSelector.disabled = false;
+            modeloSelector.disabled = true;
+            submodelSelector.disabled = false;
 
-    })
+        })
     }
 
     if (submodelSelector) {
-    submodelSelector.addEventListener("change", e => {
-       e.preventDefault();
-       debugger;
-       submodelId = e.target.value;
-       window.localStorage.setItem('submodelId', submodelId)
-       const listaSubmodelosAsociados = listaSubmodelos.filter((listaSubmodelo) => {
-            if (listaSubmodelo.submodelo_id == submodelId) {
-                return true
-            }
-       })
+        submodelSelector.addEventListener("change", e => {
+            e.preventDefault();
+            debugger;
+            submodelId = e.target.value;
+            window.localStorage.setItem('submodelId', submodelId)
+            const listaSubmodelosAsociados = listaSubmodelos.filter((listaSubmodelo) => {
+                if (listaSubmodelo.submodelo_id == submodelId) {
+                    return true
+                }
+            })
 
-       listaSubmodelosAsociados.forEach(year => {
-            const html = `<option value="${year.id}" data-id="${year.id}" class="brand-option">${year.fecha}</option>`
-            yearSelector.insertAdjacentHTML("beforeend", html)
-       })
+            listaSubmodelosAsociados.forEach(year => {
+                const html = `<option value="${year.id}" data-id="${year.id}" class="brand-option">${year.fecha}</option>`
+                yearSelector.insertAdjacentHTML("beforeend", html)
+            })
 
 
 
-       submodelSelector.disabled = true;
-       yearSelector.disabled = false;
+            submodelSelector.disabled = true;
+            yearSelector.disabled = false;
 
-    })
+        })
     }
 
 
-if (yearSelector) {
-    yearSelector.addEventListener("change", e => {
-       e.preventDefault();
-       
-       const listaSubmodelId = e.target.value;
-        debugger;
+    if (yearSelector) {
+        yearSelector.addEventListener("change", e => {
+            e.preventDefault();
+
+            const listaSubmodelId = e.target.value;
+            debugger;
 
 
-       window.location.href = `/search/compatibilidad/${listaSubmodelId}/1`
+            window.location.href = `/search/compatibilidad/${listaSubmodelId}/1`
 
 
-    })
+        })
     }
 
-    
+
 
 
 
