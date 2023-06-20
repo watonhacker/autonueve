@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 router.get('/', (req, res) => {
-    res.render("location", {alert:false})
+    res.render("nosotros", {alert:false})
 })
 
 module.exports = router

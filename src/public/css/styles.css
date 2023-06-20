@@ -462,7 +462,7 @@ template {
 @media (min-width: 992px) {
   /* Header */
   body .main-image {
-    height: 400px;
+    height: 330px;
     width: 100%;
   }
   /* Main */
@@ -484,7 +484,7 @@ template {
     margin: 0 auto;
   }
   body v .main-image {
-    height: 400px;
+    height: 330px;
     width: 100%;
   }
   /* Main */
