@@ -201,6 +201,8 @@ body {
 
     .us {
         max-width: 1200px;
+        width:90%;
+        margin:0 auto;
     }
 
     .suppliers-text,
@@ -425,4 +427,13 @@ body {
     border-radius:.5rem;
     border:2px solid #ddd;
     padding:.5rem;
+}
+
+.title-us {
+    font-size: 2rem;
+    line-height: 2rem;
+    align-self: flex-start;
+    color: #4C6EA7;
+    text-align:left;
+
 }
