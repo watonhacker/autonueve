@@ -137,8 +137,7 @@
            `
         }
 
-        debugger;
-
+    
         console.log(JSON.parse(JSON.stringify(nuevoObjeto)))
 
             fetch("/venta", {

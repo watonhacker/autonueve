@@ -1,6 +1,4 @@
-<script>
-    debugger;
-</script>
+
 
 <button style="z-index:30;" class="btnCart"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -38,7 +36,7 @@
                     datosPedido = document.querySelectorAll("body > section.main > div > table > tbody > tr > td")
                     datosPedido.forEach(n => {
                         if (n.dataset.label == "Cantidad") {
-                            debugger;
+                
                             if (document.querySelectorAll("body > section.main > div > table > tbody > tr").length == contadorPedido) {
                                 updatedListaProducto += `${n.parentElement.dataset.number}:${parseInt(n.firstElementChild.nextElementSibling.value)}`
                                 updatedProductos += n.parentElement.dataset.number
@@ -99,7 +97,7 @@
                 
                     }
                     function restarCantidad(e){
-                        debugger;
+        
                         const valueBox = e.target.nextElementSibling;
                         const valorCantidad = parseInt(e.target.nextElementSibling.value);
                         const valorPrecio = parseInt(e.target.parentElement.previousElementSibling.innerHTML);
@@ -113,7 +111,7 @@
                     }
 
                     function sumarCantidad(e){
-                        debugger;
+                
                         const valueBox = e.target.previousElementSibling;
                         const valorCantidad = parseInt(e.target.previousElementSibling.value);
                         const valorPrecio = parseInt(e.target.parentElement.previousElementSibling.innerHTML);
@@ -223,7 +221,7 @@
             const selectedProducts = Object.keys(objeto);
             const selectedAmounts = Object.values(objeto);
             
-        debugger;
+
             window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
         }
@@ -287,7 +285,7 @@
                 const selectedProducts = Object.keys(objeto);
                 const selectedAmounts = Object.values(objeto);
             
-                debugger;
+
                 window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
     

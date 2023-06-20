@@ -1,6 +1,6 @@
 ((function(){
 
-    debugger;
+
 
     let shoppingCart = document.querySelector(".shopping-cart") 
 
@@ -61,7 +61,7 @@
             const selectedProducts = Object.keys(objeto);
             const selectedAmounts = Object.values(objeto);
             
-            debugger;
+     
             window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
         }
@@ -82,7 +82,7 @@
 
  
     
-    debugger;
+
     document.querySelectorAll("[href='/checkout']")[0].addEventListener("click", e => {
         e.preventDefault()
         url = "/checkout"
@@ -138,7 +138,7 @@
             const selectedProducts = Object.keys(objeto);
             const selectedAmounts = Object.values(objeto);
             
-            debugger;
+    
             window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
         }
@@ -202,7 +202,7 @@
                 const selectedProducts = Object.keys(objeto);
                 const selectedAmounts = Object.values(objeto);
             
-                debugger;
+
                 window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
     
@@ -271,7 +271,7 @@
                 const selectedProducts = Object.keys(objeto);
                 const selectedAmounts = Object.values(objeto);
             
-                debugger;
+       
                 window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
     
@@ -339,8 +339,7 @@
     
                 const selectedProducts = Object.keys(objeto);
                 const selectedAmounts = Object.values(objeto);
-            
-                debugger;
+
                 window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
     
@@ -408,8 +407,7 @@
     
                 const selectedProducts = Object.keys(objeto);
                 const selectedAmounts = Object.values(objeto);
-            
-                debugger;
+
                 window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
     
@@ -477,8 +475,7 @@
     
                 const selectedProducts = Object.keys(objeto);
                 const selectedAmounts = Object.values(objeto);
-            
-                debugger;
+
                 window.location.href = `/checkout?items=[${selectedProducts}]&amounts=[${selectedAmounts}]`
 
     

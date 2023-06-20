@@ -374,7 +374,6 @@ template {
     font-size: 1.1rem;
   }
   body .header .nav {
-    height: 80px;
     justify-content: space-around;
   }
   body .header .nav #nav-menu > a:nth-child(7) > i,
@@ -790,18 +789,29 @@ body h3 {
 .container-selector {
   width: 100%;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   align-content: center;
   gap: 1rem;
 }
-.container-selector div {
-  width: 90%;
-  max-width: 700px;
-}
 
+@media (max-width: 700px) {
+  .container-selector {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .container-selector div {
+    border: 1px solid white;
+    width: 90%;
+    max-width: 700px;
+  }
+}
+@media (max-width: 900px) {
+  .container-selector {
+    margin-top: 1.5rem;
+  }
+}
 .restar-btn {
   border: none;
   width: 35px;
@@ -833,6 +843,11 @@ body h3 {
   padding: 0.4rem;
 }
 
+@media (min-width: 700px) {
+  .form-select {
+    width: 150px;
+  }
+}
 .subtitle-products {
   text-align: start;
   display: block;
@@ -841,9 +856,12 @@ body h3 {
 }
 
 .products {
+  width: 90%;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
   flex-wrap: wrap;
 }
 .products .product {
@@ -918,6 +936,9 @@ body h3 {
 @media (min-width: 576px) {
   /* Header */
   .products {
+    width: 90%;
+    min-width: 500px;
+    margin: 0 auto;
     gap: 2rem;
   }
   /* Main */
@@ -1189,7 +1210,7 @@ body > section.main > div > div.swiper-button-next {
   font-size: 18px;
   background: #fff;
   width: 100px;
-  height: 120px;
+  height: 200px;
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1276,7 +1297,7 @@ img {
   padding: 0;
   margin: 0;
   line-height: 0;
-  width: 200px;
+  width: 230px;
 }
 .header .nav .nav-btn {
   width: 50px;
@@ -1347,7 +1368,6 @@ img {
   color: #fff;
   margin: 0;
   padding: 0;
-  margin-bottom: 2.5rem;
 }
 .search .search-info {
   color: #fff;
@@ -1362,7 +1382,6 @@ img {
     color: #fff;
     margin: 0;
     padding: 0;
-    margin-bottom: 2.5rem;
   }
 }
 @media (min-width: 992px) {

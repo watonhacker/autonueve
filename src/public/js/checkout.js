@@ -100,7 +100,7 @@
 
     document.querySelector(".wrapperResults").addEventListener("click", e => {
 
-        debugger;
+  
 
         const elementoEliminado = e.target.parentElement.parentElement.parentElement;
         e.preventDefault()
@@ -193,7 +193,7 @@
                                             window.location.href = "/"
                                         }, 200)
                                     } else {
-                                        debugger;
+                                        
                                         //ahora se esta borrando del localStorage pero no estoy mostrando que se borre
                                         elementoEliminado.remove()
                                     }
@@ -383,7 +383,7 @@
     datosPedido = document.querySelectorAll("body > section.main > div > table > tbody > tr > td")
     datosPedido.forEach(n => {
         if (n.dataset.label == "Cantidad") {
-            debugger;
+   
             if (document.querySelectorAll("body > section.main > div > table > tbody > tr").length == contadorPedido) {
                 updatedListaProducto += `${n.parentElement.dataset.number}:${parseInt(n.firstElementChild.nextElementSibling.value)}`
                 updatedProductos += n.parentElement.dataset.number

@@ -102,6 +102,9 @@ const hbs = exphbs.create({
             if (estado_id == num) {
                 return true
             }
+        },
+        formatNumberWithPunctuation: function(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
     }
 })

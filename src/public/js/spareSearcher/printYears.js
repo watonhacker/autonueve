@@ -18,7 +18,7 @@ export function printYears () {
             .then(res => res.json())
             .then(data => {
 
-                debugger;
+  
     
                 $yearDatalist.setAttribute("id", "year")
     

@@ -59,17 +59,13 @@ exports.boostrapPaginator = (type, searchObject, page, total) => {
 
   let url;
   let search = searchObject.data;
-  
-  switch (type) {
-    case 'search':
-      url = `/search/${search}/`;
-      break;
-    case 'category':
-      url = `/categories/${search}/`;
-      break;
-    case 'submodel':
-      url = `/search/compatibilidad/${search}/`;
-      break;
+
+  if (type === 'search') {
+    url = `/search/${search}/`;
+  } else if (type === 'category') {
+    url = `/categories/${search}/`;
+  } else {
+    url = `/search/compatibilidad/${type}/`
   }
 
     return new pagination.TemplatePaginator({

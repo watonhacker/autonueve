@@ -48,6 +48,18 @@ exports.updateProducto = (producto) => {
     return productoStorageService.updateProducto(producto);    
 }
 
+exports.getProductoInfoByMarca = (marcaId) => {
+    return productoStorageService.getProductoInfoByMarca(marcaId);
+}
+
+exports.getProductoInfoByModelo = (modeloId) => {
+    return productoStorageService.getProductoInfoByModelo(modeloId);
+}
+
+exports.getProductoInfoBySubmodelo = (submodeloId) => {
+    return productoStorageService.getProductoInfoBySubmodelo(submodeloId);
+}
+
 exports.getProductoInfoByListaSubmodelo = (listaSubmodeloId) => {
     return productoStorageService.getProductoInfoByListaSubmodelo(listaSubmodeloId);
 }

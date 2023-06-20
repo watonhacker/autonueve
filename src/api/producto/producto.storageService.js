@@ -180,6 +180,113 @@ exports.updateProducto = (producto) => {
     })    
 }
 
+exports.getProductoInfoByMarca = (marcaId) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `SELECT DISTINCT producto.cantidad, tipouniversal_id, producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
+            INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id INNER JOIN modelo ON modelo.id = submodelo.modelo_id INNER JOIN marca ON marca.id = modelo.marca_id WHERE marca.id = ${marcaId} AND producto.cantidad >= 0 AND producto.estado="A" AND NOT producto.tipouniversal_id = 1`;
+
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    mysqlPool.emit('error', err)
+                    console.error(err) 
+                    
+                }
+                try {
+                    connection.query(sql, (err, result) => {
+                        if (err) { 
+                            console.error(err) 
+                            mysqlPool.emit('error', err)
+                            
+                        }
+                        connection.release(); // Importante liberar la conexión
+                        resolve(JSON.parse(JSON.stringify(result)))
+                    })
+                } catch (error) {
+                    mysqlPool.emit('error', err)
+                    console.error(error);
+                    ;
+                }
+      
+            })
+        } catch (error) {
+            console.error(error.message);
+        }
+    })
+}
+
+
+exports.getProductoInfoByModelo = (modeloId) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `SELECT DISTINCT producto.cantidad, tipouniversal_id, producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
+            INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id INNER JOIN modelo ON modelo.id = submodelo.modelo_id WHERE modelo.id = ${modeloId} AND producto.cantidad >= 0 AND producto.estado="A" AND NOT producto.tipouniversal_id = 1`;
+
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    mysqlPool.emit('error', err)
+                    console.error(err) 
+                    
+                }
+                try {
+                    connection.query(sql, (err, result) => {
+                        if (err) { 
+                            console.error(err) 
+                            mysqlPool.emit('error', err)
+                            
+                        }
+                        connection.release(); // Importante liberar la conexión
+                        resolve(JSON.parse(JSON.stringify(result)))
+                    })
+                } catch (error) {
+                    mysqlPool.emit('error', err)
+                    console.error(error);
+                    ;
+                }
+      
+            })
+        } catch (error) {
+            console.error(error.message);
+        }
+    })
+}
+
+
+exports.getProductoInfoBySubmodelo = (submodeloId) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const sql = `SELECT producto.cantidad, tipouniversal_id, producto.id, producto.imagen, producto.precio, producto.nombre, producto.SKU, producto.marca FROM listaproducto INNER JOIN producto ON producto.id = listaproducto.producto_id
+            INNER JOIN listasubmodelo ON listasubmodelo.id = listaproducto.listasubmodelo_id INNER JOIN submodelo ON submodelo.id = listasubmodelo.submodelo_id WHERE submodelo.id = ${submodeloId} AND producto.cantidad >= 0 AND producto.estado="A" AND NOT producto.tipouniversal_id = 1`;
+
+            mysqlPool.getConnection((err, connection) => {
+                if (err) { 
+                    mysqlPool.emit('error', err)
+                    console.error(err) 
+                    
+                }
+                try {
+                    connection.query(sql, (err, result) => {
+                        if (err) { 
+                            console.error(err) 
+                            mysqlPool.emit('error', err)
+                            
+                        }
+                        connection.release(); // Importante liberar la conexión
+                        resolve(JSON.parse(JSON.stringify(result)))
+                    })
+                } catch (error) {
+                    mysqlPool.emit('error', err)
+                    console.error(error);
+                    ;
+                }
+      
+            })
+        } catch (error) {
+            console.error(error.message);
+        }
+    })
+}
+
 
 exports.getProductoInfoByListaSubmodelo = (listaSubmodeloId) => {
     return new Promise((resolve, reject) => {
