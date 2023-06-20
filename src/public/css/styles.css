@@ -1402,11 +1402,12 @@ img {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 999;
   border-radius: 0.5rem;
-  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 0.7rem;
 }
 
 .dropdown-content a {
@@ -1416,6 +1417,8 @@ img {
   display: block;
   border-radius: 0.5rem;
   text-align: start;
+  width: 100%;
+  font-size: 0.9rem;
 }
 
 .dropdown-content a:hover {
