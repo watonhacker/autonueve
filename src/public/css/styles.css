@@ -848,6 +848,14 @@ body h3 {
     width: 150px;
   }
 }
+.shopping-cart-container {
+  display: flex;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid #ddd;
+  padding: 0.5rem;
+}
+
 .subtitle-products {
   text-align: start;
   display: block;

@@ -418,3 +418,11 @@ body {
         width:150px;
     }
 }
+
+.shopping-cart-container {
+    display:flex;
+    gap:.5rem;
+    border-radius:.5rem;
+    border:2px solid #ddd;
+    padding:.5rem;
+}
