@@ -92,17 +92,17 @@
     function buscarCompatibilidad (e) {
         e.preventDefault()
         const marca = document.querySelector("#brand-selector").value
-        const modelo = document.querySelector("#modelo-selector").value
-        const submodelo = document.querySelector("#submodelo-selector").value
-        const listasubmodelo = document.querySelector("#year-selector").value
+        const modelo = document.querySelector("#modelo-selector").value.toLowerCase()
+        const submodelo = document.querySelector("#submodelo-selector").value.toLowerCase()
+        const listasubmodelo = document.querySelector("#year-selector").value.toLowerCase()
 
-        if (listasubmodelo !== "Año") {
+        if (listasubmodelo !== "año") {
             window.location.href = `/search/compatibilidad/listasubmodelo/${listasubmodelo}/1`
-        } else if (submodelo !== "Submodelo") {
+        } else if (submodelo !== "submodelo") {
             window.location.href = `/search/compatibilidad/submodelo/${submodelo}/1`
-        } else if (modelo !== "Modelo") {
+        } else if (modelo !== "modelo") {
             window.location.href = `/search/compatibilidad/modelo/${modelo}/1`
-        } else if (marca !== "Marca") {
+        } else if (marca !== "marca") {
             window.location.href = `/search/compatibilidad/marca/${marca}/1`
         } else {
             return;
