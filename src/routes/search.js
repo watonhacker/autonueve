@@ -134,7 +134,21 @@ router.get('/compatibilidad/:compatibility/:id/:page', async (req, res) => {
                     resultados,
                     paginator
                 })
-            } 
+            } else {
+                const results = resultsUniversal;  
+    
+                const busqueda = req.params.listasubmodelo;
+                const data = categoriesControllers.getElementsByPageRender(compatibility, {data:busqueda}, results, page)
+                const resultados = data.results;
+                const paginator = data.paginator;
+            
+                
+                res.render('search', { 
+                    brandResults,
+                    resultados,
+                    paginator
+                }) 
+            }
         } else {
             const results = resultsUniversal;  
     
