@@ -12,17 +12,16 @@
 
     shoppingCart.innerHTML = productosLen
     datos.forEach(n => {
-        num = parseInt(n.lastElementChild.innerHTML)
+        num = parseInt(n.lastElementChild.innerHTML.replace(/[.$]/g, ''))
  
         if (num > 0) {
             total += num
         }
-      
-
-
     })
+
+    total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     
-    document.querySelector("#totalPrice").innerHTML = `<strong>${total}<strong>`
+    document.querySelector("#totalPrice").innerHTML = `<strong>$${total}<strong>`
     /* document.querySelector("#totalPrice > input[type=text]").value = `<strong>${total}<strong>` */
 
 
@@ -89,11 +88,11 @@
 <table style="border: 1px solid #ccc; display:inline-block; padding:.5rem">
   <tr>
     <td>Nombre</td>
-    <td>Jorge Urrutia</td>
+    <td>JORGE LOPEZ HENRIQUEZ</td>
   </tr>
   <tr>
     <td>Banco</td>
-    <td>Banco de Chile</td>
+    <td>Banco Santander</td>
   </tr>
   <tr>
     <td>Tipo de cuenta</td>
@@ -101,11 +100,15 @@
   </tr>
   <tr>
     <td>Numero de cuenta</td>
-    <td>7011182291</td>
+    <td>82-1900978-0</td>
   </tr>
   <tr>
     <td>Correo</td>
-    <td>ventasautonueve@gmail.com</td>
+    <td>autonueveventas@gmail.com</td>
+  </tr>
+  <tr>
+    <td>Rut</td>
+    <td>7.867.325-7</td>
   </tr>
 </table>
             
@@ -137,7 +140,7 @@
            `
         }
 
-    
+        debugger;
         console.log(JSON.parse(JSON.stringify(nuevoObjeto)))
 
             fetch("/venta", {

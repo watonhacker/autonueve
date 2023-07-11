@@ -79,9 +79,13 @@ const hbs = exphbs.create({
                 return txt
             }
         },
+        formatNumberWithPunctuation: function(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        },
         price: function (precio, num) {
             precio = precio * num
-            return precio
+            const formattedValue = precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return `$${formattedValue}`
         },
         selectImg : function (bddImg, image) {
             return bddImg || image
@@ -103,9 +107,7 @@ const hbs = exphbs.create({
                 return true
             }
         },
-        formatNumberWithPunctuation: function(number) {
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        }
+
     }
 })
 

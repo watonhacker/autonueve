@@ -100,26 +100,29 @@
         
                         const valueBox = e.target.nextElementSibling;
                         const valorCantidad = parseInt(e.target.nextElementSibling.value);
-                        const valorPrecio = parseInt(e.target.parentElement.previousElementSibling.innerHTML);
+                        const valorPrecio = parseInt(e.target.parentElement.previousElementSibling.innerHTML.replace(/[.$]/g, ''));
                         const subtotal = e.target.parentNode.nextElementSibling;
                         if (parseInt(valueBox.value) > 1) {
                             valueBox.value = parseInt(valueBox.value) -1
-                            subtotal.innerHTML = parseInt(valueBox.value) * valorPrecio;
+                            const subtotalValue = (parseInt(valueBox.value) * valorPrecio).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                            subtotal.innerHTML = `$${subtotalValue}`;
                             actualizarCarrito()
                         }
        
                     }
 
                     function sumarCantidad(e){
-                
+
                         const valueBox = e.target.previousElementSibling;
                         const valorCantidad = parseInt(e.target.previousElementSibling.value);
-                        const valorPrecio = parseInt(e.target.parentElement.previousElementSibling.innerHTML);
+                        const valorPrecio = parseInt(e.target.parentElement.previousElementSibling.innerHTML.replace(/[.$]/g, ''));
                         const subtotal = e.target.parentNode.nextElementSibling;
 
                         if (parseInt(valueBox.value) < parseInt(valueBox.max)){
                             valueBox.value = parseInt(valueBox.value) +1
-                            subtotal.innerHTML = parseInt(valueBox.value) * valorPrecio;
+                            const subtotalValue = (parseInt(valueBox.value) * valorPrecio).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                            subtotal.innerHTML = `$${subtotalValue}`;
+   
                             actualizarCarrito()
 
                         }
@@ -131,7 +134,7 @@
                 <tr data-number="{{id}}">
                     <td data-label="Eliminar"><a href="{{id}}"><i class="far fa-trash-alt"></i></a></td>
                     <td data-label="Producto"="">{{nombre}}</td>
-                    <td data-label="Precio">{{ precio }}</td>
+                    <td data-label="Precio">${{ formatNumberWithPunctuation precio }}</td>
                     <td data-label="Cantidad">
                         <button class="restar-btn" onclick="restarCantidad(event)">-</button>
                         <input type="number" class="number input-cantidad" min="1" value="{{cantidad_comprada}}" max={{cantidad}} disabled>
@@ -141,6 +144,7 @@
                  
                 </tr>
         {{/each}}
+
     </tbody>
 
     </table>
