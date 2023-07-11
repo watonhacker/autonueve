@@ -184,7 +184,7 @@ exports.guardarListaPedido = async function (res, listaIdProductos) {
                         }
                     }
                     
-                    objeto[primerNumero] = segundoNumero
+                    objeto[primerNumero] = segundoNumero.toString().split('').reverse().join('')
                 })
         
                 for (element in objeto) {

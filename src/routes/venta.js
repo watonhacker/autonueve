@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
 
             const nuevoPedido = await pedidoService.createPedido(dataPedido);
             const listaPedido = await ventaControllers.guardarListaPedido(nuevoPedido.insertId, req.body['productos']);
-            const precioPedido = parseInt(req.body.total)
+            const precioPedido = parseInt(req.body.total.replace(/[.$]/g, ''))
             const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido({
                 total: precioPedido,
                 id: listaPedido
@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
                 }
                 const nuevoPedido = await pedidoService.createPedido(dataPedido);
                 const listaPedido = await ventaControllers.guardarListaPedido(nuevoPedido.insertId, req.body['productos']);
-                const precioPedido = parseInt(req.body.total)
+                const precioPedido = parseInt(req.body.total.replace(/[.$]/g, ''))
                 const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido({
                     total: precioPedido,
                     id: listaPedido
@@ -79,7 +79,7 @@ router.post('/', async (req, res) => {
 
                 const nuevoPedido = await pedidoService.createPedido(dataPedido);
                 const listaPedido = await ventaControllers.guardarListaPedido(nuevoPedido.insertId, req.body['productos']);
-                const precioPedido = parseInt(req.body.total)
+                const precioPedido = parseInt(req.body.total.replace(/[.$]/g, ''))
                 const guardarPrecioPedido = await ventaControllers.guardarPrecioPedido({
                     total: precioPedido,
                     id: listaPedido
