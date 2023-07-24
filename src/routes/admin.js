@@ -278,7 +278,7 @@ router.get('/products', authController.isAuthenticated, (req, res) => {
 router.get('/products/edit/', authController.isAuthenticated, (req, res) => {
 
     let id = req.query.id
-    let sql = `SELECT id, nombre, precio, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE id = '${id}'`
+    let sql = `SELECT id, nombre, precio, marca, descripcion, descripcion_local, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE id = '${id}'`
     mysqlPool.getConnection((err, connection) => {
         if (err) { 
             console.error(err) 
@@ -305,9 +305,10 @@ router.post('/products/edit/', authController.isAuthenticated, (req, res) => {
     const imagen = req.body['imagen'];
     const imagen_2 = req.body['imagen_2'];
     const imagen_3 = req.body['imagen_3'];
+    const descripcion_local = req.body['descripcion_local'];
     const id = req.body['id'];
 
-    let sql = `UPDATE producto SET imagen='${imagen}', imagen_2 = '${imagen_2}', imagen_3 = '${imagen_3}' WHERE id = '${id}'`;
+    let sql = `UPDATE producto SET imagen='${imagen}', imagen_2 = '${imagen_2}', imagen_3 = '${imagen_3}', descripcion_local = '${descripcion_local}' WHERE id = '${id}'`;
     
 
     mysqlPool.getConnection((err, connection) => {

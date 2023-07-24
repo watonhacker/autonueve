@@ -3,7 +3,7 @@ const mysqlPool = require('../database/database');
 exports.getSingleProduct = (id) => {
     return new Promise((resolve, reject) => {
 
-        let sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.id = '${id}' AND producto.estado="A"; `
+        let sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, descripcion_local, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.id = '${id}' AND producto.estado="A"; `
 
         mysqlPool.getConnection((err, connection) => {
             if (err) { 
@@ -56,7 +56,7 @@ exports.getProductCategory = (id) => {
 exports.getAssociatedProducts = async (id) => {
 
     const categoryId = await this.getProductCategory(id);
-    const sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.categoria_id = ${categoryId} AND producto.estado="A" ORDER BY id DESC limit 9; `
+    const sql = `SELECT id, codigo, nombre, precio, SKU, marca, descripcion, descripcion_local, cantidad, imagen, imagen_2, imagen_3 FROM producto WHERE producto.categoria_id = ${categoryId} AND producto.estado="A" ORDER BY id DESC limit 9; `
 
     return new Promise((resolve, reject) => {
 

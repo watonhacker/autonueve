@@ -148,8 +148,8 @@ exports.getProductoById = (id) => {
 exports.updateProducto = (producto) => {
     return new Promise((resolve, reject) => {
         try {
-            const sql = 'UPDATE producto SET imagen = ?, imagen_2 = ?, imagen_3 = ? WHERE id = ?';
-            const dataProducto = [producto.imagen, producto.imagen_2, producto.imagen_3, `${producto.id}`]
+            const sql = 'UPDATE producto SET imagen = ?, imagen_2 = ?, imagen_3 = ?, descripcion_local = ? WHERE id = ?';
+            const dataProducto = [producto.imagen, producto.imagen_2, producto.imagen_3, producto.descripcion_local, `${producto.id}`]
             mysqlPool.getConnection((err, connection) => {
                 if (err) { 
                     mysqlPool.emit('error', err)

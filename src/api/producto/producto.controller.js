@@ -57,6 +57,7 @@ router.put('/:id', authController.isAuthenticated, async (req, res) => {
             "imagen": req.body.imagen,
             "imagen_2": req.body.imagen_2,
             "imagen_3": req.body.imagen_3,
+            "descripcion_local":req.body.descripcion_local,
         }
         const results = await productoService.updateProducto(listaProducto);
         res.send(results);
